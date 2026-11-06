@@ -1,0 +1,71 @@
+# Ignore environment files and node_modules
+/Assets/Sprites
+/Assets/Editor
+
+
+# Unity generated folders
+[Ll]ibrary/
+[Tt]emp/
+[Oo]bj/
+[Bb]uild/
+[Bb]uilds/
+[Ll]ogs/
+[Uu]serSettings/
+[Mm]emoryCaptures/
+[Rr]ecordings/
+
+# Unity generated files
+*.csproj
+*.unityproj
+*.sln
+*.suo
+*.tmp
+*.user
+*.userprefs
+*.pidb
+*.booproj
+*.svd
+*.pdb
+*.mdb
+*.opendb
+*.VC.db
+*.pidb.meta
+
+# Unity crash reports
+sysinfo.txt
+
+# IDE generated files
+.vs/
+.idea/
+.gradle/
+
+# Visual Studio
+*.csproj.user
+*.sln.docstates
+
+# Rider
+.idea/
+
+# Visual Studio Code
+.vscode/
+
+# OS generated files
+.DS_Store
+Thumbs.db
+Desktop.ini
+
+# Build outputs
+*.apk
+*.aab
+*.ipa
+*.app
+*.exe
+*.dll
+*.so
+*.dylib
+
+# Other temporary files
+*.log
+*.bak
+*.swp
+*.orig
