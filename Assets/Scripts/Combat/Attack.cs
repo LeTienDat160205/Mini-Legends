@@ -64,6 +64,6 @@ public class Attack : MonoBehaviour
     private void ApplyAttackRange()
     {
         if (meleeAttack == null) return;
-        meleeAttack.SetAttackRange(characterStats != null ? characterStats.attackRange : 2f);
+        meleeAttack.SetAttackRange(characterStats != null ? characterStats.AttackRange : 2f);
     }
 }
