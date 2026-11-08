@@ -33,8 +33,8 @@ public class MeleeAttack : MonoBehaviour
         hitboxRenderer.endWidth = hitboxLineWidth;
         hitboxRenderer.startColor = hitboxColor;
         hitboxRenderer.endColor = hitboxColor;
-        hitboxRenderer.sortingOrder = 20;
-        hitboxRenderer.sortingLayerName = "Default";
+        hitboxRenderer.sortingOrder = 100;
+        hitboxRenderer.sortingLayerName = "Character";
 
         Shader shader = Shader.Find("Sprites/Default");
         if (shader != null)
@@ -59,8 +59,8 @@ public class MeleeAttack : MonoBehaviour
 
         rangeMesh = new Mesh { name = "AttackRangePreview" };
         meshFilter.sharedMesh = rangeMesh;
-        rangeRenderer.sortingOrder = 19;
-        rangeRenderer.sortingLayerName = "Default";
+        rangeRenderer.sortingOrder = 99;
+        rangeRenderer.sortingLayerName = "Character";
         if (shader != null)
         {
             rangeRenderer.material = new Material(shader);

@@ -41,6 +41,8 @@ public class CharacterMovement : MonoBehaviour
     {
         if (rb != null)
             rb.linearVelocity = moveInput * speed;
+
+       
     }
 
     public void SetMovementLocked(bool locked)
