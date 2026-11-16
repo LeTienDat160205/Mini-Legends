@@ -3,6 +3,12 @@
 --- !u!114 &11400000
 MonoBehaviour:
   m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 2a4b6c8d0e1f23456789abcdef012345, type: 3}
   m_Name: BladeAssasinData
   m_EditorClassIdentifier: 
@@ -11,4 +17,6 @@ MonoBehaviour:
   attackRange: 2
   defend: 5
   heart: 100
-  speed: 1.5
+  speed: 2
+  cooldownE: 1
+  cooldownQ: 5

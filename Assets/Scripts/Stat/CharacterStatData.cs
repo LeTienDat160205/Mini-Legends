@@ -9,4 +9,7 @@ public class CharacterStatData : ScriptableObject
     [Min(0f)] public float defend = 5f;
     [Min(1f)] public float heart = 100f;
     [Min(0f)] public float speed = 1.5f;
+
+    [Min(0f)] public float cooldownE = 1f;
+    [Min(0f)] public float cooldownQ = 5f;
 }
