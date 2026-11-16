@@ -3,12 +3,12 @@
 --- !u!114 &11400000
 MonoBehaviour:
   m_ObjectHideFlags: 0
-  m_Script: {fileID: 11500000, guid: c3f67890123456789abcdef012345670, type: 3}
+  m_Script: {fileID: 11500000, guid: 2a4b6c8d0e1f23456789abcdef012345, type: 3}
   m_Name: GoblinScoutData
   m_EditorClassIdentifier: 
-  health: 90
   attack: 9
-  defense: 3
   attackSpeed: 1.4
   attackRange: 2
-  moveSpeed: 1.8
+  defend: 3
+  heart: 90
+  speed: 1.8
