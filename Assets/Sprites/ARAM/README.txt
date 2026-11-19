@@ -1,0 +1,2 @@
+ARAM Environment Expansion — 50 original generated sprite crops
+Unity: Sprite (2D and UI), Single, Point, Compression None, 128 PPU as a starting point. Floor_*.png: 128x128, not verified seamless; use on a separate tilemap or as accents. All other sprites retain native crop size; use SpriteRenderer, not random tiles. Bridge modules require manual alignment. Art is for a horizontal bridge reference; rotate ground separately or manually adapt bridge perspective for diagonal map. Not tested in Unity. No gameplay assets.
