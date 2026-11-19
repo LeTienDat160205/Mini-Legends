@@ -7,6 +7,3 @@ Initialising UDS system complete:
   - Hashmap size: 4194304
   - Service connected: true
   - Service working directory: Library/DataStore/
-[Warning] Evict-before-extend: reclaimed cold content for 57848784-byte alloc
-[Warning] Evict-before-extend: reclaimed cold content for 39886536-byte alloc
-[Warning] Evict-before-extend: reclaimed cold content for 41765060-byte alloc

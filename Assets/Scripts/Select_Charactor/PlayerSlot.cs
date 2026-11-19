@@ -8,7 +8,6 @@ using UnityEngine.UI;
 public class PlayerSlot : MonoBehaviour
 {
     [SerializeField] private Image portrait;       // Ảnh tướng nằm trong avatar tròn (tắt khi chưa chọn)
-    [SerializeField] private TMP_Text roleText;
     [SerializeField] private TMP_Text nameText;
     [SerializeField] private TMP_Text statusText;
     [SerializeField] private GameObject highlight; // Nền sáng khi đến lượt người này

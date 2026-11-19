@@ -398,7 +398,7 @@ CapsuleCollider2D:
   m_CallbackLayers:
     serializedVersion: 2
     m_Bits: 4294967295
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_UsedByEffector: 0
   m_CompositeOperation: 0
   m_CompositeOrder: 0
@@ -432,7 +432,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6d907448accd6c740b6a43080d898a8b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Stat
-  data: {fileID: 0}
+  data: {fileID: 11400000, guid: c1c410d036bbbfd45b4b44860b08b672, type: 2}
 --- !u!114 &4719059576707301632
 MonoBehaviour:
   m_ObjectHideFlags: 0

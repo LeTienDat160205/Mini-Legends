@@ -10,6 +10,7 @@ public class BladeAssasin : MonoBehaviour
     [SerializeField] private TeamMember teamMember;
     [SerializeField] private Animator animator;
     [SerializeField] private string attackTrigger = "Attack";
+    [SerializeField] private LayerMask attackTargetLayers = ~0;
 
     [Header("Skill E - Dash")]
     [SerializeField] private GameObject eDashHitBox;
@@ -116,7 +117,28 @@ public class BladeAssasin : MonoBehaviour
 
     public void Attack()
     {
-        if (aimingE || dashBusy || enemiesInRange.Count == 0) return;
+        if (aimingE || dashBusy || teamMember == null) return;
+
+        enemiesInRange.Clear();
+        Collider2D[] hits = Physics2D.OverlapCircleAll(
+            transform.position,
+            stat != null ? stat.AttackRange : 0f,
+            attackTargetLayers);
+
+        foreach (Collider2D hit in hits)
+        {
+            TeamMember target = hit != null
+                ? hit.GetComponentInParent<TeamMember>()
+                : null;
+
+            if (target == null || target == teamMember || !target.isActiveAndEnabled)
+                continue;
+
+            if (teamMember.IsEnemy(target) && !enemiesInRange.Contains(target))
+                enemiesInRange.Add(target);
+        }
+
+        if (enemiesInRange.Count == 0) return;
 
         SetAttackDirectionFromMouse();
         animator?.SetTrigger(attackTrigger);

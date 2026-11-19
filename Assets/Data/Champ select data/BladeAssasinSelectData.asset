@@ -10,10 +10,9 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 459734c92a6bb5146882276a81899574, type: 3}
-  m_Name: BladeAssasinData
+  m_Name: BladeAssasinSelectData
   m_EditorClassIdentifier: Assembly-CSharp::ChampionData
-  id: bladeassasin
+  id: 1
   displayName: Blade Assasin
-  portrait: {fileID: 8223578018048494122, guid: 3f6cac8733da81e4085723e27bdaee09, type: 3}
+  portrait: {fileID: -5614854496140799091, guid: 0a48f2c6a73317c4a952756f5409a393, type: 3}
   playerPrefab: {fileID: 331725731155256778, guid: 920d13153258f904e94d10bf6d230874, type: 3}
-  roles: 

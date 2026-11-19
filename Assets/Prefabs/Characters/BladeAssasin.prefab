@@ -17,7 +17,7 @@ GameObject:
   - component: {fileID: 3167771300326196378}
   - component: {fileID: 4445795905891914202}
   - component: {fileID: 5190340440100334767}
-  - component: {fileID: 2528734727335697223}
+  - component: {fileID: 5722096269297444495}
   m_Layer: 6
   m_Name: BladeAssasin
   m_TagString: Player
@@ -179,7 +179,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6d907448accd6c740b6a43080d898a8b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Stat
-  data: {fileID: 11400000, guid: 3b5d7f90123456789abcdef012345670, type: 2}
+  data: {fileID: 11400000, guid: 418dc462e72878d4782179a90664f56d, type: 2}
 --- !u!114 &3167771300326196378
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -217,14 +217,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5dfe2c68fcf1288448d0d7d5ba840b33, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::BladeAssasin
-  rangeIndicator: {fileID: 0}
-  stat: {fileID: 0}
-  teamMember: {fileID: 0}
-  animator: {fileID: 0}
+  rangeIndicator: {fileID: 6594111247679683477}
+  stat: {fileID: 256259162371725956}
+  teamMember: {fileID: 3167771300326196378}
+  animator: {fileID: 5429162210153377539}
   attackTrigger: Attack
-  eDashHitBox: {fileID: 0}
-  eDashPivot: {fileID: 0}
-  body: {fileID: 0}
+  eDashHitBox: {fileID: 9025476543216213716}
+  eDashPivot: {fileID: 4907112578345756965}
+  body: {fileID: 8684615327076502904}
   dashDistance: 3
   dashDuration: 0.16
   dashDamageMultiplier: 1
@@ -232,15 +232,15 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 4294967295
   dashHitBoxAngleOffset: 0
-  qRangeIndicator: {fileID: 0}
+  qRangeIndicator: {fileID: 6313180083935776763}
   qDuration: 3
   qDamageInterval: 0.2
   qDamageMultiplier: 1
   qTargetLayers:
     serializedVersion: 2
     m_Bits: 4294967295
---- !u!58 &2528734727335697223
-CircleCollider2D:
+--- !u!70 &5722096269297444495
+CapsuleCollider2D:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
@@ -273,8 +273,9 @@ CircleCollider2D:
   m_UsedByEffector: 0
   m_CompositeOperation: 0
   m_CompositeOrder: 0
-  m_Offset: {x: 0, y: -2.4999998}
-  m_Radius: 0.4378393
+  m_Offset: {x: 0, y: -1.8}
+  m_Size: {x: 1, y: 1.6}
+  m_Direction: 0
 --- !u!1 &2999329684653028093
 GameObject:
   m_ObjectHideFlags: 0
@@ -353,9 +354,9 @@ SpriteRenderer:
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
   m_GlobalIlluminationMeshLod: 0
-  m_SortingLayerID: 0
-  m_SortingLayer: 0
-  m_SortingOrder: 0
+  m_SortingLayerID: -667899289
+  m_SortingLayer: 2
+  m_SortingOrder: 1
   m_MaskInteraction: 0
   m_Sprite: {fileID: 10913, guid: 0000000000000000f000000000000000, type: 0}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
@@ -698,8 +699,8 @@ SpriteRenderer:
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
   m_GlobalIlluminationMeshLod: 0
-  m_SortingLayerID: 0
-  m_SortingLayer: 0
+  m_SortingLayerID: -667899289
+  m_SortingLayer: 2
   m_SortingOrder: 1
   m_MaskInteraction: 0
   m_Sprite: {fileID: 21300000, guid: 3943479b9e27741a78451950ae5841f6, type: 3}

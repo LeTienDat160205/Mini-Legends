@@ -1,5 +1,5 @@
 sceneSetups:
-- path: Assets/Scenes/SelectionSceneAuto.unity
+- path: Assets/Scenes/ARAM.unity
   isLoaded: 1
   isActive: 1
   isSubScene: 0

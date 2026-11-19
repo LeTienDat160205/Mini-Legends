@@ -10,10 +10,9 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 459734c92a6bb5146882276a81899574, type: 3}
-  m_Name: FootSoldierData
+  m_Name: GoblinScoutSelectData
   m_EditorClassIdentifier: Assembly-CSharp::ChampionData
-  id: foot_soldier
-  displayName: Foot Soldier
-  portrait: {fileID: 6093619760820419877, guid: bceb3aa45218aa54dbc3e34c1936dfc0, type: 3}
-  playerPrefab: {fileID: 4676062712088078102, guid: b3c6e3dabc3e93645808106496f75a3c, type: 3}
-  roles: 
+  id: 3
+  displayName: Goblin Scout
+  portrait: {fileID: 5919589887930209517, guid: 6e028d1a4201a7c418db5f49b96fd785, type: 3}
+  playerPrefab: {fileID: 3313925719148541667, guid: 8dceef3e3adf08e4d8a503be23eaa62f, type: 3}
