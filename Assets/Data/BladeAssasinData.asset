@@ -9,14 +9,11 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 2a4b6c8d0e1f23456789abcdef012345, type: 3}
+  m_Script: {fileID: 11500000, guid: 459734c92a6bb5146882276a81899574, type: 3}
   m_Name: BladeAssasinData
-  m_EditorClassIdentifier: 
-  attack: 12
-  attackSpeed: 1
-  attackRange: 2
-  defend: 5
-  heart: 100
-  speed: 2
-  cooldownE: 1
-  cooldownQ: 5
+  m_EditorClassIdentifier: Assembly-CSharp::ChampionData
+  id: bladeassasin
+  displayName: Blade Assasin
+  portrait: {fileID: 8223578018048494122, guid: 3f6cac8733da81e4085723e27bdaee09, type: 3}
+  playerPrefab: {fileID: 331725731155256778, guid: 920d13153258f904e94d10bf6d230874, type: 3}
+  roles: 

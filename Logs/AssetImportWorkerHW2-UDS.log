@@ -1,9 +1,11 @@
 Initialising UDS system complete:
   - System type: Client
-  - Resource namespace: 4794110bc530d8a6271b3f7d83c23579
+  - Resource namespace: ddf133ddecead18fcddd2238a2d16d5d
   - Shared memory size: 1073741824
   - Command buffer id: 1052576
   - Command buffer size: 8192
   - Hashmap size: 4194304
   - Service connected: true
   - Service working directory: Library/DataStore/
+[Warning] Evict-before-extend: reclaimed cold content for 41581788-byte alloc
+[Warning] Evict-before-extend: reclaimed cold content for 57848784-byte alloc
