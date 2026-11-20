@@ -1,5 +1,4 @@
-﻿
-using UnityEngine;
+﻿using UnityEngine;
 
 [RequireComponent(typeof(EdgeCollider2D))]
 public class ARAMBoundaryGenerator : MonoBehaviour
@@ -8,8 +7,14 @@ public class ARAMBoundaryGenerator : MonoBehaviour
     public ARAMTerrainGenerator terrainGenerator;
 
     [Header("=== BOUNDARY SETTINGS ===")]
-    [Min(0f)]
-    public float boundaryInset = 0.3f;
+    [Range(-5f, 5f)]
+    public float sideInset = 0.3f;
+
+    [Range(-5f, 5f)]
+    public float topInset = 0.3f;
+
+    [Range(-5f, 5f)]
+    public float bottomInset = 0.3f;
 
     private EdgeCollider2D edgeCollider;
 
@@ -19,7 +24,7 @@ public class ARAMBoundaryGenerator : MonoBehaviour
         if (terrainGenerator == null ||
             terrainGenerator.groundTilemap == null)
         {
-            Debug.LogError("Missing Terrain Generator!");
+            Debug.LogError("[ARAM] Missing Terrain Generator!");
             return;
         }
 
@@ -28,48 +33,61 @@ public class ARAMBoundaryGenerator : MonoBehaviour
         float length = terrainGenerator.laneLength;
         float baseLength = terrainGenerator.baseLength;
 
+        // Dùng float để xử lý đúng cả kích thước lẻ
         float laneBottom = -(terrainGenerator.laneWidth / 2);
         float laneTop = laneBottom + terrainGenerator.laneWidth;
 
         float baseBottom = -(terrainGenerator.baseWidth / 2);
         float baseTop = baseBottom + terrainGenerator.baseWidth;
 
-        float inset = boundaryInset;
+        float leftRight = sideInset;
+        float top = topInset;
+        float bottom = bottomInset;
 
-        if (inset * 2 >= Mathf.Min(
-            length, baseLength, terrainGenerator.laneWidth))
+        // Kiểm tra giá trị Inset
+        if (top + bottom >= terrainGenerator.laneWidth ||
+            top + bottom >= terrainGenerator.baseWidth ||
+            leftRight * 2f >= baseLength)
         {
-            Debug.LogError("Boundary Inset is too large!");
+            Debug.LogError("[ARAM] Boundary Insets are too large!");
             return;
         }
 
         // Tọa độ đường biên theo Grid
         Vector2[] points = new Vector2[]
         {
-            // Blue Base
-            new Vector2(-baseLength + inset, baseBottom + inset),
-            new Vector2(-inset, baseBottom + inset),
-            new Vector2(-inset, laneBottom + inset),
+            // Căn cứ xanh - mép dưới
+            new Vector2(-baseLength + leftRight, baseBottom + bottom),
+            new Vector2(0f - leftRight, baseBottom + bottom),
 
-            // Phía dưới cầu
-            new Vector2(length + inset, laneBottom + inset),
+            // Chuyển từ căn cứ xanh sang cầu
+            new Vector2(0f - leftRight, laneBottom + bottom),
 
-            // Red Base
-            new Vector2(length + inset, baseBottom + inset),
-            new Vector2(length + baseLength - inset, baseBottom + inset),
-            new Vector2(length + baseLength - inset, baseTop - inset),
-            new Vector2(length + inset, baseTop - inset),
-            new Vector2(length + inset, laneTop - inset),
+            // Mép dưới cầu
+            new Vector2(length + leftRight, laneBottom + bottom),
 
-            // Phía trên cầu
-            new Vector2(-inset, laneTop - inset),
+            // Căn cứ đỏ - mép dưới
+            new Vector2(length + leftRight, baseBottom + bottom),
+            new Vector2(length + baseLength - leftRight, baseBottom + bottom),
 
-            // Blue Base
-            new Vector2(-inset, baseTop - inset),
-            new Vector2(-baseLength + inset, baseTop - inset),
+            // Mép ngoài bên phải căn cứ đỏ
+            new Vector2(length + baseLength - leftRight, baseTop - top),
+
+            // Căn cứ đỏ - mép trên
+            new Vector2(length + leftRight, baseTop - top),
+
+            // Chuyển từ căn cứ đỏ sang cầu
+            new Vector2(length + leftRight, laneTop - top),
+
+            // Mép trên cầu
+            new Vector2(0f - leftRight, laneTop - top),
+
+            // Căn cứ xanh - mép trên
+            new Vector2(0f - leftRight, baseTop - top),
+            new Vector2(-baseLength + leftRight, baseTop - top),
 
             // Khép kín đường biên
-            new Vector2(-baseLength + inset, baseBottom + inset)
+            new Vector2(-baseLength + leftRight, baseBottom + bottom)
         };
 
         // Chuyển tọa độ Grid sang tọa độ Collider
@@ -89,7 +107,9 @@ public class ARAMBoundaryGenerator : MonoBehaviour
             Vector3 worldPosition =
                 tilemap.transform.TransformPoint(localPosition);
 
-            points[i] = transform.InverseTransformPoint(worldPosition);
+            points[i] = transform.InverseTransformPoint(
+                worldPosition
+            );
         }
 
         edgeCollider.points = points;
@@ -137,8 +157,6 @@ public class ARAMBoundaryGeneratorEditor : UnityEditor.Editor
         if (GUILayout.Button(
             "Generate Boundary", GUILayout.Height(35)))
         {
-            generator.GetComponent<EdgeCollider2D>().enabled = true;
-
             generator.GenerateBoundary();
         }
 
