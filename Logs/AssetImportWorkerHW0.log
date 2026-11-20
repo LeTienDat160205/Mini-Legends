@@ -1,11 +1,11 @@
 [Licensing::Module] Trying to connect to existing licensing client channel...
+[Licensing::IpcConnector] Successfully connected to: "LicenseClient-letie" at "2026-11-20T08:56:22.026484Z"
 Built from '6000.6/staging' branch; Version is '6000.6.2f1 (770e33f6875c) revision 7802419'; Using compiler version '194234433'; Build Type 'Release'
-[Licensing::IpcConnector] Successfully connected to: "LicenseClient-letie" at "2026-11-19T18:32:26.5882324Z"
 OS: 'Windows 11  (10.0.26300) CoreSingleLanguage' Language: 'en' Physical Memory: 16078 MB
 BatchMode: 1, IsHumanControllingUs: 0, StartBugReporterOnCrash: 0, Is64bit: 1
 System  architecture: x64
 Process architecture: x64
-Date: 2026-11-19T18:32:26Z
+Date: 2026-11-20T08:56:22Z
 
 COMMAND LINE ARGUMENTS:
 D:\Unity\Unity Hub\Editor\6000.6.2f1\Editor\Unity.exe
@@ -19,9 +19,9 @@ D:/Unity/UnityProject/Mini Legends
 -logFile
 Logs/AssetImportWorkerHW0.log
 -srvPort
-53862
+63084
 -parentPid
-14044
+4472
 -analyticsCloudUserId
 anonymous
 -analyticsCloudProjectId
@@ -85,14 +85,14 @@ D:/Unity/UnityProject/Mini Legends
     "memorysetup-job-temp-allocator-block-size=2097152"
     "memorysetup-job-temp-allocator-block-size-background=1048576"
     "memorysetup-job-temp-allocator-reduction-small-platforms=262144"
-Player connection [18820]  Target information:
+Player connection [18804]  Target information:
 
-Player connection [18820]  * "[IP] 26.130.85.130 [Port] 0 [Flags] 2 [Guid] 1094236179 [EditorId] 1094236179 [Version] 1048832 [Id] WindowsEditor(7,Wanderer) [Debug] 1 [PackageName] WindowsEditor [ProjectName] Editor" 
+Player connection [18804]  * "[IP] 26.130.85.130 [Port] 0 [Flags] 2 [Guid] 101538484 [EditorId] 101538484 [Version] 1048832 [Id] WindowsEditor(7,Wanderer) [Debug] 1 [PackageName] WindowsEditor [ProjectName] Editor" 
 
-Player connection [18820]  * "[IP] 192.168.11.6 [Port] 0 [Flags] 2 [Guid] 1094236179 [EditorId] 1094236179 [Version] 1048832 [Id] WindowsEditor(7,Wanderer) [Debug] 1 [PackageName] WindowsEditor [ProjectName] Editor" 
+Player connection [18804]  * "[IP] 192.168.11.6 [Port] 0 [Flags] 2 [Guid] 101538484 [EditorId] 101538484 [Version] 1048832 [Id] WindowsEditor(7,Wanderer) [Debug] 1 [PackageName] WindowsEditor [ProjectName] Editor" 
 
-Player connection [18820] Host joined multi-casting on [225.0.0.222:54997]...
-Player connection [18820] Host joined alternative multi-casting on [225.0.0.222:34997]...
+Player connection [18804] Host joined multi-casting on [225.0.0.222:54997]...
+Player connection [18804] Host joined alternative multi-casting on [225.0.0.222:34997]...
 JobSystem: Creating JobQueue using job-worker-count value 3
 Input System module state changed to: Initialized.
 [Physics::Module] Initialized fallback backend.
@@ -113,7 +113,7 @@ Initialising UDS system complete:
 [Physics::Module] SDK Version: 4.1.2
 [Physics::Module] Integration Version: 1.0.0
 [Physics::Module] Threading Mode: Multi-Threaded
-Refreshing native plugins compatible for Editor in 5.67 ms, found 5 plugins.
+Refreshing native plugins compatible for Editor in 5.60 ms, found 5 plugins.
 Initialize engine version: 6000.6.2f1 (770e33f6875c)
 [EntityIdStore] init: VM path (explicit commit), pageSize=4096, blockCount=1048576, entitiesPerBlock=256, slots reserved=4294967296 bytes
 [Subsystems] Discovering subsystems at path D:/Unity/Unity Hub/Editor/6000.6.2f1/Editor/Data/Resources/UnitySubsystems
@@ -135,29 +135,29 @@ Mono path[0] = 'D:/Unity/Unity Hub/Editor/6000.6.2f1/Editor/Data/Managed'
 Mono path[1] = 'D:/Unity/Unity Hub/Editor/6000.6.2f1/Editor/Data/BCLExtensions/runtime/netstandard2.1'
 Mono path[2] = 'D:/Unity/Unity Hub/Editor/6000.6.2f1/Editor/Data/MonoBleedingEdge/lib/mono/unityjit-win32'
 Mono config path = 'D:/Unity/Unity Hub/Editor/6000.6.2f1/Editor/Data/MonoBleedingEdge/etc'
-Using monoOptions --debugger-agent=transport=dt_socket,embedding=1,server=y,suspend=n,address=127.0.0.1:56436
+Using monoOptions --debugger-agent=transport=dt_socket,embedding=1,server=y,suspend=n,address=127.0.0.1:56680
 CodeReloadManager initialized
 Begin MonoManager ReloadAssembly
 Registering precompiled unity dll's ...
 Register platform support module: D:/Unity/Unity Hub/Editor/6000.6.2f1/Editor/Data/PlaybackEngines/WindowsStandaloneSupport/UnityEditor.WindowsStandalone.Extensions.dll
-Registered in 0.001356 seconds.
+Registered in 0.001721 seconds.
 [Licensing::Client] Error: HandshakeResponse reported an error:
 	ResponseCode: 505
 	ResponseStatus: Unsupported protocol version '1.18.3'.
 [Licensing::Module] Error: Failed to handshake to channel: "LicenseClient-letie"
 [Licensing::IpcConnector] LicenseClient-letie channel disconnected successfully.
-[Licensing::IpcConnector] Successfully connected to: "LicenseClient-letie-6000.6.2" at "2026-11-19T18:32:28.6719921Z"
-[Licensing::Client] Code 10 while verifying Licensing Client signature (process Id: 2844, path: "D:/Unity/Unity Hub/Editor/6000.6.2f1/Editor/Data/Resources/Licensing/Client/Unity.Licensing.Client.exe")
+[Licensing::IpcConnector] Successfully connected to: "LicenseClient-letie-6000.6.2" at "2026-11-20T08:56:24.3092468Z"
+[Licensing::Client] Code 10 while verifying Licensing Client signature (process Id: 15436, path: "D:/Unity/Unity Hub/Editor/6000.6.2f1/Editor/Data/Resources/Licensing/Client/Unity.Licensing.Client.exe")
 [Licensing::Module] LicensingClient has failed validation; ignoring
 [Licensing::Client] Handshaking with LicensingClient:
   Version:                 1.18.3+d7ffd15
-  Session Id:              57e7b14c579942c9b2950e5418d92bce
-  Correlation Id:          8c9e6eeeab8b867d68d136d3618d3f7a
-  External correlation Id: 3761178705882479904
+  Session Id:              6d7a64d2128e4a88b32342e31d715fdc
+  Correlation Id:          a6fc5d1d8ad72e58db2466e5713e1dc4
+  External correlation Id: 6641142160623957431
   Machine Id:              caWf6u+T61qvuuoonmaj16EhxbE=
 [Licensing::Module] Successfully connected to LicensingClient on channel: "LicenseClient-letie-6000.6.2" (connect: 0.00s, validation: 0.00s, handshake: 0.01s)
-[Licensing::IpcConnector] Successfully connected to: "LicenseClient-letie-6000.6.2-notifications" at "2026-11-19T18:32:28.6867836Z"
-[Licensing::Module] Licensing Background thread has ended after 2.10s
+[Licensing::IpcConnector] Successfully connected to: "LicenseClient-letie-6000.6.2-notifications" at "2026-11-20T08:56:24.3257006Z"
+[Licensing::Module] Licensing Background thread has ended after 2.30s
 Native extension for WindowsStandalone target not found
 Package Manager log level set to [2]
 [Package Manager] Failed to launch server process. Reason: Unity was launched with the -noUpm command-line argument
@@ -165,22 +165,22 @@ Package Manager log level set to [2]
 [Package Manager] Cannot connect to Unity Package Manager local server
 ScheduleIndexationOnStartup MainProcess:False IndexOnStartup:True
 Scripting: successfully reloaded assembly
-- Finished resetting the current domain, in  0.601 seconds
-Domain Reload Profiling: 1945ms
-	BeginReloadAssembly (464ms)
+- Finished resetting the current domain, in  0.661 seconds
+Domain Reload Profiling: 2117ms
+	BeginReloadAssembly (203ms)
 	RebuildCommonClasses (7ms)
-	RebuildNativeTypeToScriptingClass (24ms)
+	RebuildNativeTypeToScriptingClass (28ms)
 	initialDomainReloadingComplete (90ms)
-	LoadAllAssembliesAndSetupDomain (759ms)
-		LoadAssemblies (463ms)
-		TypeCache.Refresh (592ms)
-			TypeCache.ScanAssembly (570ms)
+	LoadAllAssembliesAndSetupDomain (1126ms)
+		LoadAssemblies (202ms)
+		TypeCache.Refresh (966ms)
+			TypeCache.ScanAssembly (850ms)
 		AnalyzeDomain (1ms)
-	FinalizeReload (602ms)
+	FinalizeReload (662ms)
 		SetupLoadedEditorAssemblies (0ms)
-			BeforeProcessingInitializeOnLoad (127ms)
-			ProcessInitializeOnLoadAttributes (136ms)
-			ProcessInitializeOnLoadMethodAttributes (234ms)
+			BeforeProcessingInitializeOnLoad (148ms)
+			ProcessInitializeOnLoadAttributes (137ms)
+			ProcessInitializeOnLoadMethodAttributes (271ms)
 Initializing Unity extensions:
 [Licensing::Client] Successfully resolved entitlement details
 [Licensing::Module] License group:
@@ -194,1304 +194,58 @@ Import Worker Mode flag is 0x00
 Begin MonoManager ReloadAssembly
 'Packages/com.unity.render-pipelines.core/Editor/Deprecated.cs' contains partial class of Unity.Object, exactly 1 of the partial classes needs to be in a file with the same filename. This is to know the one that can be referenced from ie. GameObjects
 'Packages/com.unity.render-pipelines.core/Editor/Deprecated.cs' contains partial class of Unity.Object, exactly 1 of the partial classes needs to be in a file with the same filename. This is to know the one that can be referenced from ie. GameObjects
-Refreshing native plugins compatible for Editor in 2.77 ms, found 5 plugins.
+Refreshing native plugins compatible for Editor in 3.29 ms, found 5 plugins.
 Native extension for WindowsStandalone target not found
 [Package Manager] Failed to launch server process. Reason: Unity was launched with the -noUpm command-line argument
 [Package Manager] Unable to send message (not connected to server process).
 [Package Manager] Cannot connect to Unity Package Manager local server
-Refreshing native plugins compatible for Editor in 3.13 ms, found 5 plugins.
+Refreshing native plugins compatible for Editor in 3.94 ms, found 5 plugins.
 [Package Manager] Failed to launch server process. Reason: Unity was launched with the -noUpm command-line argument
 [Package Manager] Unable to send message (not connected to server process).
 [Package Manager] Cannot connect to Unity Package Manager local server
 ScheduleIndexationOnStartup MainProcess:False IndexOnStartup:True
 Scripting: successfully reloaded assembly
-- Finished resetting the current domain, in  2.253 seconds
-Domain Reload Profiling: 4441ms
-	BeginReloadAssembly (493ms)
-		DisableScriptedObjects (21ms)
+- Finished resetting the current domain, in  1.566 seconds
+Domain Reload Profiling: 3391ms
+	BeginReloadAssembly (409ms)
+		DisableScriptedObjects (12ms)
 		CreateAndSetChildDomain (47ms)
-	RebuildCommonClasses (14ms)
-	RebuildNativeTypeToScriptingClass (37ms)
-	initialDomainReloadingComplete (114ms)
-	LoadAllAssembliesAndSetupDomain (1528ms)
-		LoadAssemblies (814ms)
-		TypeCache.Refresh (495ms)
-			TypeCache.ScanAssembly (461ms)
-		AnalyzeDomain (185ms)
-			BuildScriptInfoCaches (172ms)
-			ResolveRequiredComponents (9ms)
-	FinalizeReload (2255ms)
-		SetupLoadedEditorAssemblies (0ms)
-			LogAssemblyErrors (5ms)
-			InitializePlatformSupportModulesInManaged (6ms)
-			BeforeProcessingInitializeOnLoad (229ms)
-			ProcessInitializeOnLoadAttributes (1042ms)
-			ProcessInitializeOnLoadMethodAttributes (514ms)
-			AfterProcessingInitializeOnLoad (3ms)
-		AwakeInstancesAfterBackupRestoration (18ms)
-AcceleratorClientConnectionCallback - disconnected - :0
-Launched and connected shader compiler UnityShaderCompiler.exe after 0.02 seconds
-Refreshing native plugins compatible for Editor in 3.21 ms, found 5 plugins.
-Unloading 24 Unused Serialized files (Serialized files now loaded: 0)
-Unloading 7543 unused Assets / (8.5 MB). Loaded Objects now: 8529.
-Memory consumption went from 370.4 MB to 361.9 MB.
-Total: 17.383700 ms (FindLiveObjects: 1.460500 ms CreateObjectMapping: 1.192700 ms MarkObjects: 11.300600 ms  DeleteObjects: 2.996100 ms)
-
-Curl error 7: Failed to connect to config.uca.cloud.unity3d.com port 443 after 2234 ms: Could not connect to server
-========================================================================
-Received Prepare
-AcceleratorClientConnectionCallback - disconnected - :0
-Begin MonoManager ReloadAssembly
-Curl error 7: Failed to connect to config.uca.cloud.unity3d.com port 443 after 4502 ms: Could not connect to server
-'Packages/com.unity.render-pipelines.core/Editor/Deprecated.cs' contains partial class of Unity.Object, exactly 1 of the partial classes needs to be in a file with the same filename. This is to know the one that can be referenced from ie. GameObjects
-'Packages/com.unity.render-pipelines.core/Editor/Deprecated.cs' contains partial class of Unity.Object, exactly 1 of the partial classes needs to be in a file with the same filename. This is to know the one that can be referenced from ie. GameObjects
-Refreshing native plugins compatible for Editor in 6.44 ms, found 5 plugins.
-Native extension for WindowsStandalone target not found
-[Package Manager] Failed to launch server process. Reason: Unity was launched with the -noUpm command-line argument
-[Package Manager] Unable to send message (not connected to server process).
-[Package Manager] Cannot connect to Unity Package Manager local server
-[Package Manager] Failed to launch server process. Reason: Unity was launched with the -noUpm command-line argument
-[Package Manager] Unable to send message (not connected to server process).
-[Package Manager] Cannot connect to Unity Package Manager local server
-ScheduleIndexationOnStartup MainProcess:False IndexOnStartup:True
-Scripting: successfully reloaded assembly
-- Finished resetting the current domain, in  2.032 seconds
-Domain Reload Profiling: 3549ms
-	BeginReloadAssembly (540ms)
-		DisableScriptedObjects (25ms)
-		CreateAndSetChildDomain (115ms)
-	RebuildCommonClasses (22ms)
-	RebuildNativeTypeToScriptingClass (45ms)
-	initialDomainReloadingComplete (129ms)
-	LoadAllAssembliesAndSetupDomain (779ms)
-		LoadAssemblies (698ms)
-		TypeCache.Refresh (18ms)
-		AnalyzeDomain (18ms)
+	RebuildCommonClasses (18ms)
+	RebuildNativeTypeToScriptingClass (32ms)
+	initialDomainReloadingComplete (110ms)
+	LoadAllAssembliesAndSetupDomain (1254ms)
+		LoadAssemblies (749ms)
+		TypeCache.Refresh (348ms)
+			TypeCache.ScanAssembly (326ms)
+		AnalyzeDomain (153ms)
+			BuildScriptInfoCaches (140ms)
 			ResolveRequiredComponents (11ms)
-	FinalizeReload (2034ms)
-		SetupLoadedEditorAssemblies (0ms)
-			LogAssemblyErrors (4ms)
-			BeforeProcessingInitializeOnLoad (253ms)
-			ProcessInitializeOnLoadAttributes (960ms)
-			ProcessInitializeOnLoadMethodAttributes (222ms)
-			AfterProcessingInitializeOnLoad (4ms)
-			EditorAssembliesLoaded (3ms)
-		AwakeInstancesAfterBackupRestoration (36ms)
-Refreshing native plugins compatible for Editor in 4.58 ms, found 5 plugins.
-Unloading 24 Unused Serialized files (Serialized files now loaded: 0)
-Unloading 7541 unused Assets / (6.3 MB). Loaded Objects now: 8533.
-Memory consumption went from 361.4 MB to 355.0 MB.
-Total: 16.254000 ms (FindLiveObjects: 2.069900 ms CreateObjectMapping: 1.035400 ms MarkObjects: 9.753800 ms  DeleteObjects: 2.851000 ms)
-
-Prepare: number of updated asset objects reloaded= 0
-========================================================================
-Received Prepare
-AcceleratorClientConnectionCallback - disconnected - :0
-[Licensing::Client] Successfully resolved entitlement details
-Begin MonoManager ReloadAssembly
-'Packages/com.unity.render-pipelines.core/Editor/Deprecated.cs' contains partial class of Unity.Object, exactly 1 of the partial classes needs to be in a file with the same filename. This is to know the one that can be referenced from ie. GameObjects
-'Packages/com.unity.render-pipelines.core/Editor/Deprecated.cs' contains partial class of Unity.Object, exactly 1 of the partial classes needs to be in a file with the same filename. This is to know the one that can be referenced from ie. GameObjects
-Refreshing native plugins compatible for Editor in 4.25 ms, found 5 plugins.
-Native extension for WindowsStandalone target not found
-[Package Manager] Failed to launch server process. Reason: Unity was launched with the -noUpm command-line argument
-[Package Manager] Unable to send message (not connected to server process).
-[Package Manager] Cannot connect to Unity Package Manager local server
-[Package Manager] Failed to launch server process. Reason: Unity was launched with the -noUpm command-line argument
-[Package Manager] Unable to send message (not connected to server process).
-[Package Manager] Cannot connect to Unity Package Manager local server
-ScheduleIndexationOnStartup MainProcess:False IndexOnStartup:True
-Scripting: successfully reloaded assembly
-- Finished resetting the current domain, in  1.474 seconds
-Domain Reload Profiling: 6563ms
-	BeginReloadAssembly (910ms)
-		DisableScriptedObjects (40ms)
-		CreateAndSetChildDomain (104ms)
-	RebuildCommonClasses (14ms)
-	RebuildNativeTypeToScriptingClass (208ms)
-	initialDomainReloadingComplete (101ms)
-	LoadAllAssembliesAndSetupDomain (3855ms)
-		LoadAssemblies (3685ms)
-		TypeCache.Refresh (21ms)
-		AnalyzeDomain (425ms)
-			BuildScriptInfoCaches (412ms)
-			ResolveRequiredComponents (10ms)
-	FinalizeReload (1475ms)
+	FinalizeReload (1567ms)
 		SetupLoadedEditorAssemblies (0ms)
 			LogAssemblyErrors (3ms)
-			BeforeProcessingInitializeOnLoad (197ms)
+			BeforeProcessingInitializeOnLoad (176ms)
 			ProcessInitializeOnLoadAttributes (677ms)
-			ProcessInitializeOnLoadMethodAttributes (158ms)
-			AfterProcessingInitializeOnLoad (3ms)
-		AwakeInstancesAfterBackupRestoration (34ms)
-Refreshing native plugins compatible for Editor in 3.69 ms, found 5 plugins.
+			ProcessInitializeOnLoadMethodAttributes (378ms)
+			AfterProcessingInitializeOnLoad (5ms)
+			EditorAssembliesLoaded (3ms)
+		AwakeInstancesAfterBackupRestoration (15ms)
+AcceleratorClientConnectionCallback - disconnected - :0
+Launched and connected shader compiler UnityShaderCompiler.exe after 0.02 seconds
+Refreshing native plugins compatible for Editor in 3.85 ms, found 5 plugins.
 Unloading 24 Unused Serialized files (Serialized files now loaded: 0)
-Unloading 7541 unused Assets / (7.5 MB). Loaded Objects now: 8536.
-Memory consumption went from 373.4 MB to 365.9 MB.
-Total: 14.588200 ms (FindLiveObjects: 2.136100 ms CreateObjectMapping: 0.824000 ms MarkObjects: 8.266700 ms  DeleteObjects: 2.929200 ms)
+Unloading 7543 unused Assets / (7.3 MB). Loaded Objects now: 8529.
+Memory consumption went from 372.2 MB to 364.9 MB.
+Total: 13.600000 ms (FindLiveObjects: 1.666200 ms CreateObjectMapping: 1.498000 ms MarkObjects: 7.459600 ms  DeleteObjects: 2.561300 ms)
 
-Prepare: number of updated asset objects reloaded= 0
-========================================================================
-Received Import Request.
-  Time of request: 2026-11-19T18:44:59.7971898Z
-  Time since last request: 1145.13857929999995 seconds.
-  importAddress: GUID: 8dceef3e3adf08e4d8a503be23eaa62f - Path: Assets/Prefabs/GoblinScout.prefab - Importer: PreviewImporter
-Importing 'GUID: 8dceef3e3adf08e4d8a503be23eaa62f - Path: Assets/Prefabs/GoblinScout.prefab - Importer: PreviewImporter' with importer (PreviewImporter)
-d3d12: upload buffer was too small for the requested resource! Size: 16777216. Requested: 34836480.
-Imported 'GUID: 8dceef3e3adf08e4d8a503be23eaa62f' -> (Import Result ID: '72c8d00a732fd6036d1b87db319e1f9b') in 1.064 seconds [static and dynamic dependencies]. Details - ImportResultOutputID=dfbfe259c7bdd1ec3cab1ab30ed05a24 DependenciesID=c89e8b394757b5d60623cc7a7120845f StaticDependenciesID=c4543d00863fb7f0b47b7ba7b7f2aba2 
-Number of updated asset objects reloaded before import = 0
-Number of asset objects unloaded after import = 1173
-========================================================================
-Received Import Request.
-  Time of request: 2026-11-19T18:48:15.5691722Z
-  Time since last request: 194.6884058 seconds.
-  importAddress: GUID: ff88a759368c35f44a696607b9bbadca - Path: Assets/Prefabs - Importer: PreviewImporter
-Importing 'GUID: ff88a759368c35f44a696607b9bbadca - Path: Assets/Prefabs - Importer: PreviewImporter' with importer (PreviewImporter)
-Imported 'GUID: ff88a759368c35f44a696607b9bbadca' -> (Import Result ID: 'f48445ff333e8738afa31218815dca7a') in 0.003 seconds [static and dynamic dependencies]. Details - ImportResultOutputID=0fe1edb3c95af2fbd3ff2ef39af38a66 DependenciesID=dc1ce443479bad45d4a4b04beffb18e0 StaticDependenciesID=386697962e27a01e8578f867317a5473 
-Number of updated asset objects reloaded before import = 0
-Number of asset objects unloaded after import = 0
+Curl error 7: Failed to connect to config.uca.cloud.unity3d.com port 443 after 2235 ms: Could not connect to server
 ========================================================================
 Received Prepare
 AcceleratorClientConnectionCallback - disconnected - :0
-Refreshing native plugins compatible for Editor in 2.61 ms, found 5 plugins.
-Unloading 24 Unused Serialized files (Serialized files now loaded: 0)
-Unloading 24 unused Assets / (3.0 MB). Loaded Objects now: 8642.
-Memory consumption went from 376.3 MB to 373.2 MB.
-Total: 12.789000 ms (FindLiveObjects: 0.905600 ms CreateObjectMapping: 0.629500 ms MarkObjects: 10.310300 ms  DeleteObjects: 0.527200 ms)
-
-Prepare: number of updated asset objects reloaded= 0
-========================================================================
-Received Import Request.
-  Time of request: 2026-11-19T18:52:36.2817498Z
-  Time since last request: 260.6686785 seconds.
-  importAddress: GUID: 8dceef3e3adf08e4d8a503be23eaa62f - Path: Assets/Prefabs/GoblinScout.prefab - Importer: ScriptedImporter/UnityEditor.QuickSearchModule:UnityEditor.Search:ASIAI0B
-Importing 'GUID: 8dceef3e3adf08e4d8a503be23eaa62f - Path: Assets/Prefabs/GoblinScout.prefab - Importer: ScriptedImporter/UnityEditor.QuickSearchModule:UnityEditor.Search:ASIAI0B' with importer (ScriptedImporter : UnityEditor.QuickSearchModule:UnityEditor.Search:ASIAI0B)
-Imported 'GUID: 8dceef3e3adf08e4d8a503be23eaa62f' -> (Import Result ID: 'f5d9096c22fe3adf2828a4be76768a76') in 0.366 seconds [static and dynamic dependencies]. Details - ImportResultOutputID=c81a234e589fbe559634a762a9019de3 DependenciesID=e5a36dc53579d962db8d8300d5976da9 StaticDependenciesID=06adcbbd5f5bc50e3178fcc3bce6401f 
-Number of updated asset objects reloaded before import = 0
-Number of asset objects unloaded after import = 113
-========================================================================
-Received Import Request.
-  Time of request: 2026-11-19T18:52:40.6398784Z
-  Time since last request: 3.9618791 seconds.
-  importAddress: GUID: 2b3ed0317f6894d47beafe879bc34e54 - Path: Assets/Prefabs/Structure - Importer: PreviewImporter
-Importing 'GUID: 2b3ed0317f6894d47beafe879bc34e54 - Path: Assets/Prefabs/Structure - Importer: PreviewImporter' with importer (PreviewImporter)
-Imported 'GUID: 2b3ed0317f6894d47beafe879bc34e54' -> (Import Result ID: '704c3110f111224e02e215c2ad2c3b57') in 0.002 seconds [static and dynamic dependencies]. Details - ImportResultOutputID=d9befae455dd4843c39ac54e7f41024e DependenciesID=cce8722023cd3cac348d9b8f134f0693 StaticDependenciesID=3df1ad8fe537dac30a8c71b23eb7c461 
-Number of updated asset objects reloaded before import = 0
-Number of asset objects unloaded after import = 0
-========================================================================
-Received Import Request.
-  Time of request: 2026-11-19T18:52:41.5965216Z
-  Time since last request: 0.930188 seconds.
-  importAddress: GUID: 2b3ed0317f6894d47beafe879bc34e54 - Path: Assets/Prefabs/Structure - Importer: ScriptedImporter/UnityEditor.QuickSearchModule:UnityEditor.Search:ASIAI0B
-Importing 'GUID: 2b3ed0317f6894d47beafe879bc34e54 - Path: Assets/Prefabs/Structure - Importer: ScriptedImporter/UnityEditor.QuickSearchModule:UnityEditor.Search:ASIAI0B' with importer (ScriptedImporter : UnityEditor.QuickSearchModule:UnityEditor.Search:ASIAI0B)
-Imported 'GUID: 2b3ed0317f6894d47beafe879bc34e54' -> (Import Result ID: 'dbdc83723b9d2057e8ccf3642c7bee6f') in 0.002 seconds [static and dynamic dependencies]. Details - ImportResultOutputID=2248b52428c525ce77776221170c0071 DependenciesID=856f12b74fbb7a22f141fb434c1c81cb StaticDependenciesID=d3eb9222413bab68df23848fb59a1af7 
-Number of updated asset objects reloaded before import = 0
-Number of asset objects unloaded after import = 1
-========================================================================
-Received Import Request.
-  Time of request: 2026-11-19T18:53:28.3469348Z
-  Time since last request: 46.7336366 seconds.
-  importAddress: GUID: b3c6e3dabc3e93645808106496f75a3c - Path: Assets/Prefabs/Characters/FootSoldier/FootSoldier.prefab - Importer: ScriptedImporter/UnityEditor.QuickSearchModule:UnityEditor.Search:ASIAI0B
-Importing 'GUID: b3c6e3dabc3e93645808106496f75a3c - Path: Assets/Prefabs/Characters/FootSoldier/FootSoldier.prefab - Importer: ScriptedImporter/UnityEditor.QuickSearchModule:UnityEditor.Search:ASIAI0B' with importer (ScriptedImporter : UnityEditor.QuickSearchModule:UnityEditor.Search:ASIAI0B)
-d3d12: upload buffer was too small for the requested resource! Size: 35651584. Requested: 39555072.
-Imported 'GUID: b3c6e3dabc3e93645808106496f75a3c' -> (Import Result ID: '23d5506f041a119354e5b444eb6602e9') in 0.576 seconds [static and dynamic dependencies]. Details - ImportResultOutputID=f396b2ba7baf78e842e988f5dbc5eb22 DependenciesID=6ad0e2eab49905f803bf7f1b1770e546 StaticDependenciesID=921ae6f76ad30cbb483db08457353370 
-Number of updated asset objects reloaded before import = 0
-Number of asset objects unloaded after import = 122
-========================================================================
-Received Prepare
-AcceleratorClientConnectionCallback - disconnected - :0
-Refreshing native plugins compatible for Editor in 2.98 ms, found 5 plugins.
-Unloading 24 Unused Serialized files (Serialized files now loaded: 0)
-Unloading 24 unused Assets / (3.0 MB). Loaded Objects now: 8642.
-Memory consumption went from 378.9 MB to 376.0 MB.
-Total: 10.586300 ms (FindLiveObjects: 0.882600 ms CreateObjectMapping: 0.314100 ms MarkObjects: 8.455200 ms  DeleteObjects: 0.546100 ms)
-
-Prepare: number of updated asset objects reloaded= 0
-========================================================================
-Received Prepare
-AcceleratorClientConnectionCallback - disconnected - :0
-Refreshing native plugins compatible for Editor in 2.30 ms, found 5 plugins.
-Unloading 24 Unused Serialized files (Serialized files now loaded: 0)
-Unloading 24 unused Assets / (3.1 MB). Loaded Objects now: 8642.
-Memory consumption went from 382.1 MB to 379.0 MB.
-Total: 11.563700 ms (FindLiveObjects: 0.824300 ms CreateObjectMapping: 0.301200 ms MarkObjects: 9.619200 ms  DeleteObjects: 0.404300 ms)
-
-Prepare: number of updated asset objects reloaded= 0
-========================================================================
-Received Prepare
-AcceleratorClientConnectionCallback - disconnected - :0
-Refreshing native plugins compatible for Editor in 2.95 ms, found 5 plugins.
-Unloading 24 Unused Serialized files (Serialized files now loaded: 0)
-Unloading 24 unused Assets / (2.9 MB). Loaded Objects now: 8642.
-Memory consumption went from 385.2 MB to 382.3 MB.
-Total: 9.950000 ms (FindLiveObjects: 0.811700 ms CreateObjectMapping: 0.315200 ms MarkObjects: 8.054700 ms  DeleteObjects: 0.387900 ms)
-
-Prepare: number of updated asset objects reloaded= 0
-========================================================================
-Received Import Request.
-  Time of request: 2026-11-19T19:01:45.6108494Z
-  Time since last request: 496.66514430000001 seconds.
-  importAddress: GUID: 920d13153258f904e94d10bf6d230874 - Path: Assets/Prefabs/Characters/BladeAssasin.prefab - Importer: ScriptedImporter/UnityEditor.QuickSearchModule:UnityEditor.Search:ASIAI0B
-Importing 'GUID: 920d13153258f904e94d10bf6d230874 - Path: Assets/Prefabs/Characters/BladeAssasin.prefab - Importer: ScriptedImporter/UnityEditor.QuickSearchModule:UnityEditor.Search:ASIAI0B' with importer (ScriptedImporter : UnityEditor.QuickSearchModule:UnityEditor.Search:ASIAI0B)
-Imported 'GUID: 920d13153258f904e94d10bf6d230874' -> (Import Result ID: 'ae3f52ec97bb4020c1f68aa922ececa8') in 0.071 seconds [static and dynamic dependencies]. Details - ImportResultOutputID=5f6c315ed7d40d1f53366440032f84a3 DependenciesID=a395aa339152f1681a400e68f7cafc92 StaticDependenciesID=4172c02e707fa2006acc265022d03f40 
-Number of updated asset objects reloaded before import = 0
-Number of asset objects unloaded after import = 105
-========================================================================
-Received Prepare
-AcceleratorClientConnectionCallback - disconnected - :0
-Refreshing native plugins compatible for Editor in 3.34 ms, found 5 plugins.
-Unloading 24 Unused Serialized files (Serialized files now loaded: 0)
-Unloading 26 unused Assets / (3.0 MB). Loaded Objects now: 8642.
-Memory consumption went from 390.0 MB to 387.0 MB.
-Total: 18.051600 ms (FindLiveObjects: 0.984600 ms CreateObjectMapping: 0.467800 ms MarkObjects: 15.678300 ms  DeleteObjects: 0.489900 ms)
-
-Prepare: number of updated asset objects reloaded= 0
-========================================================================
-Received Prepare
-AcceleratorClientConnectionCallback - disconnected - :0
-Refreshing native plugins compatible for Editor in 3.36 ms, found 5 plugins.
-Unloading 24 Unused Serialized files (Serialized files now loaded: 0)
-Unloading 24 unused Assets / (3.1 MB). Loaded Objects now: 8642.
-Memory consumption went from 393.2 MB to 390.1 MB.
-Total: 13.105900 ms (FindLiveObjects: 0.872600 ms CreateObjectMapping: 0.524900 ms MarkObjects: 9.864100 ms  DeleteObjects: 1.236900 ms)
-
-Prepare: number of updated asset objects reloaded= 0
-========================================================================
-Received Prepare
-AcceleratorClientConnectionCallback - disconnected - :0
-Refreshing native plugins compatible for Editor in 2.29 ms, found 5 plugins.
-Unloading 24 Unused Serialized files (Serialized files now loaded: 0)
-Unloading 24 unused Assets / (2.9 MB). Loaded Objects now: 8642.
-Memory consumption went from 396.4 MB to 393.4 MB.
-Total: 9.372800 ms (FindLiveObjects: 0.774300 ms CreateObjectMapping: 0.290700 ms MarkObjects: 7.490700 ms  DeleteObjects: 0.410900 ms)
-
-Prepare: number of updated asset objects reloaded= 0
-========================================================================
-Received Prepare
-AcceleratorClientConnectionCallback - disconnected - :0
-Refreshing native plugins compatible for Editor in 4.30 ms, found 5 plugins.
-Unloading 24 Unused Serialized files (Serialized files now loaded: 0)
-Unloading 24 unused Assets / (3.1 MB). Loaded Objects now: 8642.
-Memory consumption went from 399.5 MB to 396.5 MB.
-Total: 12.640400 ms (FindLiveObjects: 0.798200 ms CreateObjectMapping: 0.279200 ms MarkObjects: 10.690600 ms  DeleteObjects: 0.464000 ms)
-
-Prepare: number of updated asset objects reloaded= 0
-========================================================================
-Received Prepare
-AcceleratorClientConnectionCallback - disconnected - :0
-Refreshing native plugins compatible for Editor in 2.69 ms, found 5 plugins.
-Unloading 24 Unused Serialized files (Serialized files now loaded: 0)
-Unloading 24 unused Assets / (3.1 MB). Loaded Objects now: 8642.
-Memory consumption went from 402.7 MB to 399.7 MB.
-Total: 14.408800 ms (FindLiveObjects: 0.958000 ms CreateObjectMapping: 0.688200 ms MarkObjects: 11.774200 ms  DeleteObjects: 0.584800 ms)
-
-Prepare: number of updated asset objects reloaded= 0
-========================================================================
-Received Prepare
-AcceleratorClientConnectionCallback - disconnected - :0
-Refreshing native plugins compatible for Editor in 3.17 ms, found 5 plugins.
-Unloading 24 Unused Serialized files (Serialized files now loaded: 0)
-Unloading 24 unused Assets / (2.9 MB). Loaded Objects now: 8642.
-Memory consumption went from 405.9 MB to 402.9 MB.
-Total: 14.541900 ms (FindLiveObjects: 0.879900 ms CreateObjectMapping: 0.303200 ms MarkObjects: 12.154000 ms  DeleteObjects: 0.748100 ms)
-
-Prepare: number of updated asset objects reloaded= 0
-========================================================================
-Received Import Request.
-  Time of request: 2026-11-19T19:05:16.2975588Z
-  Time since last request: 210.58781339999999 seconds.
-  importAddress: GUID: 920d13153258f904e94d10bf6d230874 - Path: Assets/Prefabs/Characters/BladeAssasin.prefab - Importer: PreviewImporter
-Importing 'GUID: 920d13153258f904e94d10bf6d230874 - Path: Assets/Prefabs/Characters/BladeAssasin.prefab - Importer: PreviewImporter' with importer (PreviewImporter)
-d3d12: upload buffer was too small for the requested resource! Size: 39845888. Requested: 57667584.
-Imported 'GUID: 920d13153258f904e94d10bf6d230874' -> (Import Result ID: 'a86261d77687c20cc25996295f3cc08f') in 0.694 seconds [static and dynamic dependencies]. Details - ImportResultOutputID=fb777dd655b9003685d716989199f7d4 DependenciesID=773350d5276ed6fe6818782590071f16 StaticDependenciesID=add2d91348523e6dbc9e17694c4127dc 
-Number of updated asset objects reloaded before import = 0
-Number of asset objects unloaded after import = 605
-========================================================================
-Received Prepare
-AcceleratorClientConnectionCallback - disconnected - :0
-Refreshing native plugins compatible for Editor in 3.67 ms, found 5 plugins.
-Unloading 24 Unused Serialized files (Serialized files now loaded: 0)
-Unloading 26 unused Assets / (3.2 MB). Loaded Objects now: 8642.
-Memory consumption went from 380.8 MB to 377.6 MB.
-Total: 14.845200 ms (FindLiveObjects: 0.892500 ms CreateObjectMapping: 0.383500 ms MarkObjects: 12.190800 ms  DeleteObjects: 0.958200 ms)
-
-Prepare: number of updated asset objects reloaded= 0
-========================================================================
-Received Prepare
-AcceleratorClientConnectionCallback - disconnected - :0
-Refreshing native plugins compatible for Editor in 2.47 ms, found 5 plugins.
-Unloading 24 Unused Serialized files (Serialized files now loaded: 0)
-Unloading 24 unused Assets / (3.0 MB). Loaded Objects now: 8642.
-Memory consumption went from 383.9 MB to 380.9 MB.
-Total: 10.194000 ms (FindLiveObjects: 0.788000 ms CreateObjectMapping: 0.307900 ms MarkObjects: 8.158900 ms  DeleteObjects: 0.488900 ms)
-
-Prepare: number of updated asset objects reloaded= 0
-========================================================================
-Received Prepare
-AcceleratorClientConnectionCallback - disconnected - :0
-Refreshing native plugins compatible for Editor in 2.56 ms, found 5 plugins.
-Unloading 24 Unused Serialized files (Serialized files now loaded: 0)
-Unloading 24 unused Assets / (3.1 MB). Loaded Objects now: 8642.
-Memory consumption went from 387.0 MB to 383.9 MB.
-Total: 9.965600 ms (FindLiveObjects: 0.847900 ms CreateObjectMapping: 0.322100 ms MarkObjects: 7.902600 ms  DeleteObjects: 0.470400 ms)
-
-Prepare: number of updated asset objects reloaded= 0
-========================================================================
-Received Prepare
-AcceleratorClientConnectionCallback - disconnected - :0
-Refreshing native plugins compatible for Editor in 2.31 ms, found 5 plugins.
-Unloading 24 Unused Serialized files (Serialized files now loaded: 0)
-Unloading 24 unused Assets / (3.0 MB). Loaded Objects now: 8642.
-Memory consumption went from 390.2 MB to 387.2 MB.
-Total: 10.706800 ms (FindLiveObjects: 0.862400 ms CreateObjectMapping: 0.298400 ms MarkObjects: 8.653600 ms  DeleteObjects: 0.492200 ms)
-
-Prepare: number of updated asset objects reloaded= 0
-========================================================================
-Received Prepare
-AcceleratorClientConnectionCallback - disconnected - :0
-Refreshing native plugins compatible for Editor in 3.33 ms, found 5 plugins.
-Unloading 24 Unused Serialized files (Serialized files now loaded: 0)
-Unloading 24 unused Assets / (3.0 MB). Loaded Objects now: 8642.
-Memory consumption went from 393.3 MB to 390.4 MB.
-Total: 17.613400 ms (FindLiveObjects: 0.922600 ms CreateObjectMapping: 1.168400 ms MarkObjects: 14.318700 ms  DeleteObjects: 0.778100 ms)
-
-Prepare: number of updated asset objects reloaded= 0
-========================================================================
-Received Import Request.
-  Time of request: 2026-11-19T19:13:22.5200415Z
-  Time since last request: 485.50884400000001 seconds.
-  importAddress: GUID: 920d13153258f904e94d10bf6d230874 - Path: Assets/Prefabs/Characters/BladeAssasin.prefab - Importer: PreviewImporter
-Importing 'GUID: 920d13153258f904e94d10bf6d230874 - Path: Assets/Prefabs/Characters/BladeAssasin.prefab - Importer: PreviewImporter' with importer (PreviewImporter)
-Imported 'GUID: 920d13153258f904e94d10bf6d230874' -> (Import Result ID: '164a246688cb34e53632fb88b54bd921') in 0.400 seconds [static and dynamic dependencies]. Details - ImportResultOutputID=fb777dd655b9003685d716989199f7d4 DependenciesID=e1a8e938673cec035c81114f327ad3f6 StaticDependenciesID=c0a175a7ccd4e1176a846113e2d42cc6 
-Number of updated asset objects reloaded before import = 0
-Number of asset objects unloaded after import = 604
-========================================================================
-Received Prepare
-AcceleratorClientConnectionCallback - disconnected - :0
-Refreshing native plugins compatible for Editor in 2.31 ms, found 5 plugins.
-Unloading 24 Unused Serialized files (Serialized files now loaded: 0)
-Unloading 26 unused Assets / (3.1 MB). Loaded Objects now: 8642.
-Memory consumption went from 380.8 MB to 377.7 MB.
-Total: 10.168300 ms (FindLiveObjects: 0.988200 ms CreateObjectMapping: 0.309600 ms MarkObjects: 7.993300 ms  DeleteObjects: 0.463000 ms)
-
-Prepare: number of updated asset objects reloaded= 0
-========================================================================
-Received Import Request.
-  Time of request: 2026-11-19T19:15:22.431482Z
-  Time since last request: 119.491787 seconds.
-  importAddress: GUID: a3ef93a32a8cda841b23094efc47ff0e - Path: Assets/Animations/Champions/GoblinScout/Death_SE.anim - Importer: ScriptedImporter/UnityEditor.QuickSearchModule:UnityEditor.Search:ASIAI0B
-Importing 'GUID: a3ef93a32a8cda841b23094efc47ff0e - Path: Assets/Animations/Champions/GoblinScout/Death_SE.anim - Importer: ScriptedImporter/UnityEditor.QuickSearchModule:UnityEditor.Search:ASIAI0B' with importer (ScriptedImporter : UnityEditor.QuickSearchModule:UnityEditor.Search:ASIAI0B)
-Imported 'GUID: a3ef93a32a8cda841b23094efc47ff0e' -> (Import Result ID: 'a03e3821b77d0e32afa84b0300b886ec') in 0.016 seconds [static and dynamic dependencies]. Details - ImportResultOutputID=d9f0a8d7f41b25450856aecfe2c2a3b9 DependenciesID=12f758dc260a8fd82b126622801b2255 StaticDependenciesID=ddedc9820b131298e5ac1b72df56b967 
-Number of updated asset objects reloaded before import = 0
-Number of asset objects unloaded after import = 1
-========================================================================
-Received Import Request.
-  Time of request: 2026-11-19T19:15:22.4883261Z
-  Time since last request: 0.0175765 seconds.
-  importAddress: GUID: 296153f3154403c49a501377f3093efe - Path: Assets/Animations/Champions/FootSoldier/Idle_N.anim - Importer: ScriptedImporter/UnityEditor.QuickSearchModule:UnityEditor.Search:ASIAI0B
-Importing 'GUID: 296153f3154403c49a501377f3093efe - Path: Assets/Animations/Champions/FootSoldier/Idle_N.anim - Importer: ScriptedImporter/UnityEditor.QuickSearchModule:UnityEditor.Search:ASIAI0B' with importer (ScriptedImporter : UnityEditor.QuickSearchModule:UnityEditor.Search:ASIAI0B)
-Imported 'GUID: 296153f3154403c49a501377f3093efe' -> (Import Result ID: '48671eac0034ce0dbecf76917c6cdd2e') in 0.008 seconds [static and dynamic dependencies]. Details - ImportResultOutputID=7491032c1de763640d3c9cf73eedd459 DependenciesID=0e2f3702ad7d405e0be7396cb3470cd2 StaticDependenciesID=68bf205144eb17220573fac2729da24b 
-Number of updated asset objects reloaded before import = 0
-Number of asset objects unloaded after import = 1
-========================================================================
-Received Import Request.
-  Time of request: 2026-11-19T19:15:22.5556613Z
-  Time since last request: 0.0024182 seconds.
-  importAddress: GUID: 940cc46495483134cbe626b996ebb7a8 - Path: Assets/Animations/Champions/GoblinScout/Attack_SE.anim - Importer: ScriptedImporter/UnityEditor.QuickSearchModule:UnityEditor.Search:ASIAI0B
-Importing 'GUID: 940cc46495483134cbe626b996ebb7a8 - Path: Assets/Animations/Champions/GoblinScout/Attack_SE.anim - Importer: ScriptedImporter/UnityEditor.QuickSearchModule:UnityEditor.Search:ASIAI0B' with importer (ScriptedImporter : UnityEditor.QuickSearchModule:UnityEditor.Search:ASIAI0B)
-Imported 'GUID: 940cc46495483134cbe626b996ebb7a8' -> (Import Result ID: '471eee5e9e45425510498fc3eb8fe80a') in 0.007 seconds [static and dynamic dependencies]. Details - ImportResultOutputID=ab813d5753a59dbb364de50edcea954b DependenciesID=ce7c498df6ef08a74957b28f6427eb8c StaticDependenciesID=30d1695d010c7da2c678037f7793ce6d 
-Number of updated asset objects reloaded before import = 0
-Number of asset objects unloaded after import = 1
-========================================================================
-Received Import Request.
-  Time of request: 2026-11-19T19:15:22.6008114Z
-  Time since last request: 0.0041484 seconds.
-  importAddress: GUID: 8bbba960749b0bd469c9be9bbd014d75 - Path: Assets/Animations/Champions/GoblinScout/AttackE_SW.anim - Importer: ScriptedImporter/UnityEditor.QuickSearchModule:UnityEditor.Search:ASIAI0B
-Importing 'GUID: 8bbba960749b0bd469c9be9bbd014d75 - Path: Assets/Animations/Champions/GoblinScout/AttackE_SW.anim - Importer: ScriptedImporter/UnityEditor.QuickSearchModule:UnityEditor.Search:ASIAI0B' with importer (ScriptedImporter : UnityEditor.QuickSearchModule:UnityEditor.Search:ASIAI0B)
-Imported 'GUID: 8bbba960749b0bd469c9be9bbd014d75' -> (Import Result ID: 'e88767861f1964a5bce6ac649ea48ca9') in 0.010 seconds [static and dynamic dependencies]. Details - ImportResultOutputID=32dba9d6108f9b9896d713a7e6cb3c73 DependenciesID=21c569adffbdc0202a9c76608883204d StaticDependenciesID=1b927f67b6077ede1429374e42080c63 
-Number of updated asset objects reloaded before import = 0
-Number of asset objects unloaded after import = 1
-========================================================================
-Received Import Request.
-  Time of request: 2026-11-19T19:15:22.6454374Z
-  Time since last request: 0.0018596 seconds.
-  importAddress: GUID: b52dd2844041c02428435be1d2ce5b76 - Path: Assets/Animations/Champions/FootSoldier/Death_E.anim - Importer: ScriptedImporter/UnityEditor.QuickSearchModule:UnityEditor.Search:ASIAI0B
-Importing 'GUID: b52dd2844041c02428435be1d2ce5b76 - Path: Assets/Animations/Champions/FootSoldier/Death_E.anim - Importer: ScriptedImporter/UnityEditor.QuickSearchModule:UnityEditor.Search:ASIAI0B' with importer (ScriptedImporter : UnityEditor.QuickSearchModule:UnityEditor.Search:ASIAI0B)
-Imported 'GUID: b52dd2844041c02428435be1d2ce5b76' -> (Import Result ID: 'dfbb20d03c1424247b2cc0a3b1445607') in 0.008 seconds [static and dynamic dependencies]. Details - ImportResultOutputID=a4e9534a32c7a90ed3f187e102cf60ad DependenciesID=48def1bb4b1677af0b089466ac78183e StaticDependenciesID=ed2513a8a2eca330c273104a12acd6a0 
-Number of updated asset objects reloaded before import = 0
-Number of asset objects unloaded after import = 1
-========================================================================
-Received Import Request.
-  Time of request: 2026-11-19T19:15:22.7259682Z
-  Time since last request: 0.0007727 seconds.
-  importAddress: GUID: f23c2591dd3dbe245a35a5aab3ea4eb0 - Path: Assets/Animations/Champions/BladeAssasin/AttackQ_SW.anim - Importer: ScriptedImporter/UnityEditor.QuickSearchModule:UnityEditor.Search:ASIAI0B
-Importing 'GUID: f23c2591dd3dbe245a35a5aab3ea4eb0 - Path: Assets/Animations/Champions/BladeAssasin/AttackQ_SW.anim - Importer: ScriptedImporter/UnityEditor.QuickSearchModule:UnityEditor.Search:ASIAI0B' with importer (ScriptedImporter : UnityEditor.QuickSearchModule:UnityEditor.Search:ASIAI0B)
-Imported 'GUID: f23c2591dd3dbe245a35a5aab3ea4eb0' -> (Import Result ID: '574b9d1d4f8619bef63d54b9189de5cc') in 0.004 seconds [static and dynamic dependencies]. Details - ImportResultOutputID=f514d1662854830d01e70992cf73f883 DependenciesID=22c89087e7c48308dfead1c5de7843a3 StaticDependenciesID=eb70c03360cd98dc8c0c4e0ebe2b3f82 
-Number of updated asset objects reloaded before import = 0
-Number of asset objects unloaded after import = 1
-========================================================================
-Received Import Request.
-  Time of request: 2026-11-19T19:15:22.7619654Z
-  Time since last request: 0.0019584 seconds.
-  importAddress: GUID: cc582f92330553f499937758392b24f6 - Path: Assets/Animations/Champions/BladeAssasin/Death_N.anim - Importer: ScriptedImporter/UnityEditor.QuickSearchModule:UnityEditor.Search:ASIAI0B
-Importing 'GUID: cc582f92330553f499937758392b24f6 - Path: Assets/Animations/Champions/BladeAssasin/Death_N.anim - Importer: ScriptedImporter/UnityEditor.QuickSearchModule:UnityEditor.Search:ASIAI0B' with importer (ScriptedImporter : UnityEditor.QuickSearchModule:UnityEditor.Search:ASIAI0B)
-Imported 'GUID: cc582f92330553f499937758392b24f6' -> (Import Result ID: '9f6dc9e1de18e94661ee4642d7703920') in 0.005 seconds [static and dynamic dependencies]. Details - ImportResultOutputID=121f32d23d957aa7b698fdef21294f27 DependenciesID=2b21875acb3d65260153288e0aba36ac StaticDependenciesID=9cbfa4fc829216684ea51854c24b7c47 
-Number of updated asset objects reloaded before import = 0
-Number of asset objects unloaded after import = 1
-========================================================================
-Received Import Request.
-  Time of request: 2026-11-19T19:15:22.7934317Z
-  Time since last request: 0.0025821 seconds.
-  importAddress: GUID: 5ae83581c05b3c341ad3d4cde24061fb - Path: Assets/Animations/Champions/FootSoldier/Attack_S.anim - Importer: ScriptedImporter/UnityEditor.QuickSearchModule:UnityEditor.Search:ASIAI0B
-Importing 'GUID: 5ae83581c05b3c341ad3d4cde24061fb - Path: Assets/Animations/Champions/FootSoldier/Attack_S.anim - Importer: ScriptedImporter/UnityEditor.QuickSearchModule:UnityEditor.Search:ASIAI0B' with importer (ScriptedImporter : UnityEditor.QuickSearchModule:UnityEditor.Search:ASIAI0B)
-Imported 'GUID: 5ae83581c05b3c341ad3d4cde24061fb' -> (Import Result ID: '49c8317510e6c8a70949820efea5f075') in 0.008 seconds [static and dynamic dependencies]. Details - ImportResultOutputID=2f022e480a90a36b08ecb37b1deea0ec DependenciesID=1d1a7e17212fa522777818c4c5866676 StaticDependenciesID=96874ff1b3c0c0c2741424272a12c7c0 
-Number of updated asset objects reloaded before import = 0
-Number of asset objects unloaded after import = 1
-========================================================================
-Received Import Request.
-  Time of request: 2026-11-19T19:15:22.8313738Z
-  Time since last request: 0.0026487 seconds.
-  importAddress: GUID: 9cc49ce7ec50e1e42b5f2f6be516e41d - Path: Assets/Animations/Champions - Importer: ScriptedImporter/UnityEditor.QuickSearchModule:UnityEditor.Search:ASIAI0B
-Importing 'GUID: 9cc49ce7ec50e1e42b5f2f6be516e41d - Path: Assets/Animations/Champions - Importer: ScriptedImporter/UnityEditor.QuickSearchModule:UnityEditor.Search:ASIAI0B' with importer (ScriptedImporter : UnityEditor.QuickSearchModule:UnityEditor.Search:ASIAI0B)
-Imported 'GUID: 9cc49ce7ec50e1e42b5f2f6be516e41d' -> (Import Result ID: 'c9d080b021692498862fbda09de0ec78') in 0.003 seconds [static and dynamic dependencies]. Details - ImportResultOutputID=a40d7f3ca3aefa1bdeecd508624fc1d3 DependenciesID=1992319876028ef43e4ae477b1cff5aa StaticDependenciesID=2bea0f04dc79457e165dae5be46de16e 
-Number of updated asset objects reloaded before import = 0
-Number of asset objects unloaded after import = 1
-========================================================================
-Received Import Request.
-  Time of request: 2026-11-19T19:15:22.8657143Z
-  Time since last request: 0.0027167 seconds.
-  importAddress: GUID: ffb98ad577b288f49ac0c3bc6167808b - Path: Assets/Animations/Champions/BladeAssasin/Run_E.anim - Importer: ScriptedImporter/UnityEditor.QuickSearchModule:UnityEditor.Search:ASIAI0B
-Importing 'GUID: ffb98ad577b288f49ac0c3bc6167808b - Path: Assets/Animations/Champions/BladeAssasin/Run_E.anim - Importer: ScriptedImporter/UnityEditor.QuickSearchModule:UnityEditor.Search:ASIAI0B' with importer (ScriptedImporter : UnityEditor.QuickSearchModule:UnityEditor.Search:ASIAI0B)
-Imported 'GUID: ffb98ad577b288f49ac0c3bc6167808b' -> (Import Result ID: '1449b464f0eea43bdd849df7bbe41c20') in 0.009 seconds [static and dynamic dependencies]. Details - ImportResultOutputID=b86c062d8384e604bb0da85b2c3aae58 DependenciesID=ee67f8ea168427804433ace74aa32651 StaticDependenciesID=0f9e5df9de9a17279ac47be04a67e7cb 
-Number of updated asset objects reloaded before import = 0
-Number of asset objects unloaded after import = 1
-========================================================================
-Received Import Request.
-  Time of request: 2026-11-19T19:15:22.9117337Z
-  Time since last request: 0.0061696 seconds.
-  importAddress: GUID: 2e137f26c6fbdb24483ab33810fb2c10 - Path: Assets/Animations/Champions/FootSoldier/AttackE_NW.anim - Importer: ScriptedImporter/UnityEditor.QuickSearchModule:UnityEditor.Search:ASIAI0B
-Importing 'GUID: 2e137f26c6fbdb24483ab33810fb2c10 - Path: Assets/Animations/Champions/FootSoldier/AttackE_NW.anim - Importer: ScriptedImporter/UnityEditor.QuickSearchModule:UnityEditor.Search:ASIAI0B' with importer (ScriptedImporter : UnityEditor.QuickSearchModule:UnityEditor.Search:ASIAI0B)
-Imported 'GUID: 2e137f26c6fbdb24483ab33810fb2c10' -> (Import Result ID: 'e3b8642d2e11f6fb4fd4d467b8f1f176') in 0.008 seconds [static and dynamic dependencies]. Details - ImportResultOutputID=39ea8a9d029aba3b34f584831b8a8683 DependenciesID=a6d996a2445e89c20c5f92e3cb10289a StaticDependenciesID=4f6f0d0863f9d477b32f51d358896aea 
-Number of updated asset objects reloaded before import = 0
-Number of asset objects unloaded after import = 1
-========================================================================
-Received Import Request.
-  Time of request: 2026-11-19T19:15:22.9780994Z
-  Time since last request: 0.001717 seconds.
-  importAddress: GUID: 7f50dc7295182794f9ee23000f17785c - Path: Assets/Animations/Champions/GoblinScout/Run_E.anim - Importer: ScriptedImporter/UnityEditor.QuickSearchModule:UnityEditor.Search:ASIAI0B
-Importing 'GUID: 7f50dc7295182794f9ee23000f17785c - Path: Assets/Animations/Champions/GoblinScout/Run_E.anim - Importer: ScriptedImporter/UnityEditor.QuickSearchModule:UnityEditor.Search:ASIAI0B' with importer (ScriptedImporter : UnityEditor.QuickSearchModule:UnityEditor.Search:ASIAI0B)
-Imported 'GUID: 7f50dc7295182794f9ee23000f17785c' -> (Import Result ID: 'dabb637d54d36656aa9ecaf9157fc56d') in 0.006 seconds [static and dynamic dependencies]. Details - ImportResultOutputID=91b46e0e58d672ff541bad68224bff13 DependenciesID=bab0e3f65480dcc009c32cca58789a1c StaticDependenciesID=9ae308dab4550dfa8e0a5c74dc9bbd9b 
-Number of updated asset objects reloaded before import = 0
-Number of asset objects unloaded after import = 1
-========================================================================
-Received Import Request.
-  Time of request: 2026-11-19T19:15:23.0232913Z
-  Time since last request: 0.0033992 seconds.
-  importAddress: GUID: fd31c6e5852e6004a881c0da0bd20b6a - Path: Assets/Animations/Champions/FootSoldier/Death_S.anim - Importer: ScriptedImporter/UnityEditor.QuickSearchModule:UnityEditor.Search:ASIAI0B
-Importing 'GUID: fd31c6e5852e6004a881c0da0bd20b6a - Path: Assets/Animations/Champions/FootSoldier/Death_S.anim - Importer: ScriptedImporter/UnityEditor.QuickSearchModule:UnityEditor.Search:ASIAI0B' with importer (ScriptedImporter : UnityEditor.QuickSearchModule:UnityEditor.Search:ASIAI0B)
-Imported 'GUID: fd31c6e5852e6004a881c0da0bd20b6a' -> (Import Result ID: 'cc314b02ec000ba240accd51ac324b84') in 0.007 seconds [static and dynamic dependencies]. Details - ImportResultOutputID=ed959c034a485391861b0bdd1b1b4725 DependenciesID=04fe3fff76b4883179e25ad53a16d06a StaticDependenciesID=db0f26aca4074491b432d849a6fa7358 
-Number of updated asset objects reloaded before import = 0
-Number of asset objects unloaded after import = 1
-========================================================================
-Received Import Request.
-  Time of request: 2026-11-19T19:15:23.0709481Z
-  Time since last request: 0.0020234 seconds.
-  importAddress: GUID: 7cc9c67384a05f4469a662cfb6d82f85 - Path: Assets/Animations/Champions/BladeAssasin/Death_W.anim - Importer: ScriptedImporter/UnityEditor.QuickSearchModule:UnityEditor.Search:ASIAI0B
-Importing 'GUID: 7cc9c67384a05f4469a662cfb6d82f85 - Path: Assets/Animations/Champions/BladeAssasin/Death_W.anim - Importer: ScriptedImporter/UnityEditor.QuickSearchModule:UnityEditor.Search:ASIAI0B' with importer (ScriptedImporter : UnityEditor.QuickSearchModule:UnityEditor.Search:ASIAI0B)
-Imported 'GUID: 7cc9c67384a05f4469a662cfb6d82f85' -> (Import Result ID: 'b4ca79a4fefc8d7f41a8c00e474d1bd0') in 0.005 seconds [static and dynamic dependencies]. Details - ImportResultOutputID=272bc5c81174879fcbd7f2f6c409aed5 DependenciesID=e6d95e117459dd13c3817fe815f235ba StaticDependenciesID=cd7a3d98264be13488c9a553506ab523 
-Number of updated asset objects reloaded before import = 0
-Number of asset objects unloaded after import = 1
-========================================================================
-Received Import Request.
-  Time of request: 2026-11-19T19:15:23.1130387Z
-  Time since last request: 0.00283 seconds.
-  importAddress: GUID: 98498ca126ac96b4a96cd51872ef02b8 - Path: Assets/Animations/Champions/BladeAssasin/AttackQ_SE.anim - Importer: ScriptedImporter/UnityEditor.QuickSearchModule:UnityEditor.Search:ASIAI0B
-Importing 'GUID: 98498ca126ac96b4a96cd51872ef02b8 - Path: Assets/Animations/Champions/BladeAssasin/AttackQ_SE.anim - Importer: ScriptedImporter/UnityEditor.QuickSearchModule:UnityEditor.Search:ASIAI0B' with importer (ScriptedImporter : UnityEditor.QuickSearchModule:UnityEditor.Search:ASIAI0B)
-Imported 'GUID: 98498ca126ac96b4a96cd51872ef02b8' -> (Import Result ID: 'd0041c450b98f20e33cdbd7a8ecb57e1') in 0.005 seconds [static and dynamic dependencies]. Details - ImportResultOutputID=6830476b0846392904e38a8fcf5cb250 DependenciesID=e8dd4346f7e8ce7430bf3246993df6e2 StaticDependenciesID=3390b36144950423cc851e10e82ea3d5 
-Number of updated asset objects reloaded before import = 0
-Number of asset objects unloaded after import = 1
-========================================================================
-Received Import Request.
-  Time of request: 2026-11-19T19:15:23.1450349Z
-  Time since last request: 0.001757 seconds.
-  importAddress: GUID: 643361c2dd359234688340ee1aa74f0c - Path: Assets/Animations/Champions/BladeAssasin/Run_S.anim - Importer: ScriptedImporter/UnityEditor.QuickSearchModule:UnityEditor.Search:ASIAI0B
-Importing 'GUID: 643361c2dd359234688340ee1aa74f0c - Path: Assets/Animations/Champions/BladeAssasin/Run_S.anim - Importer: ScriptedImporter/UnityEditor.QuickSearchModule:UnityEditor.Search:ASIAI0B' with importer (ScriptedImporter : UnityEditor.QuickSearchModule:UnityEditor.Search:ASIAI0B)
-Imported 'GUID: 643361c2dd359234688340ee1aa74f0c' -> (Import Result ID: 'bc2a5d46e675a076bad29f0906b3807e') in 0.008 seconds [static and dynamic dependencies]. Details - ImportResultOutputID=55adb1a6befc1d43bc14a3ba2336f3b9 DependenciesID=a5475a387a2d8bb7e82473e46ec5e2a1 StaticDependenciesID=f6102aa63ebd3177483a948cbdfa9e26 
-Number of updated asset objects reloaded before import = 0
-Number of asset objects unloaded after import = 1
-========================================================================
-Received Import Request.
-  Time of request: 2026-11-19T19:15:23.1781635Z
-  Time since last request: 0.0015077 seconds.
-  importAddress: GUID: db8af10020a0a1244b05ca943e0026a0 - Path: Assets/Animations/Champions/FootSoldier/Run_SE.anim - Importer: ScriptedImporter/UnityEditor.QuickSearchModule:UnityEditor.Search:ASIAI0B
-Importing 'GUID: db8af10020a0a1244b05ca943e0026a0 - Path: Assets/Animations/Champions/FootSoldier/Run_SE.anim - Importer: ScriptedImporter/UnityEditor.QuickSearchModule:UnityEditor.Search:ASIAI0B' with importer (ScriptedImporter : UnityEditor.QuickSearchModule:UnityEditor.Search:ASIAI0B)
-Imported 'GUID: db8af10020a0a1244b05ca943e0026a0' -> (Import Result ID: '190c7a80736c3d972e21f229f1ace5d8') in 0.005 seconds [static and dynamic dependencies]. Details - ImportResultOutputID=50b88197bb16f30870210e3611b3b1e0 DependenciesID=a2647cff9e30a4da4551566c76357bf7 StaticDependenciesID=4b0e57b804062d44fab32c6ac4f531ae 
-Number of updated asset objects reloaded before import = 0
-Number of asset objects unloaded after import = 1
-========================================================================
-Received Import Request.
-  Time of request: 2026-11-19T19:15:23.2283937Z
-  Time since last request: 0.0070564 seconds.
-  importAddress: GUID: 2f320494ee346864dba2c707a022c954 - Path: Assets/Animations/Champions/GoblinScout/Attack_N.anim - Importer: ScriptedImporter/UnityEditor.QuickSearchModule:UnityEditor.Search:ASIAI0B
-Importing 'GUID: 2f320494ee346864dba2c707a022c954 - Path: Assets/Animations/Champions/GoblinScout/Attack_N.anim - Importer: ScriptedImporter/UnityEditor.QuickSearchModule:UnityEditor.Search:ASIAI0B' with importer (ScriptedImporter : UnityEditor.QuickSearchModule:UnityEditor.Search:ASIAI0B)
-Imported 'GUID: 2f320494ee346864dba2c707a022c954' -> (Import Result ID: 'd50a12cab3ded483717391c447c8ba9d') in 0.006 seconds [static and dynamic dependencies]. Details - ImportResultOutputID=c90641c440808698e969989af0053cda DependenciesID=f228eeee981cd36f48cbfbf9c7a28726 StaticDependenciesID=d60346510c7e579c9cc590300fb32739 
-Number of updated asset objects reloaded before import = 0
-Number of asset objects unloaded after import = 1
-========================================================================
-Received Import Request.
-  Time of request: 2026-11-19T19:15:23.2885951Z
-  Time since last request: 0.0021908 seconds.
-  importAddress: GUID: 365b3bb32b5083840940eafd8241b5bd - Path: Assets/Animations/Champions/BladeAssasin/Attack_E.anim - Importer: ScriptedImporter/UnityEditor.QuickSearchModule:UnityEditor.Search:ASIAI0B
-Importing 'GUID: 365b3bb32b5083840940eafd8241b5bd - Path: Assets/Animations/Champions/BladeAssasin/Attack_E.anim - Importer: ScriptedImporter/UnityEditor.QuickSearchModule:UnityEditor.Search:ASIAI0B' with importer (ScriptedImporter : UnityEditor.QuickSearchModule:UnityEditor.Search:ASIAI0B)
-Imported 'GUID: 365b3bb32b5083840940eafd8241b5bd' -> (Import Result ID: 'e41f515f0d3be22a0d4d21bc89170e9b') in 0.006 seconds [static and dynamic dependencies]. Details - ImportResultOutputID=5dd202618cca795b0287d9a7fc5d40b4 DependenciesID=d5ffb6c8e105d3b41ea30385d2a0f931 StaticDependenciesID=1da8df309d5fb68749caacc169348cb8 
-Number of updated asset objects reloaded before import = 0
-Number of asset objects unloaded after import = 1
-========================================================================
-Received Import Request.
-  Time of request: 2026-11-19T19:15:23.354908Z
-  Time since last request: 0.0227399 seconds.
-  importAddress: GUID: 6e3ac3b24c8fc22479562671f64d78c1 - Path: Assets/Animations/Champions/FootSoldier/Run_W.anim - Importer: ScriptedImporter/UnityEditor.QuickSearchModule:UnityEditor.Search:ASIAI0B
-Importing 'GUID: 6e3ac3b24c8fc22479562671f64d78c1 - Path: Assets/Animations/Champions/FootSoldier/Run_W.anim - Importer: ScriptedImporter/UnityEditor.QuickSearchModule:UnityEditor.Search:ASIAI0B' with importer (ScriptedImporter : UnityEditor.QuickSearchModule:UnityEditor.Search:ASIAI0B)
-Imported 'GUID: 6e3ac3b24c8fc22479562671f64d78c1' -> (Import Result ID: '6646d277d186cc43c9145a0b78cc29fd') in 0.012 seconds [static and dynamic dependencies]. Details - ImportResultOutputID=a8c63c92c118993184562fc7949cdea7 DependenciesID=04fa9e43485e1b1783c5155e896cf8d7 StaticDependenciesID=fd44a1b671470d6806edacaea0718a60 
-Number of updated asset objects reloaded before import = 0
-Number of asset objects unloaded after import = 1
-========================================================================
-Received Import Request.
-  Time of request: 2026-11-19T19:15:23.3958285Z
-  Time since last request: 0.0038359 seconds.
-  importAddress: GUID: 033e37c5da3a3ea40b2962e233df6bed - Path: Assets/Animations/Champions/GoblinScout/Death_E.anim - Importer: ScriptedImporter/UnityEditor.QuickSearchModule:UnityEditor.Search:ASIAI0B
-Importing 'GUID: 033e37c5da3a3ea40b2962e233df6bed - Path: Assets/Animations/Champions/GoblinScout/Death_E.anim - Importer: ScriptedImporter/UnityEditor.QuickSearchModule:UnityEditor.Search:ASIAI0B' with importer (ScriptedImporter : UnityEditor.QuickSearchModule:UnityEditor.Search:ASIAI0B)
-Imported 'GUID: 033e37c5da3a3ea40b2962e233df6bed' -> (Import Result ID: '57cd483134548e98c7012d2eb36d65b3') in 0.024 seconds [static and dynamic dependencies]. Details - ImportResultOutputID=eb1e7ea70c6ca28314b72235ccb87ad2 DependenciesID=cfbc4568c33c2d8ff193c2140fcc66ca StaticDependenciesID=23ab44c678a5bf9ff5ca3b9359977cfb 
-Number of updated asset objects reloaded before import = 0
-Number of asset objects unloaded after import = 1
-========================================================================
-Received Import Request.
-  Time of request: 2026-11-19T19:15:23.4796607Z
-  Time since last request: 0.0060109 seconds.
-  importAddress: GUID: 2ebd34b21cac40e43b19e31697cced5f - Path: Assets/Animations/Champions/GoblinScout/Death_S.anim - Importer: ScriptedImporter/UnityEditor.QuickSearchModule:UnityEditor.Search:ASIAI0B
-Importing 'GUID: 2ebd34b21cac40e43b19e31697cced5f - Path: Assets/Animations/Champions/GoblinScout/Death_S.anim - Importer: ScriptedImporter/UnityEditor.QuickSearchModule:UnityEditor.Search:ASIAI0B' with importer (ScriptedImporter : UnityEditor.QuickSearchModule:UnityEditor.Search:ASIAI0B)
-Imported 'GUID: 2ebd34b21cac40e43b19e31697cced5f' -> (Import Result ID: 'febaaf4067c4a1f14738726c5069b271') in 0.006 seconds [static and dynamic dependencies]. Details - ImportResultOutputID=d061f88a010224754f420bce9c88f750 DependenciesID=911114952008714e1fc4ad5298538dd4 StaticDependenciesID=d5cc20a4d9444a58d73ca7a1bf45159e 
-Number of updated asset objects reloaded before import = 0
-Number of asset objects unloaded after import = 1
-========================================================================
-Received Import Request.
-  Time of request: 2026-11-19T19:15:23.513202Z
-  Time since last request: 0.0026263 seconds.
-  importAddress: GUID: bf084394e6de9f44c94ac44ab9b0d95d - Path: Assets/Animations/Champions/GoblinScout/Attack_E.anim - Importer: ScriptedImporter/UnityEditor.QuickSearchModule:UnityEditor.Search:ASIAI0B
-Importing 'GUID: bf084394e6de9f44c94ac44ab9b0d95d - Path: Assets/Animations/Champions/GoblinScout/Attack_E.anim - Importer: ScriptedImporter/UnityEditor.QuickSearchModule:UnityEditor.Search:ASIAI0B' with importer (ScriptedImporter : UnityEditor.QuickSearchModule:UnityEditor.Search:ASIAI0B)
-Imported 'GUID: bf084394e6de9f44c94ac44ab9b0d95d' -> (Import Result ID: '95dbc4b2658da3511b190d4abd3cd515') in 0.008 seconds [static and dynamic dependencies]. Details - ImportResultOutputID=d2931110726a58258dca2d08f1c4a012 DependenciesID=93663a5802ebfc55385d709d1719243c StaticDependenciesID=6acd5ae3d7409be307c9a3aa58bf505f 
-Number of updated asset objects reloaded before import = 0
-Number of asset objects unloaded after import = 1
-========================================================================
-Received Import Request.
-  Time of request: 2026-11-19T19:15:23.5692883Z
-  Time since last request: 0.0096519 seconds.
-  importAddress: GUID: 81e5e4628c8a694489d476fa44d14896 - Path: Assets/Animations/Champions/BladeAssasin/Death_E.anim - Importer: ScriptedImporter/UnityEditor.QuickSearchModule:UnityEditor.Search:ASIAI0B
-Importing 'GUID: 81e5e4628c8a694489d476fa44d14896 - Path: Assets/Animations/Champions/BladeAssasin/Death_E.anim - Importer: ScriptedImporter/UnityEditor.QuickSearchModule:UnityEditor.Search:ASIAI0B' with importer (ScriptedImporter : UnityEditor.QuickSearchModule:UnityEditor.Search:ASIAI0B)
-Imported 'GUID: 81e5e4628c8a694489d476fa44d14896' -> (Import Result ID: 'e72a2943a1ad5f019551b46f4a9f4799') in 0.005 seconds [static and dynamic dependencies]. Details - ImportResultOutputID=ddbc568da6c3671b040de1b8dd6229ec DependenciesID=df10f8771279b1e4270d3d5e2d0c4056 StaticDependenciesID=8418f6908b63a277e1af303eec9c931d 
-Number of updated asset objects reloaded before import = 0
-Number of asset objects unloaded after import = 1
-========================================================================
-Received Import Request.
-  Time of request: 2026-11-19T19:15:23.6103939Z
-  Time since last request: 0.0089767 seconds.
-  importAddress: GUID: 9c69d6733dd505c4988afde754e47da4 - Path: Assets/Animations/Champions/GoblinScout/Attack_E 1.anim - Importer: ScriptedImporter/UnityEditor.QuickSearchModule:UnityEditor.Search:ASIAI0B
-Importing 'GUID: 9c69d6733dd505c4988afde754e47da4 - Path: Assets/Animations/Champions/GoblinScout/Attack_E 1.anim - Importer: ScriptedImporter/UnityEditor.QuickSearchModule:UnityEditor.Search:ASIAI0B' with importer (ScriptedImporter : UnityEditor.QuickSearchModule:UnityEditor.Search:ASIAI0B)
-Imported 'GUID: 9c69d6733dd505c4988afde754e47da4' -> (Import Result ID: '571050ca385daa34a70cfbc4a2eddb92') in 0.006 seconds [static and dynamic dependencies]. Details - ImportResultOutputID=f41afcff9bd9793ca4f929d817dfa747 DependenciesID=61f1d7e2e3ad2cf916d5a80f2f0a54e2 StaticDependenciesID=8613fdbdc521728df6552fa5ee0f763e 
-Number of updated asset objects reloaded before import = 0
-Number of asset objects unloaded after import = 1
-========================================================================
-Received Import Request.
-  Time of request: 2026-11-19T19:15:23.6604078Z
-  Time since last request: 0.0019849 seconds.
-  importAddress: GUID: 62aec1b572d86244e84a8b47244f7cac - Path: Assets/Animations/Champions/FootSoldier/AttackQ_W.anim - Importer: ScriptedImporter/UnityEditor.QuickSearchModule:UnityEditor.Search:ASIAI0B
-Importing 'GUID: 62aec1b572d86244e84a8b47244f7cac - Path: Assets/Animations/Champions/FootSoldier/AttackQ_W.anim - Importer: ScriptedImporter/UnityEditor.QuickSearchModule:UnityEditor.Search:ASIAI0B' with importer (ScriptedImporter : UnityEditor.QuickSearchModule:UnityEditor.Search:ASIAI0B)
-Imported 'GUID: 62aec1b572d86244e84a8b47244f7cac' -> (Import Result ID: 'd948f1589f23b8db72b3362ccbfc4c4c') in 0.007 seconds [static and dynamic dependencies]. Details - ImportResultOutputID=731c806fbc62d03f4d5f4b9d795a8543 DependenciesID=8ebc4815b39713dbdffa16fc5324cc5d StaticDependenciesID=ac1694dc10572e91cf405c13378eccc8 
-Number of updated asset objects reloaded before import = 0
-Number of asset objects unloaded after import = 1
-========================================================================
-Received Import Request.
-  Time of request: 2026-11-19T19:15:23.7112086Z
-  Time since last request: 0.0031626 seconds.
-  importAddress: GUID: f76aae6051c028d47a11e106c555000e - Path: Assets/Animations/Champions/BladeAssasin/Death_S.anim - Importer: ScriptedImporter/UnityEditor.QuickSearchModule:UnityEditor.Search:ASIAI0B
-Importing 'GUID: f76aae6051c028d47a11e106c555000e - Path: Assets/Animations/Champions/BladeAssasin/Death_S.anim - Importer: ScriptedImporter/UnityEditor.QuickSearchModule:UnityEditor.Search:ASIAI0B' with importer (ScriptedImporter : UnityEditor.QuickSearchModule:UnityEditor.Search:ASIAI0B)
-Imported 'GUID: f76aae6051c028d47a11e106c555000e' -> (Import Result ID: '0f4a9546ec78dbf2e088e6ef5c4aa95a') in 0.005 seconds [static and dynamic dependencies]. Details - ImportResultOutputID=e49100937060599a4caf1dc41b06c731 DependenciesID=6d42c8555c69051e7a54ed87cbb0036f StaticDependenciesID=1758d97fceff73405286422b257737e7 
-Number of updated asset objects reloaded before import = 0
-Number of asset objects unloaded after import = 1
-========================================================================
-Received Import Request.
-  Time of request: 2026-11-19T19:15:23.7760523Z
-  Time since last request: 0.0046447 seconds.
-  importAddress: GUID: 748895b567ede4246b768fa45bccf09a - Path: Assets/Animations/Champions/FootSoldier/Idle_NE.anim - Importer: ScriptedImporter/UnityEditor.QuickSearchModule:UnityEditor.Search:ASIAI0B
-Importing 'GUID: 748895b567ede4246b768fa45bccf09a - Path: Assets/Animations/Champions/FootSoldier/Idle_NE.anim - Importer: ScriptedImporter/UnityEditor.QuickSearchModule:UnityEditor.Search:ASIAI0B' with importer (ScriptedImporter : UnityEditor.QuickSearchModule:UnityEditor.Search:ASIAI0B)
-Imported 'GUID: 748895b567ede4246b768fa45bccf09a' -> (Import Result ID: '059d2f637d13231689b5ce92459782c7') in 0.007 seconds [static and dynamic dependencies]. Details - ImportResultOutputID=b6db70fb69cf29735abcecc1b9d2fd28 DependenciesID=36480236332198c28bf6a0c2a3e57312 StaticDependenciesID=30d9e333d4e222818e28cc2ef5223f77 
-Number of updated asset objects reloaded before import = 0
-Number of asset objects unloaded after import = 1
-========================================================================
-Received Import Request.
-  Time of request: 2026-11-19T19:15:23.8101942Z
-  Time since last request: 0.0007775 seconds.
-  importAddress: GUID: 1f15fad2508e5894398c9267486187e3 - Path: Assets/Animations/Champions/BladeAssasin/BladeAssasin.controller - Importer: ScriptedImporter/UnityEditor.QuickSearchModule:UnityEditor.Search:ASIAI0B
-Importing 'GUID: 1f15fad2508e5894398c9267486187e3 - Path: Assets/Animations/Champions/BladeAssasin/BladeAssasin.controller - Importer: ScriptedImporter/UnityEditor.QuickSearchModule:UnityEditor.Search:ASIAI0B' with importer (ScriptedImporter : UnityEditor.QuickSearchModule:UnityEditor.Search:ASIAI0B)
-Imported 'GUID: 1f15fad2508e5894398c9267486187e3' -> (Import Result ID: '5dbdea710d7e9d577bed83b320211394') in 0.026 seconds [static and dynamic dependencies]. Details - ImportResultOutputID=9a08fed44fe3ac10898558cbf95705ae DependenciesID=f1b8fa037a47b31b7ecabfd50141c54d StaticDependenciesID=80eb8716aa68ea2ad6ac7702a7041339 
-Number of updated asset objects reloaded before import = 0
-Number of asset objects unloaded after import = 71
-========================================================================
-Received Import Request.
-  Time of request: 2026-11-19T19:15:23.8626039Z
-  Time since last request: 0.0000295 seconds.
-  importAddress: GUID: a37140224be3c8147924d4053a436815 - Path: Assets/Animations/Champions/FootSoldier/AttackE_W.anim - Importer: ScriptedImporter/UnityEditor.QuickSearchModule:UnityEditor.Search:ASIAI0B
-Importing 'GUID: a37140224be3c8147924d4053a436815 - Path: Assets/Animations/Champions/FootSoldier/AttackE_W.anim - Importer: ScriptedImporter/UnityEditor.QuickSearchModule:UnityEditor.Search:ASIAI0B' with importer (ScriptedImporter : UnityEditor.QuickSearchModule:UnityEditor.Search:ASIAI0B)
-Imported 'GUID: a37140224be3c8147924d4053a436815' -> (Import Result ID: '4c951d698d1ea42a920d8d8dd3d2a344') in 0.005 seconds [static and dynamic dependencies]. Details - ImportResultOutputID=30e54460e54194f3e879a1fa87bde271 DependenciesID=6fe2a158a835ffdafc2344f5c770a5d1 StaticDependenciesID=e2d7346e97f20367e248c9d804a7720f 
-Number of updated asset objects reloaded before import = 0
-Number of asset objects unloaded after import = 1
-========================================================================
-Received Import Request.
-  Time of request: 2026-11-19T19:15:23.8952888Z
-  Time since last request: 0.0032767 seconds.
-  importAddress: GUID: 6963733239c51d24597b9be0f76f3423 - Path: Assets/Animations/Champions/FootSoldier/AttackQ_E.anim - Importer: ScriptedImporter/UnityEditor.QuickSearchModule:UnityEditor.Search:ASIAI0B
-Importing 'GUID: 6963733239c51d24597b9be0f76f3423 - Path: Assets/Animations/Champions/FootSoldier/AttackQ_E.anim - Importer: ScriptedImporter/UnityEditor.QuickSearchModule:UnityEditor.Search:ASIAI0B' with importer (ScriptedImporter : UnityEditor.QuickSearchModule:UnityEditor.Search:ASIAI0B)
-Imported 'GUID: 6963733239c51d24597b9be0f76f3423' -> (Import Result ID: '43d584dc0caa95b5cdfd49ab42f60801') in 0.014 seconds [static and dynamic dependencies]. Details - ImportResultOutputID=731318d3d00bbc276be79b5020dedd98 DependenciesID=15db3e46826dcb0ade26767beee9d126 StaticDependenciesID=982bd524f05ce9ffb1acb8bf8bd883cc 
-Number of updated asset objects reloaded before import = 0
-Number of asset objects unloaded after import = 1
-========================================================================
-Received Import Request.
-  Time of request: 2026-11-19T19:15:23.9461179Z
-  Time since last request: 0.0013132 seconds.
-  importAddress: GUID: 858de1d52ed015749aa51e9668df32c7 - Path: Assets/Animations/Champions/BladeAssasin/AttackE_N.anim - Importer: ScriptedImporter/UnityEditor.QuickSearchModule:UnityEditor.Search:ASIAI0B
-Importing 'GUID: 858de1d52ed015749aa51e9668df32c7 - Path: Assets/Animations/Champions/BladeAssasin/AttackE_N.anim - Importer: ScriptedImporter/UnityEditor.QuickSearchModule:UnityEditor.Search:ASIAI0B' with importer (ScriptedImporter : UnityEditor.QuickSearchModule:UnityEditor.Search:ASIAI0B)
-Imported 'GUID: 858de1d52ed015749aa51e9668df32c7' -> (Import Result ID: '211b7b77aa819c1ff823b3bef45557e9') in 0.007 seconds [static and dynamic dependencies]. Details - ImportResultOutputID=5e57fb9a0f60a2815889ef1c8afab4b7 DependenciesID=203b700036ce9c2bd1190a7c07514999 StaticDependenciesID=a4472fab47f2aa535fbd9dd042d07cc0 
-Number of updated asset objects reloaded before import = 0
-Number of asset objects unloaded after import = 1
-========================================================================
-Received Import Request.
-  Time of request: 2026-11-19T19:15:23.9923629Z
-  Time since last request: 0.0118321 seconds.
-  importAddress: GUID: 394634b3d6d2a1b469f02a1399b241c2 - Path: Assets/Animations/Champions/GoblinScout/Idle_NE.anim - Importer: ScriptedImporter/UnityEditor.QuickSearchModule:UnityEditor.Search:ASIAI0B
-Importing 'GUID: 394634b3d6d2a1b469f02a1399b241c2 - Path: Assets/Animations/Champions/GoblinScout/Idle_NE.anim - Importer: ScriptedImporter/UnityEditor.QuickSearchModule:UnityEditor.Search:ASIAI0B' with importer (ScriptedImporter : UnityEditor.QuickSearchModule:UnityEditor.Search:ASIAI0B)
-Imported 'GUID: 394634b3d6d2a1b469f02a1399b241c2' -> (Import Result ID: '6417f7dc43d5266df985e3f19b45155d') in 0.004 seconds [static and dynamic dependencies]. Details - ImportResultOutputID=ac9bf8985a333f3be72720138486f9ab DependenciesID=3b87a873f874f7dd4ebc921eabfb5e7b StaticDependenciesID=d9a7a67692b0a96c5da8e25195b8a24d 
-Number of updated asset objects reloaded before import = 0
-Number of asset objects unloaded after import = 1
-========================================================================
-Received Import Request.
-  Time of request: 2026-11-19T19:15:24.0608462Z
-  Time since last request: 0.0257233 seconds.
-  importAddress: GUID: 2b08ace7e670aeb41b415774eef63059 - Path: Assets/Animations/Champions/BladeAssasin/Run_SW.anim - Importer: ScriptedImporter/UnityEditor.QuickSearchModule:UnityEditor.Search:ASIAI0B
-Importing 'GUID: 2b08ace7e670aeb41b415774eef63059 - Path: Assets/Animations/Champions/BladeAssasin/Run_SW.anim - Importer: ScriptedImporter/UnityEditor.QuickSearchModule:UnityEditor.Search:ASIAI0B' with importer (ScriptedImporter : UnityEditor.QuickSearchModule:UnityEditor.Search:ASIAI0B)
-Imported 'GUID: 2b08ace7e670aeb41b415774eef63059' -> (Import Result ID: '27cd90754666c4b26755ae7243511911') in 0.005 seconds [static and dynamic dependencies]. Details - ImportResultOutputID=39e41cc132c77e6a599799f4dfe4cb99 DependenciesID=78be50420b617a88e566392a4ac2acbc StaticDependenciesID=4b6ee7c89aedc8a3728163825abac492 
-Number of updated asset objects reloaded before import = 0
-Number of asset objects unloaded after import = 1
-========================================================================
-Received Import Request.
-  Time of request: 2026-11-19T19:15:24.092936Z
-  Time since last request: 0.003568 seconds.
-  importAddress: GUID: 284e7c9c614ed52448f6defd78fb0b59 - Path: Assets/Animations/Champions/BladeAssasin/Attack_NE.anim - Importer: ScriptedImporter/UnityEditor.QuickSearchModule:UnityEditor.Search:ASIAI0B
-Importing 'GUID: 284e7c9c614ed52448f6defd78fb0b59 - Path: Assets/Animations/Champions/BladeAssasin/Attack_NE.anim - Importer: ScriptedImporter/UnityEditor.QuickSearchModule:UnityEditor.Search:ASIAI0B' with importer (ScriptedImporter : UnityEditor.QuickSearchModule:UnityEditor.Search:ASIAI0B)
-Imported 'GUID: 284e7c9c614ed52448f6defd78fb0b59' -> (Import Result ID: '1d7d743ba9672490b747fd6564ada748') in 0.005 seconds [static and dynamic dependencies]. Details - ImportResultOutputID=7362364c37ea71ca525d898f62fd5da6 DependenciesID=a82b96e672902234f90f7506483bf006 StaticDependenciesID=d47cbc57ad38f4fc07c38d6293911d5b 
-Number of updated asset objects reloaded before import = 0
-Number of asset objects unloaded after import = 1
-========================================================================
-Received Import Request.
-  Time of request: 2026-11-19T19:15:24.130735Z
-  Time since last request: 0.0026303 seconds.
-  importAddress: GUID: dfd9909b5bc08024f817b8badfb0fa2f - Path: Assets/Animations/Champions/GoblinScout/Idle_S.anim - Importer: ScriptedImporter/UnityEditor.QuickSearchModule:UnityEditor.Search:ASIAI0B
-Importing 'GUID: dfd9909b5bc08024f817b8badfb0fa2f - Path: Assets/Animations/Champions/GoblinScout/Idle_S.anim - Importer: ScriptedImporter/UnityEditor.QuickSearchModule:UnityEditor.Search:ASIAI0B' with importer (ScriptedImporter : UnityEditor.QuickSearchModule:UnityEditor.Search:ASIAI0B)
-Imported 'GUID: dfd9909b5bc08024f817b8badfb0fa2f' -> (Import Result ID: 'de94373ee7b27592c5b8b2578c1a7473') in 0.005 seconds [static and dynamic dependencies]. Details - ImportResultOutputID=e4b5fee97a5d702242ec918ff668d1b4 DependenciesID=79e97f878aa5fa4f9f0db7bbfcab9adb StaticDependenciesID=054b0a1f48f9112af209bd354ed32bd8 
-Number of updated asset objects reloaded before import = 0
-Number of asset objects unloaded after import = 1
-========================================================================
-Received Import Request.
-  Time of request: 2026-11-19T19:15:24.1732403Z
-  Time since last request: 0.0010008 seconds.
-  importAddress: GUID: eb3a672aecca9674aabd44df9ce4f3aa - Path: Assets/Animations/Champions/GoblinScout/Idle_SE.anim - Importer: ScriptedImporter/UnityEditor.QuickSearchModule:UnityEditor.Search:ASIAI0B
-Importing 'GUID: eb3a672aecca9674aabd44df9ce4f3aa - Path: Assets/Animations/Champions/GoblinScout/Idle_SE.anim - Importer: ScriptedImporter/UnityEditor.QuickSearchModule:UnityEditor.Search:ASIAI0B' with importer (ScriptedImporter : UnityEditor.QuickSearchModule:UnityEditor.Search:ASIAI0B)
-Imported 'GUID: eb3a672aecca9674aabd44df9ce4f3aa' -> (Import Result ID: '6d96405baca31d82793fb7cebc6525c0') in 0.006 seconds [static and dynamic dependencies]. Details - ImportResultOutputID=c0db7596f9973ada20bca68801222648 DependenciesID=a31a1ec54899105e0b482e56e26ae2f5 StaticDependenciesID=e7c516ce488084c518d815650be642de 
-Number of updated asset objects reloaded before import = 0
-Number of asset objects unloaded after import = 1
-========================================================================
-Received Import Request.
-  Time of request: 2026-11-19T19:15:24.2112806Z
-  Time since last request: 0.0013383 seconds.
-  importAddress: GUID: 98fcc4b9e93af1c4492e9a9f703b658b - Path: Assets/Animations/Champions/FootSoldier/AttackQ_NW.anim - Importer: ScriptedImporter/UnityEditor.QuickSearchModule:UnityEditor.Search:ASIAI0B
-Importing 'GUID: 98fcc4b9e93af1c4492e9a9f703b658b - Path: Assets/Animations/Champions/FootSoldier/AttackQ_NW.anim - Importer: ScriptedImporter/UnityEditor.QuickSearchModule:UnityEditor.Search:ASIAI0B' with importer (ScriptedImporter : UnityEditor.QuickSearchModule:UnityEditor.Search:ASIAI0B)
-Imported 'GUID: 98fcc4b9e93af1c4492e9a9f703b658b' -> (Import Result ID: '8e320184bcf16a57c7909b4a1584b250') in 0.011 seconds [static and dynamic dependencies]. Details - ImportResultOutputID=33e4e0836ddfd0cca7117df4060ddf0f DependenciesID=0b1328f28ad17d9af6065051e6984bec StaticDependenciesID=3c3a85b5b48c676d6bc703328170154d 
-Number of updated asset objects reloaded before import = 0
-Number of asset objects unloaded after import = 1
-========================================================================
-Received Import Request.
-  Time of request: 2026-11-19T19:15:24.2482898Z
-  Time since last request: 0.0013495 seconds.
-  importAddress: GUID: 851072ca57f493940a89ba9abf8e24db - Path: Assets/Animations/Champions/GoblinScout/AttackQ_SW.anim - Importer: ScriptedImporter/UnityEditor.QuickSearchModule:UnityEditor.Search:ASIAI0B
-Importing 'GUID: 851072ca57f493940a89ba9abf8e24db - Path: Assets/Animations/Champions/GoblinScout/AttackQ_SW.anim - Importer: ScriptedImporter/UnityEditor.QuickSearchModule:UnityEditor.Search:ASIAI0B' with importer (ScriptedImporter : UnityEditor.QuickSearchModule:UnityEditor.Search:ASIAI0B)
-Imported 'GUID: 851072ca57f493940a89ba9abf8e24db' -> (Import Result ID: 'bb98db2c92510a3c6868dce2cdd76e24') in 0.006 seconds [static and dynamic dependencies]. Details - ImportResultOutputID=e21e064243ce6e5a5ba1fd3c649d79dd DependenciesID=ada78a9d63fd3efec0bba09d695e3c33 StaticDependenciesID=045413dcbfa6ea43513491d6bbac946f 
-Number of updated asset objects reloaded before import = 0
-Number of asset objects unloaded after import = 1
-========================================================================
-Received Import Request.
-  Time of request: 2026-11-19T19:15:24.2812596Z
-  Time since last request: 0.0011149 seconds.
-  importAddress: GUID: 0a5eedeceddc8f1438b9d224cebea423 - Path: Assets/Animations/Champions/BladeAssasin/Attack_S.anim - Importer: ScriptedImporter/UnityEditor.QuickSearchModule:UnityEditor.Search:ASIAI0B
-Importing 'GUID: 0a5eedeceddc8f1438b9d224cebea423 - Path: Assets/Animations/Champions/BladeAssasin/Attack_S.anim - Importer: ScriptedImporter/UnityEditor.QuickSearchModule:UnityEditor.Search:ASIAI0B' with importer (ScriptedImporter : UnityEditor.QuickSearchModule:UnityEditor.Search:ASIAI0B)
-Imported 'GUID: 0a5eedeceddc8f1438b9d224cebea423' -> (Import Result ID: '69015959c9a8d5f9a4f3b7f74667c400') in 0.006 seconds [static and dynamic dependencies]. Details - ImportResultOutputID=7b8477a652c2d90ca4fb57365e2d182c DependenciesID=dc6f7fa2b03faec374b6269e6405c697 StaticDependenciesID=39b210e45798cc8f8b3a7e035818e149 
-Number of updated asset objects reloaded before import = 0
-Number of asset objects unloaded after import = 1
-========================================================================
-Received Import Request.
-  Time of request: 2026-11-19T19:15:24.318123Z
-  Time since last request: 0.0013878 seconds.
-  importAddress: GUID: 9166b5d767393474d94a7c040a8f18b8 - Path: Assets/Animations/Champions/BladeAssasin/Idle_S.anim - Importer: ScriptedImporter/UnityEditor.QuickSearchModule:UnityEditor.Search:ASIAI0B
-Importing 'GUID: 9166b5d767393474d94a7c040a8f18b8 - Path: Assets/Animations/Champions/BladeAssasin/Idle_S.anim - Importer: ScriptedImporter/UnityEditor.QuickSearchModule:UnityEditor.Search:ASIAI0B' with importer (ScriptedImporter : UnityEditor.QuickSearchModule:UnityEditor.Search:ASIAI0B)
-Imported 'GUID: 9166b5d767393474d94a7c040a8f18b8' -> (Import Result ID: '41bd868a5e463b24c54177f31f42d026') in 0.006 seconds [static and dynamic dependencies]. Details - ImportResultOutputID=4ad6ca9c272944e42482eaa9ee8306b5 DependenciesID=ac372e20c5c7d85a23e5610e536f378d StaticDependenciesID=a1f58199c6852340a9a7698d6955f476 
-Number of updated asset objects reloaded before import = 0
-Number of asset objects unloaded after import = 1
-========================================================================
-Received Import Request.
-  Time of request: 2026-11-19T19:15:24.352432Z
-  Time since last request: 0.0009982 seconds.
-  importAddress: GUID: c911642737eff484785ae0e947247069 - Path: Assets/Animations/Champions/BladeAssasin/AttackQ_N.anim - Importer: ScriptedImporter/UnityEditor.QuickSearchModule:UnityEditor.Search:ASIAI0B
-Importing 'GUID: c911642737eff484785ae0e947247069 - Path: Assets/Animations/Champions/BladeAssasin/AttackQ_N.anim - Importer: ScriptedImporter/UnityEditor.QuickSearchModule:UnityEditor.Search:ASIAI0B' with importer (ScriptedImporter : UnityEditor.QuickSearchModule:UnityEditor.Search:ASIAI0B)
-Imported 'GUID: c911642737eff484785ae0e947247069' -> (Import Result ID: 'e39d534866ad5c4c4a6aa9546d50b421') in 0.008 seconds [static and dynamic dependencies]. Details - ImportResultOutputID=dfb4c4ac37b3c1ad3f9d3c7d53d4a171 DependenciesID=c6fde1c8944a0bcfa6c4dcd9951c3654 StaticDependenciesID=6ec88478903f41992405d263eecc9191 
-Number of updated asset objects reloaded before import = 0
-Number of asset objects unloaded after import = 1
-========================================================================
-Received Import Request.
-  Time of request: 2026-11-19T19:15:24.3845018Z
-  Time since last request: 0.0008642 seconds.
-  importAddress: GUID: 32623b97caadb3542b5f02ec0059db12 - Path: Assets/Animations/Champions/BladeAssasin/Idle_NW.anim - Importer: ScriptedImporter/UnityEditor.QuickSearchModule:UnityEditor.Search:ASIAI0B
-Importing 'GUID: 32623b97caadb3542b5f02ec0059db12 - Path: Assets/Animations/Champions/BladeAssasin/Idle_NW.anim - Importer: ScriptedImporter/UnityEditor.QuickSearchModule:UnityEditor.Search:ASIAI0B' with importer (ScriptedImporter : UnityEditor.QuickSearchModule:UnityEditor.Search:ASIAI0B)
-Imported 'GUID: 32623b97caadb3542b5f02ec0059db12' -> (Import Result ID: '35609878906115ca392b0371fb21f14d') in 0.007 seconds [static and dynamic dependencies]. Details - ImportResultOutputID=4e2380766f2f2a62873fc6fba6b9ce44 DependenciesID=dc7b748d69a17d34cd27089455f6c10c StaticDependenciesID=fa9d7077301f66631b3f8d42e205bbce 
-Number of updated asset objects reloaded before import = 0
-Number of asset objects unloaded after import = 1
-========================================================================
-Received Import Request.
-  Time of request: 2026-11-19T19:15:24.4200071Z
-  Time since last request: 0.0011463 seconds.
-  importAddress: GUID: ad49190a0728dbe4a8e70957657e043e - Path: Assets/Animations/Champions/BladeAssasin/AttackE_NE.anim - Importer: ScriptedImporter/UnityEditor.QuickSearchModule:UnityEditor.Search:ASIAI0B
-Importing 'GUID: ad49190a0728dbe4a8e70957657e043e - Path: Assets/Animations/Champions/BladeAssasin/AttackE_NE.anim - Importer: ScriptedImporter/UnityEditor.QuickSearchModule:UnityEditor.Search:ASIAI0B' with importer (ScriptedImporter : UnityEditor.QuickSearchModule:UnityEditor.Search:ASIAI0B)
-Imported 'GUID: ad49190a0728dbe4a8e70957657e043e' -> (Import Result ID: '854520a7625ab07a0eabe1945cac512c') in 0.007 seconds [static and dynamic dependencies]. Details - ImportResultOutputID=06706d517cdc60772ed9dbbde20d5986 DependenciesID=011421e1daeba876dec4d17e79ac1413 StaticDependenciesID=7cc51061c2618fd7bd32ca17c78f1861 
-Number of updated asset objects reloaded before import = 0
-Number of asset objects unloaded after import = 1
-========================================================================
-Received Import Request.
-  Time of request: 2026-11-19T19:15:24.4531599Z
-  Time since last request: 0.0023634 seconds.
-  importAddress: GUID: ab2f53ec161687b409faafcd90732acc - Path: Assets/Animations/Champions/FootSoldier/Idle_W.anim - Importer: ScriptedImporter/UnityEditor.QuickSearchModule:UnityEditor.Search:ASIAI0B
-Importing 'GUID: ab2f53ec161687b409faafcd90732acc - Path: Assets/Animations/Champions/FootSoldier/Idle_W.anim - Importer: ScriptedImporter/UnityEditor.QuickSearchModule:UnityEditor.Search:ASIAI0B' with importer (ScriptedImporter : UnityEditor.QuickSearchModule:UnityEditor.Search:ASIAI0B)
-Imported 'GUID: ab2f53ec161687b409faafcd90732acc' -> (Import Result ID: 'f26324ffc9d6d18df5b327e46d741b43') in 0.005 seconds [static and dynamic dependencies]. Details - ImportResultOutputID=4b56bd3fd5db763215e0f11f4c573e8f DependenciesID=e0b259e81347fb32262fc80a3d11af0c StaticDependenciesID=342c5b6d93b62d39f4fcd2eed080fff0 
-Number of updated asset objects reloaded before import = 0
-Number of asset objects unloaded after import = 1
-========================================================================
-Received Import Request.
-  Time of request: 2026-11-19T19:15:24.4842509Z
-  Time since last request: 0.0010386 seconds.
-  importAddress: GUID: a6827f5c0305c144593c55e72d8b2a39 - Path: Assets/Animations/Champions/GoblinScout/Run_N.anim - Importer: ScriptedImporter/UnityEditor.QuickSearchModule:UnityEditor.Search:ASIAI0B
-Importing 'GUID: a6827f5c0305c144593c55e72d8b2a39 - Path: Assets/Animations/Champions/GoblinScout/Run_N.anim - Importer: ScriptedImporter/UnityEditor.QuickSearchModule:UnityEditor.Search:ASIAI0B' with importer (ScriptedImporter : UnityEditor.QuickSearchModule:UnityEditor.Search:ASIAI0B)
-Imported 'GUID: a6827f5c0305c144593c55e72d8b2a39' -> (Import Result ID: 'e0abb5330e209880202acb4ab15e9191') in 0.007 seconds [static and dynamic dependencies]. Details - ImportResultOutputID=1bf76543054d182167ca3b64eb298e0f DependenciesID=f33aec38f4738e36bf235a294897be81 StaticDependenciesID=828174433d6afe1ec285802b60df3545 
-Number of updated asset objects reloaded before import = 0
-Number of asset objects unloaded after import = 1
-========================================================================
-Received Import Request.
-  Time of request: 2026-11-19T19:15:24.516719Z
-  Time since last request: 0.0029443 seconds.
-  importAddress: GUID: 07badf0739245ea4eb53409dcc677f61 - Path: Assets/Animations/Champions/GoblinScout/AttackE_W.anim - Importer: ScriptedImporter/UnityEditor.QuickSearchModule:UnityEditor.Search:ASIAI0B
-Importing 'GUID: 07badf0739245ea4eb53409dcc677f61 - Path: Assets/Animations/Champions/GoblinScout/AttackE_W.anim - Importer: ScriptedImporter/UnityEditor.QuickSearchModule:UnityEditor.Search:ASIAI0B' with importer (ScriptedImporter : UnityEditor.QuickSearchModule:UnityEditor.Search:ASIAI0B)
-Imported 'GUID: 07badf0739245ea4eb53409dcc677f61' -> (Import Result ID: '053b642cb00095a7bbbfdf599ffa1757') in 0.005 seconds [static and dynamic dependencies]. Details - ImportResultOutputID=b544e3774406cb7f4424c8899fe1527f DependenciesID=1ca977ff1a627160c53d8c1bf9149179 StaticDependenciesID=da7f83069d5e893573171eeb91ee7045 
-Number of updated asset objects reloaded before import = 0
-Number of asset objects unloaded after import = 1
-========================================================================
-Received Import Request.
-  Time of request: 2026-11-19T19:15:24.5528678Z
-  Time since last request: 0.0032203 seconds.
-  importAddress: GUID: 7327192b6f13c43488c5eb86aa0d380a - Path: Assets/Animations/Champions/BladeAssasin/Run_NE.anim - Importer: ScriptedImporter/UnityEditor.QuickSearchModule:UnityEditor.Search:ASIAI0B
-Importing 'GUID: 7327192b6f13c43488c5eb86aa0d380a - Path: Assets/Animations/Champions/BladeAssasin/Run_NE.anim - Importer: ScriptedImporter/UnityEditor.QuickSearchModule:UnityEditor.Search:ASIAI0B' with importer (ScriptedImporter : UnityEditor.QuickSearchModule:UnityEditor.Search:ASIAI0B)
-Imported 'GUID: 7327192b6f13c43488c5eb86aa0d380a' -> (Import Result ID: '246b39d2060cf0b7b5c20a1e6773b8cb') in 0.004 seconds [static and dynamic dependencies]. Details - ImportResultOutputID=51a784ba660bcb515e67290abeeed4ea DependenciesID=84d2d0c7cd6d361423425a0b0bffe66b StaticDependenciesID=f77880aa750116713b6bbafd54456179 
-Number of updated asset objects reloaded before import = 0
-Number of asset objects unloaded after import = 1
-========================================================================
-Received Import Request.
-  Time of request: 2026-11-19T19:15:24.6002099Z
-  Time since last request: 0.0023054 seconds.
-  importAddress: GUID: e40733c90b790bd4f93599d3a9e4723a - Path: Assets/Animations/Champions/BladeAssasin/Run_NW.anim - Importer: ScriptedImporter/UnityEditor.QuickSearchModule:UnityEditor.Search:ASIAI0B
-Importing 'GUID: e40733c90b790bd4f93599d3a9e4723a - Path: Assets/Animations/Champions/BladeAssasin/Run_NW.anim - Importer: ScriptedImporter/UnityEditor.QuickSearchModule:UnityEditor.Search:ASIAI0B' with importer (ScriptedImporter : UnityEditor.QuickSearchModule:UnityEditor.Search:ASIAI0B)
-Imported 'GUID: e40733c90b790bd4f93599d3a9e4723a' -> (Import Result ID: '1b0b3176a486837b992931dcc9457165') in 0.006 seconds [static and dynamic dependencies]. Details - ImportResultOutputID=a5adc546a189e1c2fddf94796cd4c005 DependenciesID=344aed3dcb6448b247d0e81ae9f139f2 StaticDependenciesID=dbc4c53cdea4358b0e4be939678a90cc 
-Number of updated asset objects reloaded before import = 0
-Number of asset objects unloaded after import = 1
-========================================================================
-Received Import Request.
-  Time of request: 2026-11-19T19:15:24.6347942Z
-  Time since last request: 0.0011748 seconds.
-  importAddress: GUID: a35d8a2af8a47944390d7f18a4833975 - Path: Assets/Animations/Champions/BladeAssasin/Run_W.anim - Importer: ScriptedImporter/UnityEditor.QuickSearchModule:UnityEditor.Search:ASIAI0B
-Importing 'GUID: a35d8a2af8a47944390d7f18a4833975 - Path: Assets/Animations/Champions/BladeAssasin/Run_W.anim - Importer: ScriptedImporter/UnityEditor.QuickSearchModule:UnityEditor.Search:ASIAI0B' with importer (ScriptedImporter : UnityEditor.QuickSearchModule:UnityEditor.Search:ASIAI0B)
-Imported 'GUID: a35d8a2af8a47944390d7f18a4833975' -> (Import Result ID: 'd1b6c8a31432ae7c94ca919b55ae7087') in 0.005 seconds [static and dynamic dependencies]. Details - ImportResultOutputID=7142e475ac8d24aa0e4a691cd1e7e01b DependenciesID=ee8375237427ba9f0d319ec69cf44d89 StaticDependenciesID=e9edd74d273c9af10edc3feaaec9aa7d 
-Number of updated asset objects reloaded before import = 0
-Number of asset objects unloaded after import = 1
-========================================================================
-Received Import Request.
-  Time of request: 2026-11-19T19:15:24.6775192Z
-  Time since last request: 0.0016462 seconds.
-  importAddress: GUID: 3cdc7e07c14281e4ab6cf5f77ea63a9e - Path: Assets/Animations/Champions/BladeAssasin/Idle_SW.anim - Importer: ScriptedImporter/UnityEditor.QuickSearchModule:UnityEditor.Search:ASIAI0B
-Importing 'GUID: 3cdc7e07c14281e4ab6cf5f77ea63a9e - Path: Assets/Animations/Champions/BladeAssasin/Idle_SW.anim - Importer: ScriptedImporter/UnityEditor.QuickSearchModule:UnityEditor.Search:ASIAI0B' with importer (ScriptedImporter : UnityEditor.QuickSearchModule:UnityEditor.Search:ASIAI0B)
-Imported 'GUID: 3cdc7e07c14281e4ab6cf5f77ea63a9e' -> (Import Result ID: '1d491468e6c1e1fd10e205a126a71b00') in 0.005 seconds [static and dynamic dependencies]. Details - ImportResultOutputID=418956e36cd63aadff7c0a5d3105c851 DependenciesID=ee27cecb737e6bfa4a4da7426794310a StaticDependenciesID=d3629d3303df58a7ae797b295305d077 
-Number of updated asset objects reloaded before import = 0
-Number of asset objects unloaded after import = 1
-========================================================================
-Received Import Request.
-  Time of request: 2026-11-19T19:15:24.7076627Z
-  Time since last request: 0.0016459 seconds.
-  importAddress: GUID: d3ff6d863e86c2a4fb650227abc1246b - Path: Assets/Animations/Champions/GoblinScout/Death_N.anim - Importer: ScriptedImporter/UnityEditor.QuickSearchModule:UnityEditor.Search:ASIAI0B
-Importing 'GUID: d3ff6d863e86c2a4fb650227abc1246b - Path: Assets/Animations/Champions/GoblinScout/Death_N.anim - Importer: ScriptedImporter/UnityEditor.QuickSearchModule:UnityEditor.Search:ASIAI0B' with importer (ScriptedImporter : UnityEditor.QuickSearchModule:UnityEditor.Search:ASIAI0B)
-Imported 'GUID: d3ff6d863e86c2a4fb650227abc1246b' -> (Import Result ID: '2b1e09608ce3d99163265dec39fa76ac') in 0.005 seconds [static and dynamic dependencies]. Details - ImportResultOutputID=612abf6f12bbcc1a5bd1c5660c2ab81d DependenciesID=c41524726fef767c1de259f3cd0df540 StaticDependenciesID=1d81ef860993adb68cbd0a84012fb475 
-Number of updated asset objects reloaded before import = 0
-Number of asset objects unloaded after import = 1
-========================================================================
-Received Import Request.
-  Time of request: 2026-11-19T19:15:24.7412123Z
-  Time since last request: 0.0039435 seconds.
-  importAddress: GUID: 3d489f388e2a9ec47a8400ad34b2c7e7 - Path: Assets/Animations/Champions/FootSoldier/AttackQ_NE.anim - Importer: ScriptedImporter/UnityEditor.QuickSearchModule:UnityEditor.Search:ASIAI0B
-Importing 'GUID: 3d489f388e2a9ec47a8400ad34b2c7e7 - Path: Assets/Animations/Champions/FootSoldier/AttackQ_NE.anim - Importer: ScriptedImporter/UnityEditor.QuickSearchModule:UnityEditor.Search:ASIAI0B' with importer (ScriptedImporter : UnityEditor.QuickSearchModule:UnityEditor.Search:ASIAI0B)
-Imported 'GUID: 3d489f388e2a9ec47a8400ad34b2c7e7' -> (Import Result ID: '3a2ac4d11f2253792812989d2b0c918c') in 0.006 seconds [static and dynamic dependencies]. Details - ImportResultOutputID=29578e8fd4a19db1bc32422bf509fee0 DependenciesID=d41202c5ba071ae6873917892074930f StaticDependenciesID=278ecc40a34b98ecdb4eab4bf9c186d3 
-Number of updated asset objects reloaded before import = 0
-Number of asset objects unloaded after import = 1
-========================================================================
-Received Import Request.
-  Time of request: 2026-11-19T19:15:24.7735788Z
-  Time since last request: 0.0019263 seconds.
-  importAddress: GUID: c082dc9b8b513054bb8e14ebc0080fb0 - Path: Assets/Animations/Champions/FootSoldier/Idle_NW.anim - Importer: ScriptedImporter/UnityEditor.QuickSearchModule:UnityEditor.Search:ASIAI0B
-Importing 'GUID: c082dc9b8b513054bb8e14ebc0080fb0 - Path: Assets/Animations/Champions/FootSoldier/Idle_NW.anim - Importer: ScriptedImporter/UnityEditor.QuickSearchModule:UnityEditor.Search:ASIAI0B' with importer (ScriptedImporter : UnityEditor.QuickSearchModule:UnityEditor.Search:ASIAI0B)
-Imported 'GUID: c082dc9b8b513054bb8e14ebc0080fb0' -> (Import Result ID: '87863267b311d25de338b0ce7f9e71da') in 0.005 seconds [static and dynamic dependencies]. Details - ImportResultOutputID=9d1716e0507a5daf1312a0f5fea83dd4 DependenciesID=1f18a588900cdf743a45ed4c4df6abc7 StaticDependenciesID=e0bb6e4f85a333415ce4157b898cee71 
-Number of updated asset objects reloaded before import = 0
-Number of asset objects unloaded after import = 1
-========================================================================
-Received Import Request.
-  Time of request: 2026-11-19T19:15:24.8103918Z
-  Time since last request: 0.0031181 seconds.
-  importAddress: GUID: f67cde8954fca8841a0b48a2fe3a04ed - Path: Assets/Animations/Champions/Character.controller - Importer: ScriptedImporter/UnityEditor.QuickSearchModule:UnityEditor.Search:ASIAI0B
-Importing 'GUID: f67cde8954fca8841a0b48a2fe3a04ed - Path: Assets/Animations/Champions/Character.controller - Importer: ScriptedImporter/UnityEditor.QuickSearchModule:UnityEditor.Search:ASIAI0B' with importer (ScriptedImporter : UnityEditor.QuickSearchModule:UnityEditor.Search:ASIAI0B)
-Imported 'GUID: f67cde8954fca8841a0b48a2fe3a04ed' -> (Import Result ID: '19bb6ef610b81ec8ae204d42fb7f1fd5') in 0.024 seconds [static and dynamic dependencies]. Details - ImportResultOutputID=7d06f5f9bd1f18d3c5238f335a359289 DependenciesID=9969d4d685af579c6bd25c452c457dd8 StaticDependenciesID=4ebeeb054c4291a7cadffffda211c735 
-Number of updated asset objects reloaded before import = 0
-Number of asset objects unloaded after import = 47
-========================================================================
-Received Import Request.
-  Time of request: 2026-11-19T19:15:24.8629311Z
-  Time since last request: 0.0024863 seconds.
-  importAddress: GUID: 7811767a73334b64c848aeaff277bad2 - Path: Assets/Animations/Champions/BladeAssasin/Idle_N.anim - Importer: ScriptedImporter/UnityEditor.QuickSearchModule:UnityEditor.Search:ASIAI0B
-Importing 'GUID: 7811767a73334b64c848aeaff277bad2 - Path: Assets/Animations/Champions/BladeAssasin/Idle_N.anim - Importer: ScriptedImporter/UnityEditor.QuickSearchModule:UnityEditor.Search:ASIAI0B' with importer (ScriptedImporter : UnityEditor.QuickSearchModule:UnityEditor.Search:ASIAI0B)
-Imported 'GUID: 7811767a73334b64c848aeaff277bad2' -> (Import Result ID: 'dfe496bd5d89fa131dd49233f47d89d9') in 0.007 seconds [static and dynamic dependencies]. Details - ImportResultOutputID=ab1e7d468bddb6ca1abd33354ade4032 DependenciesID=eb5e351ea9f57724ce8dfb7f40c14bbb StaticDependenciesID=aa3ec5a90631d0286305817bd2a3c351 
-Number of updated asset objects reloaded before import = 0
-Number of asset objects unloaded after import = 1
-========================================================================
-Received Import Request.
-  Time of request: 2026-11-19T19:15:24.8972454Z
-  Time since last request: 0.0006737 seconds.
-  importAddress: GUID: 5b456ca9e12bf224c8059e60d04da45c - Path: Assets/Animations/Champions/BladeAssasin/Run_SE.anim - Importer: ScriptedImporter/UnityEditor.QuickSearchModule:UnityEditor.Search:ASIAI0B
-Importing 'GUID: 5b456ca9e12bf224c8059e60d04da45c - Path: Assets/Animations/Champions/BladeAssasin/Run_SE.anim - Importer: ScriptedImporter/UnityEditor.QuickSearchModule:UnityEditor.Search:ASIAI0B' with importer (ScriptedImporter : UnityEditor.QuickSearchModule:UnityEditor.Search:ASIAI0B)
-Imported 'GUID: 5b456ca9e12bf224c8059e60d04da45c' -> (Import Result ID: '9feb1817fe270204db5c5e3329283d49') in 0.007 seconds [static and dynamic dependencies]. Details - ImportResultOutputID=26306ce648f5c4ff742b4d2ba7f3cbde DependenciesID=bed9a1af17eefd7175ae444a27ffbc49 StaticDependenciesID=87a498c22f382a58b083152fb3437f6f 
-Number of updated asset objects reloaded before import = 0
-Number of asset objects unloaded after import = 1
-========================================================================
-Received Import Request.
-  Time of request: 2026-11-19T19:15:24.9307614Z
-  Time since last request: 0.0003116 seconds.
-  importAddress: GUID: c71c9b0755d84504a97132ed52be7d6c - Path: Assets/Animations/Champions/BladeAssasin/AttackE_S.anim - Importer: ScriptedImporter/UnityEditor.QuickSearchModule:UnityEditor.Search:ASIAI0B
-Importing 'GUID: c71c9b0755d84504a97132ed52be7d6c - Path: Assets/Animations/Champions/BladeAssasin/AttackE_S.anim - Importer: ScriptedImporter/UnityEditor.QuickSearchModule:UnityEditor.Search:ASIAI0B' with importer (ScriptedImporter : UnityEditor.QuickSearchModule:UnityEditor.Search:ASIAI0B)
-Imported 'GUID: c71c9b0755d84504a97132ed52be7d6c' -> (Import Result ID: '245d2d32157edd624651ad681247a3bb') in 0.006 seconds [static and dynamic dependencies]. Details - ImportResultOutputID=8c8dac29b7764674830ebacf22f8c065 DependenciesID=93f692bfc9f06ac4ac5a0029ebbb1797 StaticDependenciesID=83b007702e6744dd173b7677215bcd0d 
-Number of updated asset objects reloaded before import = 0
-Number of asset objects unloaded after import = 1
-========================================================================
-Received Import Request.
-  Time of request: 2026-11-19T19:15:24.9611171Z
-  Time since last request: 0.0006316 seconds.
-  importAddress: GUID: f71db33dab5dca24c99041d5245833d1 - Path: Assets/Animations/Champions/GoblinScout/AttackQ_NE.anim - Importer: ScriptedImporter/UnityEditor.QuickSearchModule:UnityEditor.Search:ASIAI0B
-Importing 'GUID: f71db33dab5dca24c99041d5245833d1 - Path: Assets/Animations/Champions/GoblinScout/AttackQ_NE.anim - Importer: ScriptedImporter/UnityEditor.QuickSearchModule:UnityEditor.Search:ASIAI0B' with importer (ScriptedImporter : UnityEditor.QuickSearchModule:UnityEditor.Search:ASIAI0B)
-Imported 'GUID: f71db33dab5dca24c99041d5245833d1' -> (Import Result ID: 'ff5376cb81c8aa3a143ff2e636826012') in 0.006 seconds [static and dynamic dependencies]. Details - ImportResultOutputID=0014a47c3c0989c45ef5d3a593bc6175 DependenciesID=f6faabded5c6eb40dc05facbbf65a48f StaticDependenciesID=19bd8de96b61fadd1ec63c2df2e246f0 
-Number of updated asset objects reloaded before import = 0
-Number of asset objects unloaded after import = 1
-========================================================================
-Received Import Request.
-  Time of request: 2026-11-19T19:15:24.9976861Z
-  Time since last request: 0.0027137 seconds.
-  importAddress: GUID: f1e9d8fbb1e95534695562b9782cd9c4 - Path: Assets/Animations/Champions/BladeAssasin/Attack_NW.anim - Importer: ScriptedImporter/UnityEditor.QuickSearchModule:UnityEditor.Search:ASIAI0B
-Importing 'GUID: f1e9d8fbb1e95534695562b9782cd9c4 - Path: Assets/Animations/Champions/BladeAssasin/Attack_NW.anim - Importer: ScriptedImporter/UnityEditor.QuickSearchModule:UnityEditor.Search:ASIAI0B' with importer (ScriptedImporter : UnityEditor.QuickSearchModule:UnityEditor.Search:ASIAI0B)
-Imported 'GUID: f1e9d8fbb1e95534695562b9782cd9c4' -> (Import Result ID: 'a25ade789948470f6e6b581d7b788486') in 0.005 seconds [static and dynamic dependencies]. Details - ImportResultOutputID=e87bb6005ecc352bf2320228d3a6a5e5 DependenciesID=4fea8589cca760aee41f068974606b62 StaticDependenciesID=5d78551f700dbd2138e1707ceae5db9e 
-Number of updated asset objects reloaded before import = 0
-Number of asset objects unloaded after import = 1
-========================================================================
-Received Import Request.
-  Time of request: 2026-11-19T19:15:25.0361907Z
-  Time since last request: 0.0026806 seconds.
-  importAddress: GUID: fe7ede6db20c78f419661aa0d7da7ded - Path: Assets/Animations/Champions/FootSoldier/AttackE_SW.anim - Importer: ScriptedImporter/UnityEditor.QuickSearchModule:UnityEditor.Search:ASIAI0B
-Importing 'GUID: fe7ede6db20c78f419661aa0d7da7ded - Path: Assets/Animations/Champions/FootSoldier/AttackE_SW.anim - Importer: ScriptedImporter/UnityEditor.QuickSearchModule:UnityEditor.Search:ASIAI0B' with importer (ScriptedImporter : UnityEditor.QuickSearchModule:UnityEditor.Search:ASIAI0B)
-Imported 'GUID: fe7ede6db20c78f419661aa0d7da7ded' -> (Import Result ID: '41a802086d6809cb722c2a5181f79cee') in 0.012 seconds [static and dynamic dependencies]. Details - ImportResultOutputID=9409f4970c69f5686cc33de6268f165b DependenciesID=27f77c6701243f5354dbbdf1bfc5bb09 StaticDependenciesID=9954088d8444419b6f94959dfec72723 
-Number of updated asset objects reloaded before import = 0
-Number of asset objects unloaded after import = 1
-========================================================================
-Received Import Request.
-  Time of request: 2026-11-19T19:15:25.0840532Z
-  Time since last request: 0.0004995 seconds.
-  importAddress: GUID: 63181d3a932a9e84bb350e1bf0e0d7e3 - Path: Assets/Animations/Champions/GoblinScout/AttackE_SE.anim - Importer: ScriptedImporter/UnityEditor.QuickSearchModule:UnityEditor.Search:ASIAI0B
-Importing 'GUID: 63181d3a932a9e84bb350e1bf0e0d7e3 - Path: Assets/Animations/Champions/GoblinScout/AttackE_SE.anim - Importer: ScriptedImporter/UnityEditor.QuickSearchModule:UnityEditor.Search:ASIAI0B' with importer (ScriptedImporter : UnityEditor.QuickSearchModule:UnityEditor.Search:ASIAI0B)
-Imported 'GUID: 63181d3a932a9e84bb350e1bf0e0d7e3' -> (Import Result ID: 'b898fe5f9182108261379546f186a401') in 0.005 seconds [static and dynamic dependencies]. Details - ImportResultOutputID=7606bc9390192948749677da4e18beeb DependenciesID=f78cd81d830208bc4bf323a6bb4718ad StaticDependenciesID=6f87e45449ba796a67c9b9f8a16ecf04 
-Number of updated asset objects reloaded before import = 0
-Number of asset objects unloaded after import = 1
-========================================================================
-Received Import Request.
-  Time of request: 2026-11-19T19:15:25.1172385Z
-  Time since last request: 0.002471 seconds.
-  importAddress: GUID: 4fad8b5796776b44ca61f68a51a842f3 - Path: Assets/Animations/Champions/BladeAssasin/Death_NE.anim - Importer: ScriptedImporter/UnityEditor.QuickSearchModule:UnityEditor.Search:ASIAI0B
-Importing 'GUID: 4fad8b5796776b44ca61f68a51a842f3 - Path: Assets/Animations/Champions/BladeAssasin/Death_NE.anim - Importer: ScriptedImporter/UnityEditor.QuickSearchModule:UnityEditor.Search:ASIAI0B' with importer (ScriptedImporter : UnityEditor.QuickSearchModule:UnityEditor.Search:ASIAI0B)
-Imported 'GUID: 4fad8b5796776b44ca61f68a51a842f3' -> (Import Result ID: '2381668332e998afeaa101af607cd155') in 0.006 seconds [static and dynamic dependencies]. Details - ImportResultOutputID=278332a9f65dee0d115a14f899558ce8 DependenciesID=bdebe2ccecfd842a2fc40e3c9d57b42e StaticDependenciesID=fc80dd665aad3285b51411ab062f0b43 
-Number of updated asset objects reloaded before import = 0
-Number of asset objects unloaded after import = 1
-========================================================================
-Received Import Request.
-  Time of request: 2026-11-19T19:15:25.1496733Z
-  Time since last request: 0.0024372 seconds.
-  importAddress: GUID: 870e21180cd36d74dafc56119f5a5de6 - Path: Assets/Animations/Champions/FootSoldier/Run_NW.anim - Importer: ScriptedImporter/UnityEditor.QuickSearchModule:UnityEditor.Search:ASIAI0B
-Importing 'GUID: 870e21180cd36d74dafc56119f5a5de6 - Path: Assets/Animations/Champions/FootSoldier/Run_NW.anim - Importer: ScriptedImporter/UnityEditor.QuickSearchModule:UnityEditor.Search:ASIAI0B' with importer (ScriptedImporter : UnityEditor.QuickSearchModule:UnityEditor.Search:ASIAI0B)
-Imported 'GUID: 870e21180cd36d74dafc56119f5a5de6' -> (Import Result ID: 'de7dc188f56ac637f7d7a33d39c84cad') in 0.009 seconds [static and dynamic dependencies]. Details - ImportResultOutputID=8bac5ba4aa12c7f6d9050224bc5088b5 DependenciesID=129a8c29ef939ebebc8c10c785868990 StaticDependenciesID=e7c0f724c1367f1bd5c9ff6182a02dc8 
-Number of updated asset objects reloaded before import = 0
-Number of asset objects unloaded after import = 1
-========================================================================
-Received Import Request.
-  Time of request: 2026-11-19T19:15:25.1820385Z
-  Time since last request: 0.0007183 seconds.
-  importAddress: GUID: 1bbc7fb6416a1334f8a58fb9970c3ea7 - Path: Assets/Animations/Champions/GoblinScout/Attack_N 1.anim - Importer: ScriptedImporter/UnityEditor.QuickSearchModule:UnityEditor.Search:ASIAI0B
-Importing 'GUID: 1bbc7fb6416a1334f8a58fb9970c3ea7 - Path: Assets/Animations/Champions/GoblinScout/Attack_N 1.anim - Importer: ScriptedImporter/UnityEditor.QuickSearchModule:UnityEditor.Search:ASIAI0B' with importer (ScriptedImporter : UnityEditor.QuickSearchModule:UnityEditor.Search:ASIAI0B)
-Imported 'GUID: 1bbc7fb6416a1334f8a58fb9970c3ea7' -> (Import Result ID: 'd73af563bc7b97cbda1969d3f8ad8a34') in 0.006 seconds [static and dynamic dependencies]. Details - ImportResultOutputID=23e117c90d083b8214a2e7fcf21994c3 DependenciesID=e7c0f9766da4310cd5582cb8f4e5a87b StaticDependenciesID=eb31d2fe73ffeeb6d49d478a97eedd3d 
-Number of updated asset objects reloaded before import = 0
-Number of asset objects unloaded after import = 1
-========================================================================
-Received Import Request.
-  Time of request: 2026-11-19T19:15:25.2131375Z
-  Time since last request: 0.0014962 seconds.
-  importAddress: GUID: 128906696c916034babb18bc46d5bb49 - Path: Assets/Animations/Champions/FootSoldier/Attack_NW.anim - Importer: ScriptedImporter/UnityEditor.QuickSearchModule:UnityEditor.Search:ASIAI0B
-Importing 'GUID: 128906696c916034babb18bc46d5bb49 - Path: Assets/Animations/Champions/FootSoldier/Attack_NW.anim - Importer: ScriptedImporter/UnityEditor.QuickSearchModule:UnityEditor.Search:ASIAI0B' with importer (ScriptedImporter : UnityEditor.QuickSearchModule:UnityEditor.Search:ASIAI0B)
-Imported 'GUID: 128906696c916034babb18bc46d5bb49' -> (Import Result ID: '7d8244c4e8cf19e010a67dde15fb6be6') in 0.007 seconds [static and dynamic dependencies]. Details - ImportResultOutputID=2bebab5faeca503490a5021363e81e70 DependenciesID=85d66002566741ed8cb80f8078a180bd StaticDependenciesID=9893931b51090628b5ecaaf52388ea18 
-Number of updated asset objects reloaded before import = 0
-Number of asset objects unloaded after import = 1
-========================================================================
-Received Import Request.
-  Time of request: 2026-11-19T19:15:25.2512477Z
-  Time since last request: 0.0042998 seconds.
-  importAddress: GUID: 66b46feff691a7644b285b44801fe8ef - Path: Assets/Animations/Champions/FootSoldier/Idle_SE.anim - Importer: ScriptedImporter/UnityEditor.QuickSearchModule:UnityEditor.Search:ASIAI0B
-Importing 'GUID: 66b46feff691a7644b285b44801fe8ef - Path: Assets/Animations/Champions/FootSoldier/Idle_SE.anim - Importer: ScriptedImporter/UnityEditor.QuickSearchModule:UnityEditor.Search:ASIAI0B' with importer (ScriptedImporter : UnityEditor.QuickSearchModule:UnityEditor.Search:ASIAI0B)
-Imported 'GUID: 66b46feff691a7644b285b44801fe8ef' -> (Import Result ID: '76ae7975b43f5b93647ad71ad4674bc2') in 0.005 seconds [static and dynamic dependencies]. Details - ImportResultOutputID=6896246d5dd5b020d63a5c0fb02d10af DependenciesID=b8bdcd326bac45ef9de1f001cd719324 StaticDependenciesID=8d7a54d1feca3eb3446bce4f42998059 
-Number of updated asset objects reloaded before import = 0
-Number of asset objects unloaded after import = 1
-========================================================================
-Received Import Request.
-  Time of request: 2026-11-19T19:15:25.2846107Z
-  Time since last request: 0.0035764 seconds.
-  importAddress: GUID: 82d97a3efcc30904eba6103c25b70b3f - Path: Assets/Animations/Champions/GoblinScout/Attack_NW.anim - Importer: ScriptedImporter/UnityEditor.QuickSearchModule:UnityEditor.Search:ASIAI0B
-Importing 'GUID: 82d97a3efcc30904eba6103c25b70b3f - Path: Assets/Animations/Champions/GoblinScout/Attack_NW.anim - Importer: ScriptedImporter/UnityEditor.QuickSearchModule:UnityEditor.Search:ASIAI0B' with importer (ScriptedImporter : UnityEditor.QuickSearchModule:UnityEditor.Search:ASIAI0B)
-Imported 'GUID: 82d97a3efcc30904eba6103c25b70b3f' -> (Import Result ID: '2933f0ee5deb1647348233f35a2bc559') in 0.005 seconds [static and dynamic dependencies]. Details - ImportResultOutputID=ffbe491653c7fa380a93392a82fe40d7 DependenciesID=6b1e640e25e107f0d3aab7c5d4486619 StaticDependenciesID=eab0479c9b528b080b7a062d23c8371c 
-Number of updated asset objects reloaded before import = 0
-Number of asset objects unloaded after import = 1
-========================================================================
-Received Import Request.
-  Time of request: 2026-11-19T19:15:25.3242118Z
-  Time since last request: 0.0019022 seconds.
-  importAddress: GUID: 91bc03ef3215d7c4a882c40170a122fa - Path: Assets/Animations/Champions/BladeAssasin/Death_SE.anim - Importer: ScriptedImporter/UnityEditor.QuickSearchModule:UnityEditor.Search:ASIAI0B
-Importing 'GUID: 91bc03ef3215d7c4a882c40170a122fa - Path: Assets/Animations/Champions/BladeAssasin/Death_SE.anim - Importer: ScriptedImporter/UnityEditor.QuickSearchModule:UnityEditor.Search:ASIAI0B' with importer (ScriptedImporter : UnityEditor.QuickSearchModule:UnityEditor.Search:ASIAI0B)
-Imported 'GUID: 91bc03ef3215d7c4a882c40170a122fa' -> (Import Result ID: 'f2f69016080f13b3b26466ed5ab80543') in 0.005 seconds [static and dynamic dependencies]. Details - ImportResultOutputID=fd8d24546268a86a58b8ec13263e8f18 DependenciesID=90b071c4234065424e8afe3aab663fc0 StaticDependenciesID=8d9fcb0da0a9ecd3c235e4fc4f7ed9bf 
-Number of updated asset objects reloaded before import = 0
-Number of asset objects unloaded after import = 1
-========================================================================
-Received Import Request.
-  Time of request: 2026-11-19T19:15:25.3613047Z
-  Time since last request: 0.0023313 seconds.
-  importAddress: GUID: 1e76002ed0dc7d64eae1999075f840f3 - Path: Assets/Animations/Champions/GoblinScout/Run_SE.anim - Importer: ScriptedImporter/UnityEditor.QuickSearchModule:UnityEditor.Search:ASIAI0B
-Importing 'GUID: 1e76002ed0dc7d64eae1999075f840f3 - Path: Assets/Animations/Champions/GoblinScout/Run_SE.anim - Importer: ScriptedImporter/UnityEditor.QuickSearchModule:UnityEditor.Search:ASIAI0B' with importer (ScriptedImporter : UnityEditor.QuickSearchModule:UnityEditor.Search:ASIAI0B)
-Imported 'GUID: 1e76002ed0dc7d64eae1999075f840f3' -> (Import Result ID: '4d4b19d42252f070d4deb3b1a465e3da') in 0.006 seconds [static and dynamic dependencies]. Details - ImportResultOutputID=65c3a3939da71c46b5eb833b6c131090 DependenciesID=707d5b3b40eadd0ec08a6cdb99ed216f StaticDependenciesID=ce1c2e2a76c2556c19f9b5900a9dc452 
-Number of updated asset objects reloaded before import = 0
-Number of asset objects unloaded after import = 1
-========================================================================
-Received Import Request.
-  Time of request: 2026-11-19T19:15:25.3917009Z
-  Time since last request: 0.0017262 seconds.
-  importAddress: GUID: 414b918e129e38b4e900a178f3f3812f - Path: Assets/Animations/Champions/FootSoldier/Attack_NE.anim - Importer: ScriptedImporter/UnityEditor.QuickSearchModule:UnityEditor.Search:ASIAI0B
-Importing 'GUID: 414b918e129e38b4e900a178f3f3812f - Path: Assets/Animations/Champions/FootSoldier/Attack_NE.anim - Importer: ScriptedImporter/UnityEditor.QuickSearchModule:UnityEditor.Search:ASIAI0B' with importer (ScriptedImporter : UnityEditor.QuickSearchModule:UnityEditor.Search:ASIAI0B)
-Imported 'GUID: 414b918e129e38b4e900a178f3f3812f' -> (Import Result ID: '9d9164b3c67353bfbcbec491fd131611') in 0.006 seconds [static and dynamic dependencies]. Details - ImportResultOutputID=3bb5100d197cc03686a620dab7ca3149 DependenciesID=6dd41797500307ef06980e566f99736d StaticDependenciesID=34143340168409dbd0b34878d8100aa8 
-Number of updated asset objects reloaded before import = 0
-Number of asset objects unloaded after import = 1
-========================================================================
-Received Import Request.
-  Time of request: 2026-11-19T19:15:25.4275771Z
-  Time since last request: 0.0020273 seconds.
-  importAddress: GUID: f38eef8fd38612148a04f9e534df3873 - Path: Assets/Animations/Champions/BladeAssasin/AttackQ_W.anim - Importer: ScriptedImporter/UnityEditor.QuickSearchModule:UnityEditor.Search:ASIAI0B
-Importing 'GUID: f38eef8fd38612148a04f9e534df3873 - Path: Assets/Animations/Champions/BladeAssasin/AttackQ_W.anim - Importer: ScriptedImporter/UnityEditor.QuickSearchModule:UnityEditor.Search:ASIAI0B' with importer (ScriptedImporter : UnityEditor.QuickSearchModule:UnityEditor.Search:ASIAI0B)
-Imported 'GUID: f38eef8fd38612148a04f9e534df3873' -> (Import Result ID: '1d53ac402328d6712455d0847c3db2fe') in 0.006 seconds [static and dynamic dependencies]. Details - ImportResultOutputID=8b5c73ce68f5c6338cafa3bd34778d05 DependenciesID=131f0bc65c06a25c4c73d82dd6f9443c StaticDependenciesID=d47fe75576dc7e980a91be6b0929d081 
-Number of updated asset objects reloaded before import = 0
-Number of asset objects unloaded after import = 1
-========================================================================
-Received Import Request.
-  Time of request: 2026-11-19T19:15:25.4570929Z
-  Time since last request: 0.0007151 seconds.
-  importAddress: GUID: 8a2f2bdde7de93842b8a87882e7ea102 - Path: Assets/Animations/Champions/BladeAssasin/Attack_SE.anim - Importer: ScriptedImporter/UnityEditor.QuickSearchModule:UnityEditor.Search:ASIAI0B
-Importing 'GUID: 8a2f2bdde7de93842b8a87882e7ea102 - Path: Assets/Animations/Champions/BladeAssasin/Attack_SE.anim - Importer: ScriptedImporter/UnityEditor.QuickSearchModule:UnityEditor.Search:ASIAI0B' with importer (ScriptedImporter : UnityEditor.QuickSearchModule:UnityEditor.Search:ASIAI0B)
-Imported 'GUID: 8a2f2bdde7de93842b8a87882e7ea102' -> (Import Result ID: 'e328e77c5c368461824458e52804b8ea') in 0.006 seconds [static and dynamic dependencies]. Details - ImportResultOutputID=2e421e0479b06cd52cdf1ed89490228a DependenciesID=993abad32ebf918bc38ff8adb2057efd StaticDependenciesID=0ef717d242aa52faf0eccd5d17b1783a 
-Number of updated asset objects reloaded before import = 0
-Number of asset objects unloaded after import = 1
-========================================================================
-Received Import Request.
-  Time of request: 2026-11-19T19:15:25.4944842Z
-  Time since last request: 0.0013791 seconds.
-  importAddress: GUID: 6a2ded9e73a280544b70c9812091ac7c - Path: Assets/Animations/Champions/BladeAssasin/AttackE_SE.anim - Importer: ScriptedImporter/UnityEditor.QuickSearchModule:UnityEditor.Search:ASIAI0B
-Importing 'GUID: 6a2ded9e73a280544b70c9812091ac7c - Path: Assets/Animations/Champions/BladeAssasin/AttackE_SE.anim - Importer: ScriptedImporter/UnityEditor.QuickSearchModule:UnityEditor.Search:ASIAI0B' with importer (ScriptedImporter : UnityEditor.QuickSearchModule:UnityEditor.Search:ASIAI0B)
-Imported 'GUID: 6a2ded9e73a280544b70c9812091ac7c' -> (Import Result ID: 'd223dd3393df70f4681275867ff803d6') in 0.006 seconds [static and dynamic dependencies]. Details - ImportResultOutputID=4937c3859a69e3db0ee3a598cd68f7ec DependenciesID=7924acac324d43f6f226a3535a4c4318 StaticDependenciesID=09f51103b4aa73ef01c95e77e03a378f 
-Number of updated asset objects reloaded before import = 0
-Number of asset objects unloaded after import = 1
-========================================================================
-Received Import Request.
-  Time of request: 2026-11-19T19:15:25.5268603Z
-  Time since last request: 0.0010176 seconds.
-  importAddress: GUID: 26d7748e5faaf71438c4c6e401155ac7 - Path: Assets/Animations/Champions/GoblinScout/Death_NE.anim - Importer: ScriptedImporter/UnityEditor.QuickSearchModule:UnityEditor.Search:ASIAI0B
-Importing 'GUID: 26d7748e5faaf71438c4c6e401155ac7 - Path: Assets/Animations/Champions/GoblinScout/Death_NE.anim - Importer: ScriptedImporter/UnityEditor.QuickSearchModule:UnityEditor.Search:ASIAI0B' with importer (ScriptedImporter : UnityEditor.QuickSearchModule:UnityEditor.Search:ASIAI0B)
-Imported 'GUID: 26d7748e5faaf71438c4c6e401155ac7' -> (Import Result ID: '52e255a25e9bfceb7e62a14237f0049e') in 0.006 seconds [static and dynamic dependencies]. Details - ImportResultOutputID=47f0ad8012cb6a26f23f3cf05ba18f5f DependenciesID=c695ef66e2511aceb95f3b8785f617be StaticDependenciesID=b4acdca92f9d87613afe30430508e741 
-Number of updated asset objects reloaded before import = 0
-Number of asset objects unloaded after import = 1
-========================================================================
-Received Import Request.
-  Time of request: 2026-11-19T19:15:25.5619576Z
-  Time since last request: 0.0018564 seconds.
-  importAddress: GUID: f9f2082e70a08fc4b8d3a2989a753f58 - Path: Assets/Animations/Champions/FootSoldier/Idle_E.anim - Importer: ScriptedImporter/UnityEditor.QuickSearchModule:UnityEditor.Search:ASIAI0B
-Importing 'GUID: f9f2082e70a08fc4b8d3a2989a753f58 - Path: Assets/Animations/Champions/FootSoldier/Idle_E.anim - Importer: ScriptedImporter/UnityEditor.QuickSearchModule:UnityEditor.Search:ASIAI0B' with importer (ScriptedImporter : UnityEditor.QuickSearchModule:UnityEditor.Search:ASIAI0B)
-Imported 'GUID: f9f2082e70a08fc4b8d3a2989a753f58' -> (Import Result ID: '34338c52695abbeb4b5bec3ac5f98605') in 0.005 seconds [static and dynamic dependencies]. Details - ImportResultOutputID=4a3367cd990a854ec096d4bc57ecc725 DependenciesID=8d559da8b7b5fcdecdb4a6313189e4a1 StaticDependenciesID=2c4bc42d3d2f7acd223ad1713ce15cec 
-Number of updated asset objects reloaded before import = 0
-Number of asset objects unloaded after import = 1
-========================================================================
-Received Import Request.
-  Time of request: 2026-11-19T19:15:25.5938881Z
-  Time since last request: 0.0010949 seconds.
-  importAddress: GUID: 2e5bd4ffc6bd1be48a8cce4c0d62dddd - Path: Assets/Animations/Champions/BladeAssasin/Idle_W.anim - Importer: ScriptedImporter/UnityEditor.QuickSearchModule:UnityEditor.Search:ASIAI0B
-Importing 'GUID: 2e5bd4ffc6bd1be48a8cce4c0d62dddd - Path: Assets/Animations/Champions/BladeAssasin/Idle_W.anim - Importer: ScriptedImporter/UnityEditor.QuickSearchModule:UnityEditor.Search:ASIAI0B' with importer (ScriptedImporter : UnityEditor.QuickSearchModule:UnityEditor.Search:ASIAI0B)
-Imported 'GUID: 2e5bd4ffc6bd1be48a8cce4c0d62dddd' -> (Import Result ID: '3a3e9e3ff91483ca3d083ff3265fc677') in 0.006 seconds [static and dynamic dependencies]. Details - ImportResultOutputID=17060a089c4dea56c7fea6cb21fae502 DependenciesID=d2a2e183b240f2b6975da7a0bbab1292 StaticDependenciesID=cb8cf0cf27cff13114fafee82d89bb51 
-Number of updated asset objects reloaded before import = 0
-Number of asset objects unloaded after import = 1
-========================================================================
-Received Import Request.
-  Time of request: 2026-11-19T19:15:25.6340424Z
-  Time since last request: 0.0008388 seconds.
-  importAddress: GUID: 463bad5ff40ffc0488fdae04b62c422c - Path: Assets/Animations/Champions/FootSoldier/AttackE_NE.anim - Importer: ScriptedImporter/UnityEditor.QuickSearchModule:UnityEditor.Search:ASIAI0B
-Importing 'GUID: 463bad5ff40ffc0488fdae04b62c422c - Path: Assets/Animations/Champions/FootSoldier/AttackE_NE.anim - Importer: ScriptedImporter/UnityEditor.QuickSearchModule:UnityEditor.Search:ASIAI0B' with importer (ScriptedImporter : UnityEditor.QuickSearchModule:UnityEditor.Search:ASIAI0B)
-Imported 'GUID: 463bad5ff40ffc0488fdae04b62c422c' -> (Import Result ID: '610da1546baa71c3da1d4a487bd57eb5') in 0.006 seconds [static and dynamic dependencies]. Details - ImportResultOutputID=ed6fd5faa83adf2911f70a638bba072f DependenciesID=25c118f2c54fb7360ea3422e007bd27d StaticDependenciesID=20fdd7d7f753f430b1accf95b32ae128 
-Number of updated asset objects reloaded before import = 0
-Number of asset objects unloaded after import = 1
-========================================================================
-Received Import Request.
-  Time of request: 2026-11-19T19:15:25.6708952Z
-  Time since last request: 0.0011554 seconds.
-  importAddress: GUID: 8255ac0e222248e47b20ebc6ee81d723 - Path: Assets/Animations/Champions/GoblinScout/AttackQ_NW.anim - Importer: ScriptedImporter/UnityEditor.QuickSearchModule:UnityEditor.Search:ASIAI0B
-Importing 'GUID: 8255ac0e222248e47b20ebc6ee81d723 - Path: Assets/Animations/Champions/GoblinScout/AttackQ_NW.anim - Importer: ScriptedImporter/UnityEditor.QuickSearchModule:UnityEditor.Search:ASIAI0B' with importer (ScriptedImporter : UnityEditor.QuickSearchModule:UnityEditor.Search:ASIAI0B)
-Imported 'GUID: 8255ac0e222248e47b20ebc6ee81d723' -> (Import Result ID: 'e66a0320a0568045590b35c71d5b07b2') in 0.006 seconds [static and dynamic dependencies]. Details - ImportResultOutputID=4bdd7817fa28d55b16c06c775366f0c1 DependenciesID=e55574188db50d80a7e3d88928e94ec5 StaticDependenciesID=59b41d09fd868d27a69630ba12033333 
-Number of updated asset objects reloaded before import = 0
-Number of asset objects unloaded after import = 1
-========================================================================
-Received Import Request.
-  Time of request: 2026-11-19T19:15:31.9010717Z
-  Time since last request: 6.2021479 seconds.
-  importAddress: GUID: 084853a0230691942b2a568aa18c3f73 - Path: Assets/Animations/Characters/FootSoldier/Attack_SW.anim - Importer: ScriptedImporter/UnityEditor.QuickSearchModule:UnityEditor.Search:ASIAI0B
-Importing 'GUID: 084853a0230691942b2a568aa18c3f73 - Path: Assets/Animations/Characters/FootSoldier/Attack_SW.anim - Importer: ScriptedImporter/UnityEditor.QuickSearchModule:UnityEditor.Search:ASIAI0B' with importer (ScriptedImporter : UnityEditor.QuickSearchModule:UnityEditor.Search:ASIAI0B)
-Imported 'GUID: 084853a0230691942b2a568aa18c3f73' -> (Import Result ID: 'fef760652893c74dac58e444954da844') in 0.004 seconds [static and dynamic dependencies]. Details - ImportResultOutputID=00699d33a2d00bb51e129fa13373584c DependenciesID=57d1ee0c5a9a57c4a82e48cbb5c3aebb StaticDependenciesID=84261b9a3d9160f2aa45ac9e8f8a9d54 
-Number of updated asset objects reloaded before import = 0
-Number of asset objects unloaded after import = 1
-========================================================================
-Received Import Request.
-  Time of request: 2026-11-19T19:15:31.9296142Z
-  Time since last request: 0.0031538 seconds.
-  importAddress: GUID: 7cc9c67384a05f4469a662cfb6d82f85 - Path: Assets/Animations/Characters/BladeAssasin/Death_W.anim - Importer: ScriptedImporter/UnityEditor.QuickSearchModule:UnityEditor.Search:ASIAI0B
-Importing 'GUID: 7cc9c67384a05f4469a662cfb6d82f85 - Path: Assets/Animations/Characters/BladeAssasin/Death_W.anim - Importer: ScriptedImporter/UnityEditor.QuickSearchModule:UnityEditor.Search:ASIAI0B' with importer (ScriptedImporter : UnityEditor.QuickSearchModule:UnityEditor.Search:ASIAI0B)
-Imported 'GUID: 7cc9c67384a05f4469a662cfb6d82f85' -> (Import Result ID: 'de0db51b2ad0192ebeb62c3e9651eae8') in 0.005 seconds [static and dynamic dependencies]. Details - ImportResultOutputID=201a00fd2fdb422e801e48dd61b43942 DependenciesID=fcf3bb6414d6fd2804eadc3f22922f18 StaticDependenciesID=cd7a3d98264be13488c9a553506ab523 
-Number of updated asset objects reloaded before import = 0
-Number of asset objects unloaded after import = 1
-========================================================================
-Received Import Request.
-  Time of request: 2026-11-19T19:15:31.959749Z
-  Time since last request: 0.002349 seconds.
-  importAddress: GUID: 484487d03283900468f4d0273425b38e - Path: Assets/Animations/Characters/BladeAssasin - Importer: ScriptedImporter/UnityEditor.QuickSearchModule:UnityEditor.Search:ASIAI0B
-Importing 'GUID: 484487d03283900468f4d0273425b38e - Path: Assets/Animations/Characters/BladeAssasin - Importer: ScriptedImporter/UnityEditor.QuickSearchModule:UnityEditor.Search:ASIAI0B' with importer (ScriptedImporter : UnityEditor.QuickSearchModule:UnityEditor.Search:ASIAI0B)
-Imported 'GUID: 484487d03283900468f4d0273425b38e' -> (Import Result ID: '15047d009bd36d12e906cafb3aebad1c') in 0.004 seconds [static and dynamic dependencies]. Details - ImportResultOutputID=cc3e6be317f2e1821ceda27e511580a6 DependenciesID=59eb78dee5bb587d3b7c53a8f9ec67fd StaticDependenciesID=4b0ea63c8ae3483b75707472121269e4 
-Number of updated asset objects reloaded before import = 0
-Number of asset objects unloaded after import = 1
-========================================================================
-Received Import Request.
-  Time of request: 2026-11-19T19:15:31.9874114Z
-  Time since last request: 0.0006035 seconds.
-  importAddress: GUID: 71ecf060fd6900e49bbb958b16f90178 - Path: Assets/Animations/Characters/FootSoldier/Death_W.anim - Importer: ScriptedImporter/UnityEditor.QuickSearchModule:UnityEditor.Search:ASIAI0B
-Importing 'GUID: 71ecf060fd6900e49bbb958b16f90178 - Path: Assets/Animations/Characters/FootSoldier/Death_W.anim - Importer: ScriptedImporter/UnityEditor.QuickSearchModule:UnityEditor.Search:ASIAI0B' with importer (ScriptedImporter : UnityEditor.QuickSearchModule:UnityEditor.Search:ASIAI0B)
-Imported 'GUID: 71ecf060fd6900e49bbb958b16f90178' -> (Import Result ID: 'fca8f102cda0af2853a0f81a872cbd9c') in 0.005 seconds [static and dynamic dependencies]. Details - ImportResultOutputID=8756899e3a9c0c45d7f2ea69bf097688 DependenciesID=898885a85e2278242fb4e360c5bd9eb6 StaticDependenciesID=68c2836c52f8eadc93ab38b12316071e 
-Number of updated asset objects reloaded before import = 0
-Number of asset objects unloaded after import = 1
-========================================================================
-Received Import Request.
-  Time of request: 2026-11-19T19:15:32.0186341Z
-  Time since last request: 0.0022845 seconds.
-  importAddress: GUID: f16dc3b1caa6a99499bfb4c3998e03ec - Path: Assets/Animations/Characters/GoblinScout/Attack_S.anim - Importer: ScriptedImporter/UnityEditor.QuickSearchModule:UnityEditor.Search:ASIAI0B
-Importing 'GUID: f16dc3b1caa6a99499bfb4c3998e03ec - Path: Assets/Animations/Characters/GoblinScout/Attack_S.anim - Importer: ScriptedImporter/UnityEditor.QuickSearchModule:UnityEditor.Search:ASIAI0B' with importer (ScriptedImporter : UnityEditor.QuickSearchModule:UnityEditor.Search:ASIAI0B)
-Imported 'GUID: f16dc3b1caa6a99499bfb4c3998e03ec' -> (Import Result ID: '85eb2b96ac0431c46118cc70e5ed338d') in 0.006 seconds [static and dynamic dependencies]. Details - ImportResultOutputID=1aec7b92862a8ffc29fbf3e7a02321b7 DependenciesID=d63300e9238f0a1965d3c3823a6c0ccb StaticDependenciesID=d963e53b8db6545411edaf31ed8356d2 
-Number of updated asset objects reloaded before import = 0
-Number of asset objects unloaded after import = 1
-========================================================================
-Received Import Request.
-  Time of request: 2026-11-19T19:15:32.0511068Z
-  Time since last request: 0.0028072 seconds.
-  importAddress: GUID: 940cc46495483134cbe626b996ebb7a8 - Path: Assets/Animations/Characters/GoblinScout/Attack_SE.anim - Importer: ScriptedImporter/UnityEditor.QuickSearchModule:UnityEditor.Search:ASIAI0B
-Importing 'GUID: 940cc46495483134cbe626b996ebb7a8 - Path: Assets/Animations/Characters/GoblinScout/Attack_SE.anim - Importer: ScriptedImporter/UnityEditor.QuickSearchModule:UnityEditor.Search:ASIAI0B' with importer (ScriptedImporter : UnityEditor.QuickSearchModule:UnityEditor.Search:ASIAI0B)
-Imported 'GUID: 940cc46495483134cbe626b996ebb7a8' -> (Import Result ID: '5832bea6a2a0256d58db2c0c9753679f') in 0.005 seconds [static and dynamic dependencies]. Details - ImportResultOutputID=96a9585b7492435be3873666f5a7909b DependenciesID=57346ddcd1904a5c445dea8ecf7e4e06 StaticDependenciesID=30d1695d010c7da2c678037f7793ce6d 
-Number of updated asset objects reloaded before import = 0
-Number of asset objects unloaded after import = 1
-========================================================================
-Received Import Request.
-  Time of request: 2026-11-19T19:15:32.0821541Z
-  Time since last request: 0.0020174 seconds.
-  importAddress: GUID: fc77918d2ce85ca46a850d0c2092848c - Path: Assets/Animations/Characters/GoblinScout - Importer: ScriptedImporter/UnityEditor.QuickSearchModule:UnityEditor.Search:ASIAI0B
-Importing 'GUID: fc77918d2ce85ca46a850d0c2092848c - Path: Assets/Animations/Characters/GoblinScout - Importer: ScriptedImporter/UnityEditor.QuickSearchModule:UnityEditor.Search:ASIAI0B' with importer (ScriptedImporter : UnityEditor.QuickSearchModule:UnityEditor.Search:ASIAI0B)
-Imported 'GUID: fc77918d2ce85ca46a850d0c2092848c' -> (Import Result ID: '05d0bb9a19d01960eedfcc9ad92da05d') in 0.003 seconds [static and dynamic dependencies]. Details - ImportResultOutputID=755521b7c949d0c60ff17524ccf8de80 DependenciesID=5058d25315746b10752d43396a6ab61c StaticDependenciesID=2322ba9c9de65a8fb135ad6515a8d23f 
-Number of updated asset objects reloaded before import = 0
-Number of asset objects unloaded after import = 1
-========================================================================
-Received Import Request.
-  Time of request: 2026-11-19T19:15:32.1079671Z
-  Time since last request: 0.0008309 seconds.
-  importAddress: GUID: 7f50dc7295182794f9ee23000f17785c - Path: Assets/Animations/Characters/GoblinScout/Run_E.anim - Importer: ScriptedImporter/UnityEditor.QuickSearchModule:UnityEditor.Search:ASIAI0B
-Importing 'GUID: 7f50dc7295182794f9ee23000f17785c - Path: Assets/Animations/Characters/GoblinScout/Run_E.anim - Importer: ScriptedImporter/UnityEditor.QuickSearchModule:UnityEditor.Search:ASIAI0B' with importer (ScriptedImporter : UnityEditor.QuickSearchModule:UnityEditor.Search:ASIAI0B)
-Imported 'GUID: 7f50dc7295182794f9ee23000f17785c' -> (Import Result ID: 'ca712747a7a7bb04c3e2d7dba9b7e1be') in 0.005 seconds [static and dynamic dependencies]. Details - ImportResultOutputID=c68fe750e2e25422e8eae83bb6e81ab5 DependenciesID=38757da6ccaf5ceb22086a2cdebe12e8 StaticDependenciesID=9ae308dab4550dfa8e0a5c74dc9bbd9b 
-Number of updated asset objects reloaded before import = 0
-Number of asset objects unloaded after import = 1
-========================================================================
-Received Import Request.
-  Time of request: 2026-11-19T19:15:32.139126Z
-  Time since last request: 0.0027593 seconds.
-  importAddress: GUID: 2dfe4ac4b97c39d479e50caf41355f0d - Path: Assets/Animations/Characters/BladeAssasin/Attack_SW.anim - Importer: ScriptedImporter/UnityEditor.QuickSearchModule:UnityEditor.Search:ASIAI0B
-Importing 'GUID: 2dfe4ac4b97c39d479e50caf41355f0d - Path: Assets/Animations/Characters/BladeAssasin/Attack_SW.anim - Importer: ScriptedImporter/UnityEditor.QuickSearchModule:UnityEditor.Search:ASIAI0B' with importer (ScriptedImporter : UnityEditor.QuickSearchModule:UnityEditor.Search:ASIAI0B)
-Imported 'GUID: 2dfe4ac4b97c39d479e50caf41355f0d' -> (Import Result ID: 'd4ac5f6d2db456298e0e25ae3c8da616') in 0.005 seconds [static and dynamic dependencies]. Details - ImportResultOutputID=0ab941f433c2043ecad72d965b5a3f52 DependenciesID=0090c468a3d30cc7dc32b6c8fe79afb9 StaticDependenciesID=8c538854bb2696f288f936f8c552626e 
-Number of updated asset objects reloaded before import = 0
-Number of asset objects unloaded after import = 1
-========================================================================
-Received Import Request.
-  Time of request: 2026-11-19T19:15:32.1955421Z
-  Time since last request: 0.0294206 seconds.
-  importAddress: GUID: 851072ca57f493940a89ba9abf8e24db - Path: Assets/Animations/Characters/GoblinScout/AttackQ_SW.anim - Importer: ScriptedImporter/UnityEditor.QuickSearchModule:UnityEditor.Search:ASIAI0B
-Importing 'GUID: 851072ca57f493940a89ba9abf8e24db - Path: Assets/Animations/Characters/GoblinScout/AttackQ_SW.anim - Importer: ScriptedImporter/UnityEditor.QuickSearchModule:UnityEditor.Search:ASIAI0B' with importer (ScriptedImporter : UnityEditor.QuickSearchModule:UnityEditor.Search:ASIAI0B)
-Imported 'GUID: 851072ca57f493940a89ba9abf8e24db' -> (Import Result ID: '682150c94afd7d717a858651116f841e') in 0.007 seconds [static and dynamic dependencies]. Details - ImportResultOutputID=eedb50a62800365e5e000a653a65174e DependenciesID=787ee763daed59cca15ce4c4c74a82e9 StaticDependenciesID=045413dcbfa6ea43513491d6bbac946f 
-Number of updated asset objects reloaded before import = 0
-Number of asset objects unloaded after import = 1
-========================================================================
-Received Import Request.
-  Time of request: 2026-11-19T19:15:32.2229618Z
-  Time since last request: 0.0014161 seconds.
-  importAddress: GUID: 10ffcf1d0600ca34c855b8a6dfbb0200 - Path: Assets/Animations/Characters/GoblinScout/AttackE_E.anim - Importer: ScriptedImporter/UnityEditor.QuickSearchModule:UnityEditor.Search:ASIAI0B
-Importing 'GUID: 10ffcf1d0600ca34c855b8a6dfbb0200 - Path: Assets/Animations/Characters/GoblinScout/AttackE_E.anim - Importer: ScriptedImporter/UnityEditor.QuickSearchModule:UnityEditor.Search:ASIAI0B' with importer (ScriptedImporter : UnityEditor.QuickSearchModule:UnityEditor.Search:ASIAI0B)
-Imported 'GUID: 10ffcf1d0600ca34c855b8a6dfbb0200' -> (Import Result ID: '2479b5b81809ef7eab8a1c1e52401998') in 0.005 seconds [static and dynamic dependencies]. Details - ImportResultOutputID=b25f2ff23c839fe3e6f5020d6e93c28f DependenciesID=11697df36eaaa9628c23c9ec162e0d1b StaticDependenciesID=1f56b3c0d477d727b716a5a7f31ce5b2 
-Number of updated asset objects reloaded before import = 0
-Number of asset objects unloaded after import = 1
-========================================================================
-Received Import Request.
-  Time of request: 2026-11-19T19:15:32.2526594Z
-  Time since last request: 0.0021007 seconds.
-  importAddress: GUID: 46f0ec6677946494d98ee2e3c69be16d - Path: Assets/Animations/Characters/GoblinScout/Idle_W.anim - Importer: ScriptedImporter/UnityEditor.QuickSearchModule:UnityEditor.Search:ASIAI0B
-Importing 'GUID: 46f0ec6677946494d98ee2e3c69be16d - Path: Assets/Animations/Characters/GoblinScout/Idle_W.anim - Importer: ScriptedImporter/UnityEditor.QuickSearchModule:UnityEditor.Search:ASIAI0B' with importer (ScriptedImporter : UnityEditor.QuickSearchModule:UnityEditor.Search:ASIAI0B)
-Imported 'GUID: 46f0ec6677946494d98ee2e3c69be16d' -> (Import Result ID: '8f8f9099fde0e935886159396de92e6e') in 0.004 seconds [static and dynamic dependencies]. Details - ImportResultOutputID=7fb7e21a7b16eaa1dc754556bd96d845 DependenciesID=9c7d50b446f84bb4bbe9cbdc7aeab7b2 StaticDependenciesID=00dfde19bf3ba3a2d248e7dae6d31a57 
-Number of updated asset objects reloaded before import = 0
-Number of asset objects unloaded after import = 1
-========================================================================
-Received Import Request.
-  Time of request: 2026-11-19T19:15:32.2856024Z
-  Time since last request: 0.0065174 seconds.
-  importAddress: GUID: c082dc9b8b513054bb8e14ebc0080fb0 - Path: Assets/Animations/Characters/FootSoldier/Idle_NW.anim - Importer: ScriptedImporter/UnityEditor.QuickSearchModule:UnityEditor.Search:ASIAI0B
-Importing 'GUID: c082dc9b8b513054bb8e14ebc0080fb0 - Path: Assets/Animations/Characters/FootSoldier/Idle_NW.anim - Importer: ScriptedImporter/UnityEditor.QuickSearchModule:UnityEditor.Search:ASIAI0B' with importer (ScriptedImporter : UnityEditor.QuickSearchModule:UnityEditor.Search:ASIAI0B)
-Imported 'GUID: c082dc9b8b513054bb8e14ebc0080fb0' -> (Import Result ID: '6f9f97d7621a0a53448b1cb2cfce5970') in 0.005 seconds [static and dynamic dependencies]. Details - ImportResultOutputID=792f0594faaa9f85e6053dfd6379cecd DependenciesID=27c1422cf45bd57841261ae5c4432aac StaticDependenciesID=e0bb6e4f85a333415ce4157b898cee71 
-Number of updated asset objects reloaded before import = 0
-Number of asset objects unloaded after import = 1
-========================================================================
-Received Import Request.
-  Time of request: 2026-11-19T19:15:32.3154457Z
-  Time since last request: 0.0017388 seconds.
-  importAddress: GUID: 46565aa89a7ddda4fb34035f8c7c3086 - Path: Assets/Animations/Characters/GoblinScout/Idle_N.anim - Importer: ScriptedImporter/UnityEditor.QuickSearchModule:UnityEditor.Search:ASIAI0B
-Importing 'GUID: 46565aa89a7ddda4fb34035f8c7c3086 - Path: Assets/Animations/Characters/GoblinScout/Idle_N.anim - Importer: ScriptedImporter/UnityEditor.QuickSearchModule:UnityEditor.Search:ASIAI0B' with importer (ScriptedImporter : UnityEditor.QuickSearchModule:UnityEditor.Search:ASIAI0B)
-Imported 'GUID: 46565aa89a7ddda4fb34035f8c7c3086' -> (Import Result ID: '47688341b1b3f0a76f79d8ae93bc27f4') in 0.005 seconds [static and dynamic dependencies]. Details - ImportResultOutputID=dff621038666b653344cc6145f8a1148 DependenciesID=7c1baca3528f168825257221863c6c9f StaticDependenciesID=e1b3f428c8998c0cec5af27e7c2659bc 
-Number of updated asset objects reloaded before import = 0
-Number of asset objects unloaded after import = 1
-========================================================================
-Received Import Request.
-  Time of request: 2026-11-19T19:15:32.3435428Z
-  Time since last request: 0.0004568 seconds.
-  importAddress: GUID: 4fad8b5796776b44ca61f68a51a842f3 - Path: Assets/Animations/Characters/BladeAssasin/Death_NE.anim - Importer: ScriptedImporter/UnityEditor.QuickSearchModule:UnityEditor.Search:ASIAI0B
-Importing 'GUID: 4fad8b5796776b44ca61f68a51a842f3 - Path: Assets/Animations/Characters/BladeAssasin/Death_NE.anim - Importer: ScriptedImporter/UnityEditor.QuickSearchModule:UnityEditor.Search:ASIAI0B' with importer (ScriptedImporter : UnityEditor.QuickSearchModule:UnityEditor.Search:ASIAI0B)
-Imported 'GUID: 4fad8b5796776b44ca61f68a51a842f3' -> (Import Result ID: '2c2ec451481388890da6055f754112b0') in 0.004 seconds [static and dynamic dependencies]. Details - ImportResultOutputID=07654201c553205824d0c1307f1c96f1 DependenciesID=81d76421675f28706493427da8b36d48 StaticDependenciesID=fc80dd665aad3285b51411ab062f0b43 
-Number of updated asset objects reloaded before import = 0
-Number of asset objects unloaded after import = 1
-========================================================================
-Received Import Request.
-  Time of request: 2026-11-19T19:15:32.4015322Z
-  Time since last request: 0.0327546 seconds.
-  importAddress: GUID: 91bc03ef3215d7c4a882c40170a122fa - Path: Assets/Animations/Characters/BladeAssasin/Death_SE.anim - Importer: ScriptedImporter/UnityEditor.QuickSearchModule:UnityEditor.Search:ASIAI0B
-Importing 'GUID: 91bc03ef3215d7c4a882c40170a122fa - Path: Assets/Animations/Characters/BladeAssasin/Death_SE.anim - Importer: ScriptedImporter/UnityEditor.QuickSearchModule:UnityEditor.Search:ASIAI0B' with importer (ScriptedImporter : UnityEditor.QuickSearchModule:UnityEditor.Search:ASIAI0B)
-Imported 'GUID: 91bc03ef3215d7c4a882c40170a122fa' -> (Import Result ID: '31345c7bd2143a9f5fa9c1196cf289e6') in 0.006 seconds [static and dynamic dependencies]. Details - ImportResultOutputID=30f185a758eb04722ae6126fd3257c09 DependenciesID=77a82dbf40a6089647ae5aa00e481d88 StaticDependenciesID=8d9fcb0da0a9ecd3c235e4fc4f7ed9bf 
-Number of updated asset objects reloaded before import = 0
-Number of asset objects unloaded after import = 1
-========================================================================
-Received Import Request.
-  Time of request: 2026-11-19T19:15:32.4332219Z
-  Time since last request: 0.0039113 seconds.
-  importAddress: GUID: df9b196e90112ca4c81b4cd76ff9d691 - Path: Assets/Animations/Characters/FootSoldier/Attack_N.anim - Importer: ScriptedImporter/UnityEditor.QuickSearchModule:UnityEditor.Search:ASIAI0B
-Importing 'GUID: df9b196e90112ca4c81b4cd76ff9d691 - Path: Assets/Animations/Characters/FootSoldier/Attack_N.anim - Importer: ScriptedImporter/UnityEditor.QuickSearchModule:UnityEditor.Search:ASIAI0B' with importer (ScriptedImporter : UnityEditor.QuickSearchModule:UnityEditor.Search:ASIAI0B)
-Imported 'GUID: df9b196e90112ca4c81b4cd76ff9d691' -> (Import Result ID: '9d000b564415e87f3fa0eafa7f8fc273') in 0.006 seconds [static and dynamic dependencies]. Details - ImportResultOutputID=6e150136ba0a7eed3e76c45a216c5b3c DependenciesID=7553e2c91a6aba369a02bf0929559a6d StaticDependenciesID=acfa1ac020810473b412250892897715 
-Number of updated asset objects reloaded before import = 0
-Number of asset objects unloaded after import = 1
-========================================================================
-Received Import Request.
-  Time of request: 2026-11-19T19:15:59.1057429Z
-  Time since last request: 26.6406493 seconds.
-  importAddress: GUID: a55843ea10c9baf4ea40bbe1211f503a - Path: Assets/Sprites/ARAM/Background/Abyss_03.png - Importer: PreviewImporter
-Importing 'GUID: a55843ea10c9baf4ea40bbe1211f503a - Path: Assets/Sprites/ARAM/Background/Abyss_03.png - Importer: PreviewImporter' with importer (PreviewImporter)
-Imported 'GUID: a55843ea10c9baf4ea40bbe1211f503a' -> (Import Result ID: 'ed892be11d89e13d27ffc2a85e1b8699') in 0.084 seconds [static and dynamic dependencies]. Details - ImportResultOutputID=f44eca002cc0053736d041b368bbc4f7 DependenciesID=d4db5b1329f5cdb2b0948dea1d370d35 StaticDependenciesID=d50e300f774e104ec4368ac265735302 
-Number of updated asset objects reloaded before import = 0
-Number of asset objects unloaded after import = 3
-========================================================================
-Received Import Request.
-  Time of request: 2026-11-19T19:15:59.2108696Z
-  Time since last request: 0.0020607 seconds.
-  importAddress: GUID: 7bed73a03012a5d4da97eecec16721f5 - Path: Assets/Sprites/Minions/Worlf/attack.png - Importer: PreviewImporter
-Importing 'GUID: 7bed73a03012a5d4da97eecec16721f5 - Path: Assets/Sprites/Minions/Worlf/attack.png - Importer: PreviewImporter' with importer (PreviewImporter)
-Imported 'GUID: 7bed73a03012a5d4da97eecec16721f5' -> (Import Result ID: '20a5c9ad116cdff5ee9174c870ffa169') in 1.265 seconds [static and dynamic dependencies]. Details - ImportResultOutputID=b1c59344678384891409a2d8bed3903d DependenciesID=88e0cd2016b7a709396976481be4d206 StaticDependenciesID=b85aea44a260bcb423d410a2f5a2d6c8 
-Number of updated asset objects reloaded before import = 0
-Number of asset objects unloaded after import = 194
-========================================================================
-Received Import Request.
-  Time of request: 2026-11-19T19:16:00.4972249Z
-  Time since last request: 0.0035901 seconds.
-  importAddress: GUID: 48faaa8d920de5a46a35704989b94acc - Path: Assets/Sprites/ARAM/Background/Abyss_04.png - Importer: PreviewImporter
-Importing 'GUID: 48faaa8d920de5a46a35704989b94acc - Path: Assets/Sprites/ARAM/Background/Abyss_04.png - Importer: PreviewImporter' with importer (PreviewImporter)
-Imported 'GUID: 48faaa8d920de5a46a35704989b94acc' -> (Import Result ID: 'e7d8e1da496f6a08e9a9f3ae64c2c074') in 0.056 seconds [static and dynamic dependencies]. Details - ImportResultOutputID=818ac864fb37bc6eeb3ba69c2521feca DependenciesID=aea1fff184025230df232f557796cf69 StaticDependenciesID=038fbf7fcfa35aa135c75567e8825ac6 
-Number of updated asset objects reloaded before import = 0
-Number of asset objects unloaded after import = 3
-========================================================================
-Received Import Request.
-  Time of request: 2026-11-19T19:16:00.5798755Z
-  Time since last request: 0.0048877 seconds.
-  importAddress: GUID: 60986f90a4688a240acd42843554a832 - Path: Assets/Sprites/Characters/FootSoldier/attack.png - Importer: PreviewImporter
-Importing 'GUID: 60986f90a4688a240acd42843554a832 - Path: Assets/Sprites/Characters/FootSoldier/attack.png - Importer: PreviewImporter' with importer (PreviewImporter)
-Imported 'GUID: 60986f90a4688a240acd42843554a832' -> (Import Result ID: 'e217b52f47fab78f3cb91fb2e4ecb1ac') in 1.162 seconds [static and dynamic dependencies]. Details - ImportResultOutputID=8eabe9158ee0af76b7b53bbf06fb42a1 DependenciesID=22648ee20612b9389ec100a4f58710c0 StaticDependenciesID=e24ee32f189c18f43accf0a90b024957 
-Number of updated asset objects reloaded before import = 0
-Number of asset objects unloaded after import = 194
-========================================================================
-Received Prepare
-AcceleratorClientConnectionCallback - disconnected - :0
-Refreshing native plugins compatible for Editor in 2.92 ms, found 5 plugins.
-Unloading 24 Unused Serialized files (Serialized files now loaded: 0)
-Unloading 24 unused Assets / (3.1 MB). Loaded Objects now: 8748.
-Memory consumption went from 382.6 MB to 379.5 MB.
-Total: 16.873800 ms (FindLiveObjects: 0.936100 ms CreateObjectMapping: 0.427200 ms MarkObjects: 14.541500 ms  DeleteObjects: 0.522400 ms)
-
-Prepare: number of updated asset objects reloaded= 0
-========================================================================
-Received Prepare
-AcceleratorClientConnectionCallback - disconnected - :0
-[Licensing::Client] Successfully resolved entitlement details
 Begin MonoManager ReloadAssembly
+Curl error 7: Failed to connect to config.uca.cloud.unity3d.com port 443 after 4484 ms: Could not connect to server
 'Packages/com.unity.render-pipelines.core/Editor/Deprecated.cs' contains partial class of Unity.Object, exactly 1 of the partial classes needs to be in a file with the same filename. This is to know the one that can be referenced from ie. GameObjects
 'Packages/com.unity.render-pipelines.core/Editor/Deprecated.cs' contains partial class of Unity.Object, exactly 1 of the partial classes needs to be in a file with the same filename. This is to know the one that can be referenced from ie. GameObjects
-Refreshing native plugins compatible for Editor in 4.63 ms, found 5 plugins.
+Refreshing native plugins compatible for Editor in 2.99 ms, found 5 plugins.
 Native extension for WindowsStandalone target not found
 [Package Manager] Failed to launch server process. Reason: Unity was launched with the -noUpm command-line argument
 [Package Manager] Unable to send message (not connected to server process).
@@ -1501,127 +255,136 @@ Native extension for WindowsStandalone target not found
 [Package Manager] Cannot connect to Unity Package Manager local server
 ScheduleIndexationOnStartup MainProcess:False IndexOnStartup:True
 Scripting: successfully reloaded assembly
-- Finished resetting the current domain, in  2.236 seconds
-Domain Reload Profiling: 12943ms
-	BeginReloadAssembly (6408ms)
-		DisableScriptedObjects (1261ms)
-		ReleaseScriptingObjects (4ms)
-		CreateAndSetChildDomain (2528ms)
-	RebuildCommonClasses (47ms)
-	RebuildNativeTypeToScriptingClass (55ms)
-	initialDomainReloadingComplete (162ms)
-	LoadAllAssembliesAndSetupDomain (4034ms)
-		LoadAssemblies (3411ms)
-		TypeCache.Refresh (125ms)
-		AnalyzeDomain (1357ms)
-			BuildScriptInfoCaches (1328ms)
-			ResolveRequiredComponents (17ms)
-	FinalizeReload (2237ms)
+- Finished resetting the current domain, in  1.266 seconds
+Domain Reload Profiling: 2431ms
+	BeginReloadAssembly (419ms)
+		DisableScriptedObjects (29ms)
+		CreateAndSetChildDomain (83ms)
+	RebuildCommonClasses (11ms)
+	RebuildNativeTypeToScriptingClass (33ms)
+	initialDomainReloadingComplete (124ms)
+	LoadAllAssembliesAndSetupDomain (577ms)
+		LoadAssemblies (509ms)
+		TypeCache.Refresh (11ms)
+		AnalyzeDomain (23ms)
+			ResolveRequiredComponents (16ms)
+	FinalizeReload (1267ms)
 		SetupLoadedEditorAssemblies (0ms)
-			LogAssemblyErrors (10ms)
-			InitializePlatformSupportModulesInManaged (4ms)
-			BeforeProcessingInitializeOnLoad (348ms)
-			ProcessInitializeOnLoadAttributes (1043ms)
-			ProcessInitializeOnLoadMethodAttributes (196ms)
-			AfterProcessingInitializeOnLoad (5ms)
-			EditorAssembliesLoaded (5ms)
-		AwakeInstancesAfterBackupRestoration (68ms)
-Refreshing native plugins compatible for Editor in 2.64 ms, found 5 plugins.
+			LogAssemblyErrors (4ms)
+			BeforeProcessingInitializeOnLoad (179ms)
+			ProcessInitializeOnLoadAttributes (588ms)
+			ProcessInitializeOnLoadMethodAttributes (133ms)
+		AwakeInstancesAfterBackupRestoration (27ms)
+Refreshing native plugins compatible for Editor in 2.79 ms, found 5 plugins.
 Unloading 24 Unused Serialized files (Serialized files now loaded: 0)
-Unloading 7541 unused Assets / (6.2 MB). Loaded Objects now: 8676.
-Memory consumption went from 390.7 MB to 384.5 MB.
-Total: 14.957100 ms (FindLiveObjects: 1.518900 ms CreateObjectMapping: 0.759500 ms MarkObjects: 9.490800 ms  DeleteObjects: 2.726000 ms)
+Unloading 7541 unused Assets / (6.2 MB). Loaded Objects now: 8533.
+Memory consumption went from 363.2 MB to 356.9 MB.
+Total: 13.081500 ms (FindLiveObjects: 1.214000 ms CreateObjectMapping: 0.831800 ms MarkObjects: 6.481400 ms  DeleteObjects: 4.086100 ms)
 
 Prepare: number of updated asset objects reloaded= 0
 ========================================================================
 Received Import Request.
-  Time of request: 2026-11-19T19:27:16.6712305Z
-  Time since last request: 674.90194629999996 seconds.
-  importAddress: GUID: 8dceef3e3adf08e4d8a503be23eaa62f - Path: Assets/Prefabs/Characters/GoblinScout.prefab - Importer: PreviewImporter
-Importing 'GUID: 8dceef3e3adf08e4d8a503be23eaa62f - Path: Assets/Prefabs/Characters/GoblinScout.prefab - Importer: PreviewImporter' with importer (PreviewImporter)
-Imported 'GUID: 8dceef3e3adf08e4d8a503be23eaa62f' -> (Import Result ID: 'd5d882207db895f86a88d836a7169bef') in 3.186 seconds [static and dynamic dependencies]. Details - ImportResultOutputID=dfbfe259c7bdd1ec3cab1ab30ed05a24 DependenciesID=5b5bc2421d6eb97a7dc917263b84bf28 StaticDependenciesID=0e4fdb1112b72cba7cd1a064e896ec55 
+  Time of request: 2026-11-20T08:56:39.0487871Z
+  Time since last request: 246.39241430000001 seconds.
+  importAddress: GUID: 05ad2bd4143ee484baa3ced15c749e5a - Path: Assets/Sprites/HUD/Characters/ChampFrame.png - Importer: ScriptedImporter/UnityEditor.QuickSearchModule:UnityEditor.Search:ASIAI0B
+Importing 'GUID: 05ad2bd4143ee484baa3ced15c749e5a - Path: Assets/Sprites/HUD/Characters/ChampFrame.png - Importer: ScriptedImporter/UnityEditor.QuickSearchModule:UnityEditor.Search:ASIAI0B' with importer (ScriptedImporter : UnityEditor.QuickSearchModule:UnityEditor.Search:ASIAI0B)
+Imported 'GUID: 05ad2bd4143ee484baa3ced15c749e5a' -> (Import Result ID: '0f84486df2f1f356981bd02e98195806') in 0.212 seconds [static and dynamic dependencies]. Details - ImportResultOutputID=f3c6e67ed135cf4b2acff72fb395d466 DependenciesID=1a9794d74b0b28762d67c72a31021a53 StaticDependenciesID=626387425db07d98931dbb64f8fdba21 
 Number of updated asset objects reloaded before import = 0
-Number of asset objects unloaded after import = 1174
-========================================================================
-Received Prepare
-AcceleratorClientConnectionCallback - disconnected - :0
-Refreshing native plugins compatible for Editor in 3.17 ms, found 5 plugins.
-Unloading 24 Unused Serialized files (Serialized files now loaded: 0)
-Unloading 24 unused Assets / (3.0 MB). Loaded Objects now: 8770.
-Memory consumption went from 386.4 MB to 383.4 MB.
-Total: 54.957900 ms (FindLiveObjects: 2.856700 ms CreateObjectMapping: 0.770600 ms MarkObjects: 49.165200 ms  DeleteObjects: 1.679200 ms)
-
-Prepare: number of updated asset objects reloaded= 0
-========================================================================
-Received Prepare
-AcceleratorClientConnectionCallback - disconnected - :0
-Refreshing native plugins compatible for Editor in 3.15 ms, found 5 plugins.
-Unloading 24 Unused Serialized files (Serialized files now loaded: 0)
-Unloading 24 unused Assets / (3.1 MB). Loaded Objects now: 8770.
-Memory consumption went from 389.5 MB to 386.5 MB.
-Total: 14.872900 ms (FindLiveObjects: 1.627500 ms CreateObjectMapping: 0.473200 ms MarkObjects: 11.783200 ms  DeleteObjects: 0.522300 ms)
-
-Prepare: number of updated asset objects reloaded= 0
+Number of asset objects unloaded after import = 3
 ========================================================================
 Received Import Request.
-  Time of request: 2026-11-19T19:28:43.7907114Z
-  Time since last request: 83.80323319999999 seconds.
-  importAddress: GUID: 8dceef3e3adf08e4d8a503be23eaa62f - Path: Assets/Prefabs/Characters/GoblinScout.prefab - Importer: PreviewImporter
-Importing 'GUID: 8dceef3e3adf08e4d8a503be23eaa62f - Path: Assets/Prefabs/Characters/GoblinScout.prefab - Importer: PreviewImporter' with importer (PreviewImporter)
-Imported 'GUID: 8dceef3e3adf08e4d8a503be23eaa62f' -> (Import Result ID: '826c2b2e3b747c35b92b406c1cc6017a') in 0.237 seconds [static and dynamic dependencies]. Details - ImportResultOutputID=dfbfe259c7bdd1ec3cab1ab30ed05a24 DependenciesID=768e4af60c30b8a3d817df525a22347e StaticDependenciesID=e56634e021eeaef1416e78aa1ac131fb 
+  Time of request: 2026-11-20T08:56:39.316785Z
+  Time since last request: 0.0158501 seconds.
+  importAddress: GUID: 166ebb43e2d6890449638f5ce54874a5 - Path: Assets/Data/Champ select data/BladeAssasinSelectData.asset - Importer: ScriptedImporter/UnityEditor.QuickSearchModule:UnityEditor.Search:ASIAI0B
+Importing 'GUID: 166ebb43e2d6890449638f5ce54874a5 - Path: Assets/Data/Champ select data/BladeAssasinSelectData.asset - Importer: ScriptedImporter/UnityEditor.QuickSearchModule:UnityEditor.Search:ASIAI0B' with importer (ScriptedImporter : UnityEditor.QuickSearchModule:UnityEditor.Search:ASIAI0B)
+d3d12: upload buffer was too small for the requested resource! Size: 16777216. Requested: 38445056.
+Imported 'GUID: 166ebb43e2d6890449638f5ce54874a5' -> (Import Result ID: 'b31275c6775274076696ca0dc14790ca') in 0.312 seconds [static and dynamic dependencies]. Details - ImportResultOutputID=625d0eb42097aa8b0fd413dcf7f40cbc DependenciesID=e6f817b548e86ed0d633fb35b8fb1208 StaticDependenciesID=1bfcb84b3835698ff9cc79b9e9f869f7 
 Number of updated asset objects reloaded before import = 0
-Number of asset objects unloaded after import = 1174
-========================================================================
-Received Prepare
-AcceleratorClientConnectionCallback - disconnected - :0
-Refreshing native plugins compatible for Editor in 3.79 ms, found 5 plugins.
-Unloading 24 Unused Serialized files (Serialized files now loaded: 0)
-Unloading 24 unused Assets / (3.0 MB). Loaded Objects now: 8770.
-Memory consumption went from 386.4 MB to 383.4 MB.
-Total: 14.529000 ms (FindLiveObjects: 0.928200 ms CreateObjectMapping: 0.502500 ms MarkObjects: 11.907600 ms  DeleteObjects: 0.714700 ms)
-
-Prepare: number of updated asset objects reloaded= 0
-========================================================================
-Received Prepare
-AcceleratorClientConnectionCallback - disconnected - :0
-Refreshing native plugins compatible for Editor in 8.30 ms, found 5 plugins.
-Unloading 24 Unused Serialized files (Serialized files now loaded: 0)
-Unloading 24 unused Assets / (3.1 MB). Loaded Objects now: 8770.
-Memory consumption went from 389.6 MB to 386.5 MB.
-Total: 17.545100 ms (FindLiveObjects: 1.614600 ms CreateObjectMapping: 0.702300 ms MarkObjects: 13.957500 ms  DeleteObjects: 0.754900 ms)
-
-Prepare: number of updated asset objects reloaded= 0
+Number of asset objects unloaded after import = 35
 ========================================================================
 Received Import Request.
-  Time of request: 2026-11-19T19:28:57.5763479Z
-  Time since last request: 13.5236832 seconds.
-  importAddress: GUID: b3c6e3dabc3e93645808106496f75a3c - Path: Assets/Prefabs/Characters/FootSoldier/FootSoldier.prefab - Importer: PreviewImporter
-Importing 'GUID: b3c6e3dabc3e93645808106496f75a3c - Path: Assets/Prefabs/Characters/FootSoldier/FootSoldier.prefab - Importer: PreviewImporter' with importer (PreviewImporter)
-Imported 'GUID: b3c6e3dabc3e93645808106496f75a3c' -> (Import Result ID: '40c87149c1134585d60b8391b964f6a2') in 0.328 seconds [static and dynamic dependencies]. Details - ImportResultOutputID=3e85bd44358843b4f9e65b6f0d347885 DependenciesID=5e6ba70e5ed129834e943f422ae05172 StaticDependenciesID=069a65ded09cf5fe4dbd6490fa550281 
+  Time of request: 2026-11-20T08:56:39.6772848Z
+  Time since last request: 0.0000517 seconds.
+  importAddress: GUID: 91295d1686aecb44c8c3489b22534dc9 - Path: Assets/Scenes/ARAM.unity - Importer: ScriptedImporter/UnityEditor.QuickSearchModule:UnityEditor.Search:ASIAI0B
+Importing 'GUID: 91295d1686aecb44c8c3489b22534dc9 - Path: Assets/Scenes/ARAM.unity - Importer: ScriptedImporter/UnityEditor.QuickSearchModule:UnityEditor.Search:ASIAI0B' with importer (ScriptedImporter : UnityEditor.QuickSearchModule:UnityEditor.Search:ASIAI0B)
+Imported 'GUID: 91295d1686aecb44c8c3489b22534dc9' -> (Import Result ID: 'd24bd3040358d0a9669ea974535c48fe') in 0.033 seconds [static and dynamic dependencies]. Details - ImportResultOutputID=3e03948ec0623d88d09224465fb61bb9 DependenciesID=6cde228e7f537e5ac0a5c12de3c1292e StaticDependenciesID=07a3d26db55777c405478c2dee02822b 
 Number of updated asset objects reloaded before import = 0
-Number of asset objects unloaded after import = 1183
+Number of asset objects unloaded after import = 1
 ========================================================================
 Received Import Request.
-  Time of request: 2026-11-19T19:34:56.6661757Z
-  Time since last request: 358.7265802 seconds.
-  importAddress: GUID: 34fc5a7d5ca805c4799ec7dac05f7bd6 - Path: Assets/Prefabs/Minions/Wolf.prefab - Importer: ScriptedImporter/UnityEditor.QuickSearchModule:UnityEditor.Search:ASIAI0B
-Importing 'GUID: 34fc5a7d5ca805c4799ec7dac05f7bd6 - Path: Assets/Prefabs/Minions/Wolf.prefab - Importer: ScriptedImporter/UnityEditor.QuickSearchModule:UnityEditor.Search:ASIAI0B' with importer (ScriptedImporter : UnityEditor.QuickSearchModule:UnityEditor.Search:ASIAI0B)
-Imported 'GUID: 34fc5a7d5ca805c4799ec7dac05f7bd6' -> (Import Result ID: '922ff07b835c63e24a46642b69dbd200') in 1.082 seconds [static and dynamic dependencies]. Details - ImportResultOutputID=91ab10f3e8261767df60a1ae179bb028 DependenciesID=a888db6de6f6a412856d40893391db6e StaticDependenciesID=908675712397c1b949dd3f59c23a3613 
+  Time of request: 2026-11-20T08:56:39.7467341Z
+  Time since last request: 0.0023784 seconds.
+  importAddress: GUID: 771f7ff7800046c498720e0e1fa4b371 - Path: Assets/Scenes/SelectionSceneAuto.unity - Importer: ScriptedImporter/UnityEditor.QuickSearchModule:UnityEditor.Search:ASIAI0B
+Importing 'GUID: 771f7ff7800046c498720e0e1fa4b371 - Path: Assets/Scenes/SelectionSceneAuto.unity - Importer: ScriptedImporter/UnityEditor.QuickSearchModule:UnityEditor.Search:ASIAI0B' with importer (ScriptedImporter : UnityEditor.QuickSearchModule:UnityEditor.Search:ASIAI0B)
+Imported 'GUID: 771f7ff7800046c498720e0e1fa4b371' -> (Import Result ID: 'dba75ff1807a7568e0e3db6b20561348') in 0.019 seconds [static and dynamic dependencies]. Details - ImportResultOutputID=b0e548af2c68c482848877a6bc2491ff DependenciesID=2a737b3960a379d6334f165bd86f097d StaticDependenciesID=5e10629bfdb600388cda4fb7e27febfb 
 Number of updated asset objects reloaded before import = 0
-Number of asset objects unloaded after import = 81
+Number of asset objects unloaded after import = 1
 ========================================================================
-Received Prepare
-AcceleratorClientConnectionCallback - disconnected - :0
-Refreshing native plugins compatible for Editor in 4.91 ms, found 5 plugins.
-Unloading 24 Unused Serialized files (Serialized files now loaded: 0)
-Unloading 24 unused Assets / (2.9 MB). Loaded Objects now: 8770.
-Memory consumption went from 388.5 MB to 385.6 MB.
-Total: 19.288800 ms (FindLiveObjects: 1.422900 ms CreateObjectMapping: 0.815300 ms MarkObjects: 15.702300 ms  DeleteObjects: 0.737900 ms)
-
-Prepare: number of updated asset objects reloaded= 0
+Received Import Request.
+  Time of request: 2026-11-20T08:56:39.8026505Z
+  Time since last request: 0.0005313 seconds.
+  importAddress: GUID: e548e5fb405b3d446972b5500b225727 - Path: Assets/Scripts/Select_Charactor/PlayerSlot.cs - Importer: ScriptedImporter/UnityEditor.QuickSearchModule:UnityEditor.Search:ASIAI0B
+Importing 'GUID: e548e5fb405b3d446972b5500b225727 - Path: Assets/Scripts/Select_Charactor/PlayerSlot.cs - Importer: ScriptedImporter/UnityEditor.QuickSearchModule:UnityEditor.Search:ASIAI0B' with importer (ScriptedImporter : UnityEditor.QuickSearchModule:UnityEditor.Search:ASIAI0B)
+Imported 'GUID: e548e5fb405b3d446972b5500b225727' -> (Import Result ID: '886566243e7341cdbe4ea6fb374b1ac0') in 0.005 seconds [static and dynamic dependencies]. Details - ImportResultOutputID=c6b70093f88025764e642a6211e7abf4 DependenciesID=2df6f5dd69ee84c9df02a03ad9b41635 StaticDependenciesID=081383c04ebb5d9235388c872f3b0267 
+Number of updated asset objects reloaded before import = 0
+Number of asset objects unloaded after import = 0
+========================================================================
+Received Import Request.
+  Time of request: 2026-11-20T08:56:39.8406185Z
+  Time since last request: 0.0011717 seconds.
+  importAddress: GUID: 9131c9ed531224a4bafc51d9e757c3fd - Path: Assets/Scenes/LobbyScene.unity - Importer: ScriptedImporter/UnityEditor.QuickSearchModule:UnityEditor.Search:ASIAI0B
+Importing 'GUID: 9131c9ed531224a4bafc51d9e757c3fd - Path: Assets/Scenes/LobbyScene.unity - Importer: ScriptedImporter/UnityEditor.QuickSearchModule:UnityEditor.Search:ASIAI0B' with importer (ScriptedImporter : UnityEditor.QuickSearchModule:UnityEditor.Search:ASIAI0B)
+Imported 'GUID: 9131c9ed531224a4bafc51d9e757c3fd' -> (Import Result ID: 'b9de8f2e4baac4938365cbf1e08fa558') in 0.027 seconds [static and dynamic dependencies]. Details - ImportResultOutputID=ae2dcb239cc7270488a47c0ed30deb80 DependenciesID=582057978b5eee3d6cf6d702b211a7f2 StaticDependenciesID=e01ec285b4b98c16680360d5be8c43ab 
+Number of updated asset objects reloaded before import = 0
+Number of asset objects unloaded after import = 1
+========================================================================
+Received Import Request.
+  Time of request: 2026-11-20T08:56:39.8971062Z
+  Time since last request: 0.0005293 seconds.
+  importAddress: GUID: c5b53f6d1846243449d3903772795517 - Path: Assets/Data/Champ select data/FootSoldierSelectData.asset - Importer: ScriptedImporter/UnityEditor.QuickSearchModule:UnityEditor.Search:ASIAI0B
+Importing 'GUID: c5b53f6d1846243449d3903772795517 - Path: Assets/Data/Champ select data/FootSoldierSelectData.asset - Importer: ScriptedImporter/UnityEditor.QuickSearchModule:UnityEditor.Search:ASIAI0B' with importer (ScriptedImporter : UnityEditor.QuickSearchModule:UnityEditor.Search:ASIAI0B)
+d3d12: upload buffer was too small for the requested resource! Size: 38797312. Requested: 39555072.
+Imported 'GUID: c5b53f6d1846243449d3903772795517' -> (Import Result ID: '6bf71346618c27fb5c801976a0f063bf') in 0.256 seconds [static and dynamic dependencies]. Details - ImportResultOutputID=336d26897e380e61a9976190a7734848 DependenciesID=c894b698a07edc53ea405548c2f3cbf6 StaticDependenciesID=8b8b8b2e73144e06bcfa514dab705590 
+Number of updated asset objects reloaded before import = 0
+Number of asset objects unloaded after import = 52
+========================================================================
+Received Import Request.
+  Time of request: 2026-11-20T08:56:40.1923304Z
+  Time since last request: 0.001223 seconds.
+  importAddress: GUID: e110f22c339ec3041967196d58d22db5 - Path: Assets/Data/Champ select data/GoblinScoutSelectData.asset - Importer: ScriptedImporter/UnityEditor.QuickSearchModule:UnityEditor.Search:ASIAI0B
+Importing 'GUID: e110f22c339ec3041967196d58d22db5 - Path: Assets/Data/Champ select data/GoblinScoutSelectData.asset - Importer: ScriptedImporter/UnityEditor.QuickSearchModule:UnityEditor.Search:ASIAI0B' with importer (ScriptedImporter : UnityEditor.QuickSearchModule:UnityEditor.Search:ASIAI0B)
+Imported 'GUID: e110f22c339ec3041967196d58d22db5' -> (Import Result ID: '01ba796ad197c67d191cfcbd11b704ff') in 0.171 seconds [static and dynamic dependencies]. Details - ImportResultOutputID=eca8b25084420a3c1d1b85f95ee43043 DependenciesID=109333834d2571ae230aa245ecb0c23b StaticDependenciesID=e638a9ee96750ab676a0afe7574cd941 
+Number of updated asset objects reloaded before import = 0
+Number of asset objects unloaded after import = 44
+========================================================================
+Received Import Request.
+  Time of request: 2026-11-20T08:56:40.3988413Z
+  Time since last request: 0.0010414 seconds.
+  importAddress: GUID: 1f6e868e4b43689429de9eb079134d68 - Path: Assets/Prefabs/ChampionCard.prefab - Importer: ScriptedImporter/UnityEditor.QuickSearchModule:UnityEditor.Search:ASIAI0B
+Importing 'GUID: 1f6e868e4b43689429de9eb079134d68 - Path: Assets/Prefabs/ChampionCard.prefab - Importer: ScriptedImporter/UnityEditor.QuickSearchModule:UnityEditor.Search:ASIAI0B' with importer (ScriptedImporter : UnityEditor.QuickSearchModule:UnityEditor.Search:ASIAI0B)
+Imported 'GUID: 1f6e868e4b43689429de9eb079134d68' -> (Import Result ID: '3360ff176fae6ee0533ffa3600a0ae52') in 0.166 seconds [static and dynamic dependencies]. Details - ImportResultOutputID=7fba0d7f2516f98bb6935e957b3b660c DependenciesID=f81fa57f422be339ef956b0e24f6c2dd StaticDependenciesID=540ee41f2639c902a2b89721e600f246 
+Number of updated asset objects reloaded before import = 0
+Number of asset objects unloaded after import = 34
+========================================================================
+Received Import Request.
+  Time of request: 2026-11-20T08:56:41.3857366Z
+  Time since last request: 0.7889493 seconds.
+  importAddress: GUID: 9131c9ed531224a4bafc51d9e757c3fd - Path: Assets/Scenes/LobbyScene.unity - Importer: PreviewImporter
+Importing 'GUID: 9131c9ed531224a4bafc51d9e757c3fd - Path: Assets/Scenes/LobbyScene.unity - Importer: PreviewImporter' with importer (PreviewImporter)
+Imported 'GUID: 9131c9ed531224a4bafc51d9e757c3fd' -> (Import Result ID: '6d3ff0a56ff03d52935dd3dfa87edd72') in 0.002 seconds [static and dynamic dependencies]. Details - ImportResultOutputID=a2fecddf4624053ea9f12f09cca11af1 DependenciesID=69243c3abb4653c58c472c26f3e4c7f9 StaticDependenciesID=d875522a849ed5f0a9ecb12ab34a2a68 
+Number of updated asset objects reloaded before import = 0
+Number of asset objects unloaded after import = 0
+========================================================================
+Received Import Request.
+  Time of request: 2026-11-20T08:56:41.8064745Z
+  Time since last request: 0.3993707 seconds.
+  importAddress: GUID: 8c9cfa26abfee488c85f1582747f6a02 - Path: Assets/Scenes/SampleScene.unity - Importer: PreviewImporter
+Importing 'GUID: 8c9cfa26abfee488c85f1582747f6a02 - Path: Assets/Scenes/SampleScene.unity - Importer: PreviewImporter' with importer (PreviewImporter)
+Imported 'GUID: 8c9cfa26abfee488c85f1582747f6a02' -> (Import Result ID: 'a82b698af48aad75bbdcdfe132bcc037') in 0.001 seconds [static and dynamic dependencies]. Details - ImportResultOutputID=90ed1bf11bd6e0e85d4c90d5dd7c8fe3 DependenciesID=363f4e8eb033cd59e9c245328c14214d StaticDependenciesID=370f3582ac724fca58252b729b945088 
+Number of updated asset objects reloaded before import = 0
+Number of asset objects unloaded after import = 0
 Editor requested this worker to shutdown with reason: Scaling down because of idle timeout
 AcceleratorClientConnectionCallback - disconnected - :0
-Curl error 42: Callback aborted
 AssetImportWorker is now disconnected from the server
 Process exiting
 [ExitDontLaunchBugReporter] Exiting without the bug reporter. Application will exit with return code 0
