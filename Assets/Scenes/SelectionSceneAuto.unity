@@ -3004,7 +3004,7 @@ Canvas:
   m_GameObject: {fileID: 970664411}
   m_Enabled: 1
   serializedVersion: 3
-  m_RenderMode: 1
+  m_RenderMode: 0
   m_Camera: {fileID: 410738406}
   m_PlaneDistance: 100
   m_PixelPerfect: 0
@@ -4253,7 +4253,7 @@ MonoBehaviour:
   gridContent: {fileID: 1849999482}
   lockInButton: {fileID: 502818940}
   searchInput: {fileID: 984474929}
-  gameSceneName: ARAM
+  gameSceneName: LoadingScene
   mySlot: {fileID: 1473169894}
 --- !u!4 &1352767528
 Transform:

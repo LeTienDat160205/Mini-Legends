@@ -3,7 +3,8 @@
 --- !u!78 &1
 TagManager:
   serializedVersion: 3
-  tags: []
+  tags:
+  - Nexus
   layers:
   - Default
   - TransparentFX
@@ -47,11 +48,17 @@ TagManager:
   - name: WallTop
     uniqueID: 2891758673
     locked: 0
-  - name: Character
+  - name: Player
     uniqueID: 3627068007
     locked: 0
   - name: WallBottom
     uniqueID: 3228178513
+    locked: 0
+  - name: Structure
+    uniqueID: 2548246579
+    locked: 0
+  - name: HUD
+    uniqueID: 3251939417
     locked: 0
   m_RenderingLayers:
   - Default

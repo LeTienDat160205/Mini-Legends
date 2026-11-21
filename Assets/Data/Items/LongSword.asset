@@ -1,0 +1,30 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 127cb5577a50b624d8759113e7e860dd, type: 3}
+  m_Name: LongSword
+  m_EditorClassIdentifier: Assembly-CSharp::ItemData
+  displayName: "Ki\u1EBFm d\xE0i"
+  icon: {fileID: -4559542808310389026, guid: 0d36f0a8833380141bad3229e8be9c0d, type: 3}
+  description: "Thanh ki\u1EBFm ng\u1EAFn \u0111\u01B0\u1EE3c th\u1EE3 r\xE8n l\xE0m d\xE0i ra cho c\xF3 v\u1EBB nguy hi\u1EC3m"
+  attack: 10
+  attackSpeed: 1
+  attackRange: 0
+  defend: 0
+  heart: 1
+  speed: 0
+  cooldownReduction: 0
+  canActive: 0
+  activeEffect: 0
+  activeValue: 0
+  activeDuration: 0
+  activeCooldown: 0
+  activeDescription: 

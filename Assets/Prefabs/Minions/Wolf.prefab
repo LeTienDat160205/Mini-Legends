@@ -12,10 +12,10 @@ GameObject:
   - component: {fileID: 8022544404026720057}
   - component: {fileID: 8290206969376464304}
   - component: {fileID: 8493567140992301413}
-  - component: {fileID: 5514199618055819307}
+  - component: {fileID: -7112562372160415022}
   m_Layer: 6
   m_Name: Wolf
-  m_TagString: Player
+  m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -81,7 +81,7 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_GlobalIlluminationMeshLod: 0
   m_SortingLayerID: -667899289
-  m_SortingLayer: 2
+  m_SortingLayer: 3
   m_SortingOrder: 0
   m_MaskInteraction: 0
   m_Sprite: {fileID: -2134594848, guid: 744d47ccf7fa8b148a67493492708547, type: 3}
@@ -105,7 +105,7 @@ Animator:
   m_GameObject: {fileID: 68865358124187244}
   m_Enabled: 1
   m_Avatar: {fileID: 0}
-  m_Controller: {fileID: 9100000, guid: 1f15fad2508e5894398c9267486187e3, type: 2}
+  m_Controller: {fileID: 9100000, guid: 4c272069a5c4f354e81e777dd3f82bf7, type: 2}
   m_CullingMode: 0
   m_UpdateMode: 0
   m_ApplyRootMotion: 0
@@ -144,40 +144,22 @@ Rigidbody2D:
   m_SleepingMode: 1
   m_CollisionDetection: 0
   m_Constraints: 0
---- !u!70 &5514199618055819307
-CapsuleCollider2D:
+--- !u!114 &-7112562372160415022
+MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 68865358124187244}
   m_Enabled: 1
-  serializedVersion: 3
-  m_Density: 1
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_LayerOverridePriority: 0
-  m_ForceSendLayers:
-    serializedVersion: 2
-    m_Bits: 4294967295
-  m_ForceReceiveLayers:
-    serializedVersion: 2
-    m_Bits: 4294967295
-  m_ContactCaptureLayers:
-    serializedVersion: 2
-    m_Bits: 4294967295
-  m_CallbackLayers:
-    serializedVersion: 2
-    m_Bits: 4294967295
-  m_IsTrigger: 1
-  m_UsedByEffector: 0
-  m_CompositeOperation: 0
-  m_CompositeOrder: 0
-  m_Offset: {x: 0, y: -0.9}
-  m_Size: {x: 1, y: 1.5}
-  m_Direction: 0
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5f4d98ef8d4865d4384d05ed5d94f99d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::Minion
+  team: 1
+  detectionRadius: 3
+  attackRange: 1.2
+  moveSpeed: 1.5
+  damage: 10
+  attacksPerSecond: 1
+  maxHealth: 100

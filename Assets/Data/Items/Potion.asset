@@ -1,0 +1,30 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 127cb5577a50b624d8759113e7e860dd, type: 3}
+  m_Name: Potion
+  m_EditorClassIdentifier: Assembly-CSharp::ItemData
+  displayName: "Thu\u1ED1c h\u1ED3i ph\u1EE5c"
+  icon: {fileID: -4060634772010498931, guid: 46784aa7c967b224c87289cb9170b053, type: 3}
+  description: "U\u1ED1ng thu\u1ED1c h\u1ED3i m\xE1u, ... B\u1EA1n c\xF2n tr\xF4ng ch\u1EDD g\xEC?"
+  attack: 0
+  attackSpeed: 0.01
+  attackRange: 0
+  defend: 0
+  heart: 1
+  speed: 0
+  cooldownReduction: 0
+  canActive: 1
+  activeEffect: 1
+  activeValue: 20
+  activeDuration: 0
+  activeCooldown: 60
+  activeDescription: "H\u1ED3i ph\u1EE5c: 20hp.\nTh\xF2i gian h\u1ED3i: 60s"

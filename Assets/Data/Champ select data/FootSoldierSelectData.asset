@@ -15,4 +15,4 @@ MonoBehaviour:
   id: 2
   displayName: Foot Soldier
   portrait: {fileID: 3486374487363057852, guid: dd064ed92723c0342b84d5d07e9e459e, type: 3}
-  playerPrefab: {fileID: 4676062712088078102, guid: b3c6e3dabc3e93645808106496f75a3c, type: 3}
+  playerPrefab: {fileID: 4676062712088078102, guid: 2afed3cbe65418d48995901e4d67900d, type: 3}
