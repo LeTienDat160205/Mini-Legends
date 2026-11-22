@@ -13,12 +13,25 @@ public class ChampSelectManager : MonoBehaviour
     [SerializeField] private TMP_InputField searchInput;
     [SerializeField] private string gameSceneName = "GameScene";
     [SerializeField] private PlayerSlot mySlot;   // Ô của người chơi (cột trái), hiện tướng đang chọn
+    [Header("Audio")]
+    [SerializeField] private AudioSource musicSource;
+    [SerializeField] private AudioClip selectionMusic;
 
     private readonly List<ChampionCard> cards = new List<ChampionCard>();
     private ChampionCard selected;
 
     private void Start()
     {
+        if (musicSource == null) musicSource = GetComponent<AudioSource>();
+        if (musicSource == null) musicSource = gameObject.AddComponent<AudioSource>();
+        musicSource.playOnAwake = false;
+        musicSource.spatialBlend = 0f;
+        musicSource.loop = true;
+        if (selectionMusic != null)
+        {
+            musicSource.clip = selectionMusic;
+            musicSource.Play();
+        }
         foreach (ChampionData data in allChampions)
         {
             ChampionCard card = Instantiate(cardPrefab, gridContent);
@@ -48,7 +61,7 @@ public class ChampSelectManager : MonoBehaviour
         if (selected == null) return;
 
         if (mySlot != null) mySlot.SetStatus("Locked in");
-        ChampSelectResult.PickedChampion = selected.Data;
+        ChampSelectResult.SetPicked(selected.Data, Team.Blue, 0);
         SceneManager.LoadScene(gameSceneName);
     }
 

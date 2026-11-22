@@ -228,12 +228,11 @@ GameObject:
   - component: {fileID: 8441636010714194844}
   - component: {fileID: 2307993547024281932}
   - component: {fileID: 6528339580830385550}
-  - component: {fileID: 4249503055095864999}
   - component: {fileID: 814629941815599195}
   - component: {fileID: 4719059576707301632}
   - component: {fileID: 6166548987533298544}
   - component: {fileID: 4828945144396607617}
-  - component: {fileID: 6079938705523268257}
+  - component: {fileID: 7880717259560002994}
   m_Layer: 6
   m_Name: FootSoldier
   m_TagString: Player
@@ -349,7 +348,7 @@ Rigidbody2D:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 4676062712088078102}
-  m_BodyType: 0
+  m_BodyType: 1
   m_Simulated: 1
   m_UseFullKinematicContacts: 0
   m_UseAutoMass: 0
@@ -357,7 +356,7 @@ Rigidbody2D:
   m_LinearDamping: 0
   m_AngularDamping: 0.05
   m_GravityScale: 0
-  m_Material: {fileID: 0}
+  m_Material: {fileID: 6200000, guid: 311ddeeffc23cde408655e18102cc752, type: 2}
   m_IncludeLayers:
     serializedVersion: 2
     m_Bits: 0
@@ -368,21 +367,6 @@ Rigidbody2D:
   m_SleepingMode: 1
   m_CollisionDetection: 0
   m_Constraints: 4
---- !u!114 &4249503055095864999
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4676062712088078102}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 1d73157cc247a494387d2430fd9941c9, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::PlayerMovement
-  speed: 1.5
-  rb: {fileID: 6528339580830385550}
-  animator: {fileID: 2307993547024281932}
 --- !u!114 &814629941815599195
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -408,6 +392,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e9b98812633c1534bb7a37e6bb99bdb9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::TeamMember
+  respawnDelay: 5
   team: 1
 --- !u!114 &6166548987533298544
 MonoBehaviour:
@@ -462,8 +447,8 @@ MonoBehaviour:
   qTargetLayers:
     serializedVersion: 2
     m_Bits: 4294967295
---- !u!61 &6079938705523268257
-BoxCollider2D:
+--- !u!70 &7880717259560002994
+CapsuleCollider2D:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
@@ -492,22 +477,13 @@ BoxCollider2D:
   m_CallbackLayers:
     serializedVersion: 2
     m_Bits: 4294967295
-  m_IsTrigger: 1
+  m_IsTrigger: 0
   m_UsedByEffector: 0
   m_CompositeOperation: 0
   m_CompositeOrder: 0
   m_Offset: {x: 0, y: 0}
-  m_SpriteTilingProperty:
-    border: {x: 0, y: 0, z: 0, w: 0}
-    pivot: {x: 0.5, y: 0.5}
-    oldSize: {x: 1.12, y: 1.57}
-    newSize: {x: 4.15, y: 3.61}
-    adaptiveTilingThreshold: 0.5
-    drawMode: 0
-    adaptiveTiling: 0
-  m_AutoTiling: 0
   m_Size: {x: 1.12, y: 1.57}
-  m_EdgeRadius: 0
+  m_Direction: 0
 --- !u!1 &8570122606485473468
 GameObject:
   m_ObjectHideFlags: 0

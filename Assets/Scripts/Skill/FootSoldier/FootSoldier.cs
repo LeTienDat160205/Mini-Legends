@@ -48,7 +48,7 @@ public class FootSoldier : MonoBehaviour
     private bool eBusy;
     private bool aimingQ;
     private bool qBusy;
-    private float attackCooldown;
+    private float nextAttackTime;
     private float cooldownE;
     private float cooldownQ;
     private int ignoreAttackFrame = -1;
@@ -112,7 +112,6 @@ public class FootSoldier : MonoBehaviour
 
     private void Update()
     {
-        if (attackCooldown > 0f) attackCooldown -= Time.deltaTime;
         if (cooldownE > 0f) cooldownE -= Time.deltaTime;
         if (cooldownQ > 0f) cooldownQ -= Time.deltaTime;
 
@@ -142,7 +141,8 @@ public class FootSoldier : MonoBehaviour
     public void Attack()
     {
         if (aimingE || eBusy || aimingQ || qBusy) return;
-        if (attackCooldown > 0f || bulletPrefab == null) return;
+        if (Time.time < nextAttackTime || bulletPrefab == null ||
+            teamMember == null || teamMember.CurrentHeart <= 0f) return;
 
         TeamMember target = GetTargetUnderMouse(attackTargetLayers);
         if (target == null) return;
@@ -155,8 +155,8 @@ public class FootSoldier : MonoBehaviour
         SetAttackDirection(direction);
 
         // attackSpeed càng cao -> cooldown càng ngắn, animation chạy càng nhanh.
-        float attackSpeed = Mathf.Max(0.01f, stat != null ? stat.AttackSpeed : 1f);
-        attackCooldown = 1f / attackSpeed;
+        float attackSpeed = stat != null && stat.AttackSpeed > 0f ? stat.AttackSpeed : 1f;
+        nextAttackTime = Time.time + 1f / attackSpeed;
         SetFloatSafe(attackSpeedParam, attackSpeed);
         if (animator != null) animator.SetTrigger(attackTrigger);
 

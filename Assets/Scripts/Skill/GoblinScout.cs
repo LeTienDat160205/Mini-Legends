@@ -13,6 +13,11 @@ public class GoblinScout : MonoBehaviour
     [SerializeField] private TeamMember teamMember;
     [SerializeField] private Animator animator;
     [SerializeField] private Rigidbody2D body;
+    [Header("Audio")]
+    [SerializeField] private AudioSource sfxSource;
+    [SerializeField] private AudioClip skillESound;
+    [SerializeField] private AudioClip skillQSound;
+    [SerializeField] private AudioClip skillUnavailableSound;
 
     // =================================
     // NORMAL ATTACK
@@ -21,8 +26,7 @@ public class GoblinScout : MonoBehaviour
     [Header("Normal Attack")]
     [SerializeField] private string attackTrigger = "Attack";
 
-    private float attackCooldown;
-    private float cooldownTimer;
+    private float nextAttackTime;
     private Vector3 indicatorBaseScale;
 
     // =================================
@@ -64,6 +68,7 @@ public class GoblinScout : MonoBehaviour
 
     private static readonly int AttackX = Animator.StringToHash("AttackX");
     private static readonly int AttackY = Animator.StringToHash("AttackY");
+    private static readonly int AttackSpeed = Animator.StringToHash("AttackSpeed");
     private static readonly int AttackE = Animator.StringToHash("AttackE");
     private static readonly int AttackQ = Animator.StringToHash("AttackQ");
 
@@ -84,6 +89,10 @@ public class GoblinScout : MonoBehaviour
 
         if (body == null)
             body = GetComponent<Rigidbody2D>();
+        if (sfxSource == null) sfxSource = GetComponent<AudioSource>();
+        if (sfxSource == null) sfxSource = gameObject.AddComponent<AudioSource>();
+        sfxSource.playOnAwake = false;
+        sfxSource.spatialBlend = 0f;
 
         if (rangeIndicator == null)
             rangeIndicator = FindChild("RangeIndicator");
@@ -134,9 +143,6 @@ public class GoblinScout : MonoBehaviour
     private void Update()
     {
         // Giảm cooldown
-        if (cooldownTimer > 0f)
-            cooldownTimer -= Time.deltaTime;
-
         if (cooldownE > 0f)
             cooldownE -= Time.deltaTime;
 
@@ -180,7 +186,8 @@ public class GoblinScout : MonoBehaviour
 
     private void Attack()
     {
-        if (cooldownTimer > 0f || stat == null)
+        if (Time.time < nextAttackTime || stat == null ||
+            teamMember == null || teamMember.CurrentHeart <= 0f)
             return;
 
         TeamMember target = GetTargetUnderMouse();
@@ -201,17 +208,15 @@ public class GoblinScout : MonoBehaviour
 
         SetAttackDirection(target.transform.position);
 
+        float attackSpeed = stat.AttackSpeed > 0f ? stat.AttackSpeed : 1f;
+        if (animator != null) animator.SetFloat(AttackSpeed, attackSpeed);
         animator?.SetTrigger(attackTrigger);
 
         Debug.Log("Goblin Scout: Normal Attack!");
 
         // Tạm thời chưa xử lý sát thương
 
-        attackCooldown = stat.AttackSpeed > 0f
-            ? 1f / stat.AttackSpeed
-            : 1f;
-
-        cooldownTimer = attackCooldown;
+        nextAttackTime = Time.time + 1f / attackSpeed;
     }
 
     // =================================
@@ -220,6 +225,8 @@ public class GoblinScout : MonoBehaviour
 
     private void HandleSkillInput()
     {
+        if (Input.GetKeyDown(KeyCode.E) && cooldownE > 0f) PlaySound(skillUnavailableSound);
+        if (Input.GetKeyDown(KeyCode.Q) && cooldownQ > 0f) PlaySound(skillUnavailableSound);
         // Bắt đầu ngắm E
         if (Input.GetKeyDown(KeyCode.E) &&
             !aimingE && !aimingQ &&
@@ -338,6 +345,7 @@ public class GoblinScout : MonoBehaviour
 
         if (animator != null)
             animator.SetTrigger(AttackE);
+        PlaySound(skillESound);
 
         Debug.Log("Goblin Scout: Attack E!");
 
@@ -418,6 +426,7 @@ public class GoblinScout : MonoBehaviour
 
         if (animator != null)
             animator.SetTrigger(AttackQ);
+        PlaySound(skillQSound);
 
         Debug.Log("Goblin Scout: Attack Q!");
 
@@ -575,5 +584,10 @@ public class GoblinScout : MonoBehaviour
         }
 
         return null;
+    }
+
+    private void PlaySound(AudioClip clip)
+    {
+        if (sfxSource != null && clip != null) sfxSource.PlayOneShot(clip);
     }
 }

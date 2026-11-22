@@ -1,7 +1,36 @@
 using UnityEngine;
+using Unity.Cinemachine;
 
 public class SpawnArea : MonoBehaviour
 {
+    [SerializeField] private GameObject fallbackPlayerPrefab;
+    [SerializeField] private CinemachineCamera cmCamera;
+
+    private void Start()
+    {
+        TeamMember spawnTeam = GetComponent<TeamMember>();
+        if (spawnTeam == null) return;
+
+        ChampionData picked = ChampSelectResult.PickedChampion;
+        if (picked != null && spawnTeam.team != ChampSelectResult.PickedTeam) return;
+        if (picked == null && spawnTeam.team != Team.Blue) return;
+
+        GameObject prefab = picked != null ? picked.playerPrefab : fallbackPlayerPrefab;
+        if (prefab == null)
+        {
+            Debug.LogError("SpawnArea chưa có prefab của tướng đã chọn hoặc prefab dự phòng.", this);
+            return;
+        }
+
+        GameObject player = Instantiate(prefab, transform.position, Quaternion.identity);
+        TeamMember member = player.GetComponent<TeamMember>();
+        if (member != null) member.team = spawnTeam.team;
+        if (player.GetComponent<PlayerMovement>() == null)
+            player.AddComponent<PlayerMovement>();
+        PlaceFeet(player.transform);
+        if (cmCamera != null) cmCamera.Follow = player.transform;
+    }
+
     public static SpawnArea FindFor(Team team)
     {
         foreach (SpawnArea spawn in FindObjectsByType<SpawnArea>(FindObjectsSortMode.None))

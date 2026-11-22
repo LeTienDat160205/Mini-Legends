@@ -11,6 +11,10 @@ public class ShopManager : MonoBehaviour
     [SerializeField] private GameObject itemCardPrefab;
     [SerializeField] private Transform itemView;
     [SerializeField] private List<ItemData> items = new List<ItemData>();
+    [Header("Audio")]
+    [SerializeField] private AudioSource uiAudioSource;
+    [SerializeField] private AudioClip shopToggleSound;
+    [SerializeField] private AudioClip itemPurchaseSound;
     private readonly List<ItemCard> cards = new List<ItemCard>();
     private ItemCard selectedCard;
 
@@ -36,7 +40,17 @@ public class ShopManager : MonoBehaviour
 
     public void ToggleShop()
     {
-        if (shopPanel != null) shopPanel.SetActive(!shopPanel.activeSelf);
+        if (shopPanel == null) return;
+        shopPanel.SetActive(!shopPanel.activeSelf);
+        PlayUiSound(shopToggleSound);
+    }
+
+    // Call this after a purchase has actually succeeded.
+    public void PlayItemPurchaseSound() => PlayUiSound(itemPurchaseSound);
+
+    private void PlayUiSound(AudioClip clip)
+    {
+        if (uiAudioSource != null && clip != null) uiAudioSource.PlayOneShot(clip);
     }
 
     private void BuildCards()

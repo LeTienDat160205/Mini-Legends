@@ -1395,6 +1395,14 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::LoadingScreen
   gameSceneName: ARAM
+  blueAvatarFrames:
+  - {fileID: 1243051929}
+  - {fileID: 562951712}
+  - {fileID: 1512687969}
+  redAvatarFrames:
+  - {fileID: 1761708198}
+  - {fileID: 612665820}
+  - {fileID: 923021480}
   progressBar: {fileID: 0}
   progressText: {fileID: 0}
 --- !u!1 &519420028

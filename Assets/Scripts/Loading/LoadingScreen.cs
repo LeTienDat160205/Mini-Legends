@@ -9,10 +9,27 @@ public class LoadingScreen : MonoBehaviour
     public string gameSceneName = "ARAM";
     public Slider progressBar;
     public TMP_Text progressText;
+    [SerializeField] private Image[] blueAvatarFrames;
+    [SerializeField] private Image[] redAvatarFrames;
 
     void Start()
     {
+        ShowPickedChampion();
         StartCoroutine(LoadMatchAsync());
+    }
+
+    private void ShowPickedChampion()
+    {
+        ChampionData picked = ChampSelectResult.PickedChampion;
+        if (picked == null || picked.portrait == null) return;
+
+        Image[] frames = ChampSelectResult.PickedTeam == Team.Red ? redAvatarFrames : blueAvatarFrames;
+        int index = ChampSelectResult.PickedSlotIndex;
+        if (frames == null || index < 0 || index >= frames.Length || frames[index] == null) return;
+
+        frames[index].sprite = picked.portrait;
+        frames[index].preserveAspect = true;
+        frames[index].enabled = true;
     }
 
     IEnumerator LoadMatchAsync()

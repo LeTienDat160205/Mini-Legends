@@ -176,7 +176,7 @@ GameObject:
   - component: {fileID: 3908977338679696622}
   - component: {fileID: 7285605665572059019}
   - component: {fileID: 8584153245569114078}
-  m_Layer: 6
+  m_Layer: 9
   m_Name: CombatDrone
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -339,6 +339,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e9b98812633c1534bb7a37e6bb99bdb9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::TeamMember
+  respawnDelay: 5
   team: 1
 --- !u!114 &7285605665572059019
 MonoBehaviour:
@@ -383,7 +384,7 @@ BoxCollider2D:
   m_CallbackLayers:
     serializedVersion: 2
     m_Bits: 4294967295
-  m_IsTrigger: 1
+  m_IsTrigger: 0
   m_UsedByEffector: 0
   m_CompositeOperation: 0
   m_CompositeOrder: 0
