@@ -318,3 +318,5 @@ Starting Unity Data Store Application
 0x00007ff994f9dda7 (KERNEL32) BaseThreadInitThunk
 0x00007ff997399c6c (ntdll) RtlUserThreadStart
 
+Unity Data Store Application Complete
+Shut down UDS service system complete

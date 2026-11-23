@@ -98,8 +98,13 @@ public class Minion : MonoBehaviour
                     animator.SetFloat(AttackY, lastDirection.y);
                     animator.SetTrigger(Attack);
                 }
-                destination.SendMessageUpwards("TakeDamage", stat != null ? stat.Attack : damage,
-                    SendMessageOptions.DontRequireReceiver);
+                float hitDamage = stat != null ? stat.Attack : damage;
+                Minion targetMinion = destination.GetComponent<Minion>();
+                TeamMember targetMember = destination.GetComponent<TeamMember>();
+                Nexus targetNexus = destination.GetComponent<Nexus>();
+                if (targetMinion != null) targetMinion.TakeDamage(hitDamage, gameObject);
+                else if (targetNexus != null) targetNexus.TakeDamage(hitDamage);
+                else if (targetMember != null) targetMember.TakeDamage(hitDamage, gameObject);
                 float speed = stat != null && stat.AttackSpeed > 0f ? stat.AttackSpeed : attacksPerSecond;
                 nextAttackTime = Time.time + 1f / Mathf.Max(0.01f, speed);
             }
@@ -164,11 +169,18 @@ public class Minion : MonoBehaviour
 
     public void TakeDamage(float amount)
     {
+        TakeDamage(amount, null);
+    }
+
+    public void TakeDamage(float amount, GameObject attacker)
+    {
         if (amount <= 0f || currentHealth <= 0f) return;
         currentHealth = Mathf.Max(0f, currentHealth - amount);
         RefreshHealthBar();
         if (currentHealth <= 0f)
         {
+            if (attacker != null)
+                attacker.GetComponent<Level_Gold>()?.GrantKillReward(gameObject);
             if (bodyCollider != null) bodyCollider.enabled = false;
             if (body != null) body.linearVelocity = Vector2.zero;
             float deathDuration = 1f;

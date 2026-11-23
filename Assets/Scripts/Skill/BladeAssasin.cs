@@ -40,6 +40,7 @@ public class BladeAssasin : MonoBehaviour
     private readonly HashSet<Minion> minionsInRange = new HashSet<Minion>();
     private readonly Dictionary<TeamMember, GameObject> highlights = new Dictionary<TeamMember, GameObject>();
     private readonly HashSet<TeamMember> dashTargetsHit = new HashSet<TeamMember>();
+    private readonly HashSet<Minion> dashMinionsHit = new HashSet<Minion>();
     private static readonly int AttackX = Animator.StringToHash("AttackX");
     private static readonly int AttackY = Animator.StringToHash("AttackY");
     private static readonly int AttackSpeed = Animator.StringToHash("AttackSpeed");
@@ -111,6 +112,7 @@ public class BladeAssasin : MonoBehaviour
         dashBusy = false;
         qBusy = false;
         dashTargetsHit.Clear();
+        dashMinionsHit.Clear();
         if (eDashHitBox != null) eDashHitBox.SetActive(false);
         if (qRangeIndicator != null) qRangeIndicator.SetActive(false);
     }
@@ -192,10 +194,9 @@ public class BladeAssasin : MonoBehaviour
         animator?.SetTrigger(attackTrigger);
         PlaySound(attackSound);
         foreach (TeamMember enemy in enemiesInRange)
-            enemy.SendMessageUpwards("TakeDamage", stat != null ? stat.Attack : 0f,
-                SendMessageOptions.DontRequireReceiver);
+            enemy.TakeDamage(stat != null ? stat.Attack : 0f, gameObject);
         foreach (Minion minion in minionsInRange)
-            minion.TakeDamage(stat != null ? stat.Attack : 0f);
+            minion.TakeDamage(stat != null ? stat.Attack : 0f, gameObject);
     }
 
     private void SetAttackDirectionFromMouse()
@@ -352,9 +353,16 @@ public class BladeAssasin : MonoBehaviour
             int count = areaCollider.Overlap(filter, hits);
             for (int i = 0; i < count; i++)
             {
+                Minion minion = hits[i] != null ? hits[i].GetComponentInParent<Minion>() : null;
+                if (minion != null)
+                {
+                    if (minion.Team != teamMember.team)
+                        minion.TakeDamage(stat != null ? stat.Attack * qDamageMultiplier : 0f, gameObject);
+                    continue;
+                }
                 TeamMember target = hits[i] != null ? hits[i].GetComponentInParent<TeamMember>() : null;
                 if (target == null || target == teamMember || !teamMember.IsEnemy(target)) continue;
-                target.SendMessageUpwards("TakeDamage", stat != null ? stat.Attack * qDamageMultiplier : 0f, SendMessageOptions.DontRequireReceiver);
+                target.TakeDamage(stat != null ? stat.Attack * qDamageMultiplier : 0f, gameObject);
             }
         }
     }
@@ -396,6 +404,7 @@ public class BladeAssasin : MonoBehaviour
     {
         aimingE = false;
         dashTargetsHit.Clear();
+        dashMinionsHit.Clear();
         if (eDashHitBox != null) eDashHitBox.SetActive(false);
     }
 
@@ -403,6 +412,7 @@ public class BladeAssasin : MonoBehaviour
     {
         dashBusy = true;
         dashTargetsHit.Clear();
+        dashMinionsHit.Clear();
         SetAttackDirection(direction);
         animator?.SetTrigger(AttackE);
         PlaySound(skillESound);
@@ -448,9 +458,16 @@ public class BladeAssasin : MonoBehaviour
             int count = hitBoxCollider.Overlap(filter, hits);
             for (int i = 0; i < count; i++)
             {
+                Minion minion = hits[i] != null ? hits[i].GetComponentInParent<Minion>() : null;
+                if (minion != null)
+                {
+                    if (minion.Team != teamMember.team && dashMinionsHit.Add(minion))
+                        minion.TakeDamage(stat != null ? stat.Attack * dashDamageMultiplier : 0f, gameObject);
+                    continue;
+                }
                 TeamMember target = hits[i] != null ? hits[i].GetComponentInParent<TeamMember>() : null;
                 if (target == null || target == teamMember || !teamMember.IsEnemy(target) || !dashTargetsHit.Add(target)) continue;
-                target.SendMessageUpwards("TakeDamage", stat != null ? stat.Attack * dashDamageMultiplier : 0f, SendMessageOptions.DontRequireReceiver);
+                target.TakeDamage(stat != null ? stat.Attack * dashDamageMultiplier : 0f, gameObject);
             }
         }
     }

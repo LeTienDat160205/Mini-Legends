@@ -63,7 +63,7 @@ public class Bullet : MonoBehaviour
         // Nếu đạn có mục tiêu cụ thể (đạn đuổi) thì chỉ trúng đúng mục tiêu đó.
         if (target != null && hit.transform != target && !hit.transform.IsChildOf(target)) return;
 
-        hit.SendMessageUpwards("TakeDamage", damage, SendMessageOptions.DontRequireReceiver);
+        hit.TakeDamage(damage, owner.gameObject);
 
         if (destroyOnHit)
             Destroy(gameObject);
