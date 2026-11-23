@@ -13,8 +13,15 @@ public class GoblinScout : MonoBehaviour
     [SerializeField] private TeamMember teamMember;
     [SerializeField] private Animator animator;
     [SerializeField] private Rigidbody2D body;
+    [SerializeField] private CapsuleCollider2D playerCollider;
+
+    // =================================
+    // AUDIO
+    // =================================
+
     [Header("Audio")]
     [SerializeField] private AudioSource sfxSource;
+    [SerializeField] private AudioClip attackSoud;
     [SerializeField] private AudioClip skillESound;
     [SerializeField] private AudioClip skillQSound;
     [SerializeField] private AudioClip skillUnavailableSound;
@@ -26,7 +33,8 @@ public class GoblinScout : MonoBehaviour
     [Header("Normal Attack")]
     [SerializeField] private string attackTrigger = "Attack";
 
-    private float nextAttackTime;
+    private float attackCooldown;
+    private float cooldownTimer;
     private Vector3 indicatorBaseScale;
 
     // =================================
@@ -36,12 +44,11 @@ public class GoblinScout : MonoBehaviour
     [Header("Skill E")]
     [SerializeField] private GameObject attackE;
     [SerializeField] private GameObject eDamageHitBox;
-    [SerializeField] private float eRange = 2.5f;
 
     private bool aimingE;
     private bool castingE;
     private float cooldownE;
-    private Vector2 eDirection;
+    private Vector2 eDirection = Vector2.right;
 
     // =================================
     // SKILL Q
@@ -52,11 +59,14 @@ public class GoblinScout : MonoBehaviour
     [SerializeField] private GameObject qRangeIndicator;
     [SerializeField] private GameObject qHitBox;
     [SerializeField] private GameObject qDamageHitBox;
-
     [SerializeField] private float jumpRange = 5f;
     [SerializeField] private float jumpDuration = 0.4f;
     [SerializeField] private float jumpHeight = 1.5f;
-
+    [SerializeField] private LayerMask ignoreDuringQ;
+    [SerializeField] private LayerMask structureLayer;
+    [SerializeField] private float landingCheckStep = 0.1f;
+    [SerializeField] private float landingCheckRadius = 0.3f;
+    [SerializeField] private int maxLandingAttempts = 30;
     private bool aimingQ;
     private bool castingQ;
     private float cooldownQ;
@@ -68,7 +78,6 @@ public class GoblinScout : MonoBehaviour
 
     private static readonly int AttackX = Animator.StringToHash("AttackX");
     private static readonly int AttackY = Animator.StringToHash("AttackY");
-    private static readonly int AttackSpeed = Animator.StringToHash("AttackSpeed");
     private static readonly int AttackE = Animator.StringToHash("AttackE");
     private static readonly int AttackQ = Animator.StringToHash("AttackQ");
 
@@ -89,8 +98,13 @@ public class GoblinScout : MonoBehaviour
 
         if (body == null)
             body = GetComponent<Rigidbody2D>();
-        if (sfxSource == null) sfxSource = GetComponent<AudioSource>();
-        if (sfxSource == null) sfxSource = gameObject.AddComponent<AudioSource>();
+
+        if (sfxSource == null)
+            sfxSource = GetComponent<AudioSource>();
+
+        if (sfxSource == null)
+            sfxSource = gameObject.AddComponent<AudioSource>();
+
         sfxSource.playOnAwake = false;
         sfxSource.spatialBlend = 0f;
 
@@ -102,6 +116,9 @@ public class GoblinScout : MonoBehaviour
 
         if (eDamageHitBox == null)
             eDamageHitBox = FindChild("E_DamageHitBox");
+
+        if (playerCollider == null)
+            playerCollider = GetComponent<CapsuleCollider2D>();
 
         if (attackQ == null)
             attackQ = FindChild("AttackQ");
@@ -121,45 +138,33 @@ public class GoblinScout : MonoBehaviour
             rangeIndicator.SetActive(false);
         }
 
-        if (attackE != null)
-            attackE.SetActive(false);
-
-        if (eDamageHitBox != null)
-            eDamageHitBox.SetActive(false);
-
-        if (attackQ != null)
-            attackQ.SetActive(false);
-
-        if (qRangeIndicator != null)
-            qRangeIndicator.SetActive(false);
-
-        if (qHitBox != null)
-            qHitBox.SetActive(false);
-
-        if (qDamageHitBox != null)
-            qDamageHitBox.SetActive(false);
+        SetActiveIfAssigned(attackE, false);
+        SetActiveIfAssigned(eDamageHitBox, false);
+        SetActiveIfAssigned(attackQ, false);
+        SetActiveIfAssigned(qRangeIndicator, false);
+        SetActiveIfAssigned(qHitBox, false);
+        SetActiveIfAssigned(qDamageHitBox, false);
     }
 
     private void Update()
     {
-        // Giảm cooldown
+        if (cooldownTimer > 0f)
+            cooldownTimer -= Time.deltaTime;
+
         if (cooldownE > 0f)
             cooldownE -= Time.deltaTime;
 
         if (cooldownQ > 0f)
             cooldownQ -= Time.deltaTime;
 
-        // Xử lý input kỹ năng
         HandleSkillInput();
 
-        // Chỉ cập nhật vùng ngắm khi đang giữ/ngắm kỹ năng
         if (aimingE)
             UpdateEAim();
 
         if (aimingQ)
             UpdateQAim();
 
-        // Không đánh thường khi đang ngắm hoặc thi triển kỹ năng
         if (aimingE || aimingQ || castingE || castingQ)
         {
             if (rangeIndicator != null)
@@ -168,11 +173,10 @@ public class GoblinScout : MonoBehaviour
             return;
         }
 
-        // Hiển thị tầm đánh khi giữ chuột
-        bool aiming = Input.GetMouseButton(0);
+        bool aimingNormalAttack = Input.GetMouseButton(0);
 
         if (rangeIndicator != null)
-            rangeIndicator.SetActive(aiming);
+            rangeIndicator.SetActive(aimingNormalAttack);
 
         UpdateRangeIndicator();
 
@@ -186,8 +190,7 @@ public class GoblinScout : MonoBehaviour
 
     private void Attack()
     {
-        if (Time.time < nextAttackTime || stat == null ||
-            teamMember == null || teamMember.CurrentHeart <= 0f)
+        if (cooldownTimer > 0f || stat == null)
             return;
 
         TeamMember target = GetTargetUnderMouse();
@@ -207,16 +210,21 @@ public class GoblinScout : MonoBehaviour
             return;
 
         SetAttackDirection(target.transform.position);
-
-        float attackSpeed = stat.AttackSpeed > 0f ? stat.AttackSpeed : 1f;
-        if (animator != null) animator.SetFloat(AttackSpeed, attackSpeed);
         animator?.SetTrigger(attackTrigger);
+        PlaySound(attackSoud);
 
-        Debug.Log("Goblin Scout: Normal Attack!");
+        // Tạm thời giữ cách gây sát thương đánh thường như bản hiện tại.
+        target.SendMessageUpwards(
+            "TakeDamage",
+            stat.Attack,
+            SendMessageOptions.DontRequireReceiver
+        );
 
-        // Tạm thời chưa xử lý sát thương
+        attackCooldown = stat.AttackSpeed > 0f
+            ? 1f / stat.AttackSpeed
+            : 1f;
 
-        nextAttackTime = Time.time + 1f / attackSpeed;
+        cooldownTimer = attackCooldown;
     }
 
     // =================================
@@ -225,43 +233,38 @@ public class GoblinScout : MonoBehaviour
 
     private void HandleSkillInput()
     {
-        if (Input.GetKeyDown(KeyCode.E) && cooldownE > 0f) PlaySound(skillUnavailableSound);
-        if (Input.GetKeyDown(KeyCode.Q) && cooldownQ > 0f) PlaySound(skillUnavailableSound);
-        // Bắt đầu ngắm E
         if (Input.GetKeyDown(KeyCode.E) &&
-            !aimingE && !aimingQ &&
-            !castingE && !castingQ &&
-            cooldownE <= 0f)
+            !aimingE && !aimingQ && !castingE && !castingQ)
         {
-            aimingE = true;
-
-            if (attackE != null)
-                attackE.SetActive(true);
-
-            UpdateEAim();
+            if (cooldownE > 0f)
+            {
+                PlaySound(skillUnavailableSound);
+            }
+            else
+            {
+                aimingE = true;
+                SetActiveIfAssigned(attackE, true);
+                UpdateEAim();
+            }
         }
 
-        // Bắt đầu ngắm Q
         if (Input.GetKeyDown(KeyCode.Q) &&
-            !aimingE && !aimingQ &&
-            !castingE && !castingQ &&
-            cooldownQ <= 0f)
+            !aimingE && !aimingQ && !castingE && !castingQ)
         {
-            aimingQ = true;
-
-            if (attackQ != null)
-                attackQ.SetActive(true);
-
-            if (qRangeIndicator != null)
-                qRangeIndicator.SetActive(true);
-
-            if (qHitBox != null)
-                qHitBox.SetActive(true);
-
-            UpdateQAim();
+            if (cooldownQ > 0f)
+            {
+                PlaySound(skillUnavailableSound);
+            }
+            else
+            {
+                aimingQ = true;
+                SetActiveIfAssigned(attackQ, true);
+                SetActiveIfAssigned(qRangeIndicator, true);
+                SetActiveIfAssigned(qHitBox, true);
+                UpdateQAim();
+            }
         }
 
-        // Click chuột trái để hủy kỹ năng
         if (Input.GetMouseButtonDown(0))
         {
             if (aimingE)
@@ -277,11 +280,9 @@ public class GoblinScout : MonoBehaviour
             }
         }
 
-        // Thả E để thực hiện kỹ năng
         if (Input.GetKeyUp(KeyCode.E) && aimingE)
             PerformE();
 
-        // Thả Q để thực hiện kỹ năng
         if (Input.GetKeyUp(KeyCode.Q) && aimingQ)
             PerformQ();
     }
@@ -295,36 +296,25 @@ public class GoblinScout : MonoBehaviour
         if (attackE == null || Camera.main == null)
             return;
 
-        Vector2 mousePosition = GetMouseWorldPosition();
-
-        Vector2 direction =
-            mousePosition - (Vector2)transform.position;
+        Vector2 direction = GetMouseWorldPosition() - (Vector2)transform.position;
 
         if (direction.sqrMagnitude < 0.001f)
             return;
 
         eDirection = direction.normalized;
 
-        float angle = Mathf.Atan2(
-            eDirection.y,
-            eDirection.x
-        ) * Mathf.Rad2Deg;
+        float angle = Mathf.Atan2(eDirection.y, eDirection.x) * Mathf.Rad2Deg;
 
-        // Không ghi đè vị trí local đã chỉnh trong Inspector
+        // AttackE là tâm xoay; E_Indicator là object con được offset sang phải trong Inspector.
         attackE.transform.localPosition = new Vector3(0f, -0.8f, 0f);
-
-        attackE.transform.rotation =
-            Quaternion.Euler(0f, 0f, angle);
+        attackE.transform.rotation = Quaternion.Euler(0f, 0f, angle);
     }
 
     private void CancelE()
     {
         aimingE = false;
-
-        if (attackE != null)
-            attackE.SetActive(false);
-
-        Debug.Log("Skill E cancelled!");
+        SetActiveIfAssigned(attackE, false);
+        Debug.Log("Skill E cancelled.");
     }
 
     private void PerformE()
@@ -332,74 +322,87 @@ public class GoblinScout : MonoBehaviour
         if (!aimingE)
             return;
 
-        // Cập nhật lần cuối để lấy đúng hướng tại thời điểm thả E
         UpdateEAim();
 
         aimingE = false;
         castingE = true;
 
-        if (attackE != null)
-            attackE.SetActive(false);
-
+        SetActiveIfAssigned(attackE, false);
         SetAttackDirection(eDirection);
-
-        if (animator != null)
-            animator.SetTrigger(AttackE);
+        animator?.SetTrigger(AttackE);
         PlaySound(skillESound);
 
-        Debug.Log("Goblin Scout: Attack E!");
+        Debug.Log("Goblin Scout: Skill E!");
 
-        // Tạm thời chờ animation hoàn thành
-        Invoke(nameof(FinishE), 1f);
+        // Chưa kích hoạt hitbox gây sát thương vì hệ thống damage kỹ năng chưa hoàn thiện.
+        Invoke(nameof(FinishE), GetAnimationLengthOrDefault("AttackE", 1f));
     }
 
     private void FinishE()
     {
         castingE = false;
-
-        if (eDamageHitBox != null)
-            eDamageHitBox.SetActive(false);
+        SetActiveIfAssigned(eDamageHitBox, false);
 
         cooldownE = stat != null && stat.Data != null
             ? stat.Data.cooldownE
             : 1f;
-
-        Debug.Log("Skill E finished!");
     }
 
     // =================================
-    // SKILL Q - JUMP ATTACK
+    // SKILL Q - JUMP AIM
     // =================================
 
     private void UpdateQAim()
     {
-        Vector2 mousePosition = GetMouseWorldPosition();
-        Vector2 direction = mousePosition - (Vector2)transform.position;
+        if (Camera.main == null)
+            return;
 
-        // Giới hạn khoảng cách nhảy
-        if (direction.magnitude > jumpRange)
-            direction = direction.normalized * jumpRange;
+        Vector2 direction = GetMouseWorldPosition() - (Vector2)transform.position;
+        direction = Vector2.ClampMagnitude(direction, jumpRange);
 
-        qTargetPosition = (Vector2)transform.position + direction;
+        Vector2 targetPosition = (Vector2)transform.position + direction;
 
-        if (qHitBox != null)
-            qHitBox.transform.position = qTargetPosition;
+        bool blocked = false;
+
+        if (playerCollider != null)
+        {
+            Vector2 checkPosition = targetPosition +
+                (Vector2)playerCollider.offset;
+
+            Vector2 checkSize = Vector2.Scale(
+                playerCollider.size,
+                playerCollider.transform.lossyScale
+            );
+
+            Collider2D structure = Physics2D.OverlapCapsule(
+                checkPosition,
+                checkSize,
+                playerCollider.direction,
+                playerCollider.transform.eulerAngles.z,
+                structureLayer
+            );
+
+            blocked = structure != null;
+        }
+
+        if (!blocked)
+        {
+            qTargetPosition = targetPosition;
+
+            if (qHitBox != null)
+                qHitBox.transform.position = qTargetPosition;
+        }
     }
 
     private void CancelQ()
     {
         aimingQ = false;
 
-        if (attackQ != null)
-            attackQ.SetActive(false);
+        SetActiveIfAssigned(attackQ, false);
+        SetActiveIfAssigned(qRangeIndicator, false);
+        SetActiveIfAssigned(qHitBox, false);
 
-        if (qRangeIndicator != null)
-            qRangeIndicator.SetActive(false);
-
-        if (qHitBox != null)
-            qHitBox.SetActive(false);
-
-        Debug.Log("Skill Q cancelled!");
+        Debug.Log("Skill Q cancelled.");
     }
 
     private void PerformQ()
@@ -407,53 +410,152 @@ public class GoblinScout : MonoBehaviour
         if (!aimingQ)
             return;
 
-        // Cập nhật lần cuối để lấy đúng vị trí tại thời điểm thả Q
         UpdateQAim();
+
+        qTargetPosition = GetSafeQLandingPosition(qTargetPosition);
 
         aimingQ = false;
 
-        if (attackQ != null)
-            attackQ.SetActive(false);
-
-        if (qRangeIndicator != null)
-            qRangeIndicator.SetActive(false);
-
-        if (qHitBox != null)
-            qHitBox.SetActive(false);
+        SetActiveIfAssigned(attackQ, false);
+        SetActiveIfAssigned(qRangeIndicator, false);
+        SetActiveIfAssigned(qHitBox, false);
 
         Vector2 direction = qTargetPosition - (Vector2)transform.position;
         SetAttackDirection(direction);
 
-        if (animator != null)
-            animator.SetTrigger(AttackQ);
+        animator?.SetTrigger(AttackQ);
         PlaySound(skillQSound);
 
-        Debug.Log("Goblin Scout: Attack Q!");
+        Debug.Log("Goblin Scout: Skill Q!");
 
         StartCoroutine(JumpToTarget());
     }
+    private Vector2 GetSafeQLandingPosition(Vector2 target)
+    {
+        if (playerCollider == null)
+            return target;
 
+        // Nếu vị trí hiện tại không bị Structure chiếm, giữ nguyên.
+        if (!IsBlockedByStructure(target))
+            return target;
+
+        Vector2 direction = target - (Vector2)transform.position;
+
+        // Thử lùi dần từ điểm Q về phía Goblin.
+        for (int i = 1; i <= maxLandingAttempts; i++)
+        {
+            float distance = i * landingCheckStep;
+
+            Vector2 candidate = target - direction.normalized * distance;
+
+            if (!IsBlockedByStructure(candidate))
+                return candidate;
+        }
+
+        // Nếu không tìm được vị trí trống, giữ nguyên vị trí hiện tại.
+        return transform.position;
+    }
+    private void SetQCollision(bool ignore)
+    {
+        Collider2D[] ownColliders = GetComponents<Collider2D>();
+
+        Collider2D[] targets = FindObjectsByType<Collider2D>(
+            FindObjectsSortMode.None
+        );
+
+        foreach (Collider2D own in ownColliders)
+        {
+            foreach (Collider2D target in targets)
+            {
+                if (target == null || target == own)
+                    continue;
+
+                // Bỏ qua Collider thuộc chính Goblin
+                if (target.transform.IsChildOf(transform))
+                    continue;
+
+                if (target.transform.root == transform.root)
+                    continue;
+
+                // Chỉ xử lý các Layer được chọn trong Ignore During Q
+                if (((1 << target.gameObject.layer) & ignoreDuringQ) == 0)
+                    continue;
+
+                if (ignore)
+                {
+                    // Bắt đầu Q: bỏ qua va chạm
+                    Physics2D.IgnoreCollision(own, target, true);
+                }
+                else
+                {
+                    // Kết thúc Q: khôi phục khi hai Collider đã tách nhau
+                    StartCoroutine(
+                        RestoreCollisionWhenSeparated(own, target)
+                    );
+                }
+            }
+        }
+    }
+
+    private bool IsBlockedByStructure(Vector2 position)
+    {
+        Vector2 checkPosition = position +
+            (Vector2)playerCollider.transform.TransformVector(playerCollider.offset);
+
+        Vector2 checkSize = Vector2.Scale(
+            playerCollider.size,
+            playerCollider.transform.lossyScale
+        );
+
+        Collider2D structure = Physics2D.OverlapCapsule(
+            checkPosition,
+            checkSize,
+            playerCollider.direction,
+            playerCollider.transform.eulerAngles.z,
+            structureLayer
+        );
+
+        return structure != null;
+    }
+    private IEnumerator RestoreCollisionWhenSeparated(
+    Collider2D own,
+    Collider2D target)
+    {
+        while (own != null && target != null)
+        {
+            if (!Physics2D.Distance(own, target).isOverlapped)
+                break;
+
+            yield return new WaitForFixedUpdate();
+        }
+
+        if (own != null && target != null)
+            Physics2D.IgnoreCollision(own, target, false);
+    }
     private IEnumerator JumpToTarget()
     {
         castingQ = true;
+        SetQCollision(true);
 
         Vector2 startPosition = transform.position;
         Vector2 endPosition = qTargetPosition;
-
         float elapsed = 0f;
+
+        bool hadBody = body != null;
+        bool previousSimulated = false;
+
+        if (hadBody)
+        {
+            previousSimulated = body.simulated;
+            body.simulated = false;
+        }
 
         while (elapsed < jumpDuration)
         {
             elapsed += Time.deltaTime;
-
             float progress = Mathf.Clamp01(elapsed / jumpDuration);
 
-            Vector2 position = Vector2.Lerp(
-                startPosition,
-                endPosition,
-                progress
-            );
-
+            Vector2 position = Vector2.Lerp(startPosition, endPosition, progress);
             float height = Mathf.Sin(progress * Mathf.PI) * jumpHeight;
 
             transform.position = new Vector3(
@@ -471,18 +573,25 @@ public class GoblinScout : MonoBehaviour
             transform.position.z
         );
 
-        Debug.Log("Goblin Scout: Q landed!");
+        if (hadBody)
+        {
+            body.simulated = previousSimulated;
+            body.linearVelocity = Vector2.zero;
+            body.angularVelocity = 0f;
+            body.WakeUp();
+        }
+        SetQCollision(false);
 
-        if (qDamageHitBox != null)
-            qDamageHitBox.SetActive(false);
-
+        SetActiveIfAssigned(qDamageHitBox, false);
+       
         castingQ = false;
+        
 
         cooldownQ = stat != null && stat.Data != null
             ? stat.Data.cooldownQ
             : 5f;
 
-        Debug.Log("Skill Q finished!");
+        Debug.Log("Goblin Scout: Skill Q landed.");
     }
 
     // =================================
@@ -494,12 +603,10 @@ public class GoblinScout : MonoBehaviour
         if (Camera.main == null)
             return null;
 
-        Vector3 mousePosition =
-            Camera.main.ScreenToWorldPoint(Input.mousePosition);
-
-        Vector2 mouseWorldPosition = mousePosition;
-
-        Collider2D hit = Physics2D.OverlapPoint(mouseWorldPosition);
+        Vector3 mousePosition = Camera.main.ScreenToWorldPoint(Input.mousePosition);
+        Collider2D hit = Physics2D.OverlapPoint(
+            new Vector2(mousePosition.x, mousePosition.y)
+        );
 
         if (hit == null)
             return null;
@@ -513,10 +620,7 @@ public class GoblinScout : MonoBehaviour
 
     private void SetAttackDirection(Vector3 targetPosition)
     {
-        Vector2 direction =
-            (Vector2)(targetPosition - transform.position);
-
-        SetAttackDirection(direction);
+        SetAttackDirection((Vector2)(targetPosition - transform.position));
     }
 
     private void SetAttackDirection(Vector2 direction)
@@ -525,7 +629,6 @@ public class GoblinScout : MonoBehaviour
             return;
 
         direction.Normalize();
-
         animator.SetFloat(AttackX, direction.x);
         animator.SetFloat(AttackY, direction.y);
     }
@@ -539,21 +642,13 @@ public class GoblinScout : MonoBehaviour
         if (Camera.main == null)
             return transform.position;
 
-        Vector3 mouseScreen = Input.mousePosition;
-
-        mouseScreen.z = Mathf.Abs(
+        Vector3 screenPosition = Input.mousePosition;
+        screenPosition.z = Mathf.Abs(
             Camera.main.transform.position.z - transform.position.z
         );
 
-        Vector3 mouseWorld =
-            Camera.main.ScreenToWorldPoint(mouseScreen);
-
-        return mouseWorld;
-    }
-
-    private Vector2 GetMouseDirection()
-    {
-        return GetMouseWorldPosition() - (Vector2)transform.position;
+        Vector3 worldPosition = Camera.main.ScreenToWorldPoint(screenPosition);
+        return new Vector2(worldPosition.x, worldPosition.y);
     }
 
     // =================================
@@ -565,15 +660,43 @@ public class GoblinScout : MonoBehaviour
         if (rangeIndicator == null || stat == null)
             return;
 
-        float attackRange = stat.AttackRange;
-
         rangeIndicator.transform.localScale =
-            indicatorBaseScale * Mathf.Max(0.01f, attackRange);
+            indicatorBaseScale * Mathf.Max(0.01f, stat.AttackRange);
     }
 
     // =================================
-    // COMMON
+    // AUDIO
     // =================================
+
+    private void PlaySound(AudioClip clip)
+    {
+        if (sfxSource != null && clip != null)
+            sfxSource.PlayOneShot(clip);
+    }
+
+    // =================================
+    // HELPERS
+    // =================================
+
+    private float GetAnimationLengthOrDefault(string stateName, float defaultLength)
+    {
+        if (animator == null || animator.runtimeAnimatorController == null)
+            return defaultLength;
+
+        foreach (AnimationClip clip in animator.runtimeAnimatorController.animationClips)
+        {
+            if (clip != null && clip.name == stateName)
+                return clip.length;
+        }
+
+        return defaultLength;
+    }
+
+    private void SetActiveIfAssigned(GameObject obj, bool active)
+    {
+        if (obj != null)
+            obj.SetActive(active);
+    }
 
     private GameObject FindChild(string childName)
     {
@@ -584,10 +707,5 @@ public class GoblinScout : MonoBehaviour
         }
 
         return null;
-    }
-
-    private void PlaySound(AudioClip clip)
-    {
-        if (sfxSource != null && clip != null) sfxSource.PlayOneShot(clip);
     }
 }
