@@ -1,6 +1,7 @@
 using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
+using UnityEngine.Events;
 using UnityEngine.UI;
 
 public class ShopManager : MonoBehaviour
@@ -11,24 +12,44 @@ public class ShopManager : MonoBehaviour
     [SerializeField] private GameObject itemCardPrefab;
     [SerializeField] private Transform itemView;
     [SerializeField] private List<ItemData> items = new List<ItemData>();
+    [Header("Buy")]
+    [SerializeField] private Button buyButton;
+    [SerializeField] private TMP_Text buyButtonText;     // Chữ trên nút Mua (tự tìm nếu để trống)
+    [SerializeField] private string buyLabel = "Mua";
+    [SerializeField] private string upgradeLabel = "Nâng cấp";
+    public UnityEvent<ItemData> onItemPurchased;          // Nối với kho đồ / cộng chỉ số cho người chơi
+    public event System.Action<ItemData, int> ItemPurchased;   // (món, phẩm vừa mua) cho script khác đăng ký
     [Header("Audio")]
     [SerializeField] private AudioSource uiAudioSource;
     [SerializeField] private AudioClip shopToggleSound;
     [SerializeField] private AudioClip itemPurchaseSound;
     private readonly List<ItemCard> cards = new List<ItemCard>();
     private ItemCard selectedCard;
+    private int lastBuyFrame = -1;
+    private readonly HashSet<ItemData> ownedItems = new HashSet<ItemData>();   // Món đã mua ít nhất một lần
+    private readonly HashSet<ItemData> maxedItems = new HashSet<ItemData>();   // Món đã mua đến phẩm cao nhất
 
     private void Awake()
     {
         if (shopButton != null) shopButton.onClick.AddListener(ToggleShop);
+        if (buyButton != null)
+        {
+            buyButton.onClick.AddListener(BuyItem);
+            if (buyButtonText == null) buyButtonText = buyButton.GetComponentInChildren<TMP_Text>(true);
+        }
         if (shopPanel != null) shopPanel.SetActive(false);
     }
 
-    private void Start() => BuildCards();
+    private void Start()
+    {
+        BuildCards();
+        RefreshBuyButton();
+    }
 
     private void OnDestroy()
     {
         if (shopButton != null) shopButton.onClick.RemoveListener(ToggleShop);
+        if (buyButton != null) buyButton.onClick.RemoveListener(BuyItem);
         foreach (ItemCard card in cards)
             if (card != null) card.Clicked -= OnCardClicked;
     }
@@ -43,6 +64,69 @@ public class ShopManager : MonoBehaviour
         if (shopPanel == null) return;
         shopPanel.SetActive(!shopPanel.activeSelf);
         PlayUiSound(shopToggleSound);
+    }
+
+    // Chỉ đóng (không mở lại nếu đang đóng): dùng cho nút Thoát.
+    public void CloseShop()
+    {
+        if (shopPanel == null || !shopPanel.activeSelf) return;
+        shopPanel.SetActive(false);
+        PlayUiSound(shopToggleSound);
+    }
+
+    // ------------------------------------------------------------------
+    // Mua đồ
+    // ------------------------------------------------------------------
+
+    // Gắn vào Buy Button (script tự đăng ký click, không cần gắn OnClick trong Inspector).
+    // Chưa tính tiền. Mua xong, thẻ đang chọn chuyển sang phẩm kế tiếp của chính món đó.
+    public void BuyItem()
+    {
+        if (selectedCard == null || selectedCard.Data == null) return;
+
+        ItemData item = selectedCard.Data;
+        if (maxedItems.Contains(item)) return;   // Đã nâng đến cấp cao nhất
+
+        // Chặn gọi đôi: nếu hàm bị gọi hai lần trong cùng một frame thì bỏ qua lần sau.
+        if (lastBuyFrame == Time.frameCount) return;
+        lastBuyFrame = Time.frameCount;
+
+        int boughtTier = selectedCard.TierIndex;
+        PlayItemPurchaseSound();
+        ownedItems.Add(item);   // Đã mua món này: các lần sau là Nâng cấp
+        onItemPurchased?.Invoke(item);
+        ItemPurchased?.Invoke(item, boughtTier);
+
+        if (boughtTier < item.MaxTierIndex)
+        {
+            selectedCard.SetTier(boughtTier + 1);
+            ShowItem(item, boughtTier + 1);
+        }
+        else
+        {
+            maxedItems.Add(item);
+                                // Vừa mua phẩm cao nhất: khoá nút
+        }
+
+        RefreshBuyButton();
+    }
+
+    // Bật nút khi đã chọn món; khoá khi món đã đến phẩm cao nhất; đổi chữ Mua / Nâng cấp.
+    private void RefreshBuyButton()
+    {
+        if (buyButton == null) return;
+
+        bool hasItem = selectedCard != null && selectedCard.Data != null;
+        bool maxed = hasItem && maxedItems.Contains(selectedCard.Data);
+        buyButton.gameObject.SetActive(!maxed);
+        buyButton.interactable = hasItem && !maxed;
+
+
+        if (buyButtonText != null)
+        {
+            bool owned = hasItem && ownedItems.Contains(selectedCard.Data);
+            buyButtonText.text = owned ? upgradeLabel : buyLabel;
+        }
     }
 
     // Call this after a purchase has actually succeeded.
@@ -85,24 +169,27 @@ public class ShopManager : MonoBehaviour
         if (selectedCard != null) selectedCard.SetSelected(false);
         selectedCard = card;
         selectedCard.SetSelected(true);
-        ShowItem(card.Data);
+        ShowItem(card.Data, card.TierIndex);
+        RefreshBuyButton();
     }
 
-    private void ShowItem(ItemData item)
+    private void ShowItem(ItemData item, int tierIndex)
     {
         if (itemView == null || item == null) return;
+        ItemTier tier = item.GetTier(tierIndex);
+
         Image itemFrame = itemView.Find("ItemFrame")?.GetComponent<Image>();
         if (itemFrame != null)
         {
-            itemFrame.sprite = item.icon;
-            itemFrame.enabled = item.icon != null;
+            itemFrame.sprite = tier.icon;
+            itemFrame.enabled = tier.icon != null;
             itemFrame.preserveAspect = true;
         }
         Transform info = itemView.Find("ItemInfor");
         if (info != null)
         {
             string[] names = { "Attack", "AttackSpeed", "AttackRange", "Heart", "Defend", "Speed" };
-            float[] values = { item.attack, item.attackSpeed, item.attackRange, item.heart, item.defend, item.speed };
+            float[] values = { tier.attack, tier.attackSpeed, tier.attackRange, tier.heart, tier.defend, tier.speed };
             int visible = 0;
             for (int i = 0; i < names.Length; i++)
             {
@@ -127,9 +214,9 @@ public class ShopManager : MonoBehaviour
         {
             switch (field.name)
             {
-                case "ItemName": field.text = item.DisplayName; break;
-                case "ItemEffect": field.text = item.description + (item.canActive ? $"\nKích hoạt: {item.activeDescription}" : ""); break;
-                case "ActiveEffect": field.text = item.canActive ? $"{item.activeEffect}: {item.activeDescription}\nGiá trị: {item.activeValue}, thời gian: {item.activeDuration}s, hồi: {item.activeCooldown}s" : "Không có kích hoạt"; break;
+                case "ItemName": field.text = item.GetDisplayName(tierIndex); break;
+                case "ItemEffect": field.text = tier.description + (tier.canActive ? $"\nKích hoạt: {tier.activeDescription}" : ""); break;
+                case "ActiveEffect": field.text = tier.canActive ? $"{tier.activeEffect}: {tier.activeDescription}\nGiá trị: {tier.activeValue}, thời gian: {tier.activeDuration}s, hồi: {tier.activeCooldown}s" : "Không có kích hoạt"; break;
             }
         }
     }

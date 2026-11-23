@@ -1,0 +1,111 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 127cb5577a50b624d8759113e7e860dd, type: 3}
+  m_Name: PlasmaRifle
+  m_EditorClassIdentifier: Assembly-CSharp::ItemData
+  displayName: "S\xFAng n\u0103ng l\u01B0\u1EE3ng"
+  icon: {fileID: 833935342009338382, guid: 2f8b69490934b084a8e4860fc89684f0, type: 3}
+  description: "V\u0169 kh\xED t\u1ED1i t\xE2n t\u1EDBi t\u1EEB t\u01B0\u01A1ng lai  "
+  attack: 15
+  attackSpeed: 10
+  attackRange: 10
+  defend: 0
+  heart: 0
+  speed: 0
+  cooldownReduction: 0
+  canActive: 0
+  activeEffect: 0
+  activeValue: 0
+  activeDuration: 0
+  activeCooldown: 0
+  activeDescription: 
+  upgradeTiers:
+  - nameOverride: 
+    icon: {fileID: 513499837128780487, guid: e6df868e2239e8244996854f75b5b0da, type: 3}
+    description: 
+    attack: 0
+    attackSpeed: 0
+    attackRange: 0
+    defend: 0
+    heart: 0
+    speed: 0
+    cooldownReduction: 0
+    canActive: 0
+    activeEffect: 0
+    activeValue: 0
+    activeDuration: 0
+    activeCooldown: 0
+    activeDescription: 
+  - nameOverride: 
+    icon: {fileID: 7554110476336397768, guid: 9f67b7927e0519946907e8a8fb4ec2af, type: 3}
+    description: 
+    attack: 0
+    attackSpeed: 0
+    attackRange: 0
+    defend: 0
+    heart: 0
+    speed: 0
+    cooldownReduction: 0
+    canActive: 0
+    activeEffect: 0
+    activeValue: 0
+    activeDuration: 0
+    activeCooldown: 0
+    activeDescription: 
+  - nameOverride: 
+    icon: {fileID: -5125939800415048281, guid: e79d3315241304048885f01d0f375480, type: 3}
+    description: 
+    attack: 0
+    attackSpeed: 0
+    attackRange: 0
+    defend: 0
+    heart: 0
+    speed: 0
+    cooldownReduction: 0
+    canActive: 0
+    activeEffect: 0
+    activeValue: 0
+    activeDuration: 0
+    activeCooldown: 0
+    activeDescription: 
+  - nameOverride: 
+    icon: {fileID: 3590862879635715525, guid: 16950e83885b0704ea55b7c5591672e9, type: 3}
+    description: 
+    attack: 0
+    attackSpeed: 0
+    attackRange: 0
+    defend: 0
+    heart: 0
+    speed: 0
+    cooldownReduction: 0
+    canActive: 0
+    activeEffect: 0
+    activeValue: 0
+    activeDuration: 0
+    activeCooldown: 0
+    activeDescription: 
+  - nameOverride: 
+    icon: {fileID: 1961053103591535300, guid: 8f0fea0e5acc0dd4cacf675ce0f3b0f5, type: 3}
+    description: 
+    attack: 0
+    attackSpeed: 0
+    attackRange: 0
+    defend: 0
+    heart: 0
+    speed: 0
+    cooldownReduction: 0
+    canActive: 0
+    activeEffect: 0
+    activeValue: 0
+    activeDuration: 0
+    activeCooldown: 0
+    activeDescription: 

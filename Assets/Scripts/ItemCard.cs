@@ -11,11 +11,15 @@ public class ItemCard : MonoBehaviour
     [SerializeField] private GameObject selectedFrame;
 
     public ItemData Data { get; private set; }
+    public int TierIndex { get; private set; }     // Phẩm đang hiển thị trên thẻ (0 = phẩm gốc)
     public event Action<ItemCard> Clicked;
 
-    public void Setup(ItemData data)
+    // Có thể gọi lại nhiều lần để đổi món mà không bị đăng ký click trùng.
+    public void Setup(ItemData data, int tierIndex = 0)
     {
         Data = data;
+        TierIndex = tierIndex;
+
         if (nameText == null) nameText = GetComponentInChildren<TMP_Text>(true);
         if (iconImage == null)
         {
@@ -28,10 +32,34 @@ public class ItemCard : MonoBehaviour
             Transform frame = transform.Find("SelectedFrame");
             if (frame != null) selectedFrame = frame.gameObject;
         }
-        if (nameText != null) nameText.text = data.DisplayName;
-        if (iconImage != null) { iconImage.sprite = data.icon; iconImage.enabled = data.icon != null; }
+
+        ApplyVisual();
         SetSelected(false);
-        if (button != null) button.onClick.AddListener(OnClick);
+        if (button != null)
+        {
+            button.onClick.RemoveListener(OnClick);   // tránh đăng ký trùng khi Setup được gọi lại
+            button.onClick.AddListener(OnClick);
+        }
+    }
+
+    // Đổi sang phẩm khác của cùng món (giữ nguyên trạng thái chọn).
+    public void SetTier(int tierIndex)
+    {
+        TierIndex = tierIndex;
+        ApplyVisual();
+    }
+
+    private void ApplyVisual()
+    {
+        if (Data == null) return;
+
+        ItemTier tier = Data.GetTier(TierIndex);
+        if (nameText != null) nameText.text = Data.GetDisplayName(TierIndex);
+        if (iconImage != null)
+        {
+            iconImage.sprite = tier.icon;
+            iconImage.enabled = tier.icon != null;
+        }
     }
 
     public void SetSelected(bool selected)

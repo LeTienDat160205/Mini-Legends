@@ -1,0 +1,111 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 127cb5577a50b624d8759113e7e860dd, type: 3}
+  m_Name: ChestGold
+  m_EditorClassIdentifier: Assembly-CSharp::ItemData
+  displayName: "V\xE0ng c\u1EE7a goblin"
+  icon: {fileID: -2428709190465290218, guid: 1c692e15e29b60641906060cbf297d07, type: 3}
+  description: "V\xE0ng l\xE0 v\xE0ngg th\u1EADt!! "
+  attack: 0
+  attackSpeed: 1
+  attackRange: 0
+  defend: 0
+  heart: 0
+  speed: 1
+  cooldownReduction: 0
+  canActive: 1
+  activeEffect: 3
+  activeValue: 0
+  activeDuration: 5
+  activeCooldown: 60
+  activeDescription: "T\u0103ng t\u1ED1c: 10s\nTh\u1EDDi gian h\u1ED3i: 60s "
+  upgradeTiers:
+  - nameOverride: 
+    icon: {fileID: 1303142507502258196, guid: c62140a705b62e64c96107721dee86d7, type: 3}
+    description: 
+    attack: 0
+    attackSpeed: 0
+    attackRange: 0
+    defend: 0
+    heart: 0
+    speed: 0
+    cooldownReduction: 0
+    canActive: 1
+    activeEffect: 0
+    activeValue: 0
+    activeDuration: 0
+    activeCooldown: 0
+    activeDescription: 
+  - nameOverride: 
+    icon: {fileID: -6116024749406396804, guid: da7b54ef5d3cca54fbaea3e822342f03, type: 3}
+    description: 
+    attack: 0
+    attackSpeed: 0
+    attackRange: 0
+    defend: 0
+    heart: 0
+    speed: 0
+    cooldownReduction: 0
+    canActive: 1
+    activeEffect: 0
+    activeValue: 0
+    activeDuration: 0
+    activeCooldown: 0
+    activeDescription: 
+  - nameOverride: 
+    icon: {fileID: -7188775911007044197, guid: 41f93a745bdd4c64899bd0c8f9067283, type: 3}
+    description: 
+    attack: 0
+    attackSpeed: 0
+    attackRange: 0
+    defend: 0
+    heart: 0
+    speed: 0
+    cooldownReduction: 0
+    canActive: 1
+    activeEffect: 0
+    activeValue: 0
+    activeDuration: 0
+    activeCooldown: 0
+    activeDescription: 
+  - nameOverride: 
+    icon: {fileID: -3854957914265576235, guid: 66611a215df2d134babd076a0d8d7b72, type: 3}
+    description: 
+    attack: 0
+    attackSpeed: 0
+    attackRange: 0
+    defend: 0
+    heart: 0
+    speed: 0
+    cooldownReduction: 0
+    canActive: 1
+    activeEffect: 0
+    activeValue: 0
+    activeDuration: 0
+    activeCooldown: 0
+    activeDescription: 
+  - nameOverride: 
+    icon: {fileID: 9031430636412396077, guid: 8658cb17d22600341b48350661d0f8a2, type: 3}
+    description: 
+    attack: 0
+    attackSpeed: 0
+    attackRange: 0
+    defend: 0
+    heart: 0
+    speed: 0
+    cooldownReduction: 0
+    canActive: 1
+    activeEffect: 0
+    activeValue: 0
+    activeDuration: 0
+    activeCooldown: 0
+    activeDescription: 
