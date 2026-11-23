@@ -1,0 +1,111 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 127cb5577a50b624d8759113e7e860dd, type: 3}
+  m_Name: RingGoldRuby
+  m_EditorClassIdentifier: Assembly-CSharp::ItemData
+  displayName: "Nh\u1EABn ma thu\u1EADt"
+  icon: {fileID: -692032491364505656, guid: dc3c1f1d126d07b45a0d47f8f7ff78d5, type: 3}
+  description: "M\u1ED9t chi\u1EBFc nh\u1EABn v\u1EDBi vi\xEAn ruby \u0111\u1ECF th\u1EABm t\u01B0\u1EE3ng tr\u01B0ng cho quy\u1EC1n l\u1EF1c "
+  attack: 0
+  attackSpeed: 0
+  attackRange: 5
+  defend: 0
+  heart: 20
+  speed: 5
+  cooldownReduction: 0
+  canActive: 0
+  activeEffect: 0
+  activeValue: 0
+  activeDuration: 0
+  activeCooldown: 0
+  activeDescription: 
+  upgradeTiers:
+  - nameOverride: 
+    icon: {fileID: 2492497189935041361, guid: 4be99dc30cc7b3b44bfb6a917f374974, type: 3}
+    description: 
+    attack: 0
+    attackSpeed: 0
+    attackRange: 0
+    defend: 0
+    heart: 0
+    speed: 0
+    cooldownReduction: 0
+    canActive: 0
+    activeEffect: 0
+    activeValue: 0
+    activeDuration: 0
+    activeCooldown: 0
+    activeDescription: 
+  - nameOverride: 
+    icon: {fileID: -4893851163223929484, guid: 1bd4e3ed928cbed48bbfa646bc284bbf, type: 3}
+    description: 
+    attack: 0
+    attackSpeed: 0
+    attackRange: 0
+    defend: 0
+    heart: 0
+    speed: 0
+    cooldownReduction: 0
+    canActive: 0
+    activeEffect: 0
+    activeValue: 0
+    activeDuration: 0
+    activeCooldown: 0
+    activeDescription: 
+  - nameOverride: 
+    icon: {fileID: 4212088457671162379, guid: 6b70970273c6a2b49802350e454513a9, type: 3}
+    description: 
+    attack: 0
+    attackSpeed: 0
+    attackRange: 0
+    defend: 0
+    heart: 0
+    speed: 0
+    cooldownReduction: 0
+    canActive: 0
+    activeEffect: 0
+    activeValue: 0
+    activeDuration: 0
+    activeCooldown: 0
+    activeDescription: 
+  - nameOverride: 
+    icon: {fileID: -1060364095682617482, guid: 2f2bd8ea3850caf43aac1e2bddefbf0c, type: 3}
+    description: 
+    attack: 0
+    attackSpeed: 0
+    attackRange: 0
+    defend: 0
+    heart: 0
+    speed: 0
+    cooldownReduction: 0
+    canActive: 0
+    activeEffect: 0
+    activeValue: 0
+    activeDuration: 0
+    activeCooldown: 0
+    activeDescription: 
+  - nameOverride: 
+    icon: {fileID: 2220711046268868501, guid: 79cf60cd94618874bb32ca3a34e6cdfd, type: 3}
+    description: 
+    attack: 0
+    attackSpeed: 0
+    attackRange: 0
+    defend: 0
+    heart: 0
+    speed: 0
+    cooldownReduction: 0
+    canActive: 0
+    activeEffect: 0
+    activeValue: 0
+    activeDuration: 0
+    activeCooldown: 0
+    activeDescription: 

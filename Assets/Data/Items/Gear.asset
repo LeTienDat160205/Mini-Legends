@@ -1,0 +1,31 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 127cb5577a50b624d8759113e7e860dd, type: 3}
+  m_Name: Gear
+  m_EditorClassIdentifier: Assembly-CSharp::ItemData
+  displayName: "B\xE1nh r\u0103ng nguy\u1EC1n r\u1EE7a"
+  icon: {fileID: 6714307783928611684, guid: 31d907c19f484a741ab1b0faa74586b4, type: 3}
+  description: "Tr\xF4ng nh\u01B0 m\u1ED9t b\xE1nh r\u0103ng b\xECnh th\u01B0\u1EDDng nh\u01B0ng l\u1EA1i \u1EA9n ch\u1EE9a s\u1EE9c m\u1EA1nh h\u1EAFc \xE1m kh\u1ED5ng l\u1ED3"
+  attack: 70
+  attackSpeed: 0
+  attackRange: 0
+  defend: 0
+  heart: 0
+  speed: 0
+  cooldownReduction: 200
+  canActive: 1
+  activeEffect: 0
+  activeValue: 70
+  activeDuration: 1
+  activeCooldown: 200
+  activeDescription: "g\xE2y 100 s\xE1t th\u01B0\u01A1ng cho k\u1EBB \u0111\u1ECBch g\u1EA7n nh\u1EA5t "
+  upgradeTiers: []
