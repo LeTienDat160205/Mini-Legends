@@ -233,6 +233,7 @@ GameObject:
   - component: {fileID: 6166548987533298544}
   - component: {fileID: 4828945144396607617}
   - component: {fileID: 7880717259560002994}
+  - component: {fileID: 6655747035509766281}
   m_Layer: 6
   m_Name: FootSoldier
   m_TagString: Player
@@ -484,6 +485,21 @@ CapsuleCollider2D:
   m_Offset: {x: 0, y: 0}
   m_Size: {x: 1.12, y: 1.57}
   m_Direction: 0
+--- !u!114 &6655747035509766281
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4676062712088078102}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3733dcda6ec88fe488d0dc5a47eef04a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::MinimapEntity
+  entityType: 0
+  isLocalPlayerOverride: 0
+  teamMember: {fileID: 0}
 --- !u!1 &8570122606485473468
 GameObject:
   m_ObjectHideFlags: 0

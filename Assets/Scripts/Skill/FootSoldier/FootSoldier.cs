@@ -251,6 +251,7 @@ public class FootSoldier : MonoBehaviour
 
         SetFloatSafe(eSpeedParam, 1f);
         cooldownE = stat != null && stat.Data != null ? stat.Data.cooldownE : 8f;
+        TriggerHUDCooldown(SkillSlot.SkillType.E, cooldownE);
         eBusy = false;
     }
 
@@ -345,6 +346,7 @@ public class FootSoldier : MonoBehaviour
         FireBullet(qBulletPrefab != null ? qBulletPrefab : bulletPrefab, direction, damage, homing);
 
         cooldownQ = stat != null && stat.Data != null ? stat.Data.cooldownQ : 5f;
+        TriggerHUDCooldown(SkillSlot.SkillType.Q, cooldownQ);
         qBusy = false;
     }
 
@@ -460,5 +462,16 @@ public class FootSoldier : MonoBehaviour
         foreach (Transform child in GetComponentsInChildren<Transform>(true))
             if (child.name == childName) return child.gameObject;
         return null;
+    }
+    private void TriggerHUDCooldown(SkillSlot.SkillType type, float duration)
+    {
+        SkillSlot[] allSlots = FindObjectsByType<SkillSlot>(FindObjectsSortMode.None);
+        foreach (var slot in allSlots)
+        {
+            if (slot.skillType == type)
+            {
+                slot.TriggerCooldown(duration);
+            }
+        }
     }
 }

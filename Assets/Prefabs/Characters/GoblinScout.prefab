@@ -259,6 +259,7 @@ GameObject:
   - component: {fileID: 6940355765919957094}
   - component: {fileID: 8539836033766417859}
   - component: {fileID: 3465308377782583474}
+  - component: {fileID: 4968201054274664625}
   m_Layer: 6
   m_Name: GoblinScout
   m_TagString: Player
@@ -512,6 +513,21 @@ CapsuleCollider2D:
   m_Offset: {x: -0.010196686, y: -0.7697178}
   m_Size: {x: 1.0999718, y: 1.5486109}
   m_Direction: 0
+--- !u!114 &4968201054274664625
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3313925719148541667}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3733dcda6ec88fe488d0dc5a47eef04a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::MinimapEntity
+  entityType: 0
+  isLocalPlayerOverride: 0
+  teamMember: {fileID: 0}
 --- !u!1 &3352055044474410866
 GameObject:
   m_ObjectHideFlags: 0

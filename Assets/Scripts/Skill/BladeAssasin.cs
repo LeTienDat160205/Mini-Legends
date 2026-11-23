@@ -333,6 +333,7 @@ public class BladeAssasin : MonoBehaviour
         DamageQTargets();
         if (qRangeIndicator != null) qRangeIndicator.SetActive(false);
         cooldownQ = stat != null && stat.Data != null ? stat.Data.cooldownQ : 5f;
+        TriggerHUDCooldown(SkillSlot.SkillType.Q, cooldownQ);
         qBusy = false;
     }
 
@@ -430,6 +431,7 @@ public class BladeAssasin : MonoBehaviour
         HitDashTargets();
 
         cooldownE = stat != null && stat.Data != null ? stat.Data.cooldownE : 1f;
+        TriggerHUDCooldown(SkillSlot.SkillType.E, cooldownE);
         dashBusy = false;
     }
 
@@ -472,6 +474,18 @@ public class BladeAssasin : MonoBehaviour
     private void PlaySound(AudioClip clip)
     {
         if (sfxSource != null && clip != null) sfxSource.PlayOneShot(clip);
+    }
+    // Gửi lệnh kích hoạt hiệu ứng xoay cooldown sang HUD
+    private void TriggerHUDCooldown(SkillSlot.SkillType type, float duration)
+    {
+        SkillSlot[] allSlots = FindObjectsByType<SkillSlot>(FindObjectsSortMode.None);
+        foreach (var slot in allSlots)
+        {
+            if (slot.skillType == type)
+            {
+                slot.TriggerCooldown(duration);
+            }
+        }
     }
 
     // AttackE()

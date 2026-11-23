@@ -346,6 +346,7 @@ public class GoblinScout : MonoBehaviour
         cooldownE = stat != null && stat.Data != null
             ? stat.Data.cooldownE
             : 1f;
+        TriggerHUDCooldown(SkillSlot.SkillType.E, cooldownE);
     }
 
     // =================================
@@ -590,6 +591,7 @@ public class GoblinScout : MonoBehaviour
         cooldownQ = stat != null && stat.Data != null
             ? stat.Data.cooldownQ
             : 5f;
+        TriggerHUDCooldown(SkillSlot.SkillType.Q, cooldownQ);
 
         Debug.Log("Goblin Scout: Skill Q landed.");
     }
@@ -707,5 +709,17 @@ public class GoblinScout : MonoBehaviour
         }
 
         return null;
+    }
+    // Gửi lệnh kích hoạt hiệu ứng xoay cooldown sang HUD
+    private void TriggerHUDCooldown(SkillSlot.SkillType type, float duration)
+    {
+        SkillSlot[] allSlots = FindObjectsByType<SkillSlot>(FindObjectsSortMode.None);
+        foreach (var slot in allSlots)
+        {
+            if (slot.skillType == type)
+            {
+                slot.TriggerCooldown(duration);
+            }
+        }
     }
 }
