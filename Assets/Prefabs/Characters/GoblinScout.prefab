@@ -126,7 +126,7 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: -1.69, y: 3.15, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: 1.0816, y: 1.097, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 3041120886938916781}
@@ -285,6 +285,10 @@ MonoBehaviour:
   teamMember: {fileID: 0}
   animator: {fileID: 3374940535290381000}
   body: {fileID: 0}
+  sfxSource: {fileID: 0}
+  skillESound: {fileID: 0}
+  skillQSound: {fileID: 0}
+  skillUnavailableSound: {fileID: 0}
   attackTrigger: Attack
   attackE: {fileID: 8269603653462693887}
   eDamageHitBox: {fileID: 8567312524112480465}
@@ -320,7 +324,7 @@ CapsuleCollider2D:
   m_Enabled: 1
   serializedVersion: 3
   m_Density: 1
-  m_Material: {fileID: 0}
+  m_Material: {fileID: 6200000, guid: 311ddeeffc23cde408655e18102cc752, type: 2}
   m_IncludeLayers:
     serializedVersion: 2
     m_Bits: 0
