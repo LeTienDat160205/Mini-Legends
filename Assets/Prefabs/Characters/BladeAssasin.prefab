@@ -193,6 +193,15 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6fb68c1f9d89f6f47b3975049dfc6fe4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Level
+  maxLevel: 15
+  currentLevel: 1
+  xpForLevelUp: 100
+  currentXP: 0
+  xpIncreasePerLevel: 50
+  currentGold: 0
+  minionReward: {x: 30, y: 60}
+  championReward: {x: 300, y: 60}
+  towerReward: {x: 150, y: 250}
 --- !u!114 &5190340440100334767
 MonoBehaviour:
   m_ObjectHideFlags: 0

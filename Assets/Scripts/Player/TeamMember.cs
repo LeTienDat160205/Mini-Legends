@@ -38,6 +38,11 @@ public class TeamMember : MonoBehaviour
 
     public void TakeDamage(float damage)
     {
+        TakeDamage(damage, null);
+    }
+
+    public void TakeDamage(float damage, GameObject attacker)
+    {
         if (damage <= 0f || currentHeart <= 0f) return;
 
         Damaged?.Invoke(damage);
@@ -46,6 +51,8 @@ public class TeamMember : MonoBehaviour
 
         if (currentHeart <= 0f)
         {
+            if (attacker != null)
+                attacker.GetComponent<Level_Gold>()?.GrantKillReward(gameObject);
             if (playerMovement == null) playerMovement = GetComponent<PlayerMovement>();
             if (playerMovement != null)
             {

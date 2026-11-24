@@ -233,6 +233,7 @@ GameObject:
   - component: {fileID: 6166548987533298544}
   - component: {fileID: 4828945144396607617}
   - component: {fileID: 7880717259560002994}
+  - component: {fileID: -5476900589425579730}
   m_Layer: 6
   m_Name: FootSoldier
   m_TagString: Player
@@ -393,7 +394,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::TeamMember
   respawnDelay: 5
-  team: 1
+  team: 0
 --- !u!114 &6166548987533298544
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -406,6 +407,15 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6fb68c1f9d89f6f47b3975049dfc6fe4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Level
+  maxLevel: 15
+  currentLevel: 1
+  xpForLevelUp: 100
+  currentXP: 0
+  xpIncreasePerLevel: 50
+  currentGold: 0
+  minionReward: {x: 30, y: 60}
+  championReward: {x: 300, y: 60}
+  towerReward: {x: 150, y: 60}
 --- !u!114 &4828945144396607617
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -429,6 +439,11 @@ MonoBehaviour:
   attackTargetLayers:
     serializedVersion: 2
     m_Bits: 4294967295
+  sfxSource: {fileID: 0}
+  attackSound: {fileID: 8300000, guid: 8119eb354fc0fb24fb319a25d330369e, type: 3}
+  skillESound: {fileID: 8300000, guid: 9063cf6321bee1e4990f724376a6656a, type: 3}
+  skillQSound: {fileID: 8300000, guid: 234434516636ea54084b4a41c5f11d6e, type: 3}
+  skillUnavailableSound: {fileID: 8300000, guid: 85a004879cb222b499a41f81dc9ff902, type: 3}
   eHitBox: {fileID: 2786038830782422420}
   ePivot: {fileID: 6235480187505334556}
   eSpeedParam: AttackESpeed
@@ -484,6 +499,103 @@ CapsuleCollider2D:
   m_Offset: {x: 0, y: 0}
   m_Size: {x: 1.12, y: 1.57}
   m_Direction: 0
+--- !u!82 &-5476900589425579730
+AudioSource:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4676062712088078102}
+  m_Enabled: 1
+  serializedVersion: 4
+  OutputAudioMixerGroup: {fileID: 0}
+  m_audioClip: {fileID: 0}
+  m_Resource: {fileID: 0}
+  m_PlayOnAwake: 1
+  m_Volume: 1
+  m_Pitch: 1
+  Loop: 0
+  Mute: 0
+  Spatialize: 0
+  SpatializePostEffects: 0
+  Priority: 128
+  DopplerLevel: 1
+  MinDistance: 1
+  MaxDistance: 500
+  Pan2D: 0
+  rolloffMode: 0
+  BypassEffects: 0
+  BypassListenerEffects: 0
+  BypassReverbZones: 0
+  rolloffCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    - serializedVersion: 3
+      time: 1
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  panLevelCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  spreadCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  reverbZoneMixCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
 --- !u!1 &8570122606485473468
 GameObject:
   m_ObjectHideFlags: 0
@@ -511,7 +623,7 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 2, y: 2, z: 1}
+  m_LocalScale: {x: 5, y: 4, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 2192244360770575814}

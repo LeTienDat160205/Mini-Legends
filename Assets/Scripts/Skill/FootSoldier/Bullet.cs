@@ -57,13 +57,30 @@ public class Bullet : MonoBehaviour
     {
         if (owner == null) return;
 
-        TeamMember hit = other.GetComponentInParent<TeamMember>();
-        if (hit == null || hit == owner || !owner.IsEnemy(hit)) return;
+        // Xác định nạn nhân: Minion hoặc TeamMember (giống cách BladeAssasin xử lý).
+        Minion minion = other.GetComponentInParent<Minion>();
+        TeamMember member = null;
+        Transform victimRoot;
+
+        if (minion != null)
+        {
+            if (!minion.isActiveAndEnabled || minion.Team == owner.team) return;
+            victimRoot = minion.transform;
+        }
+        else
+        {
+            member = other.GetComponentInParent<TeamMember>();
+            if (member == null || member == owner || !member.isActiveAndEnabled ||
+                member.CurrentHeart <= 0f || !owner.IsEnemy(member)) return;
+            victimRoot = member.transform;
+        }
 
         // Nếu đạn có mục tiêu cụ thể (đạn đuổi) thì chỉ trúng đúng mục tiêu đó.
-        if (target != null && hit.transform != target && !hit.transform.IsChildOf(target)) return;
+        if (target != null && victimRoot != target && !victimRoot.IsChildOf(target)) return;
 
-        hit.SendMessageUpwards("TakeDamage", damage, SendMessageOptions.DontRequireReceiver);
+        // Gọi TakeDamage trực tiếp với (sát thương, người gây sát thương), như BladeAssasin.
+        if (minion != null) minion.TakeDamage(damage, owner.gameObject);
+        else member.TakeDamage(damage, owner.gameObject);
 
         if (destroyOnHit)
             Destroy(gameObject);

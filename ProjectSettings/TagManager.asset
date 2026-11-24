@@ -5,6 +5,10 @@ TagManager:
   serializedVersion: 3
   tags:
   - Nexus
+  - Enemy
+  - Tower
+  - Minion
+  - Ally
   layers:
   - Default
   - TransparentFX
