@@ -1,3 +1,4 @@
+
 using UnityEngine;
 
 public static class MovementCollision2D
@@ -5,23 +6,62 @@ public static class MovementCollision2D
     private const float Skin = 0.02f;
     private static readonly RaycastHit2D[] Hits = new RaycastHit2D[32];
 
-    public static Vector2 AllowedStep(Collider2D bodyCollider, Vector2 step, Minion movingMinion = null)
+    private static readonly int PlayerLayer = LayerMask.NameToLayer("Player");
+    private static readonly int MinionLayer = LayerMask.NameToLayer("Minion");
+
+    public static Vector2 AllowedStep(
+        Collider2D bodyCollider,
+        Vector2 step,
+        Minion movingMinion = null)
     {
-        if (bodyCollider == null || step.sqrMagnitude < 0.000001f) return step;
+        if (bodyCollider == null || step.sqrMagnitude < 0.000001f)
+            return step;
 
         float distance = step.magnitude;
         Vector2 direction = step / distance;
+
         ContactFilter2D filter = new ContactFilter2D();
         filter.useTriggers = false;
         filter.useLayerMask = false;
-        int count = bodyCollider.Cast(direction, filter, Hits, distance + Skin);
+
+        int count = bodyCollider.Cast(
+            direction,
+            filter,
+            Hits,
+            distance + Skin
+        );
+
         float allowed = distance;
+
         for (int i = 0; i < count; i++)
         {
             Collider2D other = Hits[i].collider;
-            if (other == null || other.isTrigger || other.transform.root == bodyCollider.transform.root) continue;
-            allowed = Mathf.Min(allowed, Mathf.Max(0f, Hits[i].distance - Skin));
+
+            if (other == null || other.isTrigger ||
+                other.transform.root == bodyCollider.transform.root)
+                continue;
+
+            int layer = other.gameObject.layer;
+
+            // Cho phép thoát khỏi Collider đang chồng lấn
+            // với Player hoặc Minion.
+            if (layer == PlayerLayer || layer == MinionLayer)
+            {
+                ColliderDistance2D overlap = bodyCollider.Distance(other);
+
+                if (overlap.isOverlapped &&
+                    Vector2.Dot(direction, overlap.normal) <= 0f)
+                {
+                    continue;
+                }
+            }
+
+            allowed = Mathf.Min(
+                allowed,
+                Mathf.Max(0f, Hits[i].distance - Skin)
+            );
         }
+
         return direction * allowed;
     }
 }
