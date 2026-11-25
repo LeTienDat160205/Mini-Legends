@@ -15,6 +15,13 @@ public class FootSoldier : MonoBehaviour
     [SerializeField] private Transform firePoint;                       // Nếu để trống sẽ bắn từ tâm player
     [SerializeField] private LayerMask attackTargetLayers = ~0;
 
+    [Header("Audio")]
+    [SerializeField] private AudioSource sfxSource;
+    [SerializeField] private AudioClip attackSound;
+    [SerializeField] private AudioClip skillESound;
+    [SerializeField] private AudioClip skillQSound;
+    [SerializeField] private AudioClip skillUnavailableSound;
+
     [Header("Skill E - Rapid Fire")]
     [SerializeField] private GameObject eHitBox;                        // Object 2D (sphere + collider) hiển thị hướng bắn
     [SerializeField] private Transform ePivot;                          // Trục xoay đặt ở tâm player
@@ -63,6 +70,10 @@ public class FootSoldier : MonoBehaviour
         if (stat == null) stat = GetComponent<Stat>();
         if (teamMember == null) teamMember = GetComponent<TeamMember>();
         if (animator == null) animator = GetComponent<Animator>();
+        if (sfxSource == null) sfxSource = GetComponent<AudioSource>();
+        if (sfxSource == null) sfxSource = gameObject.AddComponent<AudioSource>();
+        sfxSource.playOnAwake = false;
+        sfxSource.spatialBlend = 0f;
         if (rangeIndicator == null) rangeIndicator = FindChild("RangeIndicator");
         if (eHitBox == null) eHitBox = FindChild("E_HitBox");
         if (qHitBox == null) qHitBox = FindChild("Q_HitBox");
@@ -110,6 +121,19 @@ public class FootSoldier : MonoBehaviour
         if (qHitBox != null) qHitBox.SetActive(false);
     }
 
+    // Khi nhân vật bị tắt (ví dụ chết): dừng coroutine, xoá trạng thái, ẩn hitbox.
+    private void OnDisable()
+    {
+        StopAllCoroutines();
+        aimingE = false;
+        aimingQ = false;
+        eBusy = false;
+        qBusy = false;
+        if (rangeIndicator != null) rangeIndicator.SetActive(false);
+        if (eHitBox != null) eHitBox.SetActive(false);
+        if (qHitBox != null) qHitBox.SetActive(false);
+    }
+
     private void Update()
     {
         if (cooldownE > 0f) cooldownE -= Time.deltaTime;
@@ -144,14 +168,14 @@ public class FootSoldier : MonoBehaviour
         if (Time.time < nextAttackTime || bulletPrefab == null ||
             teamMember == null || teamMember.CurrentHeart <= 0f) return;
 
-        TeamMember target = GetTargetUnderMouse(attackTargetLayers);
+        Transform target = GetTargetUnderMouse(attackTargetLayers);
         if (target == null) return;
 
         float range = GetIndicatorRadius(rangeIndicator, stat != null ? stat.AttackRange : 1f);
         if (!IsInRange(target, range)) return;
 
         // Hướng animation + bắn đạn về phía mục tiêu.
-        Vector2 direction = Bullet.GetAimPoint(target.transform) - (Vector2)transform.position;
+        Vector2 direction = Bullet.GetAimPoint(target) - (Vector2)transform.position;
         SetAttackDirection(direction);
 
         // attackSpeed càng cao -> cooldown càng ngắn, animation chạy càng nhanh.
@@ -159,8 +183,9 @@ public class FootSoldier : MonoBehaviour
         nextAttackTime = Time.time + 1f / attackSpeed;
         SetFloatSafe(attackSpeedParam, attackSpeed);
         if (animator != null) animator.SetTrigger(attackTrigger);
+        PlaySound(attackSound);
 
-        FireBullet(bulletPrefab, direction, stat != null ? stat.Attack : 0f, target.transform);
+        FireBullet(bulletPrefab, direction, stat != null ? stat.Attack : 0f, target);
     }
 
     private void UpdateRangeIndicator()
@@ -181,7 +206,7 @@ public class FootSoldier : MonoBehaviour
         // Giữ E -> hiện E_HitBox.
         if (!aimingE && Input.GetKeyDown(KeyCode.E))
         {
-            if (cooldownE > 0f) return;
+            if (cooldownE > 0f) { PlaySound(skillUnavailableSound); return; }
             aimingE = true;
             if (eHitBox != null) eHitBox.SetActive(true);
             UpdateEAim();
@@ -238,6 +263,7 @@ public class FootSoldier : MonoBehaviour
         float duration = Mathf.Max(0.01f, eDuration);
         SetFloatSafe(eSpeedParam, eClipLength / duration);
         if (animator != null) animator.SetTrigger(AttackE);
+        PlaySound(skillESound);
 
         int count = Mathf.Max(1, eBulletCount);
         float interval = duration / count;
@@ -251,7 +277,6 @@ public class FootSoldier : MonoBehaviour
 
         SetFloatSafe(eSpeedParam, 1f);
         cooldownE = stat != null && stat.Data != null ? stat.Data.cooldownE : 8f;
-        TriggerHUDCooldown(SkillSlot.SkillType.E, cooldownE);
         eBusy = false;
     }
 
@@ -265,7 +290,7 @@ public class FootSoldier : MonoBehaviour
         // Giữ Q -> hiện Q_HitBox.
         if (!aimingQ && Input.GetKeyDown(KeyCode.Q))
         {
-            if (cooldownQ > 0f) return;
+            if (cooldownQ > 0f) { PlaySound(skillUnavailableSound); return; }
             aimingQ = true;
             if (qHitBox != null) qHitBox.SetActive(true);
             UpdateQAim();
@@ -288,10 +313,10 @@ public class FootSoldier : MonoBehaviour
         // Không có kẻ địch nào trong tầm -> đạn bay thẳng theo hướng chuột.
         if (Input.GetKeyUp(KeyCode.Q))
         {
-            TeamMember target = FindNearestEnemy(qRange, qTargetLayers);
+            Transform target = FindNearestEnemy(qRange, qTargetLayers);
 
             Vector2 direction = target != null
-                ? Bullet.GetAimPoint(target.transform) - (Vector2)transform.position
+                ? Bullet.GetAimPoint(target) - (Vector2)transform.position
                 : GetMouseDirection();
             if (direction.sqrMagnitude < 0.001f) direction = Vector2.right;
             direction.Normalize();
@@ -306,9 +331,9 @@ public class FootSoldier : MonoBehaviour
     private void UpdateQAim()
     {
         // Khi giữ Q, hitbox chĩa vào kẻ địch gần nhất; không có thì chĩa theo chuột.
-        TeamMember nearest = FindNearestEnemy(qRange, qTargetLayers);
+        Transform nearest = FindNearestEnemy(qRange, qTargetLayers);
         Vector2 direction = nearest != null
-            ? Bullet.GetAimPoint(nearest.transform) - (Vector2)transform.position
+            ? Bullet.GetAimPoint(nearest) - (Vector2)transform.position
             : GetMouseDirection();
         if (direction.sqrMagnitude < 0.001f) return;
 
@@ -324,12 +349,13 @@ public class FootSoldier : MonoBehaviour
         if (qHitBox != null) qHitBox.SetActive(false);
     }
 
-    private IEnumerator PerformQ(Vector2 direction, TeamMember target)
+    private IEnumerator PerformQ(Vector2 direction, Transform target)
     {
         qBusy = true;
 
         SetAttackDirection(direction);
         if (animator != null) animator.SetTrigger(AttackQ);
+        PlaySound(skillQSound);
 
         // Chờ animation vung tay rồi mới bắn.
         if (qFireDelay > 0f) yield return new WaitForSeconds(qFireDelay);
@@ -338,7 +364,7 @@ public class FootSoldier : MonoBehaviour
         Transform homing = null;
         if (target != null)
         {
-            homing = target.transform;
+            homing = target;
             direction = Bullet.GetAimPoint(homing) - (Vector2)transform.position;
         }
 
@@ -346,7 +372,6 @@ public class FootSoldier : MonoBehaviour
         FireBullet(qBulletPrefab != null ? qBulletPrefab : bulletPrefab, direction, damage, homing);
 
         cooldownQ = stat != null && stat.Data != null ? stat.Data.cooldownQ : 5f;
-        TriggerHUDCooldown(SkillSlot.SkillType.Q, cooldownQ);
         qBusy = false;
     }
 
@@ -362,30 +387,48 @@ public class FootSoldier : MonoBehaviour
         bullet.Init(teamMember, damage, direction, homingTarget);
     }
 
-    // Tìm TeamMember dưới con trỏ chuột, chỉ nhận kẻ địch (IsEnemy xử lý Blue/Red/Neutral).
-    private TeamMember GetTargetUnderMouse(LayerMask layers)
+    // Lấy gốc (Transform) của kẻ địch chứa collider này: Minion hoặc TeamMember.
+    // Trả về null nếu không phải kẻ địch còn sống.
+    private Transform GetEnemyRoot(Collider2D col)
+    {
+        if (col == null || teamMember == null) return null;
+
+        Minion minion = col.GetComponentInParent<Minion>();
+        if (minion != null)
+            return minion.isActiveAndEnabled && minion.Team != teamMember.team ? minion.transform : null;
+
+        TeamMember target = col.GetComponentInParent<TeamMember>();
+        if (target == null || target == teamMember || !target.isActiveAndEnabled ||
+            target.CurrentHeart <= 0f) return null;
+
+        return teamMember.IsEnemy(target) ? target.transform : null;
+    }
+
+    // Tìm kẻ địch dưới con trỏ chuột. Dùng OverlapPointAll để không bị collider khác che.
+    private Transform GetTargetUnderMouse(LayerMask layers)
     {
         if (teamMember == null) return null;
 
         Vector2 mouseWorld = GetMouseWorld();
-        Collider2D hit = Physics2D.OverlapPoint(mouseWorld, layers);
-        if (hit == null) return null;
-
-        TeamMember target = hit.GetComponentInParent<TeamMember>();
-        if (target == null || target == teamMember || !teamMember.IsEnemy(target)) return null;
-        return target;
+        Collider2D[] hits = Physics2D.OverlapPointAll(mouseWorld, layers);
+        foreach (Collider2D hit in hits)
+        {
+            Transform enemy = GetEnemyRoot(hit);
+            if (enemy != null) return enemy;
+        }
+        return null;
     }
 
-    private bool IsInRange(TeamMember target, float radius)
+    private bool IsInRange(Transform target, float radius)
     {
-        float sqrDistance = (Bullet.GetAimPoint(target.transform) - (Vector2)transform.position).sqrMagnitude;
+        float sqrDistance = (Bullet.GetAimPoint(target) - (Vector2)transform.position).sqrMagnitude;
         return sqrDistance <= radius * radius;
     }
 
     private readonly Collider2D[] nearbyBuffer = new Collider2D[32];
 
     // Tìm kẻ địch gần nhất (tính tới điểm nhắm) trong bán kính radius quanh player.
-    private TeamMember FindNearestEnemy(float radius, LayerMask layers)
+    private Transform FindNearestEnemy(float radius, LayerMask layers)
     {
         if (teamMember == null) return null;
 
@@ -395,18 +438,15 @@ public class FootSoldier : MonoBehaviour
 
         int count = Physics2D.OverlapCircle(transform.position, radius, filter, nearbyBuffer);
 
-        TeamMember nearest = null;
+        Transform nearest = null;
         float bestSqrDistance = float.MaxValue;
 
         for (int i = 0; i < count; i++)
         {
-            Collider2D col = nearbyBuffer[i];
-            if (col == null) continue;
+            Transform candidate = GetEnemyRoot(nearbyBuffer[i]);
+            if (candidate == null) continue;
 
-            TeamMember candidate = col.GetComponentInParent<TeamMember>();
-            if (candidate == null || candidate == teamMember || !teamMember.IsEnemy(candidate)) continue;
-
-            float sqrDistance = (Bullet.GetAimPoint(candidate.transform) - (Vector2)transform.position).sqrMagnitude;
+            float sqrDistance = (Bullet.GetAimPoint(candidate) - (Vector2)transform.position).sqrMagnitude;
             if (sqrDistance > radius * radius || sqrDistance >= bestSqrDistance) continue;
 
             bestSqrDistance = sqrDistance;
@@ -457,21 +497,15 @@ public class FootSoldier : MonoBehaviour
             animator.SetFloat(hash, value);
     }
 
+    private void PlaySound(AudioClip clip)
+    {
+        if (sfxSource != null && clip != null) sfxSource.PlayOneShot(clip);
+    }
+
     private GameObject FindChild(string childName)
     {
         foreach (Transform child in GetComponentsInChildren<Transform>(true))
             if (child.name == childName) return child.gameObject;
         return null;
-    }
-    private void TriggerHUDCooldown(SkillSlot.SkillType type, float duration)
-    {
-        SkillSlot[] allSlots = FindObjectsByType<SkillSlot>(FindObjectsSortMode.None);
-        foreach (var slot in allSlots)
-        {
-            if (slot.skillType == type)
-            {
-                slot.TriggerCooldown(duration);
-            }
-        }
     }
 }
