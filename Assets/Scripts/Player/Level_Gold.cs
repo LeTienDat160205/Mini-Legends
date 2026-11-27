@@ -1,6 +1,9 @@
 using System;
 using System.Collections;
+using TMPro;
 using UnityEngine;
+using UnityEngine.Animations;
+using UnityEngine.Playables;
 
 public class Level_Gold : MonoBehaviour
 {
@@ -24,7 +27,11 @@ public class Level_Gold : MonoBehaviour
     public event Action<int> LevelChanged;
 
     private int baseXPForLevelUp;
-    private static readonly int LevelUpState = Animator.StringToHash("Base Layer.LevelUp");
+    [SerializeField] private TMP_Text levelText;
+    private SpriteRenderer effectRenderer;
+    private Animator effectAnimator;
+    private PlayableGraph effectGraph;
+    private Coroutine effectRoutine;
 
     private void Awake()
     {
@@ -34,6 +41,10 @@ public class Level_Gold : MonoBehaviour
         xpForLevelUp = RequiredXP(currentLevel);
         currentGold = Mathf.Max(0, currentGold);
         currentXP = currentLevel >= maxLevel ? 0 : Mathf.Clamp(currentXP, 0, xpForLevelUp - 1);
+        HealthBar healthBar = GetComponentInChildren<HealthBar>(true);
+        if (levelText == null && healthBar != null)
+            levelText = healthBar.transform.Find("LevelText")?.GetComponent<TMP_Text>();
+        RefreshLevelText();
     }
 
     public void AddXP(int amount)
@@ -44,10 +55,16 @@ public class Level_Gold : MonoBehaviour
         Debug.Log($"[Level_Gold] {name} nhận {amount} XP ({currentXP}/{xpForLevelUp}), cấp {currentLevel}.", this);
         while (currentLevel < maxLevel && currentXP >= xpForLevelUp)
         {
+            Stat stat = GetComponent<Stat>();
+            float previousMaxHeart = stat != null ? stat.Heart : 0f;
             currentXP -= xpForLevelUp;
             currentLevel++;
             xpForLevelUp = RequiredXP(currentLevel);
+            TeamMember member = GetComponent<TeamMember>();
+            if (member != null && stat != null)
+                member.ApplyLevelUpHeart(stat.Heart - previousMaxHeart);
             Debug.Log($"[Level_Gold] {name} LÊN CẤP {currentLevel}! XP còn {currentXP}/{xpForLevelUp}.", this);
+            RefreshLevelText();
             PlayLevelUpAnimation();
             LevelChanged?.Invoke(currentLevel);
         }
@@ -72,24 +89,23 @@ public class Level_Gold : MonoBehaviour
         return true;
     }
 
-    // Call once when this character has actually earned a kill.
-    // Pass the target's root GameObject, which has the gameplay tag.
+    // Called by the defeated unit when its health first reaches zero.
     public void GrantKillReward(GameObject defeated)
     {
         if (defeated == null || defeated == gameObject) return;
 
         TeamMember owner = GetComponent<TeamMember>();
         TeamMember targetMember = defeated.GetComponent<TeamMember>();
-        if (owner != null && targetMember != null && owner.team == targetMember.team) return;
-
         Minion targetMinion = defeated.GetComponent<Minion>();
-        if (targetMinion != null && owner != null && owner.team == targetMinion.Team) return;
+        if (owner == null || (targetMember == null && targetMinion == null)) return;
+        if (targetMember != null && owner.team == targetMember.team) return;
+
+        if (targetMinion != null && owner.team == targetMinion.Team) return;
 
         Vector2Int reward;
-        if (defeated.CompareTag("Minion")) reward = minionReward;
+        if (targetMinion != null) reward = minionReward;
         else if (defeated.CompareTag("Tower") || defeated.name.StartsWith("Turret_")) reward = towerReward;
-        else if (defeated.CompareTag("Enemy") || defeated.CompareTag("Player") ||
-                 defeated.CompareTag("Ally")) reward = championReward;
+        else if (targetMember != null) reward = championReward;
         else return;
 
         AddGold(Mathf.Max(0, reward.x));
@@ -103,13 +119,13 @@ public class Level_Gold : MonoBehaviour
             (long)Mathf.Max(0, xpIncreasePerLevel) * (level - 1), int.MaxValue);
     }
 
+    private void RefreshLevelText()
+    {
+        if (levelText != null) levelText.text = currentLevel.ToString();
+    }
+
     private void PlayLevelUpAnimation()
     {
-        if (GetComponent<BladeAssasin>() == null)
-        {
-            Debug.LogWarning($"[Level_Gold] {name} lên cấp nhưng không có BladeAssasin; bỏ qua animation LevelUp.", this);
-            return;
-        }
         TeamMember member = GetComponent<TeamMember>();
         if (member != null && member.CurrentHeart <= 0f)
         {
@@ -117,27 +133,55 @@ public class Level_Gold : MonoBehaviour
             return;
         }
 
-        Animator animator = GetComponent<Animator>();
-        if (animator == null || !animator.isActiveAndEnabled)
+        Animator characterAnimator = GetComponent<Animator>();
+        if (characterAnimator == null || characterAnimator.runtimeAnimatorController == null)
         {
-            Debug.LogWarning($"[Level_Gold] {name} thiếu Animator đang hoạt động; không thể phát LevelUp.", this);
+            Debug.LogWarning($"[Level_Gold] {name} thiếu Animator hoặc controller cho hiệu ứng LevelUp.", this);
             return;
         }
-        if (!animator.HasState(0, LevelUpState))
+        AnimationClip clip = null;
+        foreach (AnimationClip candidate in characterAnimator.runtimeAnimatorController.animationClips)
+            if (candidate != null && candidate.name == "LevelUp") { clip = candidate; break; }
+        if (clip == null)
         {
-            Debug.LogWarning($"[Level_Gold] Animator của {name} không có state Base Layer.LevelUp.", this);
+            Debug.LogWarning($"[Level_Gold] Controller của {name} không có clip LevelUp.", this);
             return;
         }
 
-        animator.Play(LevelUpState, 0, 0f);
-        Debug.Log($"[Level_Gold] Đã yêu cầu Animator của {name} phát LevelUp.", this);
-        StartCoroutine(CheckLevelUpState(animator));
+        if (effectRenderer == null)
+        {
+            GameObject effect = new GameObject("LevelUpEffect");
+            effect.transform.SetParent(transform, false);
+            effectRenderer = effect.AddComponent<SpriteRenderer>();
+            effectAnimator = effect.AddComponent<Animator>();
+            SpriteRenderer characterRenderer = GetComponent<SpriteRenderer>();
+            if (characterRenderer != null)
+            {
+                effectRenderer.sortingLayerID = characterRenderer.sortingLayerID;
+                effectRenderer.sortingOrder = characterRenderer.sortingOrder + 1;
+            }
+        }
+
+        if (effectRoutine != null) StopCoroutine(effectRoutine);
+        if (effectGraph.IsValid()) effectGraph.Destroy();
+        effectRenderer.enabled = true;
+        effectGraph = PlayableGraph.Create("LevelUpEffect");
+        AnimationPlayableOutput output = AnimationPlayableOutput.Create(effectGraph, "LevelUp", effectAnimator);
+        output.SetSourcePlayable(AnimationClipPlayable.Create(effectGraph, clip));
+        effectGraph.Play();
+        effectRoutine = StartCoroutine(HideEffectAfter(clip.length));
     }
 
-    private IEnumerator CheckLevelUpState(Animator animator)
+    private IEnumerator HideEffectAfter(float duration)
     {
-        yield return null;
-        if (animator != null && !animator.GetCurrentAnimatorStateInfo(0).IsName("LevelUp"))
-            Debug.LogWarning($"[Level_Gold] Animator của {name} đã chuyển khỏi LevelUp ngay sau khi gọi Play. Kiểm tra các transition/trigger trong Animator.", this);
+        yield return new WaitForSeconds(duration);
+        if (effectGraph.IsValid()) effectGraph.Destroy();
+        if (effectRenderer != null) effectRenderer.enabled = false;
+        effectRoutine = null;
+    }
+
+    private void OnDestroy()
+    {
+        if (effectGraph.IsValid()) effectGraph.Destroy();
     }
 }

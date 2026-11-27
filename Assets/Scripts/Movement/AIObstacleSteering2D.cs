@@ -26,14 +26,20 @@ public class AIObstacleSteering2D : MonoBehaviour
 
     private void Awake()
     {
+        Collider2D triggerFallback = null;
         foreach (Collider2D candidate in GetComponents<Collider2D>())
         {
-            if (candidate != null && !candidate.isTrigger)
+            if (candidate == null || !candidate.enabled) continue;
+            if (!candidate.isTrigger)
             {
                 bodyCollider = candidate;
                 break;
             }
+            if (triggerFallback == null) triggerFallback = candidate;
         }
+        // Existing champion prefabs use trigger body colliders. Cast can still use
+        // their shape to detect solid obstacles before moving the Rigidbody2D.
+        if (bodyCollider == null) bodyCollider = triggerFallback;
         lastPosition = transform.position;
     }
 

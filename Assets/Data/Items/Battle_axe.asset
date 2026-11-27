@@ -15,12 +15,13 @@ MonoBehaviour:
   displayName: "R\xECu b\u1ED5 c\u1EE7i"
   icon: {fileID: -7161379483717426713, guid: 7b51117f8e31fd94fb0f0a7b6ae10a9e, type: 3}
   description: "Chi\u1EBFc r\xECu \u0111\u01B0\u1EE3c v\u1EDBt l\xEAn b\u1EDFi th\u1EA7n ao"
-  attack: 50
-  attackSpeed: 1
-  attackRange: 2
+  gold: 300
+  attack: 15
+  attackSpeed: 0
+  attackRange: 0
   defend: 0
   heart: 0
-  speed: 1.5
+  speed: 0
   cooldownReduction: 60
   canActive: 1
   activeEffect: 0
@@ -32,13 +33,14 @@ MonoBehaviour:
   - nameOverride: 
     icon: {fileID: -2095515245805118129, guid: dfa3b5f5f1567044b9ba3a3c66bb404a, type: 3}
     description: 
+    gold: 25
     attack: 0
     attackSpeed: 0
     attackRange: 0
     defend: 0
     heart: 0
     speed: 0
-    cooldownReduction: 0
+    cooldownReduction: 50
     canActive: 0
     activeEffect: 0
     activeValue: 0
@@ -48,6 +50,7 @@ MonoBehaviour:
   - nameOverride: 
     icon: {fileID: -12197136392254740, guid: 1c327fc5b44cc6d4fbe3de66abf0a317, type: 3}
     description: 
+    gold: 0
     attack: 0
     attackSpeed: 0
     attackRange: 0
@@ -64,6 +67,7 @@ MonoBehaviour:
   - nameOverride: 
     icon: {fileID: -2061687789441760779, guid: 43964f6288e93ea4ba61bee709ae7cfb, type: 3}
     description: 
+    gold: 0
     attack: 0
     attackSpeed: 0
     attackRange: 0
@@ -80,6 +84,7 @@ MonoBehaviour:
   - nameOverride: 
     icon: {fileID: -715795795824812353, guid: 412b28180c123f14ea617be6a6144ca9, type: 3}
     description: 
+    gold: 0
     attack: 0
     attackSpeed: 0
     attackRange: 0
@@ -96,6 +101,7 @@ MonoBehaviour:
   - nameOverride: 
     icon: {fileID: 7216732899345787130, guid: 5d6b48cccb853ac429518ceca76a59c5, type: 3}
     description: 
+    gold: 0
     attack: 0
     attackSpeed: 0
     attackRange: 0
