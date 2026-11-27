@@ -39,13 +39,16 @@ public class MinimapManager : MonoBehaviour
 
     public void RegisterEntity(MinimapEntity entity)
     {
-        if (entity == null || activeIcons.ContainsKey(entity)) return;
+        if (entity == null || !entity.isActiveAndEnabled || activeIcons.ContainsKey(entity)) return;
+        if (iconPrefab == null || iconsContainer == null || minimapRect == null)
+        {
+            Debug.LogError("MinimapManager: assign Minimap Rect, Icons Container and Icon Prefab.", this);
+            return;
+        }
 
         GameObject newIcon = Instantiate(iconPrefab, iconsContainer);
         RectTransform iconRect = newIcon.GetComponent<RectTransform>();
         Image iconImage = newIcon.GetComponent<Image>();
-
-        UpdateEntityColor(entity, iconImage);
 
         switch (entity.entityType)
         {
@@ -66,7 +69,7 @@ public class MinimapManager : MonoBehaviour
 
     public void UnregisterEntity(MinimapEntity entity)
     {
-        if (entity != null && activeIcons.TryGetValue(entity, out RectTransform iconRect))
+        if (!ReferenceEquals(entity, null) && activeIcons.TryGetValue(entity, out RectTransform iconRect))
         {
             if (iconRect != null) Destroy(iconRect.gameObject);
             activeIcons.Remove(entity);
@@ -82,13 +85,7 @@ public class MinimapManager : MonoBehaviour
 
             if (entity != null && iconRect != null)
             {
-                iconRect.anchoredPosition = WorldToMinimapPosition(entity.transform.position);
-
-                Image iconImage = iconRect.GetComponent<Image>();
-                if (iconImage != null)
-                {
-                    UpdateEntityColor(entity, iconImage);
-                }
+                LocalPlayerTeam = entity.teamMember.team;
             }
         }
     }

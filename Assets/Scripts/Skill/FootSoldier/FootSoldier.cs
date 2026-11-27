@@ -4,6 +4,35 @@ using UnityEngine;
 
 public class FootSoldier : MonoBehaviour
 {
+    [Header("AI / Input")]
+    [SerializeField] private bool acceptPlayerInput = true;
+    public void SetPlayerInput(bool value) { acceptPlayerInput = value; }
+
+    // AI API: shared skill implementation, never simulate keyboard/mouse.
+    public bool IsUsingSkill => aimingE || eBusy || aimingQ || qBusy;
+    public bool CanUseQ => isActiveAndEnabled && cooldownQ <= 0f && !IsUsingSkill &&
+        teamMember != null && teamMember.CurrentHeart > 0f && (qBulletPrefab != null || bulletPrefab != null);
+    public bool CanUseE => isActiveAndEnabled && cooldownE <= 0f && !IsUsingSkill &&
+        teamMember != null && teamMember.CurrentHeart > 0f && bulletPrefab != null;
+
+    public bool TryCastQ(TeamMember victim)
+    {
+        if (!CanUseQ || victim == null || victim.CurrentHeart <= 0f || !teamMember.IsEnemy(victim)) return false;
+        Vector2 aim = Bullet.GetAimPoint(victim.transform) - (Vector2)transform.position;
+        if (aim.sqrMagnitude < 0.001f || aim.magnitude > qRange) return false;
+        StartCoroutine(PerformQ(aim.normalized, victim.transform));
+        return true;
+    }
+
+    public bool TryCastE(TeamMember victim)
+    {
+        if (!CanUseE || victim == null || victim.CurrentHeart <= 0f || !teamMember.IsEnemy(victim)) return false;
+        Vector2 aim = Bullet.GetAimPoint(victim.transform) - (Vector2)transform.position;
+        if (aim.sqrMagnitude < 0.001f || aim.magnitude > Mathf.Max(2f, stat.AttackRange * 1.4f)) return false;
+        StartCoroutine(PerformE(aim.normalized));
+        return true;
+    }
+
     [Header("Attack")]
     [SerializeField] private GameObject rangeIndicator;
     [SerializeField] private Stat stat;
@@ -139,6 +168,11 @@ public class FootSoldier : MonoBehaviour
         if (cooldownE > 0f) cooldownE -= Time.deltaTime;
         if (cooldownQ > 0f) cooldownQ -= Time.deltaTime;
 
+        if (!acceptPlayerInput)
+        {
+            if (rangeIndicator != null) rangeIndicator.SetActive(false);
+            return;
+        }
         HandleEInput();
         HandleQInput();
 
@@ -168,11 +202,37 @@ public class FootSoldier : MonoBehaviour
         if (Time.time < nextAttackTime || bulletPrefab == null ||
             teamMember == null || teamMember.CurrentHeart <= 0f) return;
 
-        Transform target = GetTargetUnderMouse(attackTargetLayers);
-        if (target == null) return;
+        TryAttack(GetTargetUnderMouse(attackTargetLayers));
+    }
+
+    public bool TryAttack(TeamMember victim)
+    {
+        if (victim == null || teamMember == null || !teamMember.IsEnemy(victim) || victim.CurrentHeart <= 0f) return false;
+        return TryAttack(victim.transform);
+    }
+
+    public bool TryAttack(Minion victim)
+    {
+        if (victim == null || !victim.isActiveAndEnabled || teamMember == null ||
+            victim.Team == teamMember.team) return false;
+        return TryAttack(victim.transform);
+    }
+
+    public bool TryAttack(ARAMCombatStructure victim)
+    {
+        if (victim == null || victim.isDestroyed || victim.isInvulnerable || teamMember == null ||
+            victim.team == (teamMember.team == Team.Blue ? ARAMCombatStructure.Team.Blue : ARAMCombatStructure.Team.Red)) return false;
+        return TryAttack(victim.transform);
+    }
+
+    private bool TryAttack(Transform target)
+    {
+        if (aimingE || eBusy || aimingQ || qBusy || Time.time < nextAttackTime ||
+            bulletPrefab == null || teamMember == null || teamMember.CurrentHeart <= 0f) return false;
+        if (target == null) return false;
 
         float range = GetIndicatorRadius(rangeIndicator, stat != null ? stat.AttackRange : 1f);
-        if (!IsInRange(target, range)) return;
+        if (!IsInRange(target, range)) return false;
 
         // Hướng animation + bắn đạn về phía mục tiêu.
         Vector2 direction = Bullet.GetAimPoint(target) - (Vector2)transform.position;
@@ -186,6 +246,7 @@ public class FootSoldier : MonoBehaviour
         PlaySound(attackSound);
 
         FireBullet(bulletPrefab, direction, stat != null ? stat.Attack : 0f, target);
+        return true;
     }
 
     private void UpdateRangeIndicator()

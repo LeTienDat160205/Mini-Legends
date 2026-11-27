@@ -1,4 +1,4 @@
-﻿using UnityEngine;
+using UnityEngine;
 
 public enum Team
 {
@@ -16,8 +16,14 @@ public class TeamMember : MonoBehaviour
     private Animator animator;
     private PlayerMovement playerMovement;
     private BladeAssasin bladeAssasin;
+    private EnemyMovement enemyMovement;
+    private FootSoldier footSoldier;
+    private GoblinScout goblinScout;
     private Collider2D bodyCollider;
     [SerializeField] private float respawnDelay = 5f;
+
+    [SerializeField] private bool aiControlled;
+    public void SetAIControlled(bool value) { aiControlled = value; }
 
     public Team team;
     public float CurrentHeart => currentHeart;
@@ -28,6 +34,9 @@ public class TeamMember : MonoBehaviour
         animator = GetComponent<Animator>();
         playerMovement = GetComponent<PlayerMovement>();
         bladeAssasin = GetComponent<BladeAssasin>();
+        enemyMovement = GetComponent<EnemyMovement>();
+        footSoldier = GetComponent<FootSoldier>();
+        goblinScout = GetComponent<GoblinScout>();
         foreach (Collider2D candidate in GetComponents<Collider2D>())
             if (!candidate.isTrigger) { bodyCollider = candidate; break; }
         currentHeart = stat != null ? stat.Heart : 0f;
@@ -54,11 +63,16 @@ public class TeamMember : MonoBehaviour
             if (attacker != null)
                 attacker.GetComponent<Level_Gold>()?.GrantKillReward(gameObject);
             if (playerMovement == null) playerMovement = GetComponent<PlayerMovement>();
-            if (playerMovement != null)
+            if (enemyMovement == null) enemyMovement = GetComponent<EnemyMovement>();
+            if (playerMovement != null || enemyMovement != null)
             {
-                MatchAnnouncerAudio.Instance?.PlayPlayerDeath();
-                playerMovement.enabled = false;
+                if (!aiControlled && playerMovement != null && playerMovement.enabled)
+                    MatchAnnouncerAudio.Instance?.PlayPlayerDeath();
+                if (playerMovement != null) playerMovement.enabled = false;
+                if (enemyMovement != null) enemyMovement.enabled = false;
                 if (bladeAssasin != null) bladeAssasin.enabled = false;
+                if (footSoldier != null) footSoldier.enabled = false;
+                if (goblinScout != null) goblinScout.enabled = false;
                 if (bodyCollider != null) bodyCollider.enabled = false;
                 Rigidbody2D body = GetComponent<Rigidbody2D>();
                 if (body != null) body.linearVelocity = Vector2.zero;
@@ -99,8 +113,11 @@ public class TeamMember : MonoBehaviour
             animator.Play("Base Layer.Idle", 0, 0f);
         }
         if (bodyCollider != null) bodyCollider.enabled = true;
-        if (playerMovement != null) playerMovement.enabled = true;
+        if (playerMovement != null) playerMovement.enabled = !aiControlled;
+        if (enemyMovement != null) enemyMovement.enabled = aiControlled;
         if (bladeAssasin != null) bladeAssasin.enabled = true;
+        if (footSoldier != null) footSoldier.enabled = true;
+        if (goblinScout != null) goblinScout.enabled = true;
         RefreshHealthBar();
     }
 

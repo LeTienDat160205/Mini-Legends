@@ -4,6 +4,49 @@ using UnityEngine;
 
 public class GoblinScout : MonoBehaviour
 {
+    [Header("AI / Input")]
+    [SerializeField] private bool acceptPlayerInput = true;
+    public void SetPlayerInput(bool value) => acceptPlayerInput = value;
+    public bool IsUsingSkill => aimingE || castingE || aimingQ || castingQ;
+    public bool CanUseE => isActiveAndEnabled && cooldownE <= 0f && !IsUsingSkill &&
+        teamMember != null && teamMember.CurrentHeart > 0f;
+    public bool CanUseQ => isActiveAndEnabled && cooldownQ <= 0f && !IsUsingSkill &&
+        teamMember != null && teamMember.CurrentHeart > 0f && playerCollider != null;
+
+    public bool TryCastE(TeamMember victim)
+    {
+        if (!CanUseE || victim == null || victim.CurrentHeart <= 0f || !teamMember.IsEnemy(victim) || stat == null)
+            return false;
+        Vector2 direction = victim.transform.position - transform.position;
+        if (direction.sqrMagnitude < 0.001f || direction.magnitude > Mathf.Max(2.5f, stat.AttackRange * 1.4f))
+            return false;
+        eDirection = direction.normalized;
+        aimingE = true;
+        PerformE(false);
+        return true;
+    }
+
+    public bool TryCastQ(TeamMember victim)
+    {
+        if (!CanUseQ || victim == null || victim.CurrentHeart <= 0f || !teamMember.IsEnemy(victim))
+            return false;
+        Vector2 delta = victim.transform.position - transform.position;
+        float distance = delta.magnitude;
+        if (distance < 1.5f || distance > jumpRange) return false;
+        Vector2 heading = delta.normalized;
+        float jumpDistance = Mathf.Min(distance * 0.65f, jumpRange);
+        ContactFilter2D filter = new ContactFilter2D { useTriggers = false };
+        RaycastHit2D[] hits = new RaycastHit2D[16];
+        int count = playerCollider.Cast(heading, filter, hits, jumpDistance);
+        for (int i = 0; i < count; i++)
+            if (hits[i].collider != null && hits[i].collider.transform.root != transform.root)
+                return false;
+        qTargetPosition = (Vector2)transform.position + heading * jumpDistance;
+        aimingQ = true;
+        PerformQ(false);
+        return true;
+    }
+
     [Header("References")]
     [SerializeField] private GameObject rangeIndicator;
     [SerializeField] private Stat stat;
@@ -155,6 +198,7 @@ public class GoblinScout : MonoBehaviour
         if (cooldownTimer > 0f) cooldownTimer -= Time.deltaTime;
         if (cooldownE > 0f) cooldownE -= Time.deltaTime;
         if (cooldownQ > 0f) cooldownQ -= Time.deltaTime;
+        if (!acceptPlayerInput) return;
 
         HandleSkillInput();
 
@@ -242,6 +286,58 @@ public class GoblinScout : MonoBehaviour
         PlaySound(attackSoud);
     }
 
+    public bool TryAttack(TeamMember target)
+    {
+        if (target == null || teamMember == null || !teamMember.IsEnemy(target) ||
+            target.CurrentHeart <= 0f || !CanBasicAttackTarget(target.transform)) return false;
+        BeginBasicAttack(target.transform.position);
+        hitEnemies.Clear();
+        hitMinions.Clear();
+        TryDamageTarget(target.gameObject, stat.Attack);
+        return true;
+    }
+
+    public bool TryAttack(Minion target)
+    {
+        if (target == null || !target.isActiveAndEnabled || teamMember == null ||
+            target.Team == teamMember.team || !CanBasicAttackTarget(target.transform)) return false;
+        BeginBasicAttack(target.transform.position);
+        hitEnemies.Clear();
+        hitMinions.Clear();
+        TryDamageTarget(target.gameObject, stat.Attack);
+        return true;
+    }
+
+    public bool TryAttack(ARAMCombatStructure target)
+    {
+        if (target == null || target.isDestroyed || target.isInvulnerable || teamMember == null ||
+            target.team == (teamMember.team == Team.Blue ? ARAMCombatStructure.Team.Blue : ARAMCombatStructure.Team.Red) ||
+            !CanBasicAttackTarget(target.transform)) return false;
+        BeginBasicAttack(target.transform.position);
+        target.TakeDamage(stat.Attack, gameObject);
+        return true;
+    }
+
+    private bool CanBasicAttackTarget(Transform target)
+    {
+        if (stat == null || teamMember == null || teamMember.CurrentHeart <= 0f ||
+            cooldownTimer > 0f || IsUsingSkill || target == null) return false;
+        Collider2D collider = target.GetComponentInChildren<Collider2D>();
+        Vector2 aim = collider != null ? collider.ClosestPoint(transform.position) : (Vector2)target.position;
+        return Vector2.Distance(transform.position, aim) <= stat.AttackRange;
+    }
+
+    private void BeginBasicAttack(Vector3 worldPosition)
+    {
+        SetAttackDirection((Vector2)(worldPosition - transform.position));
+        animator?.SetTrigger(attackTrigger);
+        PlaySound(attackSoud);
+        float speed = stat.AttackSpeed > 0f ? stat.AttackSpeed : 1f;
+        animator?.SetFloat("AttackSpeed", speed);
+        attackCooldown = 1f / speed;
+        cooldownTimer = attackCooldown;
+    }
+
     private void HandleSkillInput()
     {
         // 1. Nhấn phím E để bắt đầu ngắm
@@ -324,11 +420,14 @@ public class GoblinScout : MonoBehaviour
         SetActiveIfAssigned(attackE, false);
     }
 
-    private void PerformE()
+    private void PerformE(bool aimFromMouse = true)
     {
         if (!aimingE) return;
 
-        UpdateEAim();
+        if (aimFromMouse) UpdateEAim();
+        else if (attackE != null)
+            attackE.transform.rotation = Quaternion.Euler(0f, 0f,
+                Mathf.Atan2(eDirection.y, eDirection.x) * Mathf.Rad2Deg);
         aimingE = false;
         castingE = true;
 
@@ -476,11 +575,11 @@ public class GoblinScout : MonoBehaviour
         RestoreQHitBoxCollision();
     }
 
-    private void PerformQ()
+    private void PerformQ(bool aimFromMouse = true)
     {
         if (!aimingQ) return;
 
-        UpdateQAim();
+        if (aimFromMouse) UpdateQAim();
         aimingQ = false;
 
         SetActiveIfAssigned(attackQ, false);
@@ -814,6 +913,7 @@ public class GoblinScout : MonoBehaviour
 
     private void TriggerHUDCooldown(SkillSlot.SkillType type, float duration)
     {
+        if (!acceptPlayerInput) return;
         SkillSlot[] allSlots = FindObjectsByType<SkillSlot>(FindObjectsSortMode.None);
         foreach (var slot in allSlots)
         {

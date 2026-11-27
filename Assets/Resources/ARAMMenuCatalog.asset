@@ -1,0 +1,37 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ee53aef30b6f5eb49bf02dcfaf4781cd, type: 3}
+  m_Name: ARAMMenuCatalog
+  m_EditorClassIdentifier: Assembly-CSharp::ARAMMenuCatalog
+  champions:
+  - displayName: FootSoldier
+    role: "X\u1EA1 th\u1EE7"
+    description: "T\u01B0\u1EDBng \u0111\xE1nh xa s\u1EED d\u1EE5ng s\xFAng v\xE0 c\xE1c lo\u1EA1i \u0111\u1EA1n."
+    portrait: {fileID: 0}
+    attackStyle: "B\u1EAFn \u0111\u1EA1n v\xE0o k\u1EBB \u0111\u1ECBch trong t\u1EA7m."
+    skillQ: "B\u1EAFn \u0111\u1EA1n l\u1EDBn c\xF3 th\u1EC3 \u0111u\u1ED5i m\u1EE5c ti\xEAu."
+    skillE: "B\u1EAFn li\xEAn t\u1EE5c trong th\u1EDDi gian ng\u1EAFn."
+  - displayName: GoblinScout
+    role: "C\u01A1 \u0111\u1ED9ng"
+    description: "T\u01B0\u1EDBng c\xF3 kh\u1EA3 n\u0103ng nh\u1EA3y t\u1EDBi v\u1ECB tr\xED ch\u1EC9 \u0111\u1ECBnh."
+    portrait: {fileID: 0}
+    attackStyle: "T\u1EA5n c\xF4ng m\u1EE5c ti\xEAu trong t\u1EA7m \u0111\xE1nh."
+    skillQ: "Nh\u1EA3y t\u1EDBi khu v\u1EF1c \u0111\xE3 ch\u1ECDn."
+    skillE: "K\u1EF9 n\u0103ng \u0111\u1ECBnh h\u01B0\u1EDBng; s\xE1t th\u01B0\u01A1ng ch\u01B0a ho\xE0n thi\u1EC7n trong m\xE3 g\u1ED1c."
+  - displayName: BladeAssasin
+    role: "C\u1EADn chi\u1EBFn"
+    description: "T\u01B0\u1EDBng \u0111\xE1nh g\u1EA7n, c\xF3 kh\u1EA3 n\u0103ng l\u01B0\u1EDBt v\xE0 g\xE2y s\xE1t th\u01B0\u01A1ng v\xF9ng."
+    portrait: {fileID: 0}
+    attackStyle: "T\u1EA5n c\xF4ng c\xE1c m\u1EE5c ti\xEAu trong khu v\u1EF1c g\u1EA7n."
+    skillQ: "G\xE2y s\xE1t th\u01B0\u01A1ng di\u1EC7n r\u1ED9ng theo th\u1EDDi gian."
+    skillE: "L\u01B0\u1EDBt v\xE0 g\xE2y s\xE1t th\u01B0\u01A1ng tr\xEAn \u0111\u01B0\u1EDDng di chuy\u1EC3n."
+  items: []
