@@ -3,6 +3,10 @@ using Unity.Cinemachine;
 
 public class SpawnArea : MonoBehaviour
 {
+    public static GameObject SpawnedPlayer { get; private set; }
+
+    [RuntimeInitializeOnLoadMethod(RuntimeInitializeLoadType.SubsystemRegistration)]
+    private static void ResetSpawnedPlayer() { SpawnedPlayer = null; }
     [SerializeField] private GameObject fallbackPlayerPrefab;
     [SerializeField] private CinemachineCamera cmCamera;
 
@@ -22,7 +26,13 @@ public class SpawnArea : MonoBehaviour
             return;
         }
 
+        if (SpawnedPlayer != null)
+        {
+            Debug.LogWarning("Player already spawned; skipping duplicate SpawnArea spawn.", this);
+            return;
+        }
         GameObject player = Instantiate(prefab, transform.position, Quaternion.identity);
+        SpawnedPlayer = player;
         TeamMember member = player.GetComponent<TeamMember>();
         if (member != null) member.team = spawnTeam.team;
         if (player.GetComponent<PlayerMovement>() == null)

@@ -1,9 +1,40 @@
-﻿using System.Collections;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
 public class BladeAssasin : MonoBehaviour
 {
+    [Header("AI / Input")]
+    [SerializeField] private bool acceptPlayerInput = true;
+    public void SetPlayerInput(bool value) { acceptPlayerInput = value; }
+
+    // AI API. Existing player Q/E input logic is untouched.
+    public bool IsUsingSkill => aimingE || dashBusy || aimingQ || qBusy;
+    public bool CanUseE => isActiveAndEnabled && cooldownE <= 0f && !IsUsingSkill &&
+        teamMember != null && teamMember.CurrentHeart > 0f;
+    public bool CanUseQ => isActiveAndEnabled && cooldownQ <= 0f && !IsUsingSkill &&
+        teamMember != null && teamMember.CurrentHeart > 0f && qRangeIndicator != null;
+
+    public bool TryCastE(TeamMember victim)
+    {
+        if (!CanUseE || victim == null || victim.CurrentHeart <= 0f || !teamMember.IsEnemy(victim)) return false;
+        Vector2 delta = (Vector2)(victim.transform.position - transform.position);
+        if (delta.sqrMagnitude < 0.001f || delta.magnitude > dashDistance * 1.2f) return false;
+        // Existing PerformDash uses MovementCollision2D.AllowedStep.
+        StartCoroutine(PerformDash(delta.normalized));
+        return true;
+    }
+
+    public bool TryCastQ(TeamMember victim)
+    {
+        if (!CanUseQ || victim == null || victim.CurrentHeart <= 0f || !teamMember.IsEnemy(victim)) return false;
+        Collider2D area = qRangeIndicator.GetComponentInChildren<Collider2D>(true);
+        if (area == null || !area.bounds.Intersects(victim.GetComponentInChildren<Collider2D>()?.bounds ??
+              new Bounds(victim.transform.position, Vector3.one * 0.1f))) return false;
+        StartCoroutine(PerformQ((Vector2)(victim.transform.position - transform.position).normalized));
+        return true;
+    }
+
     [Header("Attack")]
     [SerializeField] private GameObject rangeIndicator;
     [SerializeField] private Stat stat;
@@ -34,9 +65,6 @@ public class BladeAssasin : MonoBehaviour
     [SerializeField] private float qDamageInterval = 0.2f;
     [SerializeField] private float qDamageMultiplier = 1f;
     [SerializeField] private LayerMask qTargetLayers = ~0;
-
-    [Header("Damage Popup")]
-    [SerializeField] private Vector3 damagePopupOffset = new Vector3(0f, 1f, 0f);
 
     private Vector3 indicatorBaseScale;
     private readonly List<TeamMember> enemiesInRange = new List<TeamMember>();
@@ -127,6 +155,11 @@ public class BladeAssasin : MonoBehaviour
         if (cooldownQ > 0f)
             cooldownQ -= Time.deltaTime;
 
+        if (!acceptPlayerInput)
+        {
+            if (rangeIndicator != null) rangeIndicator.SetActive(false);
+            return;
+        }
         HandleDashInput();
         HandleQInput();
 
@@ -148,8 +181,50 @@ public class BladeAssasin : MonoBehaviour
 
     public void Attack()
     {
+        AttackInRange(null);
+    }
+
+    public bool TryAttack(TeamMember target)
+    {
+        if (target == null || teamMember == null || !teamMember.IsEnemy(target) || target.CurrentHeart <= 0f) return false;
+        if (stat == null || Vector2.Distance(transform.position, target.transform.position) > stat.AttackRange) return false;
+        return AttackInRange(target);
+    }
+
+    private Vector2? aiAttackPoint;
+
+    public bool TryAttack(Minion target)
+    {
+        if (target == null || teamMember == null || !target.isActiveAndEnabled ||
+            target.Team == teamMember.team || stat == null) return false;
+        if (Vector2.Distance(transform.position, Bullet.GetAimPoint(target.transform)) > stat.AttackRange) return false;
+        aiAttackPoint = Bullet.GetAimPoint(target.transform);
+        bool attacked = AttackInRange(null);
+        aiAttackPoint = null;
+        return attacked;
+    }
+
+    public bool TryAttack(ARAMCombatStructure target)
+    {
+        if (target == null || target.isDestroyed || target.isInvulnerable || teamMember == null ||
+            target.team == (teamMember.team == Team.Blue ? ARAMCombatStructure.Team.Blue : ARAMCombatStructure.Team.Red) || teamMember.CurrentHeart <= 0f || stat == null ||
+            aimingE || dashBusy || aimingQ || qBusy || Time.time < nextAttackTime) return false;
+        Collider2D collider = target.GetComponentInChildren<Collider2D>();
+        Vector2 aim = collider != null ? collider.ClosestPoint(transform.position) : (Vector2)target.transform.position;
+        if (Vector2.Distance(transform.position, aim) > stat.AttackRange) return false;
+        float speed = stat.AttackSpeed > 0f ? stat.AttackSpeed : 1f;
+        nextAttackTime = Time.time + 1f / speed;
+        SetAttackDirection(aim - (Vector2)transform.position);
+        if (animator != null) { animator.SetFloat(AttackSpeed, speed); animator.SetTrigger(attackTrigger); }
+        PlaySound(attackSound);
+        target.TakeDamage(stat.Attack, gameObject);
+        return true;
+    }
+
+    private bool AttackInRange(TeamMember targetForDirection)
+    {
         if (aimingE || dashBusy || aimingQ || qBusy || teamMember == null ||
-            teamMember.CurrentHeart <= 0f || Time.time < nextAttackTime) return;
+            teamMember.CurrentHeart <= 0f || Time.time < nextAttackTime) return false;
 
         enemiesInRange.Clear();
         minionsInRange.Clear();
@@ -160,7 +235,7 @@ public class BladeAssasin : MonoBehaviour
         Vector2 radii = indicatorSprite != null && indicatorSprite.sprite != null ?
             (Vector2)indicatorSprite.bounds.extents : Vector2.one *
             (stat != null ? stat.AttackRange : 0f);
-        if (radii.x <= 0f || radii.y <= 0f) return;
+        if (radii.x <= 0f || radii.y <= 0f) return false;
         Collider2D[] hits = Physics2D.OverlapCircleAll(
             center,
             Mathf.Max(radii.x, radii.y),
@@ -188,20 +263,23 @@ public class BladeAssasin : MonoBehaviour
                 enemiesInRange.Add(target);
         }
 
-        if (enemiesInRange.Count == 0 && minionsInRange.Count == 0) return;
+        if (enemiesInRange.Count == 0 && minionsInRange.Count == 0) return false;
 
         float attackSpeed = stat != null && stat.AttackSpeed > 0f ? stat.AttackSpeed : 1f;
         nextAttackTime = Time.time + 1f / attackSpeed;
-        SetAttackDirectionFromMouse();
+        if (targetForDirection != null)
+            SetAttackDirection((Vector2)(targetForDirection.transform.position - transform.position));
+        else if (aiAttackPoint.HasValue)
+            SetAttackDirection(aiAttackPoint.Value - (Vector2)transform.position);
+        else SetAttackDirectionFromMouse();
         if (animator != null) animator.SetFloat(AttackSpeed, attackSpeed);
         animator?.SetTrigger(attackTrigger);
         PlaySound(attackSound);
-
-        float attackDamage = stat != null ? stat.Attack : 0f;
         foreach (TeamMember enemy in enemiesInRange)
-            DamageEnemy(enemy, attackDamage);
+            enemy.TakeDamage(stat != null ? stat.Attack : 0f, gameObject);
         foreach (Minion minion in minionsInRange)
-            DamageMinion(minion, attackDamage);
+            minion.TakeDamage(stat != null ? stat.Attack : 0f, gameObject);
+        return true;
     }
 
     private void SetAttackDirectionFromMouse()
@@ -349,8 +427,6 @@ public class BladeAssasin : MonoBehaviour
 
         if (qRangeIndicator == null) return;
 
-        float damage = stat != null ? stat.Attack * qDamageMultiplier : 0f;
-
         Collider2D[] colliders = qRangeIndicator.GetComponentsInChildren<Collider2D>(true);
         foreach (Collider2D areaCollider in colliders)
         {
@@ -365,12 +441,12 @@ public class BladeAssasin : MonoBehaviour
                 if (minion != null)
                 {
                     if (minion.Team != teamMember.team)
-                        DamageMinion(minion, damage);
+                        minion.TakeDamage(stat != null ? stat.Attack * qDamageMultiplier : 0f, gameObject);
                     continue;
                 }
                 TeamMember target = hits[i] != null ? hits[i].GetComponentInParent<TeamMember>() : null;
                 if (target == null || target == teamMember || !teamMember.IsEnemy(target)) continue;
-                DamageEnemy(target, damage);
+                target.TakeDamage(stat != null ? stat.Attack * qDamageMultiplier : 0f, gameObject);
             }
         }
     }
@@ -456,8 +532,6 @@ public class BladeAssasin : MonoBehaviour
     {
         if (eDashHitBox == null || teamMember == null) return;
 
-        float damage = stat != null ? stat.Attack * dashDamageMultiplier : 0f;
-
         Collider2D[] colliders = eDashHitBox.GetComponentsInChildren<Collider2D>(true);
         foreach (Collider2D hitBoxCollider in colliders)
         {
@@ -473,30 +547,14 @@ public class BladeAssasin : MonoBehaviour
                 if (minion != null)
                 {
                     if (minion.Team != teamMember.team && dashMinionsHit.Add(minion))
-                        DamageMinion(minion, damage);
+                        minion.TakeDamage(stat != null ? stat.Attack * dashDamageMultiplier : 0f, gameObject);
                     continue;
                 }
                 TeamMember target = hits[i] != null ? hits[i].GetComponentInParent<TeamMember>() : null;
                 if (target == null || target == teamMember || !teamMember.IsEnemy(target) || !dashTargetsHit.Add(target)) continue;
-                DamageEnemy(target, damage);
+                target.TakeDamage(stat != null ? stat.Attack * dashDamageMultiplier : 0f, gameObject);
             }
         }
-    }
-
-    // Gây sát thương lên minion và hiện số sát thương
-    private void DamageMinion(Minion minion, float damage)
-    {
-        if (minion == null) return;
-        minion.TakeDamage(damage, gameObject);
-        DamagePopup.Create(minion.transform.position + damagePopupOffset, damage);
-    }
-
-    // Gây sát thương lên TeamMember (kẻ địch) và hiện số sát thương
-    private void DamageEnemy(TeamMember enemy, float damage)
-    {
-        if (enemy == null) return;
-        enemy.TakeDamage(damage, gameObject);
-        DamagePopup.Create(enemy.transform.position + damagePopupOffset, damage);
     }
 
     private void SetAttackDirection(Vector2 direction)
@@ -520,6 +578,7 @@ public class BladeAssasin : MonoBehaviour
     // Gửi lệnh kích hoạt hiệu ứng xoay cooldown sang HUD
     private void TriggerHUDCooldown(SkillSlot.SkillType type, float duration)
     {
+        if (!acceptPlayerInput) return;
         SkillSlot[] allSlots = FindObjectsByType<SkillSlot>(FindObjectsSortMode.None);
         foreach (var slot in allSlots)
         {
