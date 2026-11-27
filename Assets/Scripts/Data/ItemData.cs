@@ -13,6 +13,7 @@ public class ItemData : ScriptableObject
     public string displayName;
     public Sprite icon;
     [TextArea] public string description;
+    [Min(0)] public int gold;
     [Min(0f)] public float attack;
     [Min(0f)] public float attackSpeed;
     [Min(0f)] public float attackRange;
@@ -51,6 +52,7 @@ public class ItemData : ScriptableObject
         {
             icon = icon,
             description = description,
+            gold = gold,
             attack = attack,
             attackSpeed = attackSpeed,
             attackRange = attackRange,
@@ -76,6 +78,7 @@ public class ItemData : ScriptableObject
             nameOverride = t.nameOverride,
             icon = t.icon != null ? t.icon : baseTier.icon,
             description = string.IsNullOrWhiteSpace(t.description) ? baseTier.description : t.description,
+            gold = t.gold > 0 ? t.gold : baseTier.gold,
             attack = t.attack > 0f ? t.attack : baseTier.attack,
             attackSpeed = t.attackSpeed > 0f ? t.attackSpeed : baseTier.attackSpeed,
             attackRange = t.attackRange > 0f ? t.attackRange : baseTier.attackRange,
@@ -116,6 +119,7 @@ public class ItemTier
     public string nameOverride;
     public Sprite icon;
     [TextArea] public string description;
+    [Min(0)] public int gold;
 
     [Min(0f)] public float attack;
     [Min(0f)] public float attackSpeed;

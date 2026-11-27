@@ -15,11 +15,12 @@ MonoBehaviour:
   displayName: "Ki\u1EBFm d\xE0i"
   icon: {fileID: -4559542808310389026, guid: 0d36f0a8833380141bad3229e8be9c0d, type: 3}
   description: "Thanh ki\u1EBFm ng\u1EAFn \u0111\u01B0\u1EE3c th\u1EE3 r\xE8n l\xE0m d\xE0i ra cho c\xF3 v\u1EBB nguy hi\u1EC3m"
-  attack: 10
-  attackSpeed: 1
+  gold: 300
+  attack: 15
+  attackSpeed: 0.1
   attackRange: 0
   defend: 0
-  heart: 1
+  heart: 30
   speed: 0
   cooldownReduction: 0
   canActive: 0
@@ -32,11 +33,12 @@ MonoBehaviour:
   - nameOverride: 
     icon: {fileID: 4229419431256581723, guid: 0c393770b36682640b28d35da1c5ca04, type: 3}
     description: 
-    attack: 0
-    attackSpeed: 0
+    gold: 400
+    attack: 25
+    attackSpeed: 0.3
     attackRange: 0
     defend: 0
-    heart: 0
+    heart: 30
     speed: 0
     cooldownReduction: 0
     canActive: 0
@@ -48,11 +50,12 @@ MonoBehaviour:
   - nameOverride: 
     icon: {fileID: 2718616120658165936, guid: 2c866a3a9ca7cf74f9322ae95bc93602, type: 3}
     description: 
-    attack: 0
-    attackSpeed: 0
+    gold: 500
+    attack: 35
+    attackSpeed: 0.5
     attackRange: 0
     defend: 0
-    heart: 0
+    heart: 40
     speed: 0
     cooldownReduction: 0
     canActive: 0
@@ -64,11 +67,12 @@ MonoBehaviour:
   - nameOverride: 
     icon: {fileID: 2959831323277362808, guid: 2c425a8206208e0489b905942bafeaf0, type: 3}
     description: 
-    attack: 0
-    attackSpeed: 0
+    gold: 600
+    attack: 45
+    attackSpeed: 0.7
     attackRange: 0
     defend: 0
-    heart: 0
+    heart: 40
     speed: 0
     cooldownReduction: 0
     canActive: 0
@@ -80,11 +84,12 @@ MonoBehaviour:
   - nameOverride: 
     icon: {fileID: -9129015473855955140, guid: 98efe91289371b5418c3fb6e9df5d9b3, type: 3}
     description: 
-    attack: 0
-    attackSpeed: 0
+    gold: 1000
+    attack: 55
+    attackSpeed: 0.9
     attackRange: 0
     defend: 0
-    heart: 0
+    heart: 50
     speed: 0
     cooldownReduction: 0
     canActive: 0
@@ -96,11 +101,12 @@ MonoBehaviour:
   - nameOverride: 
     icon: {fileID: 5897035843706765443, guid: 115df74edbf1a004e840919b022ce167, type: 3}
     description: 
-    attack: 0
-    attackSpeed: 0
+    gold: 0
+    attack: 70
+    attackSpeed: 1.2
     attackRange: 0
     defend: 0
-    heart: 0
+    heart: 100
     speed: 0
     cooldownReduction: 0
     canActive: 0

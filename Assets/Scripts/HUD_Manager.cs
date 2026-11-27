@@ -9,8 +9,10 @@ public class HUD_Manager : MonoBehaviour
     [SerializeField] private Slider playerHeartBar;
     [SerializeField] private TMP_Text playerHeartBarText;
     [SerializeField] private TMP_Text mathTime;
+    [SerializeField] private TMP_Text goldText;
 
     private Stat playerStat;
+    private Level_Gold playerProgress;
     private float matchSeconds;
     private int displayedSecond = -1;
 
@@ -23,6 +25,8 @@ public class HUD_Manager : MonoBehaviour
             playerHeartBarText = playerHeartBar.GetComponentInChildren<TMP_Text>(true);
         if (mathTime == null)
             mathTime = transform.Find("MathInfor/MathTime")?.GetComponent<TMP_Text>();
+        if (goldText == null)
+            goldText = transform.Find("Inventory/Gold/GoldText")?.GetComponent<TMP_Text>();
     }
 
     private void Update()
@@ -42,6 +46,9 @@ public class HUD_Manager : MonoBehaviour
         }
         if (player == null) return;
         if (playerStat == null) playerStat = player.GetComponent<Stat>();
+        if (playerProgress == null) playerProgress = player.GetComponent<Level_Gold>();
+        if (goldText != null && playerProgress != null)
+            goldText.text = playerProgress.CurrentGold.ToString();
         if (playerStat == null) return;
 
         SetStatus("AttackText", playerStat.Attack);

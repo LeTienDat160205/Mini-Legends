@@ -6,6 +6,7 @@ using UnityEngine.UI;
 public class ItemCard : MonoBehaviour
 {
     [SerializeField] private TMP_Text nameText;
+    [SerializeField] private TMP_Text goldText;
     [SerializeField] private Image iconImage;
     [SerializeField] private Button button;
     [SerializeField] private GameObject selectedFrame;
@@ -21,6 +22,11 @@ public class ItemCard : MonoBehaviour
         TierIndex = tierIndex;
 
         if (nameText == null) nameText = GetComponentInChildren<TMP_Text>(true);
+        if (goldText == null)
+        {
+            Transform goldObject = transform.Find("ItemCardGold");
+            if (goldObject != null) goldText = goldObject.GetComponent<TMP_Text>();
+        }
         if (iconImage == null)
         {
             Transform imageObject = transform.Find("ItemCardImage");
@@ -55,6 +61,7 @@ public class ItemCard : MonoBehaviour
 
         ItemTier tier = Data.GetTier(TierIndex);
         if (nameText != null) nameText.text = Data.GetDisplayName(TierIndex);
+        if (goldText != null) goldText.text = tier.gold.ToString();
         if (iconImage != null)
         {
             iconImage.sprite = tier.icon;

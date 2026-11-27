@@ -180,7 +180,7 @@ public class Minion : MonoBehaviour
         if (currentHealth <= 0f)
         {
             if (attacker != null)
-                attacker.GetComponent<Level_Gold>()?.GrantKillReward(gameObject);
+                attacker.GetComponentInParent<Level_Gold>()?.GrantKillReward(gameObject);
             if (bodyCollider != null) bodyCollider.enabled = false;
             if (body != null) body.linearVelocity = Vector2.zero;
             float deathDuration = 1f;

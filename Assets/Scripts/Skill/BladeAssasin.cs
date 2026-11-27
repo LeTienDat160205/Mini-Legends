@@ -66,6 +66,9 @@ public class BladeAssasin : MonoBehaviour
     [SerializeField] private float qDamageMultiplier = 1f;
     [SerializeField] private LayerMask qTargetLayers = ~0;
 
+    [Header("Damage Popup")]
+    [SerializeField] private Vector3 damagePopupOffset = new Vector3(0f, 1f, 0f);
+
     private Vector3 indicatorBaseScale;
     private readonly List<TeamMember> enemiesInRange = new List<TeamMember>();
     private readonly HashSet<Minion> minionsInRange = new HashSet<Minion>();
@@ -275,10 +278,9 @@ public class BladeAssasin : MonoBehaviour
         if (animator != null) animator.SetFloat(AttackSpeed, attackSpeed);
         animator?.SetTrigger(attackTrigger);
         PlaySound(attackSound);
-        foreach (TeamMember enemy in enemiesInRange)
-            enemy.TakeDamage(stat != null ? stat.Attack : 0f, gameObject);
-        foreach (Minion minion in minionsInRange)
-            minion.TakeDamage(stat != null ? stat.Attack : 0f, gameObject);
+        float attackDamage = stat != null ? stat.Attack : 0f;
+        foreach (TeamMember enemy in enemiesInRange) DamageEnemy(enemy, attackDamage);
+        foreach (Minion minion in minionsInRange) DamageMinion(minion, attackDamage);
         return true;
     }
 
@@ -441,12 +443,12 @@ public class BladeAssasin : MonoBehaviour
                 if (minion != null)
                 {
                     if (minion.Team != teamMember.team)
-                        minion.TakeDamage(stat != null ? stat.Attack * qDamageMultiplier : 0f, gameObject);
+                        DamageMinion(minion, stat != null ? stat.Attack * qDamageMultiplier : 0f);
                     continue;
                 }
                 TeamMember target = hits[i] != null ? hits[i].GetComponentInParent<TeamMember>() : null;
                 if (target == null || target == teamMember || !teamMember.IsEnemy(target)) continue;
-                target.TakeDamage(stat != null ? stat.Attack * qDamageMultiplier : 0f, gameObject);
+                DamageEnemy(target, stat != null ? stat.Attack * qDamageMultiplier : 0f);
             }
         }
     }
@@ -547,14 +549,28 @@ public class BladeAssasin : MonoBehaviour
                 if (minion != null)
                 {
                     if (minion.Team != teamMember.team && dashMinionsHit.Add(minion))
-                        minion.TakeDamage(stat != null ? stat.Attack * dashDamageMultiplier : 0f, gameObject);
+                        DamageMinion(minion, stat != null ? stat.Attack * dashDamageMultiplier : 0f);
                     continue;
                 }
                 TeamMember target = hits[i] != null ? hits[i].GetComponentInParent<TeamMember>() : null;
                 if (target == null || target == teamMember || !teamMember.IsEnemy(target) || !dashTargetsHit.Add(target)) continue;
-                target.TakeDamage(stat != null ? stat.Attack * dashDamageMultiplier : 0f, gameObject);
+                DamageEnemy(target, stat != null ? stat.Attack * dashDamageMultiplier : 0f);
             }
         }
+    }
+
+    private void DamageMinion(Minion minion, float damage)
+    {
+        if (minion == null) return;
+        minion.TakeDamage(damage, gameObject);
+        DamagePopup.Create(minion.transform.position + damagePopupOffset, damage);
+    }
+
+    private void DamageEnemy(TeamMember enemy, float damage)
+    {
+        if (enemy == null) return;
+        enemy.TakeDamage(damage, gameObject);
+        DamagePopup.Create(enemy.transform.position + damagePopupOffset, damage);
     }
 
     private void SetAttackDirection(Vector2 direction)

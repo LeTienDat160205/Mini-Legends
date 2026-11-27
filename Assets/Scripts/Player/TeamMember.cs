@@ -28,6 +28,14 @@ public class TeamMember : MonoBehaviour
     public Team team;
     public float CurrentHeart => currentHeart;
 
+    public void ApplyLevelUpHeart(float addedMaxHeart)
+    {
+        if (currentHeart > 0f && addedMaxHeart > 0f)
+            currentHeart = Mathf.Min(stat != null ? stat.Heart : currentHeart + addedMaxHeart,
+                currentHeart + addedMaxHeart);
+        RefreshHealthBar();
+    }
+
     private void Awake()
     {
         stat = GetComponent<Stat>();
@@ -61,7 +69,7 @@ public class TeamMember : MonoBehaviour
         if (currentHeart <= 0f)
         {
             if (attacker != null)
-                attacker.GetComponent<Level_Gold>()?.GrantKillReward(gameObject);
+                attacker.GetComponentInParent<Level_Gold>()?.GrantKillReward(gameObject);
             if (playerMovement == null) playerMovement = GetComponent<PlayerMovement>();
             if (enemyMovement == null) enemyMovement = GetComponent<EnemyMovement>();
             if (playerMovement != null || enemyMovement != null)

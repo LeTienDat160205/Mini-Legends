@@ -83,7 +83,10 @@ public class EnemyMovement : MonoBehaviour
         goblin = GetComponent<GoblinScout>();
         soldier = GetComponent<FootSoldier>();
         foreach (Collider2D c in GetComponents<Collider2D>())
-            if (!c.isTrigger) { bodyCollider = c; break; }
+            if (c != null && c.enabled && !c.isTrigger) { bodyCollider = c; break; }
+        if (bodyCollider == null)
+            foreach (Collider2D c in GetComponents<Collider2D>())
+                if (c != null && c.enabled) { bodyCollider = c; break; }
     }
 
     private void OnEnable()
