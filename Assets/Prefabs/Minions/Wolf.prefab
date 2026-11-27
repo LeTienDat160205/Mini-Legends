@@ -210,7 +210,7 @@ CapsuleCollider2D:
   m_CallbackLayers:
     serializedVersion: 2
     m_Bits: 4294967295
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_UsedByEffector: 0
   m_CompositeOperation: 0
   m_CompositeOrder: 0
@@ -230,7 +230,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::MinimapEntity
   entityType: 1
-  isAlly: 0
+  isLocalPlayerOverride: 0
+  teamMember: {fileID: 0}
 --- !u!1 &1134709105541402817
 GameObject:
   m_ObjectHideFlags: 0
@@ -715,8 +716,13 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::HealthBar
   fillBar: {fileID: 8189115375345693378}
   valueText: {fileID: 4248174805427353721}
+  blueBarSprite: {fileID: 7130912001605438921, guid: f87c4c574c3b97647a7360145300b5d9, type: 3}
+  redbarSprite: {fileID: 8989798869969104524, guid: b040709b12db28642af0d91bef7747c5, type: 3}
   target: {fileID: 1492514854739752340}
   worldOffset: {x: 0, y: 2, z: 0}
+  controlledPlayerColor: {r: 0, g: 1, b: 0, a: 1}
+  allyColor: {r: 0, g: 0, b: 1, a: 1}
+  enemyColor: {r: 1, g: 0, b: 0, a: 1}
 --- !u!114 &7531158162027273967
 MonoBehaviour:
   m_ObjectHideFlags: 0

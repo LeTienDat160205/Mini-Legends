@@ -245,6 +245,8 @@ MonoBehaviour:
   qTargetLayers:
     serializedVersion: 2
     m_Bits: 4294967295
+  damagePopupPrefab: {fileID: 6928235358554858502, guid: 9df91764fff06ad4f83a5d44f73cd74d, type: 3}
+  damagePopupOffset: {x: 0, y: 1, z: 0}
 --- !u!114 &6725004594863240607
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -292,7 +294,7 @@ CapsuleCollider2D:
   m_CallbackLayers:
     serializedVersion: 2
     m_Bits: 4294967295
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_UsedByEffector: 0
   m_CompositeOperation: 0
   m_CompositeOrder: 0
@@ -409,7 +411,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::MinimapEntity
   entityType: 0
-  isAlly: 0
+  isLocalPlayerOverride: 0
+  teamMember: {fileID: 0}
 --- !u!1 &593272118858851782
 GameObject:
   m_ObjectHideFlags: 0
@@ -531,8 +534,13 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::HealthBar
   fillBar: {fileID: 7974899720162484382}
   valueText: {fileID: 526874296637080242}
+  blueBarSprite: {fileID: 0}
+  redbarSprite: {fileID: 0}
   target: {fileID: 6833457907608430866}
   worldOffset: {x: 0, y: 2, z: 0}
+  controlledPlayerColor: {r: 0, g: 1, b: 0, a: 1}
+  allyColor: {r: 0, g: 0, b: 1, a: 1}
+  enemyColor: {r: 1, g: 0, b: 0, a: 1}
 --- !u!1 &1069223108332206123
 GameObject:
   m_ObjectHideFlags: 0

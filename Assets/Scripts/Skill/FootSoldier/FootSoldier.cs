@@ -277,6 +277,7 @@ public class FootSoldier : MonoBehaviour
 
         SetFloatSafe(eSpeedParam, 1f);
         cooldownE = stat != null && stat.Data != null ? stat.Data.cooldownE : 8f;
+        TriggerHUDCooldown(SkillSlot.SkillType.E, cooldownE);
         eBusy = false;
     }
 
@@ -372,6 +373,7 @@ public class FootSoldier : MonoBehaviour
         FireBullet(qBulletPrefab != null ? qBulletPrefab : bulletPrefab, direction, damage, homing);
 
         cooldownQ = stat != null && stat.Data != null ? stat.Data.cooldownQ : 5f;
+        TriggerHUDCooldown(SkillSlot.SkillType.Q, cooldownQ);
         qBusy = false;
     }
 
@@ -385,6 +387,9 @@ public class FootSoldier : MonoBehaviour
         Vector3 spawnPos = firePoint != null ? firePoint.position : transform.position;
         Bullet bullet = Instantiate(prefab, spawnPos + new Vector3(0, 0.5f, 0), Quaternion.identity);
         bullet.Init(teamMember, damage, direction, homingTarget);
+
+        // Đạn do Player bắn -> hiện số sát thương khi trúng (cần Bullet có thuộc tính ShowDamagePopup).
+        bullet.ShowDamagePopup = true;
     }
 
     // Lấy gốc (Transform) của kẻ địch chứa collider này: Minion hoặc TeamMember.
@@ -500,6 +505,17 @@ public class FootSoldier : MonoBehaviour
     private void PlaySound(AudioClip clip)
     {
         if (sfxSource != null && clip != null) sfxSource.PlayOneShot(clip);
+    }
+
+    // Gửi lệnh kích hoạt hiệu ứng xoay cooldown sang HUD
+    private void TriggerHUDCooldown(SkillSlot.SkillType type, float duration)
+    {
+        SkillSlot[] allSlots = FindObjectsByType<SkillSlot>(FindObjectsSortMode.None);
+        foreach (var slot in allSlots)
+        {
+            if (slot.skillType == type)
+                slot.TriggerCooldown(duration);
+        }
     }
 
     private GameObject FindChild(string childName)

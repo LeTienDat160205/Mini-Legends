@@ -10,12 +10,16 @@ public class Bullet : MonoBehaviour
     [SerializeField] private float speed = 10f;
     [SerializeField] private float lifeTime = 3f;
     [SerializeField] private bool destroyOnHit = true;
+    [SerializeField] private Vector3 damagePopupOffset = new Vector3(0f, 0.8f, 0f);
 
     private float damage;
     private TeamMember owner;
     private Transform target;           // null = bay thẳng theo direction
     private Collider2D targetCollider;  // Collider của mục tiêu, dùng làm điểm nhắm
     private Vector2 direction;
+
+    // true = hiện số sát thương khi trúng (FootSoldier gán true cho đạn của Player).
+    public bool ShowDamagePopup { get; set; }
 
     // Điểm nhắm = tâm collider của mục tiêu. Không có collider thì dùng gốc object.
     public static Vector2 GetAimPoint(Transform t)
@@ -78,9 +82,15 @@ public class Bullet : MonoBehaviour
         // Nếu đạn có mục tiêu cụ thể (đạn đuổi) thì chỉ trúng đúng mục tiêu đó.
         if (target != null && victimRoot != target && !victimRoot.IsChildOf(target)) return;
 
+        // Lưu vị trí trước khi gây sát thương, vì nạn nhân có thể bị Destroy ngay sau TakeDamage.
+        Vector3 popupPosition = victimRoot.position + damagePopupOffset;
+
         // Gọi TakeDamage trực tiếp với (sát thương, người gây sát thương), như BladeAssasin.
         if (minion != null) minion.TakeDamage(damage, owner.gameObject);
         else member.TakeDamage(damage, owner.gameObject);
+
+        if (ShowDamagePopup)
+            DamagePopup.Create(popupPosition, damage);
 
         if (destroyOnHit)
             Destroy(gameObject);

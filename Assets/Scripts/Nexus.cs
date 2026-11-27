@@ -9,6 +9,7 @@ public class Nexus : MonoBehaviour
     [Header("Thong tin nha chinh")]
     [SerializeField] private Team nexusTeam = Team.Blue;
     [SerializeField, Min(1f)] private float maxHealth = 1000f;
+    public Team NexusTeam => nexusTeam;
 
     [Header("Hieu ung no")]
     [SerializeField] private GameObject explosionPrefab;

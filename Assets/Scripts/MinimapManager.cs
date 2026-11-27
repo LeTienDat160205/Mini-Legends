@@ -39,16 +39,14 @@ public class MinimapManager : MonoBehaviour
 
     public void RegisterEntity(MinimapEntity entity)
     {
-        if (activeIcons.ContainsKey(entity)) return;
+        if (entity == null || activeIcons.ContainsKey(entity)) return;
 
         GameObject newIcon = Instantiate(iconPrefab, iconsContainer);
         RectTransform iconRect = newIcon.GetComponent<RectTransform>();
         Image iconImage = newIcon.GetComponent<Image>();
 
-        // Thiết lập màu ban đầu
         UpdateEntityColor(entity, iconImage);
 
-        // KÍCH THƯỚC PIXEL CHO TỪNG LOẠI
         switch (entity.entityType)
         {
             case MinimapEntityType.Player:
@@ -68,7 +66,7 @@ public class MinimapManager : MonoBehaviour
 
     public void UnregisterEntity(MinimapEntity entity)
     {
-        if (activeIcons.TryGetValue(entity, out RectTransform iconRect))
+        if (entity != null && activeIcons.TryGetValue(entity, out RectTransform iconRect))
         {
             if (iconRect != null) Destroy(iconRect.gameObject);
             activeIcons.Remove(entity);
@@ -84,10 +82,8 @@ public class MinimapManager : MonoBehaviour
 
             if (entity != null && iconRect != null)
             {
-                // Cập nhật vị trí tọa độ liên tục theo thời gian thực
                 iconRect.anchoredPosition = WorldToMinimapPosition(entity.transform.position);
 
-                // Cập nhật màu liên tục để khắc phục triệt để lỗi thứ tự Instantiate
                 Image iconImage = iconRect.GetComponent<Image>();
                 if (iconImage != null)
                 {
@@ -99,34 +95,60 @@ public class MinimapManager : MonoBehaviour
 
     private void UpdateEntityColor(MinimapEntity entity, Image iconImage)
     {
+        // 1. Nếu là nhân vật người chơi chính đang điều khiển -> Xanh lục
         if (entity.isLocalPlayer)
         {
-            if (entity.teamMember != null) LocalPlayerTeam = entity.teamMember.team;
-            iconImage.color = new Color(0.2f, 1f, 0.2f); // Xanh lục (Player chính)
+            if (entity.teamMember != null)
+            {
+                LocalPlayerTeam = entity.teamMember.team;
+            }
+            iconImage.color = new Color(0.2f, 1f, 0.2f);
+            return;
+        }
+
+        Team entityTeam = Team.Neutral;
+
+        // 2. Lấy phe từ Minion hoặc Nexus
+        if (entity.entityType == MinimapEntityType.Tower)
+        {
+            Nexus nexus = entity.GetComponent<Nexus>() ?? entity.GetComponentInParent<Nexus>();
+            if (nexus != null) entityTeam = nexus.NexusTeam;
+        }
+        else if (entity.entityType == MinimapEntityType.Minion)
+        {
+            Minion minion = entity.GetComponent<Minion>() ?? entity.GetComponentInParent<Minion>();
+            if (minion != null)
+            {
+                entityTeam = minion.Team;
+                // Debug để xem lính đang có Team gì trên Console Unity
+                // Debug.Log("Minion name: " + entity.name + " | Team: " + minion.Team);
+            }
         }
         else
         {
-            Team entityTeam = Team.Neutral;
-            if (entity.teamMember != null)
-            {
-                entityTeam = entity.teamMember.team;
-            }
-            else if (entity.name.Contains("Blue") || entity.transform.root.name.Contains("Blue"))
-            {
-                entityTeam = Team.Blue;
-            }
-            else if (entity.name.Contains("Red") || entity.transform.root.name.Contains("Red"))
-            {
-                entityTeam = Team.Red;
-            }
+            if (entity.teamMember != null) entityTeam = entity.teamMember.team;
+        }
 
+        // 3. Xử lý hiển thị màu dứt khoát
+        // Nếu lính/trụ thuộc phe Blue hoặc tên chứa chữ Blue -> Tô màu xanh dương
+        if (entityTeam == Team.Blue || entity.name.Contains("Blue") || entity.transform.root.name.Contains("Blue"))
+        {
+            iconImage.color = new Color(0.2f, 0.6f, 1f); // Xanh dương
+        }
+        else if (entityTeam == Team.Red || entity.name.Contains("Red") || entity.transform.root.name.Contains("Red"))
+        {
+            iconImage.color = new Color(1f, 0.3f, 0.3f); // Đỏ
+        }
+        else
+        {
+            // So sánh chuẩn với LocalPlayerTeam nếu các điều kiện trên không khớp
             if (entityTeam == LocalPlayerTeam && entityTeam != Team.Neutral)
             {
-                iconImage.color = new Color(0.2f, 0.6f, 1f);  // Xanh dương (Đồng minh, Lính nhà)
+                iconImage.color = new Color(0.2f, 0.6f, 1f);
             }
             else
             {
-                iconImage.color = new Color(1f, 0.3f, 0.3f); // Đỏ (Địch, Lính địch)
+                iconImage.color = new Color(1f, 0.3f, 0.3f);
             }
         }
     }

@@ -35,6 +35,9 @@ public class BladeAssasin : MonoBehaviour
     [SerializeField] private float qDamageMultiplier = 1f;
     [SerializeField] private LayerMask qTargetLayers = ~0;
 
+    [Header("Damage Popup")]
+    [SerializeField] private Vector3 damagePopupOffset = new Vector3(0f, 1f, 0f);
+
     private Vector3 indicatorBaseScale;
     private readonly List<TeamMember> enemiesInRange = new List<TeamMember>();
     private readonly HashSet<Minion> minionsInRange = new HashSet<Minion>();
@@ -193,10 +196,12 @@ public class BladeAssasin : MonoBehaviour
         if (animator != null) animator.SetFloat(AttackSpeed, attackSpeed);
         animator?.SetTrigger(attackTrigger);
         PlaySound(attackSound);
+
+        float attackDamage = stat != null ? stat.Attack : 0f;
         foreach (TeamMember enemy in enemiesInRange)
-            enemy.TakeDamage(stat != null ? stat.Attack : 0f, gameObject);
+            DamageEnemy(enemy, attackDamage);
         foreach (Minion minion in minionsInRange)
-            minion.TakeDamage(stat != null ? stat.Attack : 0f, gameObject);
+            DamageMinion(minion, attackDamage);
     }
 
     private void SetAttackDirectionFromMouse()
@@ -344,6 +349,8 @@ public class BladeAssasin : MonoBehaviour
 
         if (qRangeIndicator == null) return;
 
+        float damage = stat != null ? stat.Attack * qDamageMultiplier : 0f;
+
         Collider2D[] colliders = qRangeIndicator.GetComponentsInChildren<Collider2D>(true);
         foreach (Collider2D areaCollider in colliders)
         {
@@ -358,12 +365,12 @@ public class BladeAssasin : MonoBehaviour
                 if (minion != null)
                 {
                     if (minion.Team != teamMember.team)
-                        minion.TakeDamage(stat != null ? stat.Attack * qDamageMultiplier : 0f, gameObject);
+                        DamageMinion(minion, damage);
                     continue;
                 }
                 TeamMember target = hits[i] != null ? hits[i].GetComponentInParent<TeamMember>() : null;
                 if (target == null || target == teamMember || !teamMember.IsEnemy(target)) continue;
-                target.TakeDamage(stat != null ? stat.Attack * qDamageMultiplier : 0f, gameObject);
+                DamageEnemy(target, damage);
             }
         }
     }
@@ -449,6 +456,8 @@ public class BladeAssasin : MonoBehaviour
     {
         if (eDashHitBox == null || teamMember == null) return;
 
+        float damage = stat != null ? stat.Attack * dashDamageMultiplier : 0f;
+
         Collider2D[] colliders = eDashHitBox.GetComponentsInChildren<Collider2D>(true);
         foreach (Collider2D hitBoxCollider in colliders)
         {
@@ -464,14 +473,30 @@ public class BladeAssasin : MonoBehaviour
                 if (minion != null)
                 {
                     if (minion.Team != teamMember.team && dashMinionsHit.Add(minion))
-                        minion.TakeDamage(stat != null ? stat.Attack * dashDamageMultiplier : 0f, gameObject);
+                        DamageMinion(minion, damage);
                     continue;
                 }
                 TeamMember target = hits[i] != null ? hits[i].GetComponentInParent<TeamMember>() : null;
                 if (target == null || target == teamMember || !teamMember.IsEnemy(target) || !dashTargetsHit.Add(target)) continue;
-                target.TakeDamage(stat != null ? stat.Attack * dashDamageMultiplier : 0f, gameObject);
+                DamageEnemy(target, damage);
             }
         }
+    }
+
+    // Gây sát thương lên minion và hiện số sát thương
+    private void DamageMinion(Minion minion, float damage)
+    {
+        if (minion == null) return;
+        minion.TakeDamage(damage, gameObject);
+        DamagePopup.Create(minion.transform.position + damagePopupOffset, damage);
+    }
+
+    // Gây sát thương lên TeamMember (kẻ địch) và hiện số sát thương
+    private void DamageEnemy(TeamMember enemy, float damage)
+    {
+        if (enemy == null) return;
+        enemy.TakeDamage(damage, gameObject);
+        DamagePopup.Create(enemy.transform.position + damagePopupOffset, damage);
     }
 
     private void SetAttackDirection(Vector2 direction)

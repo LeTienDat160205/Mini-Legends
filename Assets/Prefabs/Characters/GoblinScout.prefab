@@ -420,6 +420,15 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6fb68c1f9d89f6f47b3975049dfc6fe4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Level
+  maxLevel: 15
+  currentLevel: 1
+  xpForLevelUp: 100
+  currentXP: 0
+  xpIncreasePerLevel: 50
+  currentGold: 0
+  minionReward: {x: 30, y: 60}
+  championReward: {x: 300, y: 60}
+  towerReward: {x: 150, y: 60}
 --- !u!114 &6940355765919957094
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -436,7 +445,7 @@ MonoBehaviour:
   stat: {fileID: 6540315544949209489}
   teamMember: {fileID: 0}
   animator: {fileID: 3374940535290381000}
-  body: {fileID: 0}
+  body: {fileID: 5764231100556171414}
   playerCollider: {fileID: 0}
   sfxSource: {fileID: 0}
   attackSoud: {fileID: 8300000, guid: a535265eba3a849468d3b124a1661bf5, type: 3}
@@ -444,8 +453,15 @@ MonoBehaviour:
   skillQSound: {fileID: 8300000, guid: 5d417932ff3fe0a45ba8be6e1b9fa04d, type: 3}
   skillUnavailableSound: {fileID: 8300000, guid: 8206c463bf18476438cbeb060b35e568, type: 3}
   attackTrigger: Attack
+  attackTargetLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
   attackE: {fileID: 8269603653462693887}
   eDamageHitBox: {fileID: 8567312524112480465}
+  skillEMultiplier: 1.5
+  enemyLayer:
+    serializedVersion: 2
+    m_Bits: 320
   attackQ: {fileID: 9159429367391819567}
   qRangeIndicator: {fileID: 4288045593207556111}
   qHitBox: {fileID: 3352055044474410866}
@@ -453,15 +469,13 @@ MonoBehaviour:
   jumpRange: 5
   jumpDuration: 0.4
   jumpHeight: 1.5
-  ignoreDuringQ:
-    serializedVersion: 2
-    m_Bits: 320
+  landingCheckRadius: 0.5
+  maxLandingAttempts: 30
+  landingCheckStep: 0.1
+  skillQMultiplier: 2
   structureLayer:
     serializedVersion: 2
     m_Bits: 512
-  landingCheckStep: 0.1
-  landingCheckRadius: 0.5
-  maxLandingAttempts: 30
 --- !u!114 &8539836033766417859
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -506,7 +520,7 @@ CapsuleCollider2D:
   m_CallbackLayers:
     serializedVersion: 2
     m_Bits: 4294967295
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_UsedByEffector: 0
   m_CompositeOperation: 0
   m_CompositeOrder: 0
@@ -557,7 +571,8 @@ Transform:
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 2, y: 2, z: 1}
   m_ConstrainProportionsScale: 0
-  m_Children: []
+  m_Children:
+  - {fileID: 3207358150939443377}
   m_Father: {fileID: 8167128782069859724}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!212 &917243939147541986
@@ -949,12 +964,12 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 6633248949635741618}
   serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: 0.5, y: 0.50000006, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
-  m_Father: {fileID: 8167128782069859724}
+  m_Father: {fileID: 7683547049250627315}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!58 &1934127304732179078
 CircleCollider2D:
@@ -1127,7 +1142,7 @@ GameObject:
   m_Component:
   - component: {fileID: 3128948102773618024}
   - component: {fileID: 7306123385347633343}
-  - component: {fileID: 2736250255744807870}
+  - component: {fileID: 6661698191692489808}
   m_Layer: 6
   m_Name: E_DamageHitBox
   m_TagString: Untagged
@@ -1144,8 +1159,8 @@ Transform:
   m_GameObject: {fileID: 8567312524112480465}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 1.5, y: -0.8, z: 0}
-  m_LocalScale: {x: 3, y: 1, z: 1}
+  m_LocalPosition: {x: 1.4748, y: -0.0116, z: 0}
+  m_LocalScale: {x: 3.0498, y: 1.0367, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 6136160847150623207}
@@ -1197,7 +1212,7 @@ SpriteRenderer:
   m_GlobalIlluminationMeshLod: 0
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 0
+  m_SortingOrder: 1
   m_MaskInteraction: 0
   m_Sprite: {fileID: 7482667652216324306, guid: 311925a002f4447b3a28927169b83ea6, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
@@ -1210,13 +1225,16 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_SpriteSortPoint: 0
   m_BlendShapeWeights: []
---- !u!65 &2736250255744807870
-BoxCollider:
+--- !u!61 &6661698191692489808
+BoxCollider2D:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 8567312524112480465}
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Density: 1
   m_Material: {fileID: 0}
   m_IncludeLayers:
     serializedVersion: 2
@@ -1225,12 +1243,34 @@ BoxCollider:
     serializedVersion: 2
     m_Bits: 0
   m_LayerOverridePriority: 0
+  m_ForceSendLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_ForceReceiveLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_ContactCaptureLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_CallbackLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
   m_IsTrigger: 1
-  m_ProvidesContacts: 0
-  m_Enabled: 1
-  serializedVersion: 3
-  m_Size: {x: 1, y: 1, z: 0.2}
-  m_Center: {x: 0.000000037252903, y: 0, z: 0}
+  m_UsedByEffector: 0
+  m_CompositeOperation: 0
+  m_CompositeOrder: 0
+  m_Offset: {x: 0, y: 0}
+  m_SpriteTilingProperty:
+    border: {x: 0, y: 0, z: 0, w: 0}
+    pivot: {x: 0.5, y: 0.5}
+    oldSize: {x: 1, y: 1}
+    newSize: {x: 1, y: 1}
+    adaptiveTilingThreshold: 0.5
+    drawMode: 0
+    adaptiveTiling: 0
+  m_AutoTiling: 0
+  m_Size: {x: 1, y: 1}
+  m_EdgeRadius: 0
 --- !u!1 &9006931890428224889
 GameObject:
   m_ObjectHideFlags: 0
@@ -1352,8 +1392,13 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::HealthBar
   fillBar: {fileID: 2610903284247478381}
   valueText: {fileID: 273612198905032186}
+  blueBarSprite: {fileID: 0}
+  redbarSprite: {fileID: 0}
   target: {fileID: 6195844334497947946}
   worldOffset: {x: 0, y: 2, z: 0}
+  controlledPlayerColor: {r: 0, g: 1, b: 0, a: 1}
+  allyColor: {r: 0, g: 0, b: 1, a: 1}
+  enemyColor: {r: 1, g: 0, b: 0, a: 1}
 --- !u!1 &9159429367391819567
 GameObject:
   m_ObjectHideFlags: 0
@@ -1385,6 +1430,5 @@ Transform:
   m_Children:
   - {fileID: 3535310925131225542}
   - {fileID: 7683547049250627315}
-  - {fileID: 3207358150939443377}
   m_Father: {fileID: 6195844334497947946}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
