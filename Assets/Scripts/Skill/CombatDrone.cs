@@ -68,34 +68,37 @@ public class CombatDrone : MonoBehaviour
             Attack();
     }
 
+    // Hien vung ban khi co tuong dich (Player hoac AI) trong vung quan sat.
     bool HasPlayerNearby()
     {
         if (visibleShotArea == null || teamMember == null)
             return false;
 
         int count = visibleShotArea.Overlap(filter, hits);
-
         for (int i = 0; i < count; i++)
         {
-            if (hits[i] == null)
-                continue;
+            Collider2D hit = hits[i];
+            if (hit == null || !hit.enabled) continue;
 
-            PlayerMovement player =
-                hits[i].GetComponentInParent<PlayerMovement>();
-
-            if (player == null || !player.isActiveAndEnabled)
-                continue;
-
-            TeamMember member =
-                player.GetComponentInParent<TeamMember>();
-
-            if (member != null &&
-                member.team != Team.Neutral &&
-                member.team != teamMember.team)
-                return true;
+            TeamMember member = hit.GetComponentInParent<TeamMember>();
+            if (IsEnemyChampion(member)) return true;
         }
-
         return false;
+    }
+
+    // Chi nhan tuong co bo dieu khien, tranh nham tru/cac cong trinh
+    // co TeamMember thanh tuong.
+    bool IsEnemyChampion(TeamMember member)
+    {
+        if (member == null || member == teamMember ||
+            !member.isActiveAndEnabled || member.CurrentHeart <= 0f ||
+            member.team == Team.Neutral || member.team == teamMember.team)
+            return false;
+
+        PlayerMovement human = member.GetComponent<PlayerMovement>();
+        EnemyMovement bot = member.GetComponent<EnemyMovement>();
+        return (human != null && human.isActiveAndEnabled) ||
+               (bot != null && bot.isActiveAndEnabled);
     }
 
     // Tim ca linh Minion va nguoi choi phe dich
@@ -140,22 +143,10 @@ public class CombatDrone : MonoBehaviour
             }
             else
             {
-                // Kiem tra nguoi choi
-                TeamMember member =
-                    hit.GetComponentInParent<TeamMember>();
-
-                PlayerMovement player =
-                    hit.GetComponentInParent<PlayerMovement>();
-
-                if (member != null &&
-                    player != null &&
-                    player.isActiveAndEnabled &&
-                    member != teamMember &&
-                    member.team == enemyTeam &&
-                    member.CurrentHeart > 0f)
-                {
+                // Nhan ca Player va AI, khong nham cong trinh.
+                TeamMember member = hit.GetComponentInParent<TeamMember>();
+                if (IsEnemyChampion(member))
                     candidate = member;
-                }
             }
 
             if (candidate == null)

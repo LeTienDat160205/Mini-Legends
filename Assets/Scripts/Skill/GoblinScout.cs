@@ -1,4 +1,5 @@
 using System.Collections;
+using System.Collections.Generic;
 using UnityEngine;
 
 public class GoblinScout : MonoBehaviour
@@ -6,6 +7,55 @@ public class GoblinScout : MonoBehaviour
     // =================================
     // REFERENCES
     // =================================
+
+    [Header("AI / Input")]
+    [SerializeField] private bool acceptPlayerInput = true;
+    public void SetPlayerInput(bool value) { acceptPlayerInput = value; }
+
+    // AI API: keep Player aiming unchanged. E still has no damage in original project.
+    public bool IsUsingSkill => aimingE || castingE || aimingQ || castingQ;
+    public bool CanUseE => isActiveAndEnabled && cooldownE <= 0f && !IsUsingSkill &&
+        teamMember != null && teamMember.CurrentHeart > 0f;
+    public bool CanUseQ => isActiveAndEnabled && cooldownQ <= 0f && !IsUsingSkill &&
+        teamMember != null && teamMember.CurrentHeart > 0f && playerCollider != null;
+
+    public bool TryCastE(TeamMember victim)
+    {
+        if (!CanUseE || victim == null || victim.CurrentHeart <= 0f || !teamMember.IsEnemy(victim)) return false;
+        Vector2 dir = (Vector2)(victim.transform.position - transform.position);
+        if (dir.sqrMagnitude < 0.001f || dir.magnitude > Mathf.Max(2.5f, stat.AttackRange * 1.4f)) return false;
+        eDirection = dir.normalized;
+        aimingE = true;
+        PerformE(false);
+        return true;
+    }
+
+    public bool TryCastQ(TeamMember victim)
+    {
+        if (!CanUseQ || victim == null || victim.CurrentHeart <= 0f || !teamMember.IsEnemy(victim)) return false;
+        Vector2 delta = (Vector2)(victim.transform.position - transform.position);
+        float distance = delta.magnitude;
+        if (distance < 1.5f || distance > jumpRange) return false;
+        // Never jump through walls, towers or other solid colliders.
+        Vector2 heading = delta.normalized;
+        float jumpDistance = Mathf.Min(distance * 0.65f, jumpRange);
+        ContactFilter2D filter = new ContactFilter2D();
+        filter.useTriggers = false;
+        RaycastHit2D[] hits = new RaycastHit2D[16];
+        int count = playerCollider.Cast(heading, filter, hits, jumpDistance);
+        for (int i = 0; i < count; i++)
+        {
+            if (hits[i].collider == null || hits[i].collider.transform.root == transform.root) continue;
+            // Conservative: another solid body in the path means no AI jump.
+            return false;
+        }
+        Vector2 landing = (Vector2)transform.position + heading * jumpDistance;
+        if (IsBlockedByStructure(landing)) return false;
+        qTargetPosition = landing;
+        aimingQ = true;
+        PerformQ(false);
+        return true;
+    }
 
     [Header("References")]
     [SerializeField] private GameObject rangeIndicator;
@@ -67,6 +117,7 @@ public class GoblinScout : MonoBehaviour
     [SerializeField] private float landingCheckStep = 0.1f;
     [SerializeField] private float landingCheckRadius = 0.3f;
     [SerializeField] private int maxLandingAttempts = 30;
+    private readonly List<Collider2D[]> ignoredQCollisions = new List<Collider2D[]>();
     private bool aimingQ;
     private bool castingQ;
     private float cooldownQ;
@@ -146,6 +197,28 @@ public class GoblinScout : MonoBehaviour
         SetActiveIfAssigned(qDamageHitBox, false);
     }
 
+    private void OnDisable()
+    {
+        CancelInvoke();
+        StopAllCoroutines();
+        aimingE = false;
+        aimingQ = false;
+        castingE = false;
+        castingQ = false;
+        SetActiveIfAssigned(attackE, false);
+        SetActiveIfAssigned(eDamageHitBox, false);
+        SetActiveIfAssigned(attackQ, false);
+        SetActiveIfAssigned(qRangeIndicator, false);
+        SetActiveIfAssigned(qHitBox, false);
+        SetActiveIfAssigned(qDamageHitBox, false);
+        // Death may interrupt a jump while Rigidbody2D is not simulated.
+        if (body != null) body.simulated = true;
+        foreach (Collider2D[] pair in ignoredQCollisions)
+            if (pair[0] != null && pair[1] != null)
+                Physics2D.IgnoreCollision(pair[0], pair[1], false);
+        ignoredQCollisions.Clear();
+    }
+
     private void Update()
     {
         if (cooldownTimer > 0f)
@@ -157,6 +230,11 @@ public class GoblinScout : MonoBehaviour
         if (cooldownQ > 0f)
             cooldownQ -= Time.deltaTime;
 
+        if (!acceptPlayerInput)
+        {
+            if (rangeIndicator != null) rangeIndicator.SetActive(false);
+            return;
+        }
         HandleSkillInput();
 
         if (aimingE)
@@ -190,16 +268,17 @@ public class GoblinScout : MonoBehaviour
 
     private void Attack()
     {
-        if (cooldownTimer > 0f || stat == null)
-            return;
+        TryAttack(GetTargetUnderMouse());
+    }
 
-        TeamMember target = GetTargetUnderMouse();
+    public bool TryAttack(TeamMember target)
+    {
+        if (cooldownTimer > 0f || stat == null || castingE || castingQ || aimingE || aimingQ)
+            return false;
 
-        if (target == null)
-            return;
-
-        if (teamMember == null || !teamMember.IsEnemy(target))
-            return;
+        if (target == null || target.CurrentHeart <= 0f ||
+            teamMember == null || teamMember.CurrentHeart <= 0f || !teamMember.IsEnemy(target))
+            return false;
 
         float distance = Vector2.Distance(
             transform.position,
@@ -207,23 +286,59 @@ public class GoblinScout : MonoBehaviour
         );
 
         if (distance > stat.AttackRange)
-            return;
+            return false;
 
         SetAttackDirection(target.transform.position);
         animator?.SetTrigger(attackTrigger);
         PlaySound(attackSoud);
 
-        // Tạm thời giữ cách gây sát thương đánh thường như bản hiện tại.
-        target.SendMessageUpwards(
-            "TakeDamage",
-            stat.Attack,
-            SendMessageOptions.DontRequireReceiver
-        );
+        // Tất cả tướng dùng chung hệ thống damage và kill reward.
+        target.TakeDamage(stat.Attack, gameObject);
 
         attackCooldown = stat.AttackSpeed > 0f
             ? 1f / stat.AttackSpeed
             : 1f;
 
+        cooldownTimer = attackCooldown;
+        return true;
+    }
+
+    // AI normal attacks against lane minions and destructible structures.
+    // Reuse exactly the same cooldown, animation, and damage value as champion attacks.
+    public bool TryAttack(Minion target)
+    {
+        if (target == null || !target.isActiveAndEnabled || teamMember == null ||
+            target.Team == teamMember.team || teamMember.CurrentHeart <= 0f) return false;
+        if (!CanBasicAttackTarget(target.transform)) return false;
+        BeginBasicAttack(target.transform.position);
+        target.TakeDamage(stat.Attack, gameObject);
+        return true;
+    }
+
+    public bool TryAttack(ARAMCombatStructure target)
+    {
+        if (target == null || target.isDestroyed || target.isInvulnerable || teamMember == null ||
+            target.team == (teamMember.team == Team.Blue ? ARAMCombatStructure.Team.Blue : ARAMCombatStructure.Team.Red) || teamMember.CurrentHeart <= 0f) return false;
+        if (!CanBasicAttackTarget(target.transform)) return false;
+        BeginBasicAttack(target.transform.position);
+        target.TakeDamage(stat.Attack, gameObject);
+        return true;
+    }
+
+    private bool CanBasicAttackTarget(Transform target)
+    {
+        if (stat == null || cooldownTimer > 0f || IsUsingSkill || target == null) return false;
+        Collider2D c = target.GetComponentInChildren<Collider2D>();
+        Vector2 aim = c != null ? c.ClosestPoint(transform.position) : (Vector2)target.position;
+        return Vector2.Distance(transform.position, aim) <= stat.AttackRange;
+    }
+
+    private void BeginBasicAttack(Vector3 worldPosition)
+    {
+        SetAttackDirection(worldPosition);
+        animator?.SetTrigger(attackTrigger);
+        PlaySound(attackSoud);
+        attackCooldown = stat.AttackSpeed > 0f ? 1f / stat.AttackSpeed : 1f;
         cooldownTimer = attackCooldown;
     }
 
@@ -317,12 +432,12 @@ public class GoblinScout : MonoBehaviour
         Debug.Log("Skill E cancelled.");
     }
 
-    private void PerformE()
+    private void PerformE(bool aimFromMouse = true)
     {
         if (!aimingE)
             return;
 
-        UpdateEAim();
+        if (aimFromMouse) UpdateEAim();
 
         aimingE = false;
         castingE = true;
@@ -406,12 +521,12 @@ public class GoblinScout : MonoBehaviour
         Debug.Log("Skill Q cancelled.");
     }
 
-    private void PerformQ()
+    private void PerformQ(bool aimFromMouse = true)
     {
         if (!aimingQ)
             return;
 
-        UpdateQAim();
+        if (aimFromMouse) UpdateQAim();
 
         qTargetPosition = GetSafeQLandingPosition(qTargetPosition);
 
@@ -486,6 +601,7 @@ public class GoblinScout : MonoBehaviour
                 {
                     // Bắt đầu Q: bỏ qua va chạm
                     Physics2D.IgnoreCollision(own, target, true);
+                    ignoredQCollisions.Add(new Collider2D[] { own, target });
                 }
                 else
                 {
@@ -532,6 +648,7 @@ public class GoblinScout : MonoBehaviour
 
         if (own != null && target != null)
             Physics2D.IgnoreCollision(own, target, false);
+        ignoredQCollisions.RemoveAll(pair => pair[0] == own && pair[1] == target);
     }
     private IEnumerator JumpToTarget()
     {
@@ -713,6 +830,7 @@ public class GoblinScout : MonoBehaviour
     // Gửi lệnh kích hoạt hiệu ứng xoay cooldown sang HUD
     private void TriggerHUDCooldown(SkillSlot.SkillType type, float duration)
     {
+        if (!acceptPlayerInput) return;
         SkillSlot[] allSlots = FindObjectsByType<SkillSlot>(FindObjectsSortMode.None);
         foreach (var slot in allSlots)
         {

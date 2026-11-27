@@ -57,6 +57,19 @@ public class Bullet : MonoBehaviour
     {
         if (owner == null) return;
 
+        // Structures use their own health / invulnerability progression, not TeamMember.
+        ARAMCombatStructure structure = other.GetComponentInParent<ARAMCombatStructure>();
+        if (structure != null)
+        {
+            if (structure.isDestroyed || structure.isInvulnerable ||
+                structure.team == (owner.team == Team.Blue ? ARAMCombatStructure.Team.Blue : ARAMCombatStructure.Team.Red)) return;
+            if (target != null && structure.transform != target &&
+                !structure.transform.IsChildOf(target)) return;
+            structure.TakeDamage(damage);
+            if (destroyOnHit) Destroy(gameObject);
+            return;
+        }
+
         // Xác định nạn nhân: Minion hoặc TeamMember (giống cách BladeAssasin xử lý).
         Minion minion = other.GetComponentInParent<Minion>();
         TeamMember member = null;
