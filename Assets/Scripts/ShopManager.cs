@@ -54,12 +54,14 @@ public class ShopManager : MonoBehaviour
             if (card != null) card.Clicked -= OnCardClicked;
     }
 
-    private void Update()
-    {
-        if (Input.GetKeyDown(KeyCode.P)) ToggleShop();
-    }
+    private void Update() { 
+   
+if (HotkeysSettings.Pressed(HotkeysSettings.Shop))
+    ToggleShop();
 
-    public void ToggleShop()
+}
+
+public void ToggleShop()
     {
         if (shopPanel == null) return;
         shopPanel.SetActive(!shopPanel.activeSelf);

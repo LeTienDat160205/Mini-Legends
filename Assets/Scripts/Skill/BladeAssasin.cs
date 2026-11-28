@@ -309,7 +309,7 @@ public class BladeAssasin : MonoBehaviour
     {
         if (dashBusy) return;
 
-        if (!aimingE && Input.GetKeyDown(KeyCode.E))
+        if (!aimingE && HotkeysSettings.Pressed(HotkeysSettings.SkillE))
         {
             if (cooldownE > 0f) { PlaySound(skillUnavailableSound); return; }
             aimingE = true;
@@ -330,7 +330,7 @@ public class BladeAssasin : MonoBehaviour
         }
 
         // Releasing E commits the dash.
-        if (Input.GetKeyUp(KeyCode.E))
+        if (HotkeysSettings.Released(HotkeysSettings.SkillE))
         {
             dashDirection = GetMouseDirection();
             if (dashDirection.sqrMagnitude < 0.001f)
@@ -347,7 +347,7 @@ public class BladeAssasin : MonoBehaviour
     {
         if (dashBusy || qBusy) return;
 
-        if (!aimingQ && Input.GetKeyDown(KeyCode.Q))
+        if (!aimingQ && HotkeysSettings.Pressed(HotkeysSettings.SkillQ))
         {
             if (cooldownQ > 0f) { PlaySound(skillUnavailableSound); return; }
             aimingQ = true;
@@ -367,7 +367,7 @@ public class BladeAssasin : MonoBehaviour
         }
 
         // Releasing Q creates the damaging area.
-        if (Input.GetKeyUp(KeyCode.Q))
+        if (HotkeysSettings.Released(HotkeysSettings.SkillQ))
         {
             Vector2 direction = GetMouseDirection();
             if (direction.sqrMagnitude < 0.001f) direction = Vector2.right;
