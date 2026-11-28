@@ -265,7 +265,7 @@ public class FootSoldier : MonoBehaviour
         if (eBusy || qBusy || aimingQ) return;
 
         // Giữ E -> hiện E_HitBox.
-        if (!aimingE && Input.GetKeyDown(KeyCode.E))
+        if (!aimingE && HotkeysSettings.Pressed(HotkeysSettings.SkillE))
         {
             if (cooldownE > 0f) { PlaySound(skillUnavailableSound); return; }
             aimingE = true;
@@ -286,7 +286,7 @@ public class FootSoldier : MonoBehaviour
         }
 
         // Thả E -> bắn.
-        if (Input.GetKeyUp(KeyCode.E))
+        if (HotkeysSettings.Released(HotkeysSettings.SkillE))
         {
             Vector2 direction = GetMouseDirection();
             if (direction.sqrMagnitude < 0.001f) direction = Vector2.right;
@@ -350,7 +350,7 @@ public class FootSoldier : MonoBehaviour
         if (eBusy || qBusy || aimingE) return;
 
         // Giữ Q -> hiện Q_HitBox.
-        if (!aimingQ && Input.GetKeyDown(KeyCode.Q))
+        if (!aimingQ && HotkeysSettings.Pressed(HotkeysSettings.SkillQ))
         {
             if (cooldownQ > 0f) { PlaySound(skillUnavailableSound); return; }
             aimingQ = true;
@@ -373,7 +373,7 @@ public class FootSoldier : MonoBehaviour
         // Thả Q -> bắn đạn to.
         // Tự aim vào kẻ địch gần nhất trong tầm qRange, đạn đuổi theo mục tiêu đó.
         // Không có kẻ địch nào trong tầm -> đạn bay thẳng theo hướng chuột.
-        if (Input.GetKeyUp(KeyCode.Q))
+        if (HotkeysSettings.Released(HotkeysSettings.SkillQ))
         {
             Transform target = FindNearestEnemy(qRange, qTargetLayers);
 
