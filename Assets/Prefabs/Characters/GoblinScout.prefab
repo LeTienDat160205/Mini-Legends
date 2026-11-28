@@ -567,6 +567,7 @@ MonoBehaviour:
   minionReward: {x: 30, y: 60}
   championReward: {x: 300, y: 60}
   towerReward: {x: 150, y: 60}
+  levelText: {fileID: 0}
 --- !u!114 &6940355765919957094
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -609,7 +610,7 @@ MonoBehaviour:
   jumpDuration: 0.4
   jumpHeight: 1.5
   landingCheckRadius: 0.5
-  maxLandingAttempts: 30
+  maxLandingAttempts: 100
   landingCheckStep: 0.1
   skillQMultiplier: 2
   structureLayer:
@@ -1551,7 +1552,7 @@ MonoBehaviour:
   fillBar: {fileID: 2610903284247478381}
   valueText: {fileID: 273612198905032186}
   blueBarSprite: {fileID: 0}
-  redbarSprite: {fileID: 0}
+  redbarSprite: {fileID: 8989798869969104524, guid: b040709b12db28642af0d91bef7747c5, type: 3}
   target: {fileID: 6195844334497947946}
   worldOffset: {x: 0, y: 2, z: 0}
   controlledPlayerColor: {r: 0, g: 1, b: 0, a: 1}

@@ -9,7 +9,7 @@ public class HealthBar : MonoBehaviour
     public TextMeshProUGUI valueText;
 
     [Header("Bar Sprites")]
-    [SerializeField] private Sprite blueBarSprite; // Kéo BlueBar vào đây
+    [SerializeField] private Sprite blueBarSprite; // Để trống nếu muốn dùng sprite gốc của FillBar (xanh)
     [SerializeField] private Sprite redbarSprite;  // Kéo Redbar vào đây
 
     [Header("Target & Offset")]
@@ -33,10 +33,16 @@ public class HealthBar : MonoBehaviour
     private bool lastWasLocalPlayer = false;
     private Team lastPlayerTeam;
 
+    // Sprite gốc của FillBar (xanh), lưu lại để trả về khi là đồng minh
+    private Sprite defaultFillSprite;
+
     private void Awake()
     {
         rectTransform = transform as RectTransform;
         canvas = GetComponentInParent<Canvas>();
+
+        if (fillBar != null)
+            defaultFillSprite = fillBar.sprite;
 
         FindOwnerComponents();
     }
@@ -130,6 +136,12 @@ public class HealthBar : MonoBehaviour
         SetupHealthBarVisual();
     }
 
+    // Sprite dùng cho đồng minh / người chơi: ưu tiên blueBarSprite, nếu trống thì dùng sprite gốc của FillBar
+    private Sprite GetAllySprite()
+    {
+        return blueBarSprite != null ? blueBarSprite : defaultFillSprite;
+    }
+
     private void SetupHealthBarVisual()
     {
         if (fillBar == null)
@@ -147,6 +159,10 @@ public class HealthBar : MonoBehaviour
 
         if (isLocal)
         {
+            // Reset sprite về xanh gốc để không bị dính sprite đỏ từ trước
+            Sprite allySprite = GetAllySprite();
+            if (allySprite != null) fillBar.sprite = allySprite;
+
             fillBar.color = controlledPlayerColor;
             colorInitialized = true;
             if (debugLog) Debug.Log($"[HealthBar] {name}: LOCAL PLAYER -> xanh lá", this);
@@ -189,7 +205,7 @@ public class HealthBar : MonoBehaviour
             }
         }
 
-        // 3. Áp dụng Sprite tương ứng (Địch = Redbar, Đồng minh = Bluebar)
+        // 3. Áp dụng Sprite tương ứng (Địch = Redbar, Đồng minh = Bluebar hoặc sprite gốc của FillBar)
         if (isEnemy)
         {
             if (redbarSprite != null) fillBar.sprite = redbarSprite;
@@ -197,7 +213,8 @@ public class HealthBar : MonoBehaviour
         }
         else
         {
-            if (blueBarSprite != null) fillBar.sprite = blueBarSprite;
+            Sprite allySprite = GetAllySprite();
+            if (allySprite != null) fillBar.sprite = allySprite;
             fillBar.color = Color.white;
         }
 
@@ -205,32 +222,6 @@ public class HealthBar : MonoBehaviour
             Debug.Log($"[HealthBar] {name}: không phải local player (minimapEntity={(cachedMinimapEntity != null ? "có" : "KHÔNG CÓ")}) -> {(isEnemy ? "địch" : "đồng minh")}", this);
 
         colorInitialized = true;
-    }
-
-    private TeamMember FindPlayerTeamMember()
-    {
-        GoblinScout goblin = FindFirstObjectByType<GoblinScout>();
-        if (goblin != null)
-        {
-            TeamMember member = goblin.GetComponent<TeamMember>();
-            if (member != null) return member;
-        }
-
-        BladeAssasin blade = FindFirstObjectByType<BladeAssasin>();
-        if (blade != null)
-        {
-            TeamMember member = blade.GetComponent<TeamMember>();
-            if (member != null) return member;
-        }
-
-        FootSoldier soldier = FindFirstObjectByType<FootSoldier>();
-        if (soldier != null)
-        {
-            TeamMember member = soldier.GetComponent<TeamMember>();
-            if (member != null) return member;
-        }
-
-        return null;
     }
 
     public void UpdateBar(float currentValue, float maxValue)

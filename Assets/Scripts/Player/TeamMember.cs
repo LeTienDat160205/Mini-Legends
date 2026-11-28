@@ -70,6 +70,10 @@ public class TeamMember : MonoBehaviour
         {
             if (attacker != null)
                 attacker.GetComponentInParent<Level_Gold>()?.GrantKillReward(gameObject);
+
+            // Cộng tỉ số: chỉ tính khi TƯỚNG hạ TƯỚNG phe địch (lính, trụ, nexus không tính)
+            ScoreManager.RegisterChampionKill(attacker, this);
+
             if (playerMovement == null) playerMovement = GetComponent<PlayerMovement>();
             if (enemyMovement == null) enemyMovement = GetComponent<EnemyMovement>();
             if (playerMovement != null || enemyMovement != null)

@@ -123,7 +123,6 @@ public class GoblinScout : MonoBehaviour
 
     private Vector2 eDirection = Vector2.right;
     private Vector2 qTargetPosition;
-    private bool previousBodySimulated;
 
     private readonly HashSet<TeamMember> hitEnemies = new HashSet<TeamMember>();
     private readonly HashSet<Minion> hitMinions = new HashSet<Minion>();
@@ -164,9 +163,37 @@ public class GoblinScout : MonoBehaviour
         SetActiveIfAssigned(qDamageHitBox, false);
     }
 
+    private void OnEnable()
+    {
+        // Đảm bảo vật lý luôn bật khi script được bật lại (ví dụ lúc hồi sinh)
+        if (body != null) body.simulated = true;
+    }
+
     private void OnDisable()
     {
+        // Nếu chết giữa lúc đang nhảy Q thì trả lại trạng thái vật lý
+        if (castingQ && body != null)
+        {
+            body.gravityScale = previousGravityScale;
+            body.bodyType = previousBodyType;
+        }
+
         StopAllCoroutines();
+
+        // Trả lại va chạm với lính vì coroutine RestoreMinionCollisions đã bị dừng
+        if (playerColliders != null)
+        {
+            foreach (Collider2D minionCollider in ignoredMinionColliders)
+            {
+                if (minionCollider == null) continue;
+                foreach (Collider2D playerCol in playerColliders)
+                {
+                    if (playerCol != null)
+                        Physics2D.IgnoreCollision(playerCol, minionCollider, false);
+                }
+            }
+        }
+        ignoredMinionColliders.Clear();
 
         aimingE = false;
         castingE = false;
@@ -176,10 +203,8 @@ public class GoblinScout : MonoBehaviour
         RestoreEAimVisual();
         RestoreQHitBoxCollision();
 
-        if (body != null)
-        {
-            body.simulated = previousBodySimulated;
-        }
+        // ĐÃ XÓA: body.simulated = previousBodySimulated;
+        // (biến đó chưa bao giờ được gán nên luôn là false -> tắt vật lý của Goblin sau khi chết)
 
         SetActiveIfAssigned(rangeIndicator, false);
         SetActiveIfAssigned(attackE, false);

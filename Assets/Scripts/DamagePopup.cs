@@ -31,7 +31,7 @@ public class DamagePopup : MonoBehaviour
     {
         text = gameObject.AddComponent<TextMeshPro>();
         text.text = Mathf.RoundToInt(damage).ToString();
-        text.fontSize = 6f;                       // chỉnh to/nhỏ ở đây
+        text.fontSize = 3f;                       // chỉnh to/nhỏ ở đây
         text.fontStyle = FontStyles.Bold;
         text.alignment = TextAlignmentOptions.Center;
         text.color = new Color(1f, 0.85f, 0.2f);  // vàng

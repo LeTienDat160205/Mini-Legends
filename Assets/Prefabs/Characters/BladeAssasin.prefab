@@ -204,6 +204,7 @@ MonoBehaviour:
   minionReward: {x: 30, y: 60}
   championReward: {x: 300, y: 60}
   towerReward: {x: 150, y: 250}
+  levelText: {fileID: 0}
 --- !u!114 &5190340440100334767
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -537,7 +538,7 @@ MonoBehaviour:
   fillBar: {fileID: 7974899720162484382}
   valueText: {fileID: 526874296637080242}
   blueBarSprite: {fileID: 0}
-  redbarSprite: {fileID: 0}
+  redbarSprite: {fileID: 8989798869969104524, guid: b040709b12db28642af0d91bef7747c5, type: 3}
   target: {fileID: 6833457907608430866}
   worldOffset: {x: 0, y: 2, z: 0}
   controlledPlayerColor: {r: 0, g: 1, b: 0, a: 1}

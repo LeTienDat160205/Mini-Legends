@@ -36,6 +36,15 @@ public class EnemyMovement : MonoBehaviour
     [SerializeField, Range(0f, 1f)] private float skillUseChance = 0.7f;
     [SerializeField] private bool prioritizeQ = true;
 
+    [Header("Anti-stuck (chống kẹt)")]
+    [Tooltip("Cứ mỗi khoảng này thì đo xem AI có thật sự di chuyển được không")]
+    [SerializeField, Min(0.5f)] private float stuckCheckInterval = 1f;
+    [Tooltip("Kẹt liên tục quá số giây này thì bỏ mục tiêu / bỏ waypoint hiện tại")]
+    [SerializeField, Min(1f)] private float giveUpSeconds = 3f;
+    [Tooltip("Mục tiêu bị bỏ sẽ bị bỏ qua trong khoảng thời gian này")]
+    [SerializeField, Min(1f)] private float ignoreTargetSeconds = 4f;
+    [SerializeField] private bool showStuckDebug = false;
+
     [Header("Diagnostics")]
     [SerializeField] private bool showGizmos = true;
 
@@ -56,6 +65,13 @@ public class EnemyMovement : MonoBehaviour
     private float nextSkillDecisionTime;
     private Vector2 moveInput;
     private Vector2 lastDirection = Vector2.down;
+
+    // Anti-stuck
+    private Vector2 progressAnchor;
+    private float progressAnchorTime;
+    private float stuckAccum;
+    private UnityEngine.Object ignoredTarget;
+    private float ignoreUntil;
 
     private static readonly int MoveX = Animator.StringToHash("MoveX");
     private static readonly int MoveY = Animator.StringToHash("MoveY");
@@ -96,6 +112,13 @@ public class EnemyMovement : MonoBehaviour
         nextDecisionTime = 0f;
         nextSkillDecisionTime = Time.time + Random.Range(0.1f, 0.6f);
         moveInput = Vector2.zero;
+
+        progressAnchor = transform.position;
+        progressAnchorTime = Time.time;
+        stuckAccum = 0f;
+        ignoredTarget = null;
+        ignoreUntil = 0f;
+
         if (obstacleSteering != null) obstacleSteering.ResetNavigation();
     }
 
@@ -130,8 +153,86 @@ public class EnemyMovement : MonoBehaviour
             FightStructure(currentStructure);
         else moveInput = GetPatrolDirection();
 
+        UpdateStuckWatchdog();
+
         if (moveInput.sqrMagnitude > 0.001f) lastDirection = moveInput.normalized;
         UpdateAnimator();
+    }
+
+    // Đo xem AI có thật sự di chuyển được khi đang muốn di chuyển hay không.
+    // Nếu kẹt liên tục quá giveUpSeconds thì bỏ mục tiêu (hoặc waypoint) hiện tại.
+    private void UpdateStuckWatchdog()
+    {
+        if (rb == null) return;
+
+        // Đang đứng đánh / đang dùng chiêu / không có hướng đi -> không tính là kẹt
+        if (moveInput.sqrMagnitude < 0.001f || IsBusyCasting() || (blade != null && blade.IsDashing))
+        {
+            progressAnchor = rb.position;
+            progressAnchorTime = Time.time;
+            stuckAccum = 0f;
+            return;
+        }
+
+        float elapsed = Time.time - progressAnchorTime;
+        if (elapsed < stuckCheckInterval) return;
+
+        float speed = stat != null && stat.Speed > 0.01f ? stat.Speed : defaultSpeed;
+        float expected = speed * speedMultiplier * elapsed;
+        float moved = Vector2.Distance(rb.position, progressAnchor);
+
+        progressAnchor = rb.position;
+        progressAnchorTime = Time.time;
+
+        if (moved < expected * 0.3f) stuckAccum += elapsed;
+        else stuckAccum = 0f;
+
+        if (stuckAccum >= giveUpSeconds)
+        {
+            stuckAccum = 0f;
+            GiveUpCurrentGoal();
+        }
+    }
+
+    private void GiveUpCurrentGoal()
+    {
+        if (currentChampion != null)
+        {
+            if (showStuckDebug) Debug.Log($"[AI Stuck] {name}: bỏ champion {currentChampion.name}", this);
+            IgnoreTarget(currentChampion);
+        }
+        else if (currentMinion != null)
+        {
+            if (showStuckDebug) Debug.Log($"[AI Stuck] {name}: bỏ minion {currentMinion.name}", this);
+            IgnoreTarget(currentMinion);
+        }
+        else if (currentStructure != null)
+        {
+            if (showStuckDebug) Debug.Log($"[AI Stuck] {name}: bỏ công trình {currentStructure.name}", this);
+            IgnoreTarget(currentStructure);
+        }
+        else if (waypoints != null && waypointIndex < waypoints.Length - 1)
+        {
+            // Waypoint có thể nằm trong vật cản / không tới được -> bỏ qua, đi tới waypoint kế tiếp
+            if (showStuckDebug) Debug.Log($"[AI Stuck] {name}: bỏ waypoint #{waypointIndex}", this);
+            waypointIndex++;
+        }
+
+        currentChampion = null;
+        currentMinion = null;
+        currentStructure = null;
+        if (obstacleSteering != null) obstacleSteering.ResetNavigation();
+    }
+
+    private void IgnoreTarget(UnityEngine.Object target)
+    {
+        ignoredTarget = target;
+        ignoreUntil = Time.time + ignoreTargetSeconds;
+    }
+
+    private bool IsIgnored(UnityEngine.Object target)
+    {
+        return target != null && ignoredTarget == target && Time.time < ignoreUntil;
     }
 
     private void FightChampion(TeamMember target)
@@ -162,12 +263,14 @@ public class EnemyMovement : MonoBehaviour
         Collider2D collider = target.GetComponentInChildren<Collider2D>();
         Vector2 aim = collider != null ? collider.ClosestPoint(transform.position) : (Vector2)target.transform.position;
         Vector2 diff = aim - (Vector2)transform.position;
-        FightAtDistance(diff, diff.magnitude, () => TryBasicAttack(target));
+        // Công trình có collider rắn nên không thể áp sát như đánh người: nới thêm tầm để AI không đứng
+        // ép sát trụ mà không chịu đánh.
+        FightAtDistance(diff, diff.magnitude, () => TryBasicAttack(target), 0.97f);
     }
 
-    private void FightAtDistance(Vector2 diff, float distance, System.Action attack)
+    private void FightAtDistance(Vector2 diff, float distance, System.Action attack, float rangeFactor = 0.85f)
     {
-        float range = Mathf.Max(0.1f, stat.AttackRange) * 0.85f;
+        float range = Mathf.Max(0.1f, stat.AttackRange) * rangeFactor;
         if (distance <= range)
         {
             moveInput = Vector2.zero;
@@ -207,7 +310,8 @@ public class EnemyMovement : MonoBehaviour
             Minion m = attackMinions ? hit.GetComponentInParent<Minion>() : null;
             if (m != null)
             {
-                if (!m.isActiveAndEnabled || !m.gameObject.activeInHierarchy || m.Team == ownTeam.team) continue;
+                if (!m.isActiveAndEnabled || !m.gameObject.activeInHierarchy || m.Team == ownTeam.team ||
+                    IsIgnored(m)) continue;
                 float d = Vector2.Distance(transform.position, Bullet.GetAimPoint(m.transform));
                 if (d > range) continue;
                 float score = d * minionPriorityFactor;
@@ -217,7 +321,7 @@ public class EnemyMovement : MonoBehaviour
             if (!attackChampions) continue;
             TeamMember c = hit.GetComponentInParent<TeamMember>();
             if (c == null || c == ownTeam || !c.isActiveAndEnabled || c.CurrentHeart <= 0f ||
-                !ownTeam.IsEnemy(c)) continue;
+                !ownTeam.IsEnemy(c) || IsIgnored(c)) continue;
             // A TeamMember on a static structure must not be treated as a champion.
             if (c.GetComponent<FootSoldier>() == null && c.GetComponent<GoblinScout>() == null &&
                 c.GetComponent<BladeAssasin>() == null) continue;
@@ -234,7 +338,8 @@ public class EnemyMovement : MonoBehaviour
         {
             if (structure == null || !structure.isActiveAndEnabled || structure.isDestroyed ||
                 structure.isInvulnerable || structure.team == (ownTeam.team == Team.Blue ? ARAMCombatStructure.Team.Blue : ARAMCombatStructure.Team.Red) ||
-                structure.structureType == ARAMCombatStructure.StructureType.HealthRelic) continue;
+                structure.structureType == ARAMCombatStructure.StructureType.HealthRelic ||
+                IsIgnored(structure)) continue;
             Collider2D c = structure.GetComponentInChildren<Collider2D>();
             Vector2 point = c != null ? c.ClosestPoint(transform.position) : (Vector2)structure.transform.position;
             float d = Vector2.Distance(transform.position, point);
