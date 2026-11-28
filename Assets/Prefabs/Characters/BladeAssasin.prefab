@@ -204,6 +204,7 @@ MonoBehaviour:
   minionReward: {x: 30, y: 60}
   championReward: {x: 300, y: 60}
   towerReward: {x: 150, y: 250}
+  levelText: {fileID: 0}
 --- !u!114 &5190340440100334767
 MonoBehaviour:
   m_ObjectHideFlags: 0

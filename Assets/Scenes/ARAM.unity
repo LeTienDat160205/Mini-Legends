@@ -1534,6 +1534,9 @@ GameObject:
   - component: {fileID: 77203827}
   - component: {fileID: 77203829}
   - component: {fileID: 77203830}
+  - component: {fileID: 77203833}
+  - component: {fileID: 77203832}
+  - component: {fileID: 77203831}
   m_Layer: 9
   m_Name: Nexus_Blue
   m_TagString: Nexus
@@ -1659,6 +1662,61 @@ MonoBehaviour:
   destructionEffect: {fileID: 0}
   hideSpriteOnDestroyed: 1
   disableBodyColliderOnDestroyed: 1
+--- !u!50 &77203831
+Rigidbody2D:
+  serializedVersion: 5
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 77203826}
+  m_BodyType: 0
+  m_Simulated: 1
+  m_UseFullKinematicContacts: 0
+  m_UseAutoMass: 0
+  m_Mass: 1
+  m_LinearDamping: 0
+  m_AngularDamping: 0.05
+  m_GravityScale: 0
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_Interpolate: 0
+  m_SleepingMode: 1
+  m_CollisionDetection: 0
+  m_Constraints: 0
+--- !u!114 &77203832
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 77203826}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6d907448accd6c740b6a43080d898a8b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::Stat
+  data: {fileID: 11400000, guid: 160006aaed615af47bccc33d3c61a1e8, type: 2}
+--- !u!114 &77203833
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 77203826}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e9b98812633c1534bb7a37e6bb99bdb9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::TeamMember
+  respawnDelay: 5
+  aiControlled: 0
+  team: 1
 --- !u!1 &83820862
 GameObject:
   m_ObjectHideFlags: 0
@@ -21082,6 +21140,7 @@ GameObject:
   - component: {fileID: 763693094}
   - component: {fileID: 763693093}
   - component: {fileID: 8000000000000000001}
+  - component: {fileID: 1830219627}
   m_Layer: 9
   m_Name: Collider
   m_TagString: Untagged
@@ -27424,6 +27483,10 @@ GameObject:
   - component: {fileID: 1045857490}
   - component: {fileID: 1045857492}
   - component: {fileID: 1045857493}
+  - component: {fileID: 1045857494}
+  - component: {fileID: 1045857495}
+  - component: {fileID: 1045857497}
+  - component: {fileID: 1045857496}
   m_Layer: 9
   m_Name: Inhibitor_Blue
   m_TagString: Untagged
@@ -27537,7 +27600,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::ARAMCombatStructure
   team: 0
   structureType: 1
-  maxHealth: 600
+  maxHealth: 2000
   currentHealth: 0
   invulnerableOverride: 0
   prerequisites:
@@ -27545,6 +27608,81 @@ MonoBehaviour:
   destructionEffect: {fileID: 0}
   hideSpriteOnDestroyed: 1
   disableBodyColliderOnDestroyed: 1
+--- !u!114 &1045857494
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1045857489}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6d907448accd6c740b6a43080d898a8b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::Stat
+  data: {fileID: 11400000, guid: 160006aaed615af47bccc33d3c61a1e8, type: 2}
+--- !u!114 &1045857495
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1045857489}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3ffe3d6d2d6f33649b62fd9fbc4a0db9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::CombatDrone
+  stat: {fileID: 1045857494}
+  teamMember: {fileID: 0}
+  animator: {fileID: 0}
+  visibleShotArea: {fileID: 0}
+  shotArea: {fileID: 0}
+  shotAreaVisual: {fileID: 0}
+  bulletPrefab: {fileID: 0}
+  firePoint: {fileID: 0}
+--- !u!114 &1045857496
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1045857489}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e9b98812633c1534bb7a37e6bb99bdb9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::TeamMember
+  respawnDelay: 5
+  aiControlled: 0
+  team: 1
+--- !u!50 &1045857497
+Rigidbody2D:
+  serializedVersion: 5
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1045857489}
+  m_BodyType: 0
+  m_Simulated: 1
+  m_UseFullKinematicContacts: 0
+  m_UseAutoMass: 0
+  m_Mass: 1
+  m_LinearDamping: 0
+  m_AngularDamping: 0.05
+  m_GravityScale: 0
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_Interpolate: 0
+  m_SleepingMode: 1
+  m_CollisionDetection: 0
+  m_Constraints: 0
 --- !u!1 &1053168454
 GameObject:
   m_ObjectHideFlags: 0
@@ -31822,6 +31960,9 @@ GameObject:
   - component: {fileID: 1194403520}
   - component: {fileID: 1194403521}
   - component: {fileID: 1194403522}
+  - component: {fileID: 1194403525}
+  - component: {fileID: 1194403524}
+  - component: {fileID: 1194403523}
   m_Layer: 9
   m_Name: Nexus_Red
   m_TagString: Nexus
@@ -31957,10 +32098,65 @@ MonoBehaviour:
   currentHealth: 0
   invulnerableOverride: 0
   prerequisites:
-  - {fileID: 1809500222}
+  - {fileID: 0}
   destructionEffect: {fileID: 0}
   hideSpriteOnDestroyed: 1
   disableBodyColliderOnDestroyed: 1
+--- !u!114 &1194403523
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1194403517}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e9b98812633c1534bb7a37e6bb99bdb9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::TeamMember
+  respawnDelay: 5
+  aiControlled: 0
+  team: 2
+--- !u!50 &1194403524
+Rigidbody2D:
+  serializedVersion: 5
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1194403517}
+  m_BodyType: 0
+  m_Simulated: 1
+  m_UseFullKinematicContacts: 0
+  m_UseAutoMass: 0
+  m_Mass: 1
+  m_LinearDamping: 0
+  m_AngularDamping: 0.05
+  m_GravityScale: 0
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_Interpolate: 0
+  m_SleepingMode: 1
+  m_CollisionDetection: 0
+  m_Constraints: 0
+--- !u!114 &1194403525
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1194403517}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6d907448accd6c740b6a43080d898a8b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::Stat
+  data: {fileID: 0}
 --- !u!1 &1196295653
 GameObject:
   m_ObjectHideFlags: 0
@@ -58585,7 +58781,9 @@ GameObject:
   - component: {fileID: 1809500220}
   - component: {fileID: 1809500219}
   - component: {fileID: 1809500221}
-  - component: {fileID: 1809500222}
+  - component: {fileID: 1809500223}
+  - component: {fileID: 1809500226}
+  - component: {fileID: 1809500225}
   m_Layer: 9
   m_Name: Inhibitor_Red
   m_TagString: Untagged
@@ -58685,7 +58883,7 @@ MonoBehaviour:
   entityType: 2
   isLocalPlayerOverride: 0
   teamMember: {fileID: 0}
---- !u!114 &1809500222
+--- !u!114 &1809500223
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -58694,19 +58892,52 @@ MonoBehaviour:
   m_GameObject: {fileID: 1809500218}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 9cdecc54950658d40940ddb980b851b0, type: 3}
+  m_Script: {fileID: 11500000, guid: 6d907448accd6c740b6a43080d898a8b, type: 3}
   m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::ARAMCombatStructure
-  team: 1
-  structureType: 1
-  maxHealth: 600
-  currentHealth: 0
-  invulnerableOverride: 0
-  prerequisites:
-  - {fileID: 8000000000000000406}
-  destructionEffect: {fileID: 0}
-  hideSpriteOnDestroyed: 1
-  disableBodyColliderOnDestroyed: 1
+  m_EditorClassIdentifier: Assembly-CSharp::Stat
+  data: {fileID: 11400000, guid: 160006aaed615af47bccc33d3c61a1e8, type: 2}
+--- !u!50 &1809500225
+Rigidbody2D:
+  serializedVersion: 5
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1809500218}
+  m_BodyType: 0
+  m_Simulated: 1
+  m_UseFullKinematicContacts: 0
+  m_UseAutoMass: 0
+  m_Mass: 1
+  m_LinearDamping: 0
+  m_AngularDamping: 0.05
+  m_GravityScale: 0
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_Interpolate: 0
+  m_SleepingMode: 1
+  m_CollisionDetection: 0
+  m_Constraints: 0
+--- !u!114 &1809500226
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1809500218}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e9b98812633c1534bb7a37e6bb99bdb9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::TeamMember
+  respawnDelay: 5
+  aiControlled: 0
+  team: 2
 --- !u!1 &1809786492
 GameObject:
   m_ObjectHideFlags: 0
@@ -59226,6 +59457,27 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_SpriteSortPoint: 0
   m_BlendShapeWeights: []
+--- !u!114 &1830219627
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 763693091}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9cdecc54950658d40940ddb980b851b0, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::ARAMCombatStructure
+  team: 0
+  structureType: 0
+  maxHealth: 600
+  currentHealth: 0
+  invulnerableOverride: 0
+  prerequisites: []
+  destructionEffect: {fileID: 0}
+  hideSpriteOnDestroyed: 1
+  disableBodyColliderOnDestroyed: 1
 --- !u!1 &1833649193
 GameObject:
   m_ObjectHideFlags: 0
@@ -61774,6 +62026,7 @@ GameObject:
   - component: {fileID: 1948343290}
   - component: {fileID: 1948343289}
   - component: {fileID: 8000000000000000006}
+  - component: {fileID: 8000000000000000009}
   m_Layer: 9
   m_Name: Collider
   m_TagString: Untagged
@@ -135592,6 +135845,27 @@ PolygonCollider2D:
       - {x: 0.29296875, y: 0.40234375}
       - {x: 0.15234375, y: 0.47265625}
   m_UseDelaunayMesh: 1
+--- !u!114 &8000000000000000009
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1948343287}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9cdecc54950658d40940ddb980b851b0, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::ARAMCombatStructure
+  team: 0
+  structureType: 0
+  maxHealth: 600
+  currentHealth: 0
+  invulnerableOverride: 0
+  prerequisites: []
+  destructionEffect: {fileID: 0}
+  hideSpriteOnDestroyed: 1
+  disableBodyColliderOnDestroyed: 1
 --- !u!114 &8000000000000000300
 MonoBehaviour:
   m_ObjectHideFlags: 0
