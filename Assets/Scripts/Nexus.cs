@@ -1,7 +1,6 @@
-
 using UnityEngine;
 using UnityEngine.SceneManagement;
-using TMPro;
+using UnityEngine.UI;
 using System.Collections;
 
 public class Nexus : MonoBehaviour
@@ -17,7 +16,17 @@ public class Nexus : MonoBehaviour
 
     [Header("End Game")]
     [SerializeField] private GameObject endGamePanel;
-    [SerializeField] private TMP_Text resultText;
+    [Tooltip("De trong: tu tao Image con 'ResultImage' o giua EndGamePanel")]
+    [SerializeField] private Image resultImage;
+    [SerializeField] private Sprite victorySprite;
+    [SerializeField] private Sprite defeatSprite;
+    [Tooltip("Kich thuoc toi da cua anh (pixel). Anh lon hon se duoc thu nho cho vua, KHONG phong to")]
+    [SerializeField] private Vector2 maxImageSize = new Vector2(600f, 300f);
+
+    [Header("Quay ve menu")]
+    [Tooltip("Thoi gian hien man hinh ket qua truoc khi chuyen scene")]
+    [SerializeField, Min(0f)] private float returnDelay = 4f;
+    [SerializeField] private string menuSceneName = "ModeMenu_Styled";
 
     private float currentHealth;
     private bool destroyed;
@@ -93,23 +102,99 @@ public class Nexus : MonoBehaviour
             Mathf.Max(0f, explosionDuration)
         );
 
-        // Hien man hinh ket qua
-        if (resultText != null)
-        {
-            resultText.text = victory
-                ? "VICTORY"
-                : "DEFEAT";
-
-            resultText.color = victory
-                ? Color.yellow
-                : Color.red;
-        }
-
-        if (endGamePanel != null)
-            endGamePanel.SetActive(true);
+        // Hien man hinh ket qua (anh Victory / Defeat)
+        ShowResultPanel(victory);
 
         // Dung tran dau
         Time.timeScale = 0f;
+
+        // Doi roi quay ve menu (dung thoi gian thuc vi timeScale = 0)
+        yield return new WaitForSecondsRealtime(
+            Mathf.Max(0f, returnDelay)
+        );
+
+        ReturnToMenu();
+    }
+
+    private void ShowResultPanel(bool victory)
+    {
+        if (endGamePanel == null)
+        {
+            Debug.LogWarning(name + ": chua gan EndGamePanel.", this);
+            return;
+        }
+
+        // Dam bao canvas chua panel hien thi tren moi UI khac
+        Canvas canvas = endGamePanel.GetComponentInParent<Canvas>(true);
+        if (canvas != null)
+            canvas.sortingOrder = Mathf.Max(canvas.sortingOrder, 100);
+
+        // Dung Image con o giua panel (KHONG dung chinh panel) de anh khong bi keo full man hinh
+        if (resultImage == null)
+        {
+            Transform existing = endGamePanel.transform.Find("ResultImage");
+            if (existing != null) resultImage = existing.GetComponent<Image>();
+        }
+        if (resultImage == null)
+        {
+            GameObject go = new GameObject(
+                "ResultImage", typeof(RectTransform), typeof(Image));
+            go.transform.SetParent(endGamePanel.transform, false);
+
+            RectTransform rect = (RectTransform)go.transform;
+            rect.anchorMin = new Vector2(0.5f, 0.5f);
+            rect.anchorMax = new Vector2(0.5f, 0.5f);
+            rect.pivot = new Vector2(0.5f, 0.5f);
+            rect.anchoredPosition = Vector2.zero;
+
+            resultImage = go.GetComponent<Image>();
+        }
+
+        Sprite resultSprite = victory ? victorySprite : defeatSprite;
+        if (resultSprite == null)
+            Debug.LogWarning(
+                name + ": chua gan sprite " +
+                (victory ? "Victory" : "Defeat") + ".", this);
+
+        resultImage.sprite = resultSprite;
+        resultImage.color = Color.white;
+        resultImage.preserveAspect = true;
+        resultImage.raycastTarget = false;
+        resultImage.enabled = resultSprite != null;
+        FitImageSize(resultImage, resultSprite);
+
+        resultImage.gameObject.SetActive(true);
+        endGamePanel.SetActive(true);
+    }
+
+    // Dat kich thuoc anh theo sprite, thu nho neu vuot maxImageSize (giu ti le, khong phong to)
+    private void FitImageSize(Image image, Sprite sprite)
+    {
+        if (sprite == null) return;
+
+        Vector2 size = sprite.rect.size;
+        float scale = 1f;
+        if (maxImageSize.x > 0f) scale = Mathf.Min(scale, maxImageSize.x / size.x);
+        if (maxImageSize.y > 0f) scale = Mathf.Min(scale, maxImageSize.y / size.y);
+
+        image.rectTransform.sizeDelta = size * scale;
+    }
+
+    private void ReturnToMenu()
+    {
+        if (!Application.CanStreamedLevelBeLoaded(menuSceneName))
+        {
+            Debug.LogError(
+                "Scene '" + menuSceneName +
+                "' chua co trong Build Settings.", this);
+            return;
+        }
+
+        // Reset de tran sau con pha Nexus duoc (bien static khong tu reset khi doi scene)
+        Time.timeScale = 1f;
+        matchEnded = false;
+
+        SceneManager.LoadScene(menuSceneName);
     }
 
     // Nut choi lai

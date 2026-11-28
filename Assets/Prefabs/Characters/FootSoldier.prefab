@@ -65,7 +65,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 7130912001605438921, guid: f87c4c574c3b97647a7360145300b5d9, type: 3}
+  m_Sprite: {fileID: 0}
   m_Type: 3
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -570,6 +570,7 @@ MonoBehaviour:
   minionReward: {x: 30, y: 60}
   championReward: {x: 300, y: 60}
   towerReward: {x: 150, y: 60}
+  levelText: {fileID: 0}
 --- !u!114 &4828945144396607617
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1254,8 +1255,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::HealthBar
   fillBar: {fileID: 7741803610196852143}
   valueText: {fileID: 5317817247236170785}
-  blueBarSprite: {fileID: 0}
-  redbarSprite: {fileID: 0}
+  blueBarSprite: {fileID: 7130912001605438921, guid: f87c4c574c3b97647a7360145300b5d9, type: 3}
+  redbarSprite: {fileID: 8989798869969104524, guid: b040709b12db28642af0d91bef7747c5, type: 3}
   target: {fileID: 2192244360770575814}
   worldOffset: {x: 0, y: 2, z: 0}
   controlledPlayerColor: {r: 0, g: 1, b: 0, a: 1}

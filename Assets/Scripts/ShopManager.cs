@@ -17,17 +17,34 @@ public class ShopManager : MonoBehaviour
     [SerializeField] private TMP_Text buyButtonText;     // Chữ trên nút Mua (tự tìm nếu để trống)
     [SerializeField] private string buyLabel = "Mua";
     [SerializeField] private string upgradeLabel = "Nâng cấp";
+    [Header("Túi đồ")]
+    [Tooltip("Để trống: tự tìm InventoryHUD trong scene")]
+    [SerializeField] private InventoryHUD inventory;
+    [SerializeField] private string inventoryFullLabel = "Túi đồ đầy";
     public UnityEvent<ItemData> onItemPurchased;          // Nối với kho đồ / cộng chỉ số cho người chơi
     public event System.Action<ItemData, int> ItemPurchased;   // (món, phẩm vừa mua) cho script khác đăng ký
+
+    [Header("Giá tiền")]
+    [Tooltip("Tuỳ chọn: ô chữ hiện giá của phẩm đang chọn (để trống nếu không cần)")]
+    [SerializeField] private TMP_Text priceText;
+    [SerializeField] private string priceFormat = "Giá: {0}";
+    [SerializeField] private Color affordableColor = Color.white;
+    [SerializeField] private Color notAffordableColor = new Color(1f, 0.3f, 0.3f);
+
     [Header("Audio")]
     [SerializeField] private AudioSource uiAudioSource;
     [SerializeField] private AudioClip shopToggleSound;
     [SerializeField] private AudioClip itemPurchaseSound;
+    [SerializeField] private AudioClip cannotBuySound;    // Âm báo khi không đủ vàng
+
     private readonly List<ItemCard> cards = new List<ItemCard>();
     private ItemCard selectedCard;
     private int lastBuyFrame = -1;
     private readonly HashSet<ItemData> ownedItems = new HashSet<ItemData>();   // Món đã mua ít nhất một lần
     private readonly HashSet<ItemData> maxedItems = new HashSet<ItemData>();   // Món đã mua đến phẩm cao nhất
+
+    // Ví vàng của người chơi (Level_Gold trên nhân vật được spawn)
+    private Level_Gold wallet;
 
     private void Awake()
     {
@@ -43,6 +60,12 @@ public class ShopManager : MonoBehaviour
     private void Start()
     {
         BuildCards();
+        TryBindWallet();
+
+        if (inventory == null) inventory = FindFirstObjectByType<InventoryHUD>(FindObjectsInactive.Include);
+        if (inventory != null) inventory.Changed += RefreshBuyButton;
+        else Debug.LogWarning("[ShopManager] Không tìm thấy InventoryHUD nên không chặn được khi hết ô.", this);
+
         RefreshBuyButton();
     }
 
@@ -52,12 +75,46 @@ public class ShopManager : MonoBehaviour
         if (buyButton != null) buyButton.onClick.RemoveListener(BuyItem);
         foreach (ItemCard card in cards)
             if (card != null) card.Clicked -= OnCardClicked;
+        if (wallet != null) wallet.ProgressChanged -= OnGoldChanged;
+        if (inventory != null) inventory.Changed -= RefreshBuyButton;
     }
 
+<<<<<<< HEAD
     private void Update() { 
    
 if (HotkeysSettings.Pressed(HotkeysSettings.Shop))
     ToggleShop();
+=======
+    private void Update()
+    {
+        if (Input.GetKeyDown(KeyCode.P)) ToggleShop();
+
+        // Người chơi được spawn sau ShopManager.Start, nên tiếp tục tìm cho tới khi thấy
+        if (wallet == null || (SpawnArea.SpawnedPlayer != null && wallet.gameObject != SpawnArea.SpawnedPlayer))
+            TryBindWallet();
+    }
+
+    // Tìm Level_Gold của người chơi và đăng ký theo dõi thay đổi vàng
+    private void TryBindWallet()
+    {
+        GameObject player = SpawnArea.SpawnedPlayer;
+        if (player == null) return;
+
+        Level_Gold found = player.GetComponent<Level_Gold>();
+        if (found == null || found == wallet) return;
+
+        if (wallet != null) wallet.ProgressChanged -= OnGoldChanged;
+        wallet = found;
+        wallet.ProgressChanged += OnGoldChanged;
+        RefreshBuyButton();
+    }
+
+    // Vàng thay đổi (kiếm thêm hoặc vừa tiêu) -> cập nhật nút Mua ngay cả khi shop đang mở
+    private void OnGoldChanged()
+    {
+        RefreshBuyButton();
+    }
+>>>>>>> b6374591275d089fb51bf449642ef0b9c9b02399
 
 }
 
@@ -80,8 +137,21 @@ public void ToggleShop()
     // Mua đồ
     // ------------------------------------------------------------------
 
+    // Giá của phẩm mà thẻ đang chọn sắp mua (phẩm kế tiếp của món đó)
+    private int GetCurrentPrice()
+    {
+        if (selectedCard == null || selectedCard.Data == null) return 0;
+        return selectedCard.Data.GetTier(selectedCard.TierIndex).gold;
+    }
+
+    private bool CanAfford(int price)
+    {
+        if (price <= 0) return true;
+        return wallet != null && wallet.CurrentGold >= price;
+    }
+
     // Gắn vào Buy Button (script tự đăng ký click, không cần gắn OnClick trong Inspector).
-    // Chưa tính tiền. Mua xong, thẻ đang chọn chuyển sang phẩm kế tiếp của chính món đó.
+    // Mua xong, thẻ đang chọn chuyển sang phẩm kế tiếp của chính món đó.
     public void BuyItem()
     {
         if (selectedCard == null || selectedCard.Data == null) return;
@@ -94,6 +164,34 @@ public void ToggleShop()
         lastBuyFrame = Time.frameCount;
 
         int boughtTier = selectedCard.TierIndex;
+        int price = item.GetTier(boughtTier).gold;
+
+        // --- Hết ô trong túi đồ (và đây là món mới, không phải nâng cấp) thì chặn, chưa trừ vàng. ---
+        if (inventory != null && !inventory.HasRoomFor(item))
+        {
+            PlayUiSound(cannotBuySound);
+            RefreshBuyButton();
+            return;
+        }
+
+        // --- Kiểm tra và trừ vàng. Không đủ thì dừng, không thêm đồ, không lên phẩm. ---
+        if (price > 0)
+        {
+            if (wallet == null) TryBindWallet();
+            if (wallet == null)
+            {
+                Debug.LogWarning("[ShopManager] Chưa tìm thấy Level_Gold của người chơi nên không thể mua.", this);
+                PlayUiSound(cannotBuySound);
+                return;
+            }
+            if (!wallet.TrySpendGold(price))
+            {
+                PlayUiSound(cannotBuySound);
+                RefreshBuyButton();
+                return;
+            }
+        }
+
         PlayItemPurchaseSound();
         ownedItems.Add(item);   // Đã mua món này: các lần sau là Nâng cấp
         onItemPurchased?.Invoke(item);
@@ -106,28 +204,38 @@ public void ToggleShop()
         }
         else
         {
-            maxedItems.Add(item);
-                                // Vừa mua phẩm cao nhất: khoá nút
+            maxedItems.Add(item);   // Vừa mua phẩm cao nhất: khoá nút
         }
 
         RefreshBuyButton();
     }
 
-    // Bật nút khi đã chọn món; khoá khi món đã đến phẩm cao nhất; đổi chữ Mua / Nâng cấp.
+    // Bật nút khi đã chọn món VÀ đủ vàng; khoá khi món đã đến phẩm cao nhất; đổi chữ Mua / Nâng cấp.
     private void RefreshBuyButton()
     {
-        if (buyButton == null) return;
-
         bool hasItem = selectedCard != null && selectedCard.Data != null;
         bool maxed = hasItem && maxedItems.Contains(selectedCard.Data);
-        buyButton.gameObject.SetActive(!maxed);
-        buyButton.interactable = hasItem && !maxed;
+        int price = hasItem && !maxed ? GetCurrentPrice() : 0;
+        bool affordable = CanAfford(price);
+        bool hasRoom = !hasItem || inventory == null || inventory.HasRoomFor(selectedCard.Data);
 
-
-        if (buyButtonText != null)
+        if (buyButton != null)
         {
-            bool owned = hasItem && ownedItems.Contains(selectedCard.Data);
-            buyButtonText.text = owned ? upgradeLabel : buyLabel;
+            buyButton.gameObject.SetActive(!maxed);
+            buyButton.interactable = hasItem && !maxed && affordable && hasRoom;
+
+            if (buyButtonText != null)
+            {
+                bool owned = hasItem && ownedItems.Contains(selectedCard.Data);
+                buyButtonText.text = !hasRoom ? inventoryFullLabel : (owned ? upgradeLabel : buyLabel);
+            }
+        }
+
+        if (priceText != null)
+        {
+            priceText.gameObject.SetActive(hasItem && !maxed);
+            priceText.text = string.Format(priceFormat, price);
+            priceText.color = affordable ? affordableColor : notAffordableColor;
         }
     }
 

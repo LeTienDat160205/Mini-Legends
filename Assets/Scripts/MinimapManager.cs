@@ -14,9 +14,18 @@ public class MinimapManager : MonoBehaviour
     [Header("Bounds Source")]
     [SerializeField] private BoxCollider2D arenaBounds;
 
+    [Header("Cong trinh (Tru / Nexus)")]
+    [Tooltip("Ve icon tru va nexus tren cung mot duong ngang (lay Y trung binh cua chung), tranh bi lech do pivot khac nhau")]
+    [SerializeField] private bool alignStructuresToLane = true;
+    [Tooltip("Dich icon cong trinh len/xuong (don vi the gioi). Dung de chinh tay neu can")]
+    [SerializeField] private float structureYOffset = 0f;
+
     private Dictionary<MinimapEntity, RectTransform> activeIcons = new Dictionary<MinimapEntity, RectTransform>();
     private Vector2 worldMinBounds;
     private Vector2 worldMaxBounds;
+
+    private bool laneYDirty = true;
+    private float structureLaneY;
 
     // --- BIẾN TOÀN CỤC LƯU PHE CỦA PLAYER CHÍNH ---
     public static Team LocalPlayerTeam = Team.Blue;
@@ -66,20 +75,26 @@ public class MinimapManager : MonoBehaviour
         switch (entity.entityType)
         {
             case MinimapEntityType.Player:
-                iconRect.sizeDelta = new Vector2(24f, 24f);
+                iconRect.sizeDelta = new Vector2(20f, 20f);
                 newIcon.transform.SetAsLastSibling();
                 break;
             case MinimapEntityType.Tower:
-                iconRect.sizeDelta = new Vector2(40f, 40f);
+                iconRect.sizeDelta = new Vector2(30f, 30f);
                 break;
             case MinimapEntityType.Minion:
                 iconRect.sizeDelta = new Vector2(14f, 14f);
                 break;
         }
 
+        if (entity.entityType == MinimapEntityType.Tower)
+        {
+            laneYDirty = true;
+            WarnIfNexusTeamMismatch(entity);
+        }
+
         iconImage.enabled = true;
         UpdateEntityColor(entity, iconImage);
-        iconRect.anchoredPosition = WorldToMinimapPosition(entity.transform.position);
+        iconRect.anchoredPosition = WorldToMinimapPosition(GetIconWorldPosition(entity));
         activeIcons.Add(entity, iconRect);
     }
 
@@ -89,6 +104,7 @@ public class MinimapManager : MonoBehaviour
         {
             if (iconRect != null) Destroy(iconRect.gameObject);
             activeIcons.Remove(entity);
+            laneYDirty = true;
         }
     }
 
@@ -110,9 +126,61 @@ public class MinimapManager : MonoBehaviour
             MinimapEntity entity = pair.Key;
             RectTransform iconRect = pair.Value;
             if (entity == null || iconRect == null) continue;
-            iconRect.anchoredPosition = WorldToMinimapPosition(entity.transform.position);
+            iconRect.anchoredPosition = WorldToMinimapPosition(GetIconWorldPosition(entity));
             Image iconImage = iconRect.GetComponent<Image>();
             if (iconImage != null) UpdateEntityColor(entity, iconImage);
+        }
+    }
+
+    // Vi tri the gioi dung de ve icon. Tru / Nexus duoc dua ve cung mot duong ngang.
+    private Vector3 GetIconWorldPosition(MinimapEntity entity)
+    {
+        Vector3 position = entity.transform.position;
+
+        if (alignStructuresToLane && entity.entityType == MinimapEntityType.Tower)
+        {
+            if (laneYDirty) RecomputeStructureLaneY();
+            position.y = structureLaneY + structureYOffset;
+        }
+
+        return position;
+    }
+
+    private void RecomputeStructureLaneY()
+    {
+        float sum = 0f;
+        int count = 0;
+
+        foreach (var pair in activeIcons)
+        {
+            MinimapEntity entity = pair.Key;
+            if (entity == null || entity.entityType != MinimapEntityType.Tower) continue;
+            sum += entity.transform.position.y;
+            count++;
+        }
+
+        if (count > 0) structureLaneY = sum / count;
+        laneYDirty = false;
+    }
+
+    // Nexus co ten Red nhung truong Nexus Team lai de Blue (hoac nguoc lai) -> mau tren minimap,
+    // thanh mau va man hinh Victory/Defeat deu sai. Bao ra Console de sua trong Inspector.
+    private void WarnIfNexusTeamMismatch(MinimapEntity entity)
+    {
+        Nexus nexus = entity.GetComponent<Nexus>();
+        if (nexus == null) nexus = entity.GetComponentInParent<Nexus>();
+        if (nexus == null) return;
+
+        string lowerName = nexus.name.ToLower();
+        bool nameSaysRed = lowerName.Contains("red");
+        bool nameSaysBlue = lowerName.Contains("blue");
+
+        if ((nameSaysRed && nexus.NexusTeam != Team.Red) ||
+            (nameSaysBlue && nexus.NexusTeam != Team.Blue))
+        {
+            Debug.LogWarning(
+                $"[Minimap] {nexus.name} dang co Nexus Team = {nexus.NexusTeam}, khong khop voi ten object. " +
+                "Hay chinh lai o component Nexus trong Inspector.", nexus);
         }
     }
 
@@ -132,14 +200,17 @@ public class MinimapManager : MonoBehaviour
         Team entityTeam = Team.Neutral;
 
         // 2. Lấy phe từ Minion hoặc Nexus
+        // (Khong dung toan tu "??" voi GetComponent: trong Editor no co the khong coi "khong tim thay" la null.)
         if (entity.entityType == MinimapEntityType.Tower)
         {
-            Nexus nexus = entity.GetComponent<Nexus>() ?? entity.GetComponentInParent<Nexus>();
+            Nexus nexus = entity.GetComponent<Nexus>();
+            if (nexus == null) nexus = entity.GetComponentInParent<Nexus>();
             if (nexus != null) entityTeam = nexus.NexusTeam;
         }
         else if (entity.entityType == MinimapEntityType.Minion)
         {
-            Minion minion = entity.GetComponent<Minion>() ?? entity.GetComponentInParent<Minion>();
+            Minion minion = entity.GetComponent<Minion>();
+            if (minion == null) minion = entity.GetComponentInParent<Minion>();
             if (minion != null)
             {
                 entityTeam = minion.Team;
