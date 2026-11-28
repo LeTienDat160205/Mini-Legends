@@ -341,7 +341,7 @@ public class GoblinScout : MonoBehaviour
     private void HandleSkillInput()
     {
         // 1. Nhấn phím E để bắt đầu ngắm
-        if (Input.GetKeyDown(KeyCode.E) &&
+        if (HotkeysSettings.Pressed(HotkeysSettings.SkillE) &&
             !aimingE && !aimingQ && !castingE && !castingQ)
         {
             if (cooldownE > 0f)
@@ -357,7 +357,7 @@ public class GoblinScout : MonoBehaviour
         }
 
         // 2. Nhấn phím Q để bắt đầu ngắm
-        if (Input.GetKeyDown(KeyCode.Q) &&
+        if (HotkeysSettings.Pressed(HotkeysSettings.SkillQ) &&
             !aimingE && !aimingQ && !castingE && !castingQ)
         {
             if (cooldownQ > 0f)
@@ -392,10 +392,10 @@ public class GoblinScout : MonoBehaviour
         }
 
         // 4. Thả phím E hoặc Q -> THỰC HIỆN CHIÊU
-        if (Input.GetKeyUp(KeyCode.E) && aimingE)
+        if (HotkeysSettings.Released(HotkeysSettings.SkillE) && aimingE)
             PerformE();
 
-        if (Input.GetKeyUp(KeyCode.Q) && aimingQ)
+        if (HotkeysSettings.Released(HotkeysSettings.SkillQ) && aimingQ)
             PerformQ();
     }
 

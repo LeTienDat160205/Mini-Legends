@@ -46,7 +46,10 @@ public class Teleport : MonoBehaviour
             Input.GetAxisRaw("Vertical") != 0f ||
             (transform.position - castStartPosition).sqrMagnitude > 0.0001f))
             CancelTeleport();
-        if (Input.GetKeyDown(KeyCode.B)) TeleportToSpawn();
+
+        if (HotkeysSettings.Pressed(HotkeysSettings.Recall))
+            TeleportToSpawn();
+
     }
 
     private void LateUpdate()
